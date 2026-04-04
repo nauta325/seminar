@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>학원 운영 자동화 세미나</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0f0e0d;
+  --paper: #f5f2ec;
+  --cream: #ede9e0;
+  --accent: #2d6a4f;
+  --accent2: #1b4332;
+  --warm: #d4a853;
+  --red: #c1440e;
+  --muted: #7a7670;
+  --light-line: rgba(15,14,13,0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE overlay ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 48px 60px;
+  border-bottom: 2px solid var(--ink);
+  overflow: hidden;
+}
+.hero-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(120px, 22vw, 260px);
+  color: var(--ink);
+  opacity: 0.04;
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.1s forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--accent);
+}
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(48px, 8vw, 96px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  max-width: 800px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.2s forwards;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-title .underline {
+  position: relative;
+  display: inline-block;
+}
+.hero-title .underline::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--warm);
+}
+.hero-sub {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 520px;
+  margin-top: 28px;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.35s forwards;
+}
+.hero-meta {
+  display: flex;
+  gap: 0;
+  margin-top: 52px;
+  border-top: 1px solid var(--light-line);
+  padding-top: 32px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.5s forwards;
+}
+.meta-item {
+  flex: 1;
+  padding-right: 32px;
+  border-right: 1px solid var(--light-line);
+  margin-right: 32px;
+}
+.meta-item:last-child {
+  border-right: none;
+  margin-right: 0;
+  padding-right: 0;
+}
+.meta-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.meta-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.meta-value small {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--muted);
+  display: block;
+  margin-top: 2px;
+}
+
+/* ── BADGE ── */
+.badge-row {
+  position: absolute;
+  top: 40px;
+  right: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeIn 0.6s ease 0.8s forwards;
+}
+.badge {
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 2px;
+}
+.badge.accent { background: var(--accent); }
+.badge.warm { background: var(--warm); color: var(--ink); }
+
+/* ── CTA ── */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 18px 36px;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  transition: all 0.2s ease;
+  margin-top: 40px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.6s forwards;
+}
+.cta-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.cta-btn svg { transition: transform 0.2s; }
+.cta-btn:hover svg { transform: translateX(4px); }
+
+/* ── SECTION COMMONS ── */
+section {
+  padding: 80px 48px;
+  border-bottom: 1px solid var(--light-line);
+  position: relative;
+}
+.section-no {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-no::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 40px;
+  background: var(--muted);
+  opacity: 0.4;
+}
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 5vw, 54px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 48px;
+}
+
+/* ── WHO ── */
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--light-line);
+  border: 1px solid var(--light-line);
+  margin-top: 40px;
+}
+.who-card {
+  background: var(--paper);
+  padding: 32px;
+}
+.who-card.highlight { background: var(--accent); color: white; }
+.who-card.highlight .who-label { color: rgba(255,255,255,0.6); }
+.who-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.who-text { font-size: 17px; font-weight: 400; line-height: 1.6; }
+
+/* ── CURRICULUM ── */
+.curriculum-list {
+  list-style: none;
+  margin-top: 16px;
+  counter-reset: item;
+}
+.curriculum-list li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--light-line);
+}
+.curriculum-list li:last-child { border-bottom: none; }
+.curriculum-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--light-line);
+  line-height: 1;
+  min-width: 40px;
+  letter-spacing: 1px;
+}
+.curriculum-num::before { content: counter(item, decimal-leading-zero); }
+.curriculum-body { flex: 1; }
+.curriculum-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.curriculum-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.curriculum-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 2px;
+  margin-top: 8px;
+}
+
+/* ── SPLIT LAYOUT ── */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* ── SEMINAR 2 ── */
+.s2-section {
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom: none;
+}
+.s2-section .section-no { color: rgba(255,255,255,0.3); }
+.s2-section .section-no::after { background: rgba(255,255,255,0.2); }
+.s2-section .section-title { color: var(--paper); }
+.s2-section .section-title em { color: var(--warm); }
+.s2-tag {
+  display: inline-block;
+  background: var(--warm);
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 2px;
+  margin-bottom: 40px;
+}
+.s2-features {
+  list-style: none;
+  margin-top: 32px;
+}
+.s2-features li {
+  display: flex;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  align-items: flex-start;
+}
+.s2-features li:last-child { border-bottom: none; }
+.s2-icon {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.s2-feat-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+.s2-feat-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+.s2-price-box {
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 36px;
+  margin-top: 40px;
+  position: relative;
+}
+.s2-price-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 12px;
+}
+.s2-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: var(--warm);
+}
+.s2-price-note {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+.s2-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--warm);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  text-decoration: none;
+  border: 2px solid var(--warm);
+  margin-top: 28px;
+  transition: all 0.2s;
+}
+.s2-cta:hover { background: transparent; color: var(--warm); }
+
+/* ── FLOW SECTION ── */
+.flow-section { background: var(--cream); }
+.flow-steps {
+  display: flex;
+  gap: 0;
+  margin-top: 48px;
+  position: relative;
+}
+.flow-steps::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  right: 28px;
+  height: 1px;
+  background: var(--light-line);
+  z-index: 0;
+}
+.flow-step {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  padding: 0 24px 0 0;
+}
+.flow-dot {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.flow-dot.s1 { background: var(--accent); color: white; }
+.flow-dot.s2 { background: var(--ink); color: var(--paper); }
+.flow-step-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.flow-step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.flow-step-date {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--warm);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 2px solid var(--ink);
+}
+.footer-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: var(--ink);
+}
+.footer-note {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero, section { padding: 60px 24px; }
+  .hero-meta { flex-direction: column; gap: 24px; }
+  .meta-item { border-right: none; margin-right: 0; padding-bottom: 24px; border-bottom: 1px solid var(--light-line); }
+  .meta-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .split { grid-template-columns: 1fr; gap: 40px; }
+  .who-grid { grid-template-columns: 1fr; }
+  .flow-steps { flex-direction: column; gap: 32px; }
+  .flow-steps::before { display: none; }
+  .badge-row { position: static; margin-bottom: 24px; flex-direction: row; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg-text">NOTION</div>
+
+  <div class="badge-row">
+    <span class="badge accent">세미나 1</span>
+    <span class="badge warm">선착순 20명</span>
+  </div>
+
+  <div class="hero-eyebrow">학원 운영 자동화 시리즈</div>
+
+  <h1 class="hero-title">
+    노션으로<br>
+    <em>학원을</em><br>
+    <span class="underline">굴린다</span>
+  </h1>
+
+  <p class="hero-sub">
+    예쁜 노션 말고 — 학생·교재·수업 기록을 데이터베이스로 엮어서 실제로 작동하는 학원 시스템을 만듭니다.
+  </p>
+
+  <div class="hero-meta">
+    <div class="meta-item">
+      <div class="meta-label">Date</div>
+      <div class="meta-value">MAY 2<small>2025년 5월 2일 토요일</small></div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Time</div>
+      <div class="meta-value">12:00<small>오후 12시 · 약 3시간+</small></div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Price</div>
+      <div class="meta-value">3만원<small>선착순 20명 마감</small></div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Location</div>
+      <div class="meta-value" style="font-size:18px;">홍보은영어학원<small>일산서구 대산로 116 유화프라자 5층<br>주차 협소 — 대중교통 이용 권장</small></div>
+    </div>
+  </div>
+
+  <a href="https://forms.gle/vVjnh7vYs34n8ArK6" target="_blank" class="cta-btn">
+    신청하기
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</section>
+
+<!-- ═══════════════════════════════════ WHO ═══════════════════════════════════ -->
+<section>
+  <div class="section-no">01 — WHO IS THIS FOR</div>
+  <h2 class="section-title reveal">이런 분께 딱 맞습니다</h2>
+
+  <div class="who-grid reveal">
+    <div class="who-card highlight">
+      <div class="who-label">Best Fit</div>
+      <div class="who-text">개별·무학년 수업을 하는 소규모 학원 선생님</div>
+    </div>
+    <div class="who-card">
+      <div class="who-label">상황</div>
+      <div class="who-text">학생 관리를 엑셀·메모·카카오톡에 따로 하고 있는 분</div>
+    </div>
+    <div class="who-card">
+      <div class="who-label">목표</div>
+      <div class="who-text">수업 후 5분 기록으로 학부모 문자까지 자동으로 해결하고 싶은 분</div>
+    </div>
+    <div class="who-card">
+      <div class="who-label">수준</div>
+      <div class="who-text">노션 완전 처음도 OK — 코딩 0줄, 디자인 0% 수업입니다</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ CURRICULUM ═══════════════════════════════════ -->
+<section>
+  <div class="section-no">02 — CURRICULUM</div>
+  <div class="split">
+    <div>
+      <h2 class="section-title reveal">당일 만드는 것들</h2>
+      <p class="reveal" style="color:var(--muted);font-size:15px;margin-top:-20px;margin-bottom:32px;">
+        수업이 끝나면 실제로 작동하는 시스템이 손에 남습니다.
+      </p>
+    </div>
+    <div></div>
+  </div>
+
+  <ul class="curriculum-list">
+    <li class="reveal">
+      <span class="curriculum-num"></span>
+      <div class="curriculum-body">
+        <div class="curriculum-title">학생 DB + 교재 DB 구축</div>
+        <div class="curriculum-desc">학생 명단·연락처·재원상태, 사용 교재·유닛 목록을 데이터베이스로 정리. 필터로 재원생만, 정렬로 요일별 — 원하는 대로 꺼내봅니다.</div>
+        <span class="curriculum-tag">실습</span>
+      </div>
+    </li>
+    <li class="reveal">
+      <span class="curriculum-num"></span>
+      <div class="curriculum-body">
+        <div class="curriculum-title">DB끼리 연동하기 — 관계형 + 롤업</div>
+        <div class="curriculum-desc">학생 DB와 교재 DB를 관계형으로 연결. 수업 기록에서 학생 이름을 선택하면 연락처가 자동으로 따라오는 그 마법을 직접 만듭니다.</div>
+        <span class="curriculum-tag">핵심 개념</span>
+      </div>
+    </li>
+    <li class="reveal">
+      <span class="curriculum-num"></span>
+      <div class="curriculum-body">
+        <div class="curriculum-title">요일별 시간표 만들기</div>
+        <div class="curriculum-desc">월~금 수업 스케줄을 DB로 관리. 그룹화 기능으로 요일별 블록 보기, 선생님별 필터링까지.</div>
+        <span class="curriculum-tag">실습</span>
+      </div>
+    </li>
+    <li class="reveal">
+      <span class="curriculum-num"></span>
+      <div class="curriculum-body">
+        <div class="curriculum-title">일일 리포트 DB + 학부모 문자 자동 완성</div>
+        <div class="curriculum-desc">수업 기록을 입력하면 학부모 문자가 자동으로 완성됩니다 — 복사해서 카톡에 붙여넣기만 하면 끝. 타이핑 없이 10초면 발송.</div>
+        <span class="curriculum-tag">하이라이트</span>
+      </div>
+    </li>
+    <li class="reveal">
+      <span class="curriculum-num"></span>
+      <div class="curriculum-body">
+        <div class="curriculum-title">교재비 관리 DB + 학부모 문자 보내기</div>
+        <div class="curriculum-desc">교재 구입 내역·미납 현황을 DB로 관리. 수식으로 안내 문자를 자동 완성하는 방법까지.</div>
+        <span class="curriculum-tag">실습</span>
+      </div>
+    </li>
+    <li class="reveal">
+      <span class="curriculum-num"></span>
+      <div class="curriculum-body">
+        <div class="curriculum-title">Make로 일일 리포트 자동 SMS 발송</div>
+        <div class="curriculum-desc">노션에 수업 기록을 입력하는 순간 Make가 감지 → 솔라피로 학부모 문자 자동 발송. 당일 본인 폰으로 직접 테스트합니다.<br><br>
+        <span style="color:var(--muted);font-size:13px;">카카오 알림톡은 템플릿 검수에 1~3일이 걸려 당일 테스트가 어렵습니다. 이번 세미나에서는 SMS로 자동 발송을 경험하고, 세미나 2에서 카카오톡 알림톡으로 업그레이드합니다.</span></div>
+        <span class="curriculum-tag">자동화</span>
+      </div>
+    </li>
+  </ul>
+</section>
+
+
+
+<!-- ═══════════════════════════════════ APPLY ═══════════════════════════════════ -->
+<section id="apply" style="background:var(--accent);color:white;">
+  <div class="section-no" style="color:rgba(255,255,255,0.4);">03 — APPLY</div>
+  <div class="split" style="align-items:center;">
+    <div>
+      <h2 class="section-title reveal" style="color:white;">
+        신청하기
+      </h2>
+      <p class="reveal" style="color:rgba(255,255,255,0.7);font-size:16px;margin-top:-20px;">
+        노션 폼으로 신청합니다.<br>
+        선착순 20명 마감 — 입금 확인 후 확정.
+      </p>
+    </div>
+    <div class="reveal">
+      <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:40px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:20px;">세미나 01 요약</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;gap:16px;align-items:center;">
+            <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);min-width:60px;">날짜</span>
+            <span style="font-size:16px;font-weight:700;">2025년 5월 2일 (토)</span>
+          </div>
+          <div style="display:flex;gap:16px;align-items:center;">
+            <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);min-width:60px;">시간</span>
+            <span style="font-size:16px;font-weight:700;">낮 12시 · 약 3시간+</span>
+          </div>
+          <div style="display:flex;gap:16px;align-items:center;">
+            <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);min-width:60px;">가격</span>
+            <span style="font-size:16px;font-weight:700;">30,000원</span>
+          </div>
+          <div style="display:flex;gap:16px;align-items:center;">
+            <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);min-width:60px;">정원</span>
+            <span style="font-size:16px;font-weight:700;">선착순 20명</span>
+          </div>
+        </div>
+        <a href="https://forms.gle/vVjnh7vYs34n8ArK6" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;background:white;color:var(--accent2);font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:18px;text-decoration:none;margin-top:32px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+          신청하기
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ SEMINAR 2 ═══════════════════════════════════ -->
+<section class="s2-section">
+  <div class="section-no">04 — NEXT SEMINAR</div>
+
+  <div class="split">
+    <div>
+      <div class="s2-tag">예고 · 세미나 02</div>
+      <h2 class="section-title reveal">
+        이걸로<br>
+        <em>카톡 보내고</em><br>
+        평가서 쓴다
+      </h2>
+      <p class="reveal" style="color:rgba(255,255,255,0.5);font-size:15px;margin-top:-20px;">
+        5월 2~3주차 예정 · 세미나 1 다음 단계<br>
+        날짜 확정되면 공지합니다.
+      </p>
+    </div>
+
+    <div>
+      <ul class="s2-features reveal">
+        <li>
+          <div class="s2-icon">💬</div>
+          <div>
+            <div class="s2-feat-title">카카오 알림톡 자동 발송</div>
+            <div class="s2-feat-desc">세미나 1에서 SMS로 자동화 경험 → 세미나 2에서 카카오 알림톡으로 업그레이드. 솔라피 + Make 연동, 검수 템플릿 등록까지.</div>
+          </div>
+        </li>
+        <li>
+          <div class="s2-icon">⚙️</div>
+          <div>
+            <div class="s2-feat-title">Google Apps Script 작동해보기</div>
+            <div class="s2-feat-desc">코드 복붙만으로 노션과 Google 서비스를 연결. 배포하고 URL 생성까지 직접 해봅니다.</div>
+          </div>
+        </li>
+        <li>
+          <div class="s2-icon">🤖</div>
+          <div>
+            <div class="s2-feat-title">월말 평가서 자동 생성기 만들기</div>
+            <div class="s2-feat-desc">수업 기록 데이터 → 평가서 초안 자동 작성 → Google Docs 자동 저장 → 학부모 열람 링크 생성.</div>
+          </div>
+        </li>
+        <li>
+          <div class="s2-icon">📊</div>
+          <div>
+            <div class="s2-feat-title">학부모용 열람 페이지</div>
+            <div class="s2-feat-desc">출석률·태도·단어통과율 도넛차트가 자동 생성. 학부모가 링크 하나로 확인합니다.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ FOOTER ═══════════════════════════════════ -->
+<footer>
+  <div class="footer-brand">학원 운영 자동화 시리즈</div>
+  <div class="footer-note">개별·무학년 수업 학원 선생님을 위한 노션 + AI 자동화 세미나</div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      entry.target.style.transitionDelay = `${(i % 4) * 0.08}s`;
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

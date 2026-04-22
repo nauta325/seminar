@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>세미나 사전 준비 체크리스트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --card: #ffffff;
+    --accent: #ff6b35;
+    --accent2: #2d6a4f;
+    --accent3: #f4a261;
+    --text: #1a1a1a;
+    --muted: #888;
+    --done-bg: #f0faf4;
+    --done-border: #b7e4c7;
+    --border: #e8e4dd;
+    --step-num: #ffe8dc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* ── NAME SELECT SCREEN ── */
+  #nameScreen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: var(--bg);
+  }
+  .name-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px 32px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+  .name-card .logo {
+    font-size: 40px;
+    margin-bottom: 16px;
+  }
+  .name-card h1 {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 6px;
+  }
+  .name-card p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+  .group-label {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+  .name-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .name-btn {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 10px;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    transition: all 0.18s;
+    text-align: left;
+  }
+  .name-btn:hover {
+    border-color: var(--accent);
+    background: #fff4ef;
+    color: var(--accent);
+  }
+  .name-btn .academy {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+  }
+  .name-btn.offline-tag::after {
+    content: '오프라인';
+    font-size: 10px;
+    background: #fff0e8;
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 6px;
+    float: right;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .name-btn.online-tag::after {
+    content: '온라인';
+    font-size: 10px;
+    background: #e8f5ee;
+    color: var(--accent2);
+    padding: 1px 6px;
+    border-radius: 6px;
+    float: right;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .admin-link {
+    margin-top: 24px;
+    font-size: 12px;
+    color: #ccc;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .admin-link:hover { color: var(--muted); }
+
+  /* ── MAIN APP ── */
+  #mainApp { display: none; }
+
+  .hero {
+    background: var(--accent);
+    color: white;
+    padding: 40px 24px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+  .hero-name {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero p {
+    font-size: 13px;
+    opacity: 0.88;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+  .change-name-btn {
+    display: inline-block;
+    margin-top: 14px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    font-size: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .change-name-btn:hover { background: rgba(255,255,255,0.25); }
+
+  .progress-wrap {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 18px 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .progress-label { font-size: 13px; font-weight: 700; }
+  .progress-count {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .progress-bar {
+    background: #f0ece6;
+    border-radius: 10px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+    height: 100%;
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  .section {
+    max-width: 800px;
+    margin: 32px auto 0;
+    padding: 0 24px;
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .section-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .section-icon.orange { background: #fff0e8; }
+  .section-icon.green { background: #e8f5ee; }
+  .section-icon.blue { background: #e8f0ff; }
+  .section-icon.yellow { background: #fff8e0; }
+  .section-name { font-size: 17px; font-weight: 800; }
+
+  .step-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .step-card.done {
+    background: var(--done-bg);
+    border-color: var(--done-border);
+  }
+  .step-card.done .step-main { opacity: 0.6; }
+
+  .step-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 18px 14px;
+  }
+  .checkbox {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    margin-top: 2px;
+    background: white;
+  }
+  .done .checkbox {
+    background: var(--accent2);
+    border-color: var(--accent2);
+  }
+  .checkbox svg { display: none; }
+  .done .checkbox svg { display: block; }
+
+  .step-main { flex: 1; transition: opacity 0.3s; }
+  .step-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 3px;
+    font-family: 'Space Mono', monospace;
+  }
+  .step-title { font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; }
+  .step-subtitle { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  .done-badge {
+    display: none;
+    background: var(--accent2);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .done .done-badge { display: block; }
+
+  .step-detail {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 16px 18px 18px;
+    background: #fdfcfb;
+  }
+  .step-card.open .step-detail { display: block; }
+  .step-card.done .step-detail { background: #f4faf6; }
+
+  .detail-steps {
+    list-style: none;
+    counter-reset: detail-counter;
+  }
+  .detail-steps li {
+    counter-increment: detail-counter;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #333;
+  }
+  .detail-steps li::before {
+    content: counter(detail-counter);
+    background: var(--step-num);
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 12px;
+    min-width: 22px; height: 22px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .tip-box {
+    background: #fff8f0;
+    border: 1px solid #ffd5b8;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #7a4a2a;
+  }
+  .tip-box strong { color: var(--accent); font-weight: 700; }
+
+  .warning-box {
+    background: #fff3cd;
+    border: 1px solid #ffc940;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #7a5a00;
+  }
+  .warning-box strong { color: #c47a00; font-weight: 700; }
+
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-top: 14px;
+    transition: opacity 0.2s;
+  }
+  .link-btn:hover { opacity: 0.88; }
+  .link-btn.green { background: var(--accent2); }
+  .link-btn.blue { background: #3d6ee0; }
+
+  .divider {
+    max-width: 800px;
+    margin: 32px auto 0;
+    padding: 0 24px;
+    border: none;
+    border-top: 2px dashed var(--border);
+  }
+
+  .complete-banner {
+    display: none;
+    max-width: 800px;
+    margin: 32px auto 0;
+    padding: 0 24px;
+  }
+  .complete-banner.show { display: block; }
+  .complete-inner {
+    background: linear-gradient(135deg, var(--accent2), #1b4332);
+    color: white;
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .complete-inner .emoji { font-size: 48px; margin-bottom: 12px; }
+  .complete-inner h2 { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+  .complete-inner p { font-size: 14px; opacity: 0.85; line-height: 1.7; }
+
+  .footer-note {
+    max-width: 800px;
+    margin: 24px auto 0;
+    padding: 0 24px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* ── ADMIN SCREEN ── */
+  #adminScreen { display: none; }
+
+  .admin-hero {
+    background: #1a1a2e;
+    color: white;
+    padding: 36px 32px 32px;
+  }
+  .admin-hero h1 { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+  .admin-hero p { font-size: 13px; opacity: 0.6; }
+  .admin-back-btn {
+    display: inline-block;
+    margin-top: 16px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    font-size: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .admin-body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  .admin-group-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 12px;
+    margin-top: 28px;
+  }
+  .admin-group-title:first-child { margin-top: 0; }
+
+  .admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+
+  .admin-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 20px;
+    transition: box-shadow 0.2s;
+  }
+  .admin-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .admin-card.all-done {
+    border-color: var(--done-border);
+    background: var(--done-bg);
+  }
+
+  .admin-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .admin-name { font-size: 16px; font-weight: 800; }
+  .admin-academy { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .admin-pct {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .admin-card.all-done .admin-pct { color: var(--accent2); }
+
+  .admin-bar {
+    background: #f0ece6;
+    border-radius: 6px;
+    height: 6px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .admin-bar-fill {
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.5s ease;
+  }
+  .admin-card.all-done .admin-bar-fill {
+    background: linear-gradient(90deg, var(--accent2), #52b788);
+  }
+
+  .admin-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .admin-dot {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    background: #f0ece6;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: #bbb;
+    font-family: 'Space Mono', monospace;
+  }
+  .admin-dot.done {
+    background: var(--accent2);
+    color: white;
+  }
+
+  .admin-refresh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f0ece6;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    margin-bottom: 24px;
+    transition: background 0.2s;
+    color: var(--text);
+  }
+  .admin-refresh-btn:hover { background: #e8e4dd; }
+
+  .admin-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .summary-card {
+    background: white;
+    border-radius: 14px;
+    padding: 16px;
+    text-align: center;
+    border: 1.5px solid var(--border);
+  }
+  .summary-card .num {
+    font-family: 'Space Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .summary-card .lbl {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ADMIN PASSWORD */
+  #adminPasswordScreen {
+    display: none;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  .pw-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px 32px;
+    max-width: 360px;
+    width: 100%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+  .pw-card h2 { font-size: 20px; font-weight: 900; margin-bottom: 8px; }
+  .pw-card p { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+  .pw-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+    letter-spacing: 0.2em;
+    margin-bottom: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .pw-input:focus { border-color: var(--accent); }
+  .pw-submit {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 13px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .pw-submit:hover { opacity: 0.88; }
+  .pw-error {
+    font-size: 13px;
+    color: #e74c3c;
+    margin-top: 10px;
+    display: none;
+  }
+  .pw-back { margin-top: 16px; font-size: 12px; color: var(--muted); cursor: pointer; text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- ── NAME SELECT ── -->
+<div id="nameScreen">
+  <div class="name-card">
+    <div class="logo">📋</div>
+    <h1>세미나 사전 준비</h1>
+    <p>이름을 선택하면 내 준비 현황이 저장돼요<br>어느 기기에서 접속해도 이어서 할 수 있어요</p>
+
+    <div class="group-label">📍 5월 2일 오프라인</div>
+    <div class="name-grid" id="offlineGrid"></div>
+
+    <div class="group-label">💻 5월 3일 온라인 ZOOM</div>
+    <div class="name-grid" id="onlineGrid"></div>
+
+    <div class="admin-link" onclick="showAdminLogin()">관리자 보기</div>
+  </div>
+</div>
+
+<!-- ── ADMIN PASSWORD ── -->
+<div id="adminPasswordScreen" style="display:none; min-height:100vh; align-items:center; justify-content:center; padding:40px 20px;">
+  <div class="pw-card">
+    <h2>🔒 관리자 로그인</h2>
+    <p>관리자 비밀번호를 입력하세요</p>
+    <input class="pw-input" type="password" id="pwInput" placeholder="••••" maxlength="10">
+    <button class="pw-submit" onclick="checkPassword()">확인</button>
+    <div class="pw-error" id="pwError">비밀번호가 틀렸어요</div>
+    <div class="pw-back" onclick="backToNameScreen()">← 돌아가기</div>
+  </div>
+</div>
+
+<!-- ── MAIN APP ── -->
+<div id="mainApp">
+  <div class="hero">
+    <div class="hero-name" id="heroName">이름</div>
+    <h1>수업 전에<br>이것만 해오세요!</h1>
+    <p>노션 학원 운영 자동화 세미나<br>당일 바로 실습하려면 미리 준비가 필요해요 😊</p>
+    <button class="change-name-btn" onclick="backToNameScreen()">✏️ 이름 변경</button>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-header">
+      <span class="progress-label">✅ 준비 완료</span>
+      <span class="progress-count" id="progressCount">0 / 9</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon orange">📱</div>
+      <div class="section-name">STEP 1 — 노션 가입</div>
+    </div>
+    <div class="step-card" id="step1" onclick="toggleStep('step1')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step1')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-main">
+          <div class="step-num">STEP 01</div>
+          <div class="step-title">노션(Notion) 회원가입</div>
+          <div class="step-subtitle">notion.so — 무료로 가입할 수 있어요</div>
+        </div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li>크롬 브라우저를 열고 주소창에 <b>notion.so</b> 를 입력해요</li>
+          <li>오른쪽 위 <b>"Notion 무료로 사용하기"</b> 버튼을 클릭해요</li>
+          <li>이메일로 가입하거나 구글 계정으로 로그인해요</li>
+          <li>설정 화면이 나오면 그냥 넘어가도 괜찮아요</li>
+          <li>메인 화면이 뜨면 가입 완료!</li>
+        </ul>
+        <div class="tip-box"><strong>💡 꿀팁</strong><br>세미나 당일 노트북으로 접속할 예정이라면 <b>노트북에서 미리 로그인</b>해두세요.</div>
+        <a href="https://www.notion.so" target="_blank" class="link-btn">👉 노션 바로가기</a>
+      </div>
+    </div>
+
+    <div class="step-card" id="step2" onclick="toggleStep('step2')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step2')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-main">
+          <div class="step-num">STEP 02</div>
+          <div class="step-title">노션 — PC에서 접속 확인</div>
+          <div class="step-subtitle">세미나 당일 노트북 지참 필수예요</div>
+        </div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li>노트북에서 <b>notion.so</b> 에 접속해서 로그인이 되는지 확인해요</li>
+          <li>화면 왼쪽에 사이드바가 보이면 OK!</li>
+        </ul>
+        <div class="warning-box"><strong>⚠️ 주의</strong><br>스마트폰·아이패드만으로는 실습이 어려워요. 반드시 <b>노트북</b>을 가져오세요!</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon green">💬</div>
+      <div class="section-name">STEP 2 — 솔라피 가입 (문자 자동발송)</div>
+    </div>
+
+    <div class="step-card" id="step3" onclick="toggleStep('step3')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step3')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-main">
+          <div class="step-num">STEP 03</div>
+          <div class="step-title">솔라피(Solapi) 회원가입</div>
+          <div class="step-subtitle">학부모 문자 자동발송에 쓰는 서비스예요</div>
+        </div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li>브라우저에서 <b>solapi.com</b> 에 접속해요</li>
+          <li>오른쪽 위 <b>"회원가입"</b> 클릭</li>
+          <li>이메일, 비밀번호 입력 후 가입 완료</li>
+          <li>이메일로 인증 메일이 오면 <b>인증 링크 클릭</b>해야 해요</li>
+        </ul>
+        <a href="https://solapi.com" target="_blank" class="link-btn green">👉 솔라피 바로가기</a>
+      </div>
+    </div>
+
+    <div class="step-card" id="step4" onclick="toggleStep('step4')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step4')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-main">
+          <div class="step-num">STEP 04</div>
+          <div class="step-title">솔라피 — 발신번호 등록</div>
+          <div class="step-subtitle">⚠️ 1~2일 걸릴 수 있어요. 미리 꼭 해두세요!</div>
+        </div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li>솔라피 로그인 후 왼쪽 메뉴에서 <b>"발신번호 관리"</b> 클릭</li>
+          <li><b>"발신번호 등록"</b> 버튼 클릭</li>
+          <li>내 휴대폰 번호 입력 후 <b>인증번호</b> 받기</li>
+          <li>인증번호 입력하면 등록 완료!</li>
+        </ul>
+        <div class="warning-box"><strong>⚠️ 중요!</strong><br>발신번호 등록이 되어 있어야 당일 테스트 문자를 보낼 수 있어요. 세미나 최소 <b>하루 전</b>에 꼭 해두세요.</div>
+      </div>
+    </div>
+
+    <div class="step-card" id="step5" onclick="toggleStep('step5')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step5')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-main">
+          <div class="step-num">STEP 05</div>
+          <div class="step-title">솔라피 — 소액 충전 (선택)</div>
+          <div class="step-subtitle">문자 1건에 약 9~12원, 테스트용 1,000원이면 충분해요</div>
+        </div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li>솔라피 로그인 후 <b>"충전"</b> 메뉴 클릭</li>
+          <li>최소 충전금액(보통 1,000원)으로 충전해요</li>
+          <li>신용카드·계좌이체 모두 가능해요</li>
+        </ul>
+        <div class="tip-box"><strong>💡 참고</strong><br>당일 테스트는 몇 건 안 보내니까 <b>1,000원</b>이면 충분해요.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon blue">⚙️</div>
+      <div class="section-name">STEP 3 — Make 가입 (자동화 연결)</div>
+    </div>
+
+    <div class="step-card" id="step6" onclick="toggleStep('step6')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step6')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-main">
+          <div class="step-num">STEP 06</div>
+          <div class="step-title">Make(메이크) 회원가입</div>
+          <div class="step-subtitle">노션과 솔라피를 연결해주는 자동화 서비스예요</div>
+        </div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li>브라우저에서 <b>make.com</b> 에 접속해요</li>
+          <li>오른쪽 위 <b>"Get started free"</b> 클릭</li>
+          <li>이메일로 가입하거나 구글 계정으로 로그인</li>
+          <li>무료 플랜으로 시작하면 돼요. 카드 정보 입력 안 해도 됩니다</li>
+        </ul>
+        <div class="tip-box"><strong>💡 참고</strong><br>Make는 가입만 해두면 돼요. 세팅은 <b>당일 수업</b>에서 같이 해요.</div>
+        <a href="https://make.com" target="_blank" class="link-btn blue">👉 Make 바로가기</a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon yellow">🎒</div>
+      <div class="section-name">STEP 4 — 당일 챙겨올 것</div>
+    </div>
+
+    <div class="step-card" id="step7" onclick="toggleStep('step7')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step7')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-main">
+          <div class="step-num">STEP 07</div>
+          <div class="step-title">노트북 챙기기</div>
+          <div class="step-subtitle">맥북·윈도우 모두 OK. 배터리 충전해서 오세요</div>
+        </div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li>노트북에 <b>크롬 브라우저</b>가 설치되어 있으면 좋아요</li>
+          <li>충전기도 같이 챙겨오세요</li>
+          <li>노션 로그인이 된 상태로 오시면 더 좋아요</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-card" id="step8" onclick="toggleStep('step8')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step8')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-main">
+          <div class="step-num">STEP 08</div>
+          <div class="step-title">스마트폰 챙기기</div>
+          <div class="step-subtitle">문자 테스트 수신용으로 필요해요</div>
+        </div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li>솔라피에 등록한 번호와 <b>같은 폰</b>을 챙겨오세요</li>
+          <li>수업 중에 문자가 실제로 오는 걸 직접 확인할 수 있어요!</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-card" id="step9" onclick="toggleStep('step9')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step9')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-main">
+          <div class="step-num">STEP 09</div>
+          <div class="step-title">학원 기본 정보 떠올려 두기</div>
+          <div class="step-subtitle">학생 이름 3~5명, 교재 이름 1~2개면 충분해요</div>
+        </div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li>실습할 때 <b>실제 학원 데이터</b>로 하면 더 와닿아요</li>
+          <li>학생 이름(가명도 OK), 연락처, 현재 수업 중인 교재 이름 정도만 있으면 돼요</li>
+          <li>없으면 수업 중에 예시 데이터 드려요 — 걱정 안 해도 됩니다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="complete-banner" id="completeBanner">
+    <div class="complete-inner">
+      <div class="emoji">🎉</div>
+      <h2>준비 완료!</h2>
+      <p>세미나 당일 뵙겠습니다 😊<br>질문 있으시면 편하게 연락 주세요.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    항목을 클릭하면 상세 안내를 볼 수 있어요<br>
+    체크박스를 누르면 완료 표시가 됩니다<br><br>
+    궁금한 점은 홍보은영어학원으로 연락 주세요 🙏
+  </div>
+</div>
+
+<!-- ── ADMIN SCREEN ── -->
+<div id="adminScreen">
+  <div class="admin-hero">
+    <h1>📊 세미나 준비 현황</h1>
+    <p id="adminSubtitle">전체 참가자 준비 상태</p>
+    <button class="admin-back-btn" onclick="backToNameScreen()">← 나가기</button>
+    <button class="admin-refresh-btn" onclick="loadAdmin()" style="margin-left:8px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">🔄 새로고침</button>
+  </div>
+  <div class="admin-body">
+    <div class="admin-summary" id="adminSummary"></div>
+    <button class="admin-refresh-btn" onclick="loadAdmin()">🔄 새로고침</button>
+    <div id="adminContent"></div>
+  </div>
+</div>
+
+<script>
+const TOTAL = 9;
+const ADMIN_PASSWORD = '0502';
+
+const PARTICIPANTS = {
+  offline: [
+    { name: '한가진', academy: '진수학' },
+    { name: '채현정', academy: '공부방' },
+    { name: '김인애', academy: '시너지수학' },
+    { name: '김현강', academy: '윤선생영어' },
+    { name: '임수현', academy: '씨아이영어학원' },
+    { name: '이혜진', academy: '꼼꼼영어' },
+    { name: '김도균', academy: 'ILS어학원' },
+    { name: '이화연', academy: '써니사이드학원' },
+    { name: '김초록', academy: '원더리딩영어교습소' },
+  ],
+  online: [
+    { name: '공윤영', academy: '리드웰영어학원' },
+    { name: '채수빈', academy: '유니드영어' },
+    { name: '김광미', academy: 'Readwell English' },
+    { name: '정유진', academy: '해빛' },
+    { name: '김민서', academy: '올영어교습소' },
+    { name: '김유리', academy: '유리영어교습소' },
+    { name: '김보란', academy: '김보란영어학원' },
+    { name: '어썸잉글리쉬', academy: '어썸잉글리쉬' },
+  ]
+};
+
+let currentUser = null;
+let checkedSteps = new Set();
+
+// ── BUILD NAME BUTTONS ──
+function buildNameButtons() {
+  const og = document.getElementById('offlineGrid');
+  const ol = document.getElementById('onlineGrid');
+  PARTICIPANTS.offline.forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'name-btn offline-tag';
+    btn.innerHTML = `${p.name}<span class="academy">${p.academy}</span>`;
+    btn.onclick = () => selectUser(p.name, p.academy);
+    og.appendChild(btn);
+  });
+  PARTICIPANTS.online.forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'name-btn online-tag';
+    btn.innerHTML = `${p.name}<span class="academy">${p.academy}</span>`;
+    btn.onclick = () => selectUser(p.name, p.academy);
+    ol.appendChild(btn);
+  });
+}
+
+// ── SELECT USER ──
+async function selectUser(name, academy) {
+  currentUser = name;
+  document.getElementById('heroName').textContent = name + ' 님';
+
+  // Load saved progress
+  checkedSteps = new Set();
+  try {
+    const result = await window.storage.get('progress:' + name, true);
+    if (result && result.value) {
+      const saved = JSON.parse(result.value);
+      saved.forEach(s => checkedSteps.add(s));
+    }
+  } catch(e) {}
+
+  // Apply UI
+  for (let i = 1; i <= TOTAL; i++) {
+    const card = document.getElementById('step' + i);
+    if (checkedSteps.has('step' + i)) {
+      card.classList.add('done');
+    } else {
+      card.classList.remove('done');
+    }
+  }
+  updateProgress();
+
+  document.getElementById('nameScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+}
+
+// ── CHECKLIST ──
+function toggleStep(id) {
+  const card = document.getElementById(id);
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.step-card').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+async function checkStep(e, id) {
+  e.stopPropagation();
+  const card = document.getElementById(id);
+  if (checkedSteps.has(id)) {
+    checkedSteps.delete(id);
+    card.classList.remove('done');
+  } else {
+    checkedSteps.add(id);
+    card.classList.add('done');
+  }
+  updateProgress();
+  await saveProgress();
+}
+
+async function saveProgress() {
+  if (!currentUser) return;
+  try {
+    await window.storage.set('progress:' + currentUser, JSON.stringify([...checkedSteps]), true);
+  } catch(e) {}
+}
+
+function updateProgress() {
+  const count = checkedSteps.size;
+  document.getElementById('progressCount').textContent = count + ' / ' + TOTAL;
+  document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+  const banner = document.getElementById('completeBanner');
+  if (count === TOTAL) {
+    banner.classList.add('show');
+    setTimeout(() => banner.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+  } else {
+    banner.classList.remove('show');
+  }
+}
+
+// ── NAVIGATION ──
+function backToNameScreen() {
+  document.getElementById('nameScreen').style.display = 'flex';
+  document.getElementById('mainApp').style.display = 'none';
+  document.getElementById('adminScreen').style.display = 'none';
+  document.getElementById('adminPasswordScreen').style.display = 'none';
+  // Reset
+  document.querySelectorAll('.step-card').forEach(c => {
+    c.classList.remove('open', 'done');
+  });
+  checkedSteps = new Set();
+  currentUser = null;
+}
+
+// ── ADMIN ──
+function showAdminLogin() {
+  document.getElementById('nameScreen').style.display = 'none';
+  document.getElementById('adminPasswordScreen').style.display = 'flex';
+  document.getElementById('pwInput').value = '';
+  document.getElementById('pwError').style.display = 'none';
+  setTimeout(() => document.getElementById('pwInput').focus(), 100);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('pwInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkPassword();
+  });
+});
+
+function checkPassword() {
+  const val = document.getElementById('pwInput').value;
+  if (val === ADMIN_PASSWORD) {
+    document.getElementById('adminPasswordScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
+    loadAdmin();
+  } else {
+    document.getElementById('pwError').style.display = 'block';
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwInput').focus();
+  }
+}
+
+async function loadAdmin() {
+  const allParticipants = [
+    ...PARTICIPANTS.offline.map(p => ({...p, type: 'offline'})),
+    ...PARTICIPANTS.online.map(p => ({...p, type: 'online'}))
+  ];
+
+  // Load all progress
+  const results = await Promise.all(
+    allParticipants.map(async p => {
+      let steps = [];
+      try {
+        const r = await window.storage.get('progress:' + p.name, true);
+        if (r && r.value) steps = JSON.parse(r.value);
+      } catch(e) {}
+      return { ...p, steps, count: steps.length };
+    })
+  );
+
+  const total = results.length;
+  const ready = results.filter(r => r.count === TOTAL).length;
+  const started = results.filter(r => r.count > 0 && r.count < TOTAL).length;
+
+  // Summary
+  document.getElementById('adminSummary').innerHTML = `
+    <div class="summary-card">
+      <div class="num">${total}</div>
+      <div class="lbl">전체 참가자</div>
+    </div>
+    <div class="summary-card">
+      <div class="num" style="color:var(--accent2)">${ready}</div>
+      <div class="lbl">준비 완료 🎉</div>
+    </div>
+    <div class="summary-card">
+      <div class="num" style="color:#888">${total - ready - started}</div>
+      <div class="lbl">아직 시작 전</div>
+    </div>
+  `;
+
+  document.getElementById('adminSubtitle').textContent =
+    `전체 ${total}명 · 완료 ${ready}명 · 진행중 ${started}명`;
+
+  // Cards
+  const offline = results.filter(r => r.type === 'offline');
+  const online = results.filter(r => r.type === 'online');
+
+  function renderGroup(list, label) {
+    const dots = Array.from({length: TOTAL}, (_, i) => i + 1);
+    return `
+      <div class="admin-group-title">${label}</div>
+      <div class="admin-grid">
+        ${list.map(p => `
+          <div class="admin-card ${p.count === TOTAL ? 'all-done' : ''}">
+            <div class="admin-card-top">
+              <div>
+                <div class="admin-name">${p.name}</div>
+                <div class="admin-academy">${p.academy}</div>
+              </div>
+              <div class="admin-pct">${p.count}/${TOTAL}</div>
+            </div>
+            <div class="admin-bar">
+              <div class="admin-bar-fill" style="width:${p.count/TOTAL*100}%"></div>
+            </div>
+            <div class="admin-steps">
+              ${dots.map(n => `
+                <div class="admin-dot ${p.steps.includes('step'+n) ? 'done' : ''}">${n}</div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  document.getElementById('adminContent').innerHTML =
+    renderGroup(offline, '📍 5월 2일 오프라인') +
+    renderGroup(online, '💻 5월 3일 온라인 ZOOM');
+}
+
+// ── INIT ──
+buildNameButtons();
+document.getElementById('nameScreen').style.display = 'flex';
+</script>
+</body>
+</html>

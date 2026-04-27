@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>노션 학원 자동화 — 세미나 자료</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0f0f;
+  --surface: #1a1a1a;
+  --surface2: #222;
+  --border: #2e2e2e;
+  --accent: #ff6b35;
+  --accent2: #52b788;
+  --accent3: #f4d03f;
+  --text: #f0ece6;
+  --muted: #666;
+  --muted2: #999;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--accent);
+  padding: 60px 32px 56px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: 'NOTION';
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 200px;
+  color: rgba(0,0,0,0.08);
+  bottom: -20px; right: -10px;
+  line-height: 1;
+  pointer-events: none;
+}
+.hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-tag {
+  display: inline-block;
+  background: rgba(0,0,0,0.15);
+  color: white;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 5px 14px; border-radius: 20px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 88px);
+  line-height: 0.95;
+  color: white;
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+.hero-desc {
+  font-size: 16px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.7;
+  max-width: 480px;
+}
+.hero-meta {
+  display: flex; gap: 24px; flex-wrap: wrap;
+  margin-top: 28px;
+}
+.hero-meta-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: rgba(255,255,255,0.75); font-weight: 500;
+}
+
+/* ── NAV ── */
+.nav-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-bar::-webkit-scrollbar { display: none; }
+.nav-inner {
+  max-width: 860px; margin: 0 auto;
+  display: flex; gap: 0; white-space: nowrap;
+  padding: 0 24px;
+}
+.nav-item {
+  padding: 14px 20px;
+  font-size: 13px; font-weight: 700;
+  color: var(--muted2);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  display: inline-block;
+}
+.nav-item:hover { color: var(--text); border-bottom-color: var(--accent); }
+
+/* ── CONTENT ── */
+.content { max-width: 860px; margin: 0 auto; padding: 48px 24px 0; }
+
+/* ── SECTION HEADER ── */
+.sec-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 32px; padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.sec-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px; color: var(--accent);
+  line-height: 1; flex-shrink: 0;
+  opacity: 0.4;
+}
+.sec-title-wrap {}
+.sec-label { font-size: 11px; font-weight: 700; color: var(--muted2); letter-spacing: 0.1em; margin-bottom: 4px; }
+.sec-title { font-size: 26px; font-weight: 900; line-height: 1.2; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.card-title {
+  font-size: 16px; font-weight: 800;
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.card-title .num {
+  width: 26px; height: 26px;
+  background: var(--accent);
+  color: white;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800;
+  font-family: 'Space Mono', monospace;
+  flex-shrink: 0;
+}
+.card p { font-size: 14px; line-height: 1.8; color: #bbb; }
+.card p + p { margin-top: 10px; }
+
+/* ── STEP LIST ── */
+.step-list { list-style: none; counter-reset: sc; }
+.step-list li {
+  counter-increment: sc;
+  display: flex; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px; line-height: 1.7; color: #bbb;
+}
+.step-list li:last-child { border-bottom: none; }
+.step-list li::before {
+  content: counter(sc, decimal-leading-zero);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  color: var(--accent);
+  background: rgba(255,107,53,0.1);
+  min-width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.step-list li b { color: var(--text); }
+
+/* ── HIGHLIGHT BOX ── */
+.hl-box {
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 16px;
+  font-size: 14px; line-height: 1.7;
+}
+.hl-box.orange { background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.25); color: #ffb899; }
+.hl-box.green { background: rgba(82,183,136,0.1); border: 1px solid rgba(82,183,136,0.25); color: #90d4ae; }
+.hl-box.yellow { background: rgba(244,208,63,0.1); border: 1px solid rgba(244,208,63,0.25); color: #f9e08a; }
+.hl-box strong { color: inherit; font-weight: 800; }
+
+/* ── TAG CHIPS ── */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.chip {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--muted2);
+  font-size: 12px; font-weight: 700;
+  padding: 5px 12px; border-radius: 20px;
+  font-family: 'Space Mono', monospace;
+}
+.chip.accent { background: rgba(255,107,53,0.1); border-color: rgba(255,107,53,0.3); color: var(--accent); }
+
+/* ── TWO COL ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+/* ── LINK CARD ── */
+.link-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s;
+}
+.link-card:hover { border-color: var(--accent); background: rgba(255,107,53,0.05); }
+.link-card .lc-label { font-size: 11px; font-weight: 700; color: var(--muted2); letter-spacing: 0.08em; margin-bottom: 6px; }
+.link-card .lc-title { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+.link-card .lc-url { font-size: 12px; color: var(--accent); font-family: 'Space Mono', monospace; }
+
+/* ── MAKE FLOW ── */
+.make-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.make-node {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; gap: 6px;
+}
+.make-arrow { color: var(--muted); font-size: 18px; }
+
+/* ── DIVIDER ── */
+.section-divider { margin: 56px 0 48px; border: none; border-top: 1px solid var(--border); }
+
+/* ── FOOTER ── */
+.footer {
+  max-width: 860px; margin: 56px auto 0;
+  padding: 32px 24px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-left .ft-title { font-size: 15px; font-weight: 900; margin-bottom: 4px; }
+.footer-left .ft-sub { font-size: 12px; color: var(--muted2); }
+.footer-right { font-size: 12px; color: var(--muted); text-align: right; line-height: 1.8; }
+
+/* ── CODE ── */
+code {
+  background: var(--surface2);
+  color: var(--accent3);
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  padding: 2px 7px; border-radius: 5px;
+}
+
+.section-gap { margin-top: 56px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">📋 세미나 배포 자료</div>
+    <h1>노션으로<br>학원 굴리기</h1>
+    <p class="hero-desc">오늘 수업에서 배운 내용을 정리했어요.<br>집에서 다시 따라하면서 복습해보세요 😊</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">📅 2025년 5월</div>
+      <div class="hero-meta-item">🏫 홍보은영어학원</div>
+      <div class="hero-meta-item">⏱ 약 3시간 수업</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-bar">
+  <div class="nav-inner">
+    <a class="nav-item" href="#section1">① 노션 기초</a>
+    <a class="nav-item" href="#section2">② DB 만들기</a>
+    <a class="nav-item" href="#section3">③ 자동화</a>
+    <a class="nav-item" href="#section4">④ Make 설정</a>
+    <a class="nav-item" href="#section5">⑤ 링크 모음</a>
+    <a class="nav-item" href="#section6">⑥ 다음 수업 수요조사</a>
+  </div>
+</div>
+
+<!-- SECTION 1 -->
+<div class="content" id="section1">
+  <div class="sec-header">
+    <div class="sec-num">01</div>
+    <div class="sec-title-wrap">
+      <div class="sec-label">CHAPTER 1</div>
+      <div class="sec-title">노션 기초 — 이것만 알면 돼요</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"><div class="num">1</div> 노션이 뭐예요?</div>
+      <p>메모, 표, 일정, 체크리스트를 한 곳에 모아두는 <b style="color:var(--text)">클라우드 메모장</b>이에요.</p>
+      <p>엑셀 + 메모장 + 구글 드라이브를 합쳐놨다고 생각하면 돼요.</p>
+      <div class="hl-box green" style="margin-top:14px">무료로 쓸 수 있고, PC·폰 어디서나 접속 가능해요</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="num">2</div> 기본 구조</div>
+      <div class="chips">
+        <div class="chip accent">워크스페이스</div>
+        <div class="chip">→</div>
+        <div class="chip accent">페이지</div>
+        <div class="chip">→</div>
+        <div class="chip accent">블록</div>
+      </div>
+      <p style="margin-top:14px">모든 내용은 <b style="color:var(--text)">블록</b>으로 이루어져요.<br>텍스트, 표, 이미지, 체크박스 모두 블록이에요.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:0">
+    <div class="card-title"><div class="num">3</div> 꼭 알아야 할 단축키</div>
+    <div class="two-col" style="margin-top:4px">
+      <ul class="step-list">
+        <li><code>/</code> 입력 → 블록 추가 메뉴 열기</li>
+        <li><code>/table</code> → 표(데이터베이스) 만들기</li>
+        <li><code>/h1</code> → 큰 제목 만들기</li>
+        <li><code>/todo</code> → 체크박스 만들기</li>
+      </ul>
+      <ul class="step-list">
+        <li><code>Ctrl+D</code> → 블록 복제</li>
+        <li><code>Ctrl+Z</code> → 실행 취소</li>
+        <li><code>Ctrl+/</code> → 블록 타입 변경</li>
+        <li>드래그 → 블록 순서 이동</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="content section-gap" id="section2">
+  <div class="sec-header">
+    <div class="sec-num">02</div>
+    <div class="sec-title-wrap">
+      <div class="sec-label">CHAPTER 2</div>
+      <div class="sec-title">학원 DB 만들기 — 따라하기</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">1</div> 학생 DB 만들기</div>
+    <ul class="step-list">
+      <li>노션 왼쪽 사이드바에서 <b>+ 새 페이지</b> 클릭</li>
+      <li>페이지 제목에 <b>학생 DB</b> 라고 입력</li>
+      <li><code>/table</code> 입력 → <b>Table - Full page</b> 선택</li>
+      <li>열(컬럼) 추가: <b>이름 / 연락처 / 학년 / 현재 교재 / 수업 요일</b></li>
+      <li>각 열 제목 클릭 → 속성 타입 설정<br>연락처 → <b>전화번호</b>, 학년 → <b>선택</b>, 요일 → <b>다중 선택</b></li>
+      <li>학생 1~2명 직접 입력해서 테스트해보기</li>
+    </ul>
+    <div class="hl-box orange">
+      <strong>💡 팁</strong> — 열 타입을 잘 설정해두면 나중에 필터링이 편해져요.<br>요일을 "다중 선택"으로 하면 월+수 수업도 한 칸에 표시돼요.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">2</div> 교재 DB 만들기</div>
+    <ul class="step-list">
+      <li>새 페이지 만들고 제목 <b>교재 DB</b></li>
+      <li><code>/table</code> → Table - Full page 선택</li>
+      <li>열 추가: <b>교재명 / 출판사 / 레벨 / 단원 수</b></li>
+      <li>현재 수업 중인 교재 입력</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">3</div> DB 연결하기 (관계형)</div>
+    <ul class="step-list">
+      <li>학생 DB 열기</li>
+      <li><b>+ 속성 추가</b> → <b>관계형(Relation)</b> 선택</li>
+      <li>연결할 DB로 <b>교재 DB</b> 선택 → 확인</li>
+      <li>이제 학생 행에서 교재를 직접 연결할 수 있어요!</li>
+      <li>학생 행 클릭 → 교재 필드에서 해당 교재 선택</li>
+    </ul>
+    <div class="hl-box green">
+      <strong>✅ 완성!</strong> — 학생 이름 클릭하면 어떤 교재 쓰는지 바로 보여요.<br>교재 DB에서도 어떤 학생이 쓰는지 반대로 볼 수 있어요.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">4</div> 수업 기록 DB 만들기</div>
+    <ul class="step-list">
+      <li>새 페이지 → 제목 <b>수업 기록</b></li>
+      <li>열 추가: <b>날짜 / 학생(관계형) / 수업 내용 / 특이사항 / 문자발송</b></li>
+      <li>날짜 → <b>날짜</b> 타입, 학생 → <b>관계형</b>(학생 DB 연결)</li>
+      <li>문자발송 → <b>체크박스</b> 타입</li>
+    </ul>
+    <div class="hl-box yellow">
+      <strong>⚡ 핵심</strong> — 이 "수업 기록" DB가 Make 자동화의 출발점이에요.<br>"문자발송" 체크박스를 체크하면 → 학부모 문자가 자동으로 발송돼요!
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="content section-gap" id="section3">
+  <div class="sec-header">
+    <div class="sec-num">03</div>
+    <div class="sec-title-wrap">
+      <div class="sec-label">CHAPTER 3</div>
+      <div class="sec-title">자동화 흐름 이해하기</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">1</div> 전체 자동화 흐름</div>
+    <div class="make-flow">
+      <div class="make-node">📝 수업 기록 입력</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">☑️ 문자발송 체크</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">⚙️ Make 감지</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">📱 솔라피 문자 발송</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">✅ 학부모 수신</div>
+    </div>
+    <p>체크박스 하나로 학부모 문자까지 자동으로 보내지는 구조예요.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">2</div> 문자 내용 예시</div>
+    <div class="hl-box orange" style="font-family:'Space Mono',monospace; font-size:13px; line-height:1.9">
+      안녕하세요, [학생이름] 어머니/아버지!<br>
+      홍보은영어학원입니다 😊<br><br>
+      오늘 수업 내용: [수업 내용]<br>
+      특이사항: [특이사항]<br><br>
+      감사합니다 🙏
+    </div>
+    <p style="margin-top:14px">대괄호 [ ] 부분이 노션 DB에서 자동으로 채워져요.</p>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="content section-gap" id="section4">
+  <div class="sec-header">
+    <div class="sec-num">04</div>
+    <div class="sec-title-wrap">
+      <div class="sec-label">CHAPTER 4</div>
+      <div class="sec-title">Make 자동화 설정 — 따라하기</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">1</div> Make 시나리오 만들기</div>
+    <ul class="step-list">
+      <li>make.com 로그인 → <b>Create a new scenario</b> 클릭</li>
+      <li>화면 중앙 <b>+</b> 버튼 클릭 → 검색창에 <b>Notion</b> 입력</li>
+      <li><b>Watch Database Items</b> 선택</li>
+      <li>Notion 계정 연결 (처음이면 로그인 팝업 나와요)</li>
+      <li>Database ID → 수업 기록 DB 선택</li>
+    </ul>
+    <div class="hl-box orange">
+      <strong>💡 팁</strong> — "Watch"는 "감시한다"는 뜻이에요. 노션 DB에 변화가 생기면 Make가 감지해요.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">2</div> 조건 설정 (필터)</div>
+    <ul class="step-list">
+      <li>Notion 모듈 오른쪽 <b>+</b> 클릭 → <b>Filter</b> 검색 → <b>Router</b> 또는 <b>Filter</b> 선택</li>
+      <li>조건: <b>문자발송</b> 필드 → <b>Equal to</b> → <b>true</b></li>
+      <li>이렇게 하면 체크박스가 체크된 것만 통과해요</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">3</div> 솔라피 연결</div>
+    <ul class="step-list">
+      <li>필터 다음 <b>+</b> 클릭 → 검색창에 <b>HTTP</b> 입력 → <b>Make an API Key Auth request</b> 선택</li>
+      <li>URL: <code>https://api.solapi.com/messages/v4/send</code></li>
+      <li>Method: <b>POST</b></li>
+      <li>Headers에 솔라피 API 키 입력</li>
+      <li>Body에 문자 내용 작성 (노션 필드 값 연결)</li>
+    </ul>
+    <div class="hl-box green">
+      <strong>✅ 솔라피 API 키 위치</strong><br>
+      솔라피 로그인 → 오른쪽 위 계정 클릭 → <b>API Key 관리</b>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">4</div> 테스트 & 활성화</div>
+    <ul class="step-list">
+      <li>Make 화면 하단 <b>Run once</b> 클릭 → 테스트 실행</li>
+      <li>노션에서 테스트용 수업 기록 만들고 체크박스 체크</li>
+      <li>내 폰으로 문자 오는지 확인!</li>
+      <li>잘 되면 왼쪽 하단 토글 켜서 <b>자동화 활성화</b></li>
+      <li>스케줄 설정: <b>15분마다</b> 체크 추천</li>
+    </ul>
+    <div class="hl-box yellow">
+      <strong>⚠️ 주의</strong> — 활성화 후 노션에서 같은 행을 또 수정하면 문자가 중복 발송될 수 있어요.<br>체크박스 체크 후 수정하지 않는 습관을 들이세요!
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="content section-gap" id="section5">
+  <div class="sec-header">
+    <div class="sec-num">05</div>
+    <div class="sec-title-wrap">
+      <div class="sec-label">CHAPTER 5</div>
+      <div class="sec-title">유용한 링크 모음</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <a class="link-card" href="https://notion.so" target="_blank">
+      <div class="lc-label">TOOL 01</div>
+      <div class="lc-title">📝 Notion</div>
+      <div class="lc-url">notion.so</div>
+    </a>
+    <a class="link-card" href="https://solapi.com" target="_blank">
+      <div class="lc-label">TOOL 02</div>
+      <div class="lc-title">💬 솔라피 (문자 발송)</div>
+      <div class="lc-url">solapi.com</div>
+    </a>
+    <a class="link-card" href="https://make.com" target="_blank">
+      <div class="lc-label">TOOL 03</div>
+      <div class="lc-title">⚙️ Make (자동화)</div>
+      <div class="lc-url">make.com</div>
+    </a>
+    <a class="link-card" href="https://www.notion.so/ko-kr/templates" target="_blank">
+      <div class="lc-label">RESOURCE</div>
+      <div class="lc-title">🗂 노션 공식 템플릿</div>
+      <div class="lc-url">notion.so/ko-kr/templates</div>
+    </a>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-title"><div class="num">💡</div> 막히면 여기서 찾아보세요</div>
+    <ul class="step-list">
+      <li>유튜브에 <b>"노션 입문"</b> 검색 → 한국어 영상 많아요</li>
+      <li>Make 공식 문서: <code>make.com/help</code></li>
+      <li>솔라피 개발 문서: <code>docs.solapi.com</code></li>
+      <li>막히는 부분은 언제든 질문 주세요! 😊</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- SURVEY SECTION -->
+<div class="content section-gap" id="section6">
+  <div class="sec-header">
+    <div class="sec-num">06</div>
+    <div class="sec-title-wrap">
+      <div class="sec-label">NEXT STEP</div>
+      <div class="sec-title">다음 수업, 뭐가 필요하세요?</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">💬</div> 이번 세미나 이후 추가로 배우고 싶은 것을 골라주세요</div>
+    <p style="margin-bottom:20px">오늘 배운 <b style="color:var(--text)">시간표 관리 + 일일 리포트 문자 + 교재비 문자 + 교재 유닛별 진도 관리</b> 외에,<br>다음 중 어떤 게 가장 필요하신가요?</p>
+    <div id="surveyItems"></div>
+    <div id="surveyResult" style="display:none" class="hl-box green" style="margin-top:20px">
+      <strong>✅ 선택 완료!</strong><br>
+      <span id="surveyResultText"></span>
+    </div>
+    <button id="surveySubmit" onclick="submitSurvey()" style="display:none; margin-top:16px; background:var(--accent); color:white; border:none; border-radius:12px; padding:12px 24px; font-size:14px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; width:100%">
+      선택 완료 →
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">🗓</div> 다음 세미나 예고</div>
+    <p>수요가 많은 주제로 다음 세미나를 준비할게요.<br>결과는 인스타그램 또는 카톡으로 안내드릴 예정이에요 😊</p>
+    <div class="hl-box orange" style="margin-top:16px">
+      <strong>📌 지금 배운 것부터 써보세요!</strong><br>
+      완벽하게 만들고 시작하려 하면 영원히 못 써요.<br>
+      일단 학생 1명 데이터 넣고, 문자 1번 보내보는 것부터 시작하세요.
+    </div>
+  </div>
+</div>
+
+<script>
+const SURVEY_ITEMS = [
+  { id: 'c', emoji: '💰', title: '수강료 미납 알림', desc: '납부 기한이 지난 학부모에게 자동으로 안내 문자 발송' },
+  { id: 'd', emoji: '🚫', title: '결석/지각 자동 알림', desc: '학생이 결석하면 학부모에게 바로 문자 발송' },
+  { id: 'e', emoji: '📝', title: '숙제 체크 & 미제출 알림', desc: '숙제 안 해온 학생 기록하고 학부모 알림' },
+  { id: 'f', emoji: '📊', title: '월간 학습 리포트', desc: '한 달 수업 내용을 자동으로 정리해서 학부모에게 발송' },
+  { id: 'g', emoji: '🎯', title: '레벨테스트 결과 관리', desc: '레벨테스트 점수 기록하고 반 배치 자동화' },
+  { id: 'h', emoji: '💬', title: '상담 일지 & 예약 관리', desc: '학부모 상담 내용 기록하고 다음 상담 일정 자동 알림' },
+  { id: 'i', emoji: '🖥️', title: '출결관리 + 선생님 대시보드 웹앱', desc: '노션 한계를 넘어서 — 실시간 출결, 시간표, 선생님별 대시보드를 웹앱으로 만들기' },
+];
+
+let selected = new Set();
+
+function buildSurvey() {
+  const container = document.getElementById('surveyItems');
+  SURVEY_ITEMS.forEach(item => {
+    const el = document.createElement('div');
+    el.id = 'si-' + item.id;
+    el.style.cssText = 'background:#1a1a1a;border:1.5px solid #2e2e2e;border-radius:12px;padding:16px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;display:flex;align-items:flex-start;gap:14px;';
+    el.innerHTML = `
+      <div style="font-size:24px;flex-shrink:0;margin-top:2px">${item.emoji}</div>
+      <div style="flex:1">
+        <div style="font-size:15px;font-weight:800;color:#f0ece6;margin-bottom:4px">${item.title}</div>
+        <div style="font-size:13px;color:#888;line-height:1.6">${item.desc}</div>
+      </div>
+      <div id="check-${item.id}" style="width:24px;height:24px;border-radius:7px;border:2px solid #444;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;"></div>
+    `;
+    el.onclick = () => toggleSurveyItem(item.id, el);
+    container.appendChild(el);
+  });
+}
+
+function toggleSurveyItem(id, el) {
+  const check = document.getElementById('check-' + id);
+  if (selected.has(id)) {
+    selected.delete(id);
+    el.style.borderColor = '#2e2e2e';
+    el.style.background = '#1a1a1a';
+    check.style.background = 'transparent';
+    check.style.borderColor = '#444';
+    check.innerHTML = '';
+  } else {
+    selected.add(id);
+    el.style.borderColor = '#52b788';
+    el.style.background = 'rgba(82,183,136,0.08)';
+    check.style.background = '#52b788';
+    check.style.borderColor = '#52b788';
+    check.innerHTML = '<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
+  document.getElementById('surveySubmit').style.display = selected.size > 0 ? 'block' : 'none';
+}
+
+function submitSurvey() {
+  const names = [...selected].map(id => SURVEY_ITEMS.find(i => i.id === id).title);
+  document.getElementById('surveyResult').style.display = 'block';
+  document.getElementById('surveyResultText').textContent = '선택하신 항목: ' + names.join(', ');
+  document.getElementById('surveySubmit').style.display = 'none';
+  document.getElementById('surveyResult').scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+buildSurvey();
+</script>
+
+<!-- FOOTER -->
+<div class="content">
+  <div class="footer">
+    <div class="footer-left">
+      <div class="ft-title">홍보은영어학원</div>
+      <div class="ft-sub">노션 학원 운영 자동화 세미나 · 2025년 5월</div>
+    </div>
+    <div class="footer-right">
+      이 자료는 수강생 전용입니다<br>
+      문의: 홍보은영어학원
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

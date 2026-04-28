@@ -442,6 +442,82 @@ code {
     </div>
   </div>
 
+
+  <div class="card">
+    <div class="card-title"><div class="num">0</div> Make ↔ 노션 연결 (선행 작업) — Internal API 방식</div>
+    <p style="margin-bottom:20px">Make에서 노션 DB를 읽으려면 <b style="color:var(--text)">API 키를 먼저 발급받아 연결</b>해야 해요. 총 3단계예요.</p>
+
+    <div style="background:rgba(255,107,53,0.08);border-radius:10px;padding:14px 16px;margin-bottom:16px;">
+      <div style="font-size:13px;font-weight:800;color:var(--accent);margin-bottom:10px;">PART A — 노션에서 API 키 발급</div>
+      <ul class="detail-steps" style="list-style:none;counter-reset:dc;">
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
+          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">1</span>
+          노션 → 왼쪽 하단 <b style="color:var(--text)">설정</b> 클릭 → 왼쪽 메뉴에서 <b style="color:var(--text)">"연결"</b> 클릭
+        </li>
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
+          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">2</span>
+          하단 <b style="color:var(--text)">"연결 개발 또는 관리"</b> 클릭
+        </li>
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
+          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">3</span>
+          <b style="color:var(--text)">"새 API 통합 만들기"</b> 클릭 → 이름 입력 (예: <code>Make연결</code>) → <b style="color:var(--text)">"생성하기"</b>
+        </li>
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
+          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">4</span>
+          팝업에서 <b style="color:var(--text)">"API 통합 설정 구성"</b> 클릭
+        </li>
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
+          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">5</span>
+          <b style="color:var(--text)">"액세스 토큰 실치"</b> 옆 <b style="color:var(--text)">"복사"</b> 버튼 클릭 → 메모장에 붙여두기
+        </li>
+      </ul>
+    </div>
+
+    <div style="background:rgba(82,183,136,0.08);border-radius:10px;padding:14px 16px;margin-bottom:16px;">
+      <div style="font-size:13px;font-weight:800;color:var(--accent2);margin-bottom:10px;">PART B — Make에서 연결 만들기</div>
+      <ul class="detail-steps" style="list-style:none;counter-reset:dc2;counter-reset:dc;">
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
+          <span style="background:rgba(82,183,136,0.15);color:var(--accent2);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">1</span>
+          Make → 새 시나리오 → Notion 모듈 추가 → <b style="color:var(--text)">Watch Data Source Items</b> 선택
+        </li>
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
+          <span style="background:rgba(82,183,136,0.15);color:var(--accent2);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">2</span>
+          Connection Type → <b style="color:var(--text)">"Notion Internal"</b> 선택
+        </li>
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
+          <span style="background:rgba(82,183,136,0.15);color:var(--accent2);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">3</span>
+          이름 입력 → 아까 복사한 <b style="color:var(--text)">API 토큰 붙여넣기</b> → <b style="color:var(--text)">Save</b>
+        </li>
+      </ul>
+    </div>
+
+    <div style="background:rgba(244,208,63,0.08);border-radius:10px;padding:14px 16px;margin-bottom:16px;">
+      <div style="font-size:13px;font-weight:800;color:var(--accent3);margin-bottom:10px;">PART C — 노션에서 DB에 연결 허용</div>
+      <ul class="detail-steps" style="list-style:none;counter-reset:dc;">
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
+          <span style="background:rgba(244,208,63,0.15);color:#c8a800;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">1</span>
+          노션으로 돌아와서 연결할 <b style="color:var(--text)">DB 페이지</b> 열기
+        </li>
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
+          <span style="background:rgba(244,208,63,0.15);color:#c8a800;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">2</span>
+          오른쪽 위 <b style="color:var(--text)">··· → 연결</b> 클릭
+        </li>
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
+          <span style="background:rgba(244,208,63,0.15);color:#c8a800;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">3</span>
+          목록에서 <b style="color:var(--text)">방금 만든 연결 이름 (NEW API 등)</b> 선택 → 허용
+        </li>
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
+          <span style="background:rgba(244,208,63,0.15);color:#c8a800;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">4</span>
+          <b style="color:var(--text)">일일리포트DB + 학생DB 둘 다</b> 동일하게 반복
+        </li>
+      </ul>
+    </div>
+
+    <div class="hl-box green">
+      <strong>✅ 완료 확인</strong> — Make에서 Database ID 검색창에 DB 이름이 보이면 연결 성공!
+    </div>
+  </div>
+
   <div class="card">
     <div class="card-title"><div class="num">1</div> Make 시나리오 만들기</div>
     <ul class="step-list">

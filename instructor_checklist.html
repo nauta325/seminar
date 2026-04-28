@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>세미나 강사 준비 체크리스트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf8f4;
+  --card: #ffffff;
+  --border: #e8e4dd;
+  --accent: #ff6b35;
+  --green: #1D9E75;
+  --green-bg: #eaf5ef;
+  --notion: #185FA5;
+  --notion-bg: #E6F1FB;
+  --make: #854F0B;
+  --make-bg: #FAEEDA;
+  --check: #3B6D11;
+  --check-bg: #EAF3DE;
+  --text: #1a1a1a;
+  --muted: #888;
+  --muted2: #555;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* HERO */
+.hero {
+  background: #2c3e5d;
+  color: white;
+  padding: 40px 24px 36px;
+  text-align: center;
+}
+.hero-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
+.hero h1 { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
+.hero p { font-size: 14px; opacity: 0.75; line-height: 1.7; }
+
+/* PROGRESS */
+.progress-wrap {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 18px 24px;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.progress-label { font-size: 13px; font-weight: 700; }
+.progress-count { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--green); font-weight: 700; }
+.progress-bar { background: #f0ece6; border-radius: 10px; height: 8px; overflow: hidden; }
+.progress-fill { background: var(--green); height: 100%; border-radius: 10px; width: 0%; transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+
+/* BODY */
+.body { max-width: 720px; margin: 0 auto; padding: 32px 20px 0; }
+
+/* GROUP */
+.group { margin-bottom: 28px; }
+.group-title {
+  font-size: 11px; font-weight: 700; color: var(--muted);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 10px; padding-bottom: 8px;
+  border-bottom: 1.5px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+}
+.group-icon {
+  width: 22px; height: 22px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; flex-shrink: 0;
+}
+
+/* ITEM */
+.item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 14px;
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.item:hover { border-color: var(--green); background: #f8fdf9; }
+.item.done { background: var(--green-bg); border-color: #b7e4c7; }
+.item.done .item-text { text-decoration: line-through; color: var(--muted); }
+.item.done .item-sub { color: #aaa; }
+
+.cb {
+  width: 24px; height: 24px; border-radius: 7px;
+  border: 2px solid #ddd; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; margin-top: 1px;
+  background: white;
+}
+.item.done .cb { background: var(--green); border-color: var(--green); }
+.cb svg { display: none; }
+.item.done .cb svg { display: block; }
+
+.item-body { flex: 1; }
+.item-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 3px; }
+.item-text { font-size: 14px; font-weight: 500; line-height: 1.5; }
+.item-sub { font-size: 12px; color: var(--muted2); line-height: 1.6; }
+
+/* BADGE */
+.badge {
+  font-size: 11px; font-weight: 700;
+  padding: 2px 8px; border-radius: 10px;
+  flex-shrink: 0; white-space: nowrap;
+}
+.badge-notion { background: var(--notion-bg); color: var(--notion); }
+.badge-make { background: var(--make-bg); color: var(--make); }
+.badge-check { background: var(--check-bg); color: var(--check); }
+
+/* COMPLETE */
+.complete-banner {
+  display: none; max-width: 720px; margin: 24px auto 0; padding: 0 20px;
+}
+.complete-banner.show { display: block; }
+.complete-inner {
+  background: linear-gradient(135deg, #1D9E75, #0F6E56);
+  color: white; border-radius: 16px; padding: 28px 24px; text-align: center;
+}
+.complete-inner .emoji { font-size: 40px; margin-bottom: 10px; }
+.complete-inner h2 { font-size: 20px; font-weight: 900; margin-bottom: 6px; }
+.complete-inner p { font-size: 14px; opacity: 0.85; line-height: 1.7; }
+
+/* RESET BTN */
+.reset-btn {
+  display: block; max-width: 720px; margin: 20px auto 0; padding: 0 20px;
+  text-align: right;
+}
+.reset-btn button {
+  background: none; border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 14px;
+  font-size: 12px; color: var(--muted);
+  font-family: 'Noto Sans KR', sans-serif;
+  cursor: pointer; transition: all 0.2s;
+}
+.reset-btn button:hover { border-color: #e74c3c; color: #e74c3c; }
+
+.footer-note {
+  max-width: 720px; margin: 24px auto 0; padding: 0 20px;
+  text-align: center; font-size: 12px; color: var(--muted); line-height: 1.8;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">강사 준비 체크리스트</div>
+  <h1>세미나 전 내가 해야 할 것들</h1>
+  <p>노션 DB 4개 + Make 시나리오 2개<br>체크하면 자동 저장돼요 (이 기기에서)</p>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-header">
+    <span class="progress-label">✅ 준비 완료</span>
+    <span class="progress-count" id="progressCount">0 / 16</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="body" id="body"></div>
+
+<div class="complete-banner" id="completeBanner">
+  <div class="complete-inner">
+    <div class="emoji">🎉</div>
+    <h2>준비 완료!</h2>
+    <p>세미나 당일 자신있게 진행하세요 😊</p>
+  </div>
+</div>
+
+<div class="reset-btn"><button onclick="resetAll()">전체 초기화</button></div>
+
+<div class="footer-note">체크하면 이 기기에 자동 저장돼요<br>홍보은영어학원 세미나 강사 준비 자료</div>
+
+<script>
+const DATA = [
+  {
+    group: "노션 — 전체학생 DB",
+    icon: "📘",
+    iconBg: "#E6F1FB",
+    badge: "badge-notion",
+    badgeText: "노션",
+    items: [
+      {
+        text: "전체학생 DB 생성 (데이터베이스 인라인)",
+        sub: "새 페이지 → /데이터베이스 인라인 → 제목: '전체학생 명단'"
+      },
+      {
+        text: "속성 5개 추가: 학년(선택) · 학부모연락처(전화번호) · 담당선생님(선택) · 등원시간(선택) · 학부모이름(텍스트)",
+        sub: "선택 속성에 초1~고3, 요일, 선생님 이름 옵션 미리 입력해두기"
+      },
+      {
+        text: "뷰 추가: 요일별 등원시간표",
+        sub: "+ 보기 추가 → 등원시간 기준 그룹화 설정"
+      },
+      {
+        text: "뷰 추가: 선생님별 보기",
+        sub: "필터: 담당선생님 = 각 선생님 이름"
+      },
+      {
+        text: "예시 학생 5명 입력 (본인 번호로 가짜 학생 1명 포함)",
+        sub: "문자 테스트용 — 학부모연락처에 본인 번호 꼭 넣기"
+      }
+    ]
+  },
+  {
+    group: "노션 — 교재 DB",
+    icon: "📗",
+    iconBg: "#EAF3DE",
+    badge: "badge-notion",
+    badgeText: "노션",
+    items: [
+      {
+        text: "교재 DB 생성",
+        sub: "속성: 교재명(제목) · 레벨(선택) · 금액(숫자) · 출판사(텍스트)"
+      },
+      {
+        text: "전체학생 DB에 교재 관계형 속성 추가",
+        sub: "전체학생 DB → + 속성 → 관계형 → 교재 DB 선택"
+      },
+      {
+        text: "교재 3개 이상 입력, 각 학생에 교재 연결",
+        sub: "실제 수업에서 쓰는 교재로 — 롤업 동작 확인까지"
+      }
+    ]
+  },
+  {
+    group: "노션 — 시간표 DB",
+    icon: "🗓",
+    iconBg: "#FAEEDA",
+    badge: "badge-notion",
+    badgeText: "노션",
+    items: [
+      {
+        text: "시간표 DB 생성",
+        sub: "속성: 수업명(제목) · 요일(선택) · 시간(텍스트) · 학생(관계형→전체학생)"
+      },
+      {
+        text: "롤업 2개 추가: 교재(학생→교재) · 학부모연락처(학생→연락처)",
+        sub: "학생만 고르면 교재·연락처 자동 표시되는지 확인"
+      },
+      {
+        text: "시간표 데이터 5건 입력 + 롤업 동작 확인",
+        sub: ""
+      }
+    ]
+  },
+  {
+    group: "노션 — 데일리리포트 DB",
+    icon: "📙",
+    iconBg: "#FAECE7",
+    badge: "badge-notion",
+    badgeText: "노션",
+    items: [
+      {
+        text: "데일리리포트 DB 생성",
+        sub: "속성: 날짜(날짜) · 학생(관계형→전체학생) · 수업내용(텍스트) · 특이사항(텍스트) · 단원(텍스트)"
+      },
+      {
+        text: "체크박스 속성 2개 추가: 문자발송 · 교재비발송",
+        sub: "Make 트리거용 — 두 개 별도로 만들기"
+      },
+      {
+        text: "롤업 추가: 교재 · 학부모연락처 · 학부모이름 (학생 DB에서 가져오기)",
+        sub: "학생 선택 시 자동으로 채워지는지 확인"
+      }
+    ]
+  },
+  {
+    group: "Make — 연결 & 시나리오 2개",
+    icon: "⚙️",
+    iconBg: "#FAEEDA",
+    badge: "badge-make",
+    badgeText: "Make",
+    items: [
+      {
+        text: "노션 Internal API 연결 설정",
+        sub: "노션 설정→연결→연결 개발 또는 관리→새 API 통합→토큰 복사 → Make Notion Internal에 입력"
+      },
+      {
+        text: "데일리리포트 DB + 전체학생 DB에 연결 허용",
+        sub: "각 DB 페이지 → ··· → 연결 → 만든 연결 이름 선택"
+      },
+      {
+        text: "시나리오 1: 데일리리포트 문자 발송",
+        sub: "Watch Data Source Items(문자발송 체크) → Get Item(학생) → Solapi Send / 테스트 발송까지"
+      },
+      {
+        text: "시나리오 2: 교재비 안내 문자",
+        sub: "교재비발송 체크박스 트리거 → 교재명·금액 자동 포함 → Solapi Send"
+      }
+    ]
+  },
+  {
+    group: "최종 확인",
+    icon: "✅",
+    iconBg: "#EAF3DE",
+    badge: "badge-check",
+    badgeText: "확인",
+    items: [
+      {
+        text: "본인 폰으로 데일리리포트 문자 테스트 발송",
+        sub: "내용이 정확히 채워지는지 확인"
+      },
+      {
+        text: "본인 폰으로 교재비 문자 테스트 발송",
+        sub: "교재명·금액이 맞게 들어오는지 확인"
+      },
+      {
+        text: "Make 스케줄 설정 + 자동화 ON",
+        sub: "15분~1시간 간격 추천 → 좌하단 토글 ON"
+      }
+    ]
+  }
+];
+
+const TOTAL = DATA.reduce((s, g) => s + g.items.length, 0);
+let checked = JSON.parse(localStorage.getItem('seminar_instructor_checklist') || '{}');
+
+function save() {
+  localStorage.setItem('seminar_instructor_checklist', JSON.stringify(checked));
+}
+
+function resetAll() {
+  if (confirm('모든 체크를 초기화할까요?')) {
+    checked = {};
+    save();
+    render();
+    updateProgress();
+  }
+}
+
+function toggleItem(key) {
+  checked[key] = !checked[key];
+  save();
+  const card = document.getElementById('item-' + key);
+  if (checked[key]) card.classList.add('done');
+  else card.classList.remove('done');
+  updateProgress();
+}
+
+function updateProgress() {
+  const count = Object.values(checked).filter(Boolean).length;
+  document.getElementById('progressCount').textContent = count + ' / ' + TOTAL;
+  document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+  const banner = document.getElementById('completeBanner');
+  if (count === TOTAL) {
+    banner.classList.add('show');
+    setTimeout(() => banner.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+  } else {
+    banner.classList.remove('show');
+  }
+}
+
+function render() {
+  const body = document.getElementById('body');
+  body.innerHTML = '';
+  DATA.forEach((group, gi) => {
+    const gDiv = document.createElement('div');
+    gDiv.className = 'group';
+    gDiv.innerHTML = `
+      <div class="group-title">
+        <div class="group-icon" style="background:${group.iconBg}">${group.icon}</div>
+        ${group.group}
+      </div>
+    `;
+    group.items.forEach((item, ii) => {
+      const key = gi + '-' + ii;
+      const done = !!checked[key];
+      const el = document.createElement('div');
+      el.className = 'item' + (done ? ' done' : '');
+      el.id = 'item-' + key;
+      el.innerHTML = `
+        <div class="cb">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 6L5 9L10 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-body">
+          <div class="item-top">
+            <span class="item-text">${item.text}</span>
+            <span class="badge ${group.badge}">${group.badgeText}</span>
+          </div>
+          ${item.sub ? `<div class="item-sub">${item.sub}</div>` : ''}
+        </div>
+      `;
+      el.onclick = () => toggleItem(key);
+      gDiv.appendChild(el);
+    });
+    body.appendChild(gDiv);
+  });
+}
+
+render();
+updateProgress();
+</script>
+</body>
+</html>

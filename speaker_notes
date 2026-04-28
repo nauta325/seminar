@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>강사용 진행 노트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 11px;
+  color: #1a1a1a;
+  background: #fff;
+  padding: 16px;
+  line-height: 1.5;
+}
+@media print {
+  body { padding: 10px; font-size: 10px; }
+  .page-break { page-break-before: always; }
+}
+h1 {
+  font-size: 18px;
+  font-weight: 900;
+  border-bottom: 3px solid #1a1a1a;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+.time-row {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 8px;
+  margin-bottom: 2px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+}
+.time {
+  font-weight: 900;
+  color: #2d6a4f;
+  font-size: 12px;
+}
+.section-header {
+  background: #2d6a4f;
+  color: #fff;
+  padding: 6px 12px;
+  font-weight: 900;
+  font-size: 12px;
+  margin: 12px 0 6px;
+  border-radius: 4px;
+}
+.section-header.break { background: #d4a853; color: #1a1a1a; }
+.section-header.check { background: #c1440e; color: #fff; }
+.talk {
+  background: #f8f6f2;
+  border-left: 3px solid #d4a853;
+  padding: 4px 8px;
+  margin: 4px 0;
+  font-style: italic;
+  font-size: 10.5px;
+  color: #555;
+}
+.action {
+  color: #2d6a4f;
+  font-weight: 700;
+}
+.warn {
+  color: #c1440e;
+  font-weight: 700;
+}
+.step {
+  display: flex;
+  gap: 6px;
+  padding: 2px 0;
+}
+.step-num {
+  font-weight: 900;
+  color: #2d6a4f;
+  min-width: 18px;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.mini-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10.5px;
+  margin: 4px 0;
+}
+.mini-table th {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 3px 6px;
+  text-align: left;
+  font-size: 10px;
+}
+.mini-table td {
+  padding: 3px 6px;
+  border-bottom: 1px solid #eee;
+}
+.mini-table tr:nth-child(even) td { background: #fafafa; }
+.checklist { list-style: none; margin: 4px 0; }
+.checklist li { padding: 2px 0; }
+.checklist li::before { content: '☐ '; }
+.note-box {
+  border: 1px solid #ddd;
+  padding: 6px 8px;
+  border-radius: 4px;
+  margin: 4px 0;
+  font-size: 10.5px;
+}
+hr { border: none; border-top: 1px dashed #ccc; margin: 8px 0; }
+</style>
+</head>
+<body>
+
+<h1>강사 진행 노트 — 세미나 01</h1>
+
+<div class="time-row">
+  <span class="time">전체흐름</span>
+  <span>오프닝(5) → 노션기초(35) → 실습 3개DB(35) → 일일리포트DB(25) → 쉬는시간(10) → Make입문(30) → 문자발송 실습(30) → 마무리(10) = <b>약 3시간</b></span>
+</div>
+
+<!-- ═══ 오프닝 ═══ -->
+<div class="section-header">12:00 — 오프닝 (5분)</div>
+
+<div class="talk">"안녕하세요, 홍보은영어학원 원장 ○○○입니다. 저도 코딩 배운 적 없습니다. 오늘 보여드리는 건 제가 실제로 매일 쓰고 있는 시스템입니다."</div>
+
+<div class="step"><span class="step-num action">시연:</span> 노션에 일일리포트 입력 → Make 실행 → 본인 폰에 문자 도착 보여주기</div>
+
+<div class="talk">"이걸 오늘 3시간 안에 직접 만들어 가십니다."</div>
+
+<!-- ═══ 파트 1 ═══ -->
+<div class="section-header">12:05 — PART 1: 노션 데이터베이스 기초 (35분)</div>
+
+<b>노션이란? (5분)</b>
+<div class="step"><span class="step-num">•</span> 메모앱 아니고 <b>데이터베이스 도구</b></div>
+<div class="step"><span class="step-num">•</span> 엑셀 = 셀, 노션 = "속성이 있는 카드"</div>
+<div class="step"><span class="step-num action">시연:</span> 노션 열어서 새 페이지 만들기</div>
+
+<hr>
+
+<b>데이터베이스 만들기 (10분)</b>
+<div class="step"><span class="step-num action">시연:</span> /데이터베이스 인라인 → 속성 추가</div>
+
+<table class="mini-table">
+<tr><th>속성</th><th>용도</th><th>예시</th></tr>
+<tr><td>제목</td><td>기본 이름</td><td>학생 이름</td></tr>
+<tr><td>텍스트</td><td>자유 입력</td><td>메모</td></tr>
+<tr><td>선택</td><td>하나만</td><td>요일, 학년</td></tr>
+<tr><td>다중선택</td><td>여러 개</td><td>수강 과목</td></tr>
+<tr><td>날짜</td><td>날짜/시간</td><td>수업일</td></tr>
+<tr><td>체크박스</td><td>예/아니오</td><td>숙제완료</td></tr>
+</table>
+
+<div class="step"><span class="step-num action">실습:</span> 빈 DB에 속성 3개 추가해보기 (2분)</div>
+
+<hr>
+
+<b>보기 + 필터 (5분)</b>
+<div class="step"><span class="step-num action">시연:</span> 테이블뷰 → 보드뷰 전환 / 필터 적용 / 그룹 적용</div>
+
+<hr>
+
+<b>★ 관계형 + 롤업 (15분) — 핵심!</b>
+
+<div class="talk">"학생 이름을 직접 쓰는 게 아니라, 학생DB에서 골라오는 것. 이게 관계형입니다."</div>
+<div class="talk">"학생을 고르면 학부모 연락처가 자동으로 따라오는 것. 이게 롤업입니다."</div>
+
+<div class="step"><span class="step-num action">시연:</span> 학생 선택 → 학부모 연락처 자동 표시 (와! 하는 반응 유도)</div>
+
+<!-- ═══ 파트 2 ═══ -->
+<div class="section-header">12:40 — PART 2: 실습 — 3개 DB 만들기 (35분)</div>
+
+<b>Step 1 — 교재DB (5분)</b>
+<div class="step"><span class="step-num">1.</span> /데이터베이스 인라인 → "교재DB"</div>
+<div class="step"><span class="step-num">2.</span> 속성: 교재명(제목), 레벨(선택), 단원수(숫자)</div>
+<div class="step"><span class="step-num">3.</span> 데이터 3개: Reading Explorer 2 / Grammar in Use / Phonics World 3</div>
+<div class="note-box"><span class="warn">교재DB를 먼저 만드는 이유:</span> 학생DB에서 관계형으로 연결하려면 대상이 먼저 있어야 함</div>
+
+<hr>
+
+<b>Step 2 — 학생DB (10분)</b>
+<div class="step"><span class="step-num">1.</span> /데이터베이스 인라인 → "학생DB"</div>
+<div class="step"><span class="step-num">2.</span> 속성: 이름(제목), 학년(선택), <span class="action">교재(관계형→교재DB) ★</span>, 학부모연락처(텍스트), 학부모이름(텍스트), 상태(선택)</div>
+<div class="step"><span class="step-num">3.</span> 데이터 3명 입력 — <span class="warn">학부모연락처에 본인 번호 넣기!</span></div>
+<div class="step"><span class="step-num">4.</span> 각 학생의 교재 선택 (관계형 동작 확인)</div>
+
+<hr>
+
+<b>Step 3 — 시간표DB (15분)</b>
+<div class="step"><span class="step-num">1.</span> /데이터베이스 인라인 → "시간표DB"</div>
+<div class="step"><span class="step-num">2.</span> 속성: 수업명(제목), 요일(선택), 시간(텍스트)</div>
+<div class="step"><span class="step-num">3.</span> <span class="action">학생(관계형→학생DB)</span></div>
+<div class="step"><span class="step-num">4.</span> <span class="action">교재(롤업) → 학생의 교재 ★ "학생만 고르면 교재 자동!"</span></div>
+<div class="step"><span class="step-num">5.</span> <span class="action">학부모연락처(롤업) → 학생의 학부모연락처</span></div>
+<div class="step"><span class="step-num">6.</span> 데이터 5개 입력</div>
+
+<hr>
+
+<b>Step 4 — 요일별 보기 (5분)</b>
+<div class="step"><span class="step-num">1.</span> 그룹 → "요일" 선택 → 자동 분류 확인</div>
+<div class="step"><span class="step-num">2.</span> 보드 뷰 추가</div>
+
+<div class="section-header check">체크포인트: "시간표에서 학생 선택 → 교재 + 학부모연락처 둘 다 자동으로 나오나요?"</div>
+
+<!-- ═══ 파트 3 ═══ -->
+<div class="section-header">13:15 — PART 3: 일일리포트DB (25분)</div>
+
+<div class="talk">"시간표는 '언제 누가 수업하는가', 리포트는 '오늘 뭘 했는가'. 문자는 리포트에서 보냅니다."</div>
+
+<b>Step 1 — 일일리포트DB 만들기 (12분)</b>
+<div class="step"><span class="step-num">1.</span> /데이터베이스 인라인 → "일일리포트DB"</div>
+<div class="step"><span class="step-num">2.</span> <span class="action">학생(관계형→학생DB)</span></div>
+<div class="step"><span class="step-num">3.</span> <span class="action">교재(롤업→학생의 교재) ★ 자동!</span></div>
+<div class="step"><span class="step-num">4.</span> 수업일(날짜), <b>단원(텍스트)</b> ← 매일 직접 입력</div>
+<div class="step"><span class="step-num">5.</span> 수업내용(텍스트), 숙제(텍스트), 숙제완료(체크), 태도(선택), 메모(텍스트)</div>
+<div class="step"><span class="step-num">6.</span> <span class="action">학부모연락처(롤업), 학부모이름(롤업) ★ 자동!</span></div>
+
+<div class="talk">"김민수를 선택하는 순간 교재가 Reading Explorer 2로 자동 표시됩니다. 매일 교재 다시 고를 필요 없어요."</div>
+
+<hr>
+
+<b>Step 2 — 테스트 데이터 (5분)</b>
+<div class="step"><span class="step-num">•</span> 리포트 3개 입력. 학생 선택 → 교재/연락처 자동 확인</div>
+
+<hr>
+
+<b>Step 3 — 문자내용 수식 (5분)</b>
+<div class="note-box" style="font-family:monospace;font-size:10px;">
+"[홍보은영어학원]\n" + prop("학부모이름") + "님, 오늘 수업 안내입니다.\n\n" + "■ 교재: " + prop("교재") + "\n" + "■ 단원: " + prop("단원") + "\n" + "■ 수업내용: " + prop("수업내용") + "\n" + "■ 숙제: " + prop("숙제") + "\n" + "■ 태도: " + prop("태도") + "\n\n" + "감사합니다."
+</div>
+
+<div class="section-header check">체크포인트: "학생 선택 → 교재, 연락처, 문자내용 전부 자동인가요?"</div>
+
+<!-- ═══ 쉬는시간 ═══ -->
+<div class="section-header break">13:40 — 쉬는시간 (10분)</div>
+<div class="step"><span class="step-num action">안내:</span> make.com 접속 / 솔라피 로그인 확인 / "쉬고 오시면 실제로 문자 보내봅니다"</div>
+
+<!-- ═══ 파트 4 ═══ -->
+<div class="section-header">13:50 — PART 4: Make 입문 (30분)</div>
+
+<div class="talk">"코딩 없이 앱과 앱을 연결하는 자동화 도구입니다. 레고처럼 블록을 연결하면 됩니다."</div>
+
+<b>Make란? (5분)</b>
+<div class="step"><span class="step-num">•</span> make.com 화면 보여주기</div>
+<div class="step"><span class="step-num">•</span> "노션에 새 기록 → Make 감지 → 솔라피 문자" 흐름 설명</div>
+
+<hr>
+
+<b>Notion 모듈 연결 (10분)</b>
+<div class="step"><span class="step-num">1.</span> Create a new scenario</div>
+<div class="step"><span class="step-num">2.</span> Notion 검색 → <b>Watch Database Items</b></div>
+<div class="step"><span class="step-num">3.</span> Add → Notion 로그인 → 권한 허용 → 일일리포트DB 선택</div>
+
+<div class="note-box"><span class="warn">자주 막힘:</span> Notion 연결 시 DB가 안 보임 → 노션에서 해당 페이지를 Make에 공유 허용해야 함. 천천히 시연!</div>
+
+<b>★ Make ↔ 노션 API 연결 (시나리오 만들기 전 필수!) — 3단계</b>
+
+<div class="section-header" style="background:#1a5276;margin-top:8px;">PART A — 노션에서 API 키 발급</div>
+<div class="step"><span class="step-num">1.</span> 노션 → 왼쪽 하단 <b>설정</b> → 왼쪽 메뉴 <b>"연결"</b> 클릭</div>
+<div class="step"><span class="step-num">2.</span> 하단 <b>"연결 개발 또는 관리"</b> 클릭</div>
+<div class="step"><span class="step-num">3.</span> <b>"새 API 통합 만들기"</b> → 이름 입력 (예: <b>Make연결</b>) → <b>"생성하기"</b></div>
+<div class="step"><span class="step-num">4.</span> 팝업에서 <b>"API 통합 설정 구성"</b> 클릭</div>
+<div class="step"><span class="step-num">5.</span> <b>"액세스 토큰"</b> 옆 <span class="action">"복사" 클릭</span> → 메모장에 붙여두기</div>
+
+<div class="section-header" style="background:#1a5276;margin-top:8px;">PART B — Make에서 연결 만들기</div>
+<div class="step"><span class="step-num">1.</span> Make → 새 시나리오 → Notion 모듈 → <b>Watch Data Source Items</b></div>
+<div class="step"><span class="step-num">2.</span> Connection Type → <b>"Notion Internal"</b> 선택</div>
+<div class="step"><span class="step-num">3.</span> 이름 입력 → <span class="action">아까 복사한 API 토큰 붙여넣기</span> → <b>Save</b></div>
+
+<div class="section-header" style="background:#1a5276;margin-top:8px;">PART C — 노션 DB에 연결 허용</div>
+<div class="step"><span class="step-num">1.</span> 노션으로 돌아와서 <b>일일리포트DB</b> 페이지 열기</div>
+<div class="step"><span class="step-num">2.</span> 오른쪽 위 <b>···</b> → <b>"연결"</b> 클릭</div>
+<div class="step"><span class="step-num">3.</span> 목록에서 <span class="action">방금 만든 연결 이름</span> 선택 → 허용</div>
+<div class="step"><span class="step-num">4.</span> <span class="warn">학생DB도 동일하게 반복!</span> (롤업 데이터 때문에 필수)</div>
+<div class="note-box"><span class="action">✅ 확인:</span> Make에서 Database ID 검색창에 DB 이름이 보이면 연결 성공!</div>
+
+<hr>
+
+<b>데이터 확인 (5분)</b>
+<div class="step"><span class="step-num">1.</span> "Run once" 클릭</div>
+<div class="step"><span class="step-num">2.</span> 노션에서 리포트 1개 새로 추가</div>
+<div class="step"><span class="step-num">3.</span> Make에서 데이터 들어오는 것 확인</div>
+
+<hr>
+
+<b>SOLAPI 모듈 연결 (10분)</b>
+<div class="step"><span class="step-num">1.</span> "+" → SOLAPI 검색 → Send a Message</div>
+<div class="step"><span class="step-num">2.</span> Add → API Key, API Secret 입력</div>
+
+<div class="note-box"><span class="warn">안 될 때:</span> API Key/Secret 오타 확인. 솔라피 대시보드에서 다시 복사.</div>
+
+<!-- ═══ 파트 5 ═══ -->
+<div class="section-header">14:20 — PART 5: 문자 발송 실습 (30분)</div>
+
+<b>솔라피 매핑 (10분)</b>
+<table class="mini-table">
+<tr><th>필드</th><th>매핑 값</th></tr>
+<tr><td>To</td><td>일일리포트의 학부모연락처 (Notion 필드 드래그)</td></tr>
+<tr><td>From</td><td>본인 발신번호</td></tr>
+<tr><td>Text</td><td>Notion 필드 조합: 학부모이름 + 교재 + 단원 + 수업내용 + 숙제 + 태도</td></tr>
+</table>
+
+<hr>
+
+<b>★★★ 테스트 발송 (10분) — 세미나 하이라이트!</b>
+<div class="step"><span class="step-num">1.</span> 노션에서 일일리포트 새로 추가</div>
+<div class="step"><span class="step-num">2.</span> Make에서 <b>Run once</b></div>
+<div class="step"><span class="step-num">3.</span> <span class="action">본인 폰에 문자 도착!</span></div>
+
+<div class="talk">"지금 여러분 폰에 문자 오셨나요?" → 환호 유도 → 사진 촬영 타임</div>
+
+<div class="note-box">
+<span class="warn">안 오는 수강생 대응:</span><br>
+• Make 빨간 에러 → API 키/발신번호 확인<br>
+• Make 성공인데 안 옴 → 솔라피 잔액 확인<br>
+• 발신번호 미등록 → 강사 번호로 대신 시연
+</div>
+
+<hr>
+
+<b>자동 실행 설정 (5분)</b>
+<div class="step"><span class="step-num">1.</span> Make 시계 아이콘 → Every day → 오후 9시</div>
+<div class="step"><span class="step-num">2.</span> 토글 ON</div>
+
+<div class="talk">"내일부터 매일 노션에 기록만 하면, Make가 알아서 학부모에게 보냅니다."</div>
+
+<!-- ═══ 마무리 ═══ -->
+<div class="section-header">14:50 — 마무리 (10분)</div>
+
+<b>정리 (3분)</b>
+<div class="step"><span class="step-num">•</span> 교재DB → 학생DB(교재 연결) → 시간표DB → 일일리포트DB → Make + 솔라피</div>
+<div class="step"><span class="step-num">•</span> "학생만 선택하면 교재·연락처·문자내용 전부 자동. 직접 쓰는 건 단원·수업내용·숙제·태도 4개뿐."</div>
+
+<b>Q&A (5분)</b>
+
+<b>세미나 2 예고 (2분)</b>
+<div class="talk">"다음 시간에는 제가 실제로 쓰고 있는 시스템을 잠깐 보여드릴게요."</div>
+<div class="step"><span class="step-num action">시연:</span> 출결관리 웹앱 + 시간표 + 선생님 대시보드 화면 공유</div>
+<div class="talk">"이건 노션만으로는 만들기 어려워요. 그래서 따로 만든 겁니다. 다음 세미나에서 이걸 어떻게 만드는지 같이 해볼게요."</div>
+<div class="step"><span class="step-num">•</span> 다음 세미나 예고 항목: 수강료 미납 알림 자동화 / 결석·지각 자동 알림 / 출결관리 + 선생님 대시보드 웹앱 만들기</div>
+
+<b>수요조사 안내 (1분)</b>
+<div class="talk">"배포 자료 하단에 다음 수업 수요조사가 있어요. 어떤 게 필요하신지 체크해주시면 다음 세미나 주제 선정에 반영하겠습니다."</div>
+<div class="step"><span class="step-num action">줌 채팅에 올리기:</span> https://nauta325.github.io/seminar/seminar_handout.html</div>
+
+<hr>
+<div style="margin-top:12px;">
+<b>강의 전 체크리스트:</b>
+<ul class="checklist">
+<li>코드/수식 복사용 Google Docs 링크 준비</li>
+<li>노션 템플릿 복제 링크 준비</li>
+<li>솔라피 테스트 잔액 확인</li>
+<li>예시 데이터 (학생 3명, 교재 3개, 시간표 5개, 리포트 3개)</li>
+<li>줌: 화면 공유 테스트 + 글씨 크기 확인</li>
+<li>줌: 채팅에 복사용 링크 미리 올려놓기</li>
+<li>출결관리·시간표·선생님 대시보드 웹앱 열어두기 (세미나 2 예고용 시연)</li>
+<li>배포자료 URL 채팅 준비: https://nauta325.github.io/seminar/seminar_handout.html</li>
+</ul>
+</div>
+
+</body>
+</html>

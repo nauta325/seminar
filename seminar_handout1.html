@@ -13,7 +13,7 @@
   --border: #e0e0e0;
   --accent: #ff6b35;
   --accent2: #52b788;
-  --accent3: #f4d03f;
+  --accent3: #c67c00;
   --text: #1a1a1a;
   --muted: #555;
   --muted2: #777;
@@ -180,7 +180,7 @@ body {
 }
 .hl-box.orange { background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.35); color: #c94a1a; }
 .hl-box.green { background: rgba(82,183,136,0.12); border: 1px solid rgba(82,183,136,0.35); color: #1e7a50; }
-.hl-box.yellow { background: rgba(244,208,63,0.15); border: 1px solid rgba(244,208,63,0.4); color: #7a5e00; }
+.hl-box.yellow { background: rgba(244,208,63,0.15); border: 1px solid rgba(244,208,63,0.4); color: #5a4400; }
 .hl-box strong { color: inherit; font-weight: 800; }
 
 /* ── TAG CHIPS ── */
@@ -316,7 +316,7 @@ code {
     <div class="two-col" style="margin-top:4px">
       <ul class="step-list">
         <li><code>/</code> 입력 → 블록 추가 메뉴 열기</li>
-        <li><code>/table</code> → 표(데이터베이스) 만들기</li>
+        <li><code>/database</code> 또는 <code>/데이터베이스</code> → 데이터베이스(표) 만들기</li>
         <li><code>/h1</code> → 큰 제목 만들기</li>
         <li><code>/todo</code> → 체크박스 만들기</li>
       </ul>
@@ -344,7 +344,7 @@ code {
   <div class="card">
     <div class="card-title"><div class="num">1</div> 전체학생 DB</div>
     <ul class="step-list">
-      <li>노션 새 페이지 → <code>/table</code> → Table Full page 선택</li>
+      <li>노션 새 페이지 → <code>/database</code> (또는 <code>/데이터베이스</code>) → <b>Table — Full page</b> 선택</li>
       <li>제목: <b>전체학생DB</b></li>
       <li>속성 추가: <b>학생ID(텍스트), 재원상태(선택), 학교(선택), 학년(선택), 담당선생님(선택), 전화번호(전화번호)</b></li>
       <li>요일별 등원시간: <b>월-등원시간 ~ 금-등원시간</b> (선택 타입 × 5개)</li>
@@ -543,11 +543,11 @@ code {
       <div style="font-size:13px;font-weight:800;color:var(--accent3);margin-bottom:10px;">PART C — DB에 연결 권한 부여</div>
       <ul class="detail-steps" style="list-style:none;counter-reset:dc;">
         <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#444;">
-          <span style="background:rgba(244,208,63,0.15);color:#c8a800;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">1</span>
+          <span style="background:rgba(244,208,63,0.15);color:#7a5500;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">1</span>
           노션 <b style="color:var(--text)">데일리리포트DB</b> 페이지 → 우상단 <b style="color:var(--text)">··· → 연결</b>
         </li>
         <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#444;">
-          <span style="background:rgba(244,208,63,0.15);color:#c8a800;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">2</span>
+          <span style="background:rgba(244,208,63,0.15);color:#7a5500;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">2</span>
           목록에서 <b style="color:var(--text)">만든 API 통합 이름</b> 선택 → 전체학생DB, 교재비관리DB도 동일하게 반복
         </li>
       </ul>

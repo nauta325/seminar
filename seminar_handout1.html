@@ -7,16 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0f0f0f;
-  --surface: #1a1a1a;
-  --surface2: #222;
-  --border: #2e2e2e;
+  --bg: #ffffff;
+  --surface: #f8f8f8;
+  --surface2: #f0f0f0;
+  --border: #e0e0e0;
   --accent: #ff6b35;
   --accent2: #52b788;
   --accent3: #f4d03f;
-  --text: #f0ece6;
-  --muted: #666;
-  --muted2: #999;
+  --text: #1a1a1a;
+  --muted: #555;
+  --muted2: #777;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -48,7 +48,7 @@ body {
 .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
 .hero-tag {
   display: inline-block;
-  background: rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.9);
   color: white;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.12em;
@@ -145,7 +145,7 @@ body {
   font-family: 'Space Mono', monospace;
   flex-shrink: 0;
 }
-.card p { font-size: 14px; line-height: 1.8; color: #bbb; }
+.card p { font-size: 14px; line-height: 1.8; color: #444; }
 .card p + p { margin-top: 10px; }
 
 /* ── STEP LIST ── */
@@ -155,7 +155,7 @@ body {
   display: flex; gap: 14px;
   padding: 14px 0;
   border-bottom: 1px solid var(--border);
-  font-size: 14px; line-height: 1.7; color: #bbb;
+  font-size: 14px; line-height: 1.7; color: #444;
 }
 .step-list li:last-child { border-bottom: none; }
 .step-list li::before {
@@ -178,9 +178,9 @@ body {
   margin-top: 16px;
   font-size: 14px; line-height: 1.7;
 }
-.hl-box.orange { background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.25); color: #ffb899; }
-.hl-box.green { background: rgba(82,183,136,0.1); border: 1px solid rgba(82,183,136,0.25); color: #90d4ae; }
-.hl-box.yellow { background: rgba(244,208,63,0.1); border: 1px solid rgba(244,208,63,0.25); color: #f9e08a; }
+.hl-box.orange { background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.35); color: #c94a1a; }
+.hl-box.green { background: rgba(82,183,136,0.12); border: 1px solid rgba(82,183,136,0.35); color: #1e7a50; }
+.hl-box.yellow { background: rgba(244,208,63,0.15); border: 1px solid rgba(244,208,63,0.4); color: #7a5e00; }
 .hl-box strong { color: inherit; font-weight: 800; }
 
 /* ── TAG CHIPS ── */
@@ -330,6 +330,7 @@ code {
   </div>
 </div>
 
+
 <!-- SECTION 2 -->
 <div class="content section-gap" id="section2">
   <div class="sec-header">
@@ -341,57 +342,77 @@ code {
   </div>
 
   <div class="card">
-    <div class="card-title"><div class="num">1</div> 학생 DB 만들기</div>
+    <div class="card-title"><div class="num">1</div> 전체학생 DB</div>
     <ul class="step-list">
-      <li>노션 왼쪽 사이드바에서 <b>+ 새 페이지</b> 클릭</li>
-      <li>페이지 제목에 <b>학생 DB</b> 라고 입력</li>
-      <li><code>/table</code> 입력 → <b>Table - Full page</b> 선택</li>
-      <li>열(컬럼) 추가: <b>이름 / 연락처 / 학년 / 현재 교재 / 수업 요일</b></li>
-      <li>각 열 제목 클릭 → 속성 타입 설정<br>연락처 → <b>전화번호</b>, 학년 → <b>선택</b>, 요일 → <b>다중 선택</b></li>
-      <li>학생 1~2명 직접 입력해서 테스트해보기</li>
+      <li>노션 새 페이지 → <code>/table</code> → Table Full page 선택</li>
+      <li>제목: <b>전체학생DB</b></li>
+      <li>속성 추가: <b>학생ID(텍스트), 재원상태(선택), 학교(선택), 학년(선택), 담당선생님(선택), 전화번호(전화번호)</b></li>
+      <li>요일별 등원시간: <b>월-등원시간 ~ 금-등원시간</b> (선택 타입 × 5개)</li>
+      <li>교재 연결(관계형): <b>리딩교재 / 단어교재 / 문법교재</b> → 교재DB 연결</li>
     </ul>
     <div class="hl-box orange">
-      <strong>💡 팁</strong> — 열 타입을 잘 설정해두면 나중에 필터링이 편해져요.<br>요일을 "다중 선택"으로 하면 월+수 수업도 한 칸에 표시돼요.
+      <strong>💡 시간표 = 전체학생DB의 뷰</strong><br>
+      별도 DB가 아니에요. 전체학생DB에서 <b>+ 보기 추가 → 그룹화 → 월-등원시간</b> 선택하면 시간대별로 자동 분류돼요.
     </div>
   </div>
 
   <div class="card">
-    <div class="card-title"><div class="num">2</div> 교재 DB 만들기</div>
+    <div class="card-title"><div class="num">2</div> 교재 DB</div>
     <ul class="step-list">
-      <li>새 페이지 만들고 제목 <b>교재 DB</b></li>
-      <li><code>/table</code> → Table - Full page 선택</li>
-      <li>열 추가: <b>교재명 / 출판사 / 레벨 / 단원 수</b></li>
-      <li>현재 수업 중인 교재 입력</li>
+      <li>새 페이지 → <b>교재DB</b></li>
+      <li>속성: <b>교재명(제목), 종류(선택: 리딩/문법/단어), 가격(숫자), 누적교재수량(숫자)</b></li>
+      <li>교재비관리DB 연결 후 → <b>배포된수량(롤업)</b>, <b>재고(수식: <code>누적교재수량 - 배포된수량</code>)</b> 추가</li>
     </ul>
   </div>
 
   <div class="card">
-    <div class="card-title"><div class="num">3</div> DB 연결하기 (관계형)</div>
+    <div class="card-title"><div class="num">3</div> 교재비관리 DB</div>
     <ul class="step-list">
-      <li>학생 DB 열기</li>
-      <li><b>+ 속성 추가</b> → <b>관계형(Relation)</b> 선택</li>
-      <li>연결할 DB로 <b>교재 DB</b> 선택 → 확인</li>
-      <li>이제 학생 행에서 교재를 직접 연결할 수 있어요!</li>
-      <li>학생 행 클릭 → 교재 필드에서 해당 교재 선택</li>
+      <li>새 페이지 → <b>교재비관리DB</b></li>
+      <li>속성: <b>학생이름(관계형→전체학생DB), 배부교재(관계형→교재DB), 배부날짜(날짜), 배부월(선택)</b></li>
+      <li><b>결제상태(선택: 미납/완납), 카톡전송(선택: 미전송/전송완료)</b></li>
+      <li>자동 계산: <b>교재비합계(롤업→배부교재→가격→합계), 전화번호(롤업→학생이름→전화번호)</b></li>
+      <li>Make 문자용 수식: <b>이름값(<code>format(학생이름)</code>), 배부교재값(<code>format(배부교재)</code>)</b></li>
     </ul>
-    <div class="hl-box green">
-      <strong>✅ 완성!</strong> — 학생 이름 클릭하면 어떤 교재 쓰는지 바로 보여요.<br>교재 DB에서도 어떤 학생이 쓰는지 반대로 볼 수 있어요.
-    </div>
   </div>
 
   <div class="card">
-    <div class="card-title"><div class="num">4</div> 수업 기록 DB 만들기</div>
+    <div class="card-title"><div class="num">4</div> 데일리리포트 DB</div>
     <ul class="step-list">
-      <li>새 페이지 → 제목 <b>수업 기록</b></li>
-      <li>열 추가: <b>날짜 / 학생(관계형) / 수업 내용 / 특이사항 / 문자발송</b></li>
-      <li>날짜 → <b>날짜</b> 타입, 학생 → <b>관계형</b>(학생 DB 연결)</li>
-      <li>문자발송 → <b>체크박스</b> 타입</li>
+      <li>새 페이지 → <b>데일리리포트DB</b></li>
+      <li>속성: <b>학생이름(관계형→전체학생DB), 날짜(날짜)</b></li>
+      <li>수업 상태: <b>지각 / 태도 / 과제 / 단어테스트_결과</b> (선택)</li>
+      <li>교재 연결: <b>리딩교재 / 단어교재 / 문법교재</b> (관계형→교재DB)</li>
+      <li>진도: <b>리딩진도 / 단어진도 / 문법진도 / 추가사항</b> (텍스트)</li>
+      <li><b>카톡전송</b>(선택: 미전송/전송완료) ← Make 트리거!</li>
+      <li>롤업: <b>진화번호</b>(학생이름→전화번호)</li>
+      <li>수식(Make 문자용): <b>학생이름값, 리딩교재값, 문법교재값, 단어교재값</b> (<code>format(각 관계형)</code>)</li>
     </ul>
     <div class="hl-box yellow">
-      <strong>⚡ 핵심</strong> — 이 "수업 기록" DB가 Make 자동화의 출발점이에요.<br>"문자발송" 체크박스를 체크하면 → 학부모 문자가 자동으로 발송돼요!
+      <strong>⚡ 수식 속성이 왜 필요한가요?</strong><br>
+      관계형 속성은 Make에서 바로 텍스트로 쓸 수 없어요. <code>format(리딩교재)</code> 수식을 만들어두면 Make에서 문자 내용에 바로 넣을 수 있어요.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">💡</div> DB 만드는 순서</div>
+    <p style="margin-bottom:14px">4개 DB가 서로 관계형으로 연결되어 있어서 "한 DB 완성 → 다음 DB" 순서로는 못 만들어요.</p>
+    <div class="make-flow" style="flex-wrap:wrap;gap:8px;">
+      <div class="make-node">① 4개 DB<br>빈 껍데기 생성</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">② 기본 속성<br>(관계형·롤업 제외)</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">③ 관계형<br>연결</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">④ 롤업·수식<br>마지막</div>
     </div>
   </div>
 </div>
+
+
+  <div style="margin-top:16px;padding:12px 16px;border:1px dashed var(--border);border-radius:10px;min-height:52px;">
+    <span style="font-size:11px;color:var(--muted2);font-weight:700;letter-spacing:0.05em;">MEMO</span>
+  </div>
 
 <!-- SECTION 3 -->
 <div class="content section-gap" id="section3">
@@ -408,29 +429,57 @@ code {
     <div class="make-flow">
       <div class="make-node">📝 수업 기록 입력</div>
       <div class="make-arrow">→</div>
-      <div class="make-node">☑️ 문자발송 체크</div>
+      <div class="make-node">카톡전송 = 미전송</div>
       <div class="make-arrow">→</div>
-      <div class="make-node">⚙️ Make 감지</div>
+      <div class="make-node">⚙️ Make 감지<br>(1분 간격)</div>
       <div class="make-arrow">→</div>
-      <div class="make-node">📱 솔라피 문자 발송</div>
+      <div class="make-node">📱 솔라피 문자</div>
       <div class="make-arrow">→</div>
-      <div class="make-node">✅ 학부모 수신</div>
+      <div class="make-node">✅ 카톡전송<br>= 전송완료</div>
     </div>
-    <p>체크박스 하나로 학부모 문자까지 자동으로 보내지는 구조예요.</p>
+    <p>체크박스 대신 <b>카톡전송 = 미전송</b>이 트리거예요. 문자가 나가면 자동으로 <b>전송완료</b>로 바뀌어서 중복 발송이 없어요.</p>
   </div>
 
   <div class="card">
-    <div class="card-title"><div class="num">2</div> 문자 내용 예시</div>
-    <div class="hl-box orange" style="font-family:'Space Mono',monospace; font-size:13px; line-height:1.9">
-      안녕하세요, [학생이름] 어머니/아버지!<br>
-      홍보은영어학원입니다 😊<br><br>
-      오늘 수업 내용: [수업 내용]<br>
-      특이사항: [특이사항]<br><br>
-      감사합니다 🙏
+    <div class="card-title"><div class="num">2</div> 시나리오 ① 데일리리포트 문자</div>
+    <div class="hl-box orange" style="font-family:'Space Mono',monospace; font-size:12px; line-height:1.9">
+      수업 보고서 {{날짜.start}}<br>
+      ——————————————<br>
+      과제수행 : {{과제.name}}<br>
+      수업태도 : {{태도.name}}<br>
+      지각여부 : {{지각.name}}<br>
+      단어테스트 : {{단어테스트_결과.name}}<br>
+      ——————————————<br>
+      [[ 학습사항 ]]<br>
+      리딩 : {{리딩교재값.string}} {{리딩진도[].plain_text}}<br>
+      문법 : {{문법교재값.string}} {{문법진도[].plain_text}}<br>
+      어휘 : {{단어교재값.string}} {{단어진도[].plain_text}}<br>
+      추가사항 : {{추가사항[].plain_text}}
     </div>
-    <p style="margin-top:14px">대괄호 [ ] 부분이 노션 DB에서 자동으로 채워져요.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">3</div> 시나리오 ② 교재비 안내 문자</div>
+    <div class="hl-box orange" style="font-family:'Space Mono',monospace; font-size:12px; line-height:1.9">
+      {{이름값.string}} 학생<br>
+      {{배부월.name}} 교재비 내역입니다.<br>
+      배부교재 : {{배부교재값.string}}<br>
+      총금액 = {{교재비합계.number}}원<br><br>
+      교재비는 카드 결제가 되지 않으므로,<br>
+      아래 계좌로 입금 부탁드립니다.<br><br>
+      카카오뱅크<br>
+      : 3333-05-XXXXXXX 홍보은
+    </div>
+    <div class="hl-box yellow" style="margin-top:12px">
+      <strong>⚠️ 매월 필터값 변경</strong> — 5월이 되면 Make 시나리오에서 <b>배부월 = 4월</b>을 <b>5월</b>로 바꿔줘야 해요.
+    </div>
   </div>
 </div>
+
+
+  <div style="margin-top:16px;padding:12px 16px;border:1px dashed var(--border);border-radius:10px;min-height:52px;">
+    <span style="font-size:11px;color:var(--muted2);font-weight:700;letter-spacing:0.05em;">MEMO</span>
+  </div>
 
 <!-- SECTION 4 -->
 <div class="content section-gap" id="section4">
@@ -442,132 +491,198 @@ code {
     </div>
   </div>
 
+  <div class="card">
+    <div class="card-title"><div class="num">0</div> 사전 준비 — 솔라피 설정</div>
+    <ul class="step-list">
+      <li><b>solapi.com</b> 회원가입 → 로그인</li>
+      <li>좌측 메뉴 <b>발신번호 관리</b> → 학원 전화번호 등록 → <b>승인됨</b> 상태 확인 (1~2일 소요, 미리 해두세요!)</li>
+      <li>최소 <b>50,000원</b> 충전 (SMS 1건 약 7~8원)</li>
+      <li>우상단 계정 → <b>API Key 관리</b> → API Key + API Secret 복사해두기</li>
+    </ul>
+    <div class="hl-box green">
+      <strong>✅ 준비물 체크</strong> — 발신번호 승인됨 · 포인트 50,000원 이상 · API Key 복사 완료
+    </div>
+  </div>
 
   <div class="card">
-    <div class="card-title"><div class="num">0</div> Make ↔ 노션 연결 (선행 작업) — Internal API 방식</div>
-    <p style="margin-bottom:20px">Make에서 노션 DB를 읽으려면 <b style="color:var(--text)">API 키를 먼저 발급받아 연결</b>해야 해요. 총 3단계예요.</p>
+    <div class="card-title"><div class="num">1</div> 노션 ↔ Make 연결 — Internal API 3단계</div>
 
-    <div style="background:rgba(255,107,53,0.08);border-radius:10px;padding:14px 16px;margin-bottom:16px;">
-      <div style="font-size:13px;font-weight:800;color:var(--accent);margin-bottom:10px;">PART A — 노션에서 API 키 발급</div>
+    <div style="background:rgba(255,107,53,0.08);border-radius:10px;padding:14px 16px;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:800;color:var(--accent);margin-bottom:10px;">PART A — 노션에서 API 토큰 발급</div>
       <ul class="detail-steps" style="list-style:none;counter-reset:dc;">
-        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
-          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">1</span>
-          노션 → 왼쪽 하단 <b style="color:var(--text)">설정</b> 클릭 → 왼쪽 메뉴에서 <b style="color:var(--text)">"연결"</b> 클릭
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#444;">
+          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">1</span>
+          노션 <b style="color:var(--text)">설정</b> → 왼쪽 메뉴 <b style="color:var(--text)">연결</b> → 하단 <b style="color:var(--text)">"연결 개발 또는 관리"</b> 클릭
         </li>
-        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
-          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">2</span>
-          하단 <b style="color:var(--text)">"연결 개발 또는 관리"</b> 클릭
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#444;">
+          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">2</span>
+          <b style="color:var(--text)">"새 API 통합 만들기"</b> → 이름 입력 → <b style="color:var(--text)">생성하기</b>
         </li>
-        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
-          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">3</span>
-          <b style="color:var(--text)">"새 API 통합 만들기"</b> 클릭 → 이름 입력 (예: <code>Make연결</code>) → <b style="color:var(--text)">"생성하기"</b>
-        </li>
-        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
-          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">4</span>
-          팝업에서 <b style="color:var(--text)">"API 통합 설정 구성"</b> 클릭
-        </li>
-        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
-          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">5</span>
-          <b style="color:var(--text)">"액세스 토큰 실치"</b> 옆 <b style="color:var(--text)">"복사"</b> 버튼 클릭 → 메모장에 붙여두기
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#444;">
+          <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">3</span>
+          <b style="color:var(--text)">"API 통합 설정 구성"</b> → <b style="color:var(--text)">액세스 토큰 복사</b> → 메모장에 저장
         </li>
       </ul>
     </div>
 
-    <div style="background:rgba(82,183,136,0.08);border-radius:10px;padding:14px 16px;margin-bottom:16px;">
+    <div style="background:rgba(82,183,136,0.08);border-radius:10px;padding:14px 16px;margin-bottom:14px;">
       <div style="font-size:13px;font-weight:800;color:var(--accent2);margin-bottom:10px;">PART B — Make에서 연결 만들기</div>
-      <ul class="detail-steps" style="list-style:none;counter-reset:dc2;counter-reset:dc;">
-        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
-          <span style="background:rgba(82,183,136,0.15);color:var(--accent2);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">1</span>
-          Make → 새 시나리오 → Notion 모듈 추가 → <b style="color:var(--text)">Watch Data Source Items</b> 선택
-        </li>
-        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
-          <span style="background:rgba(82,183,136,0.15);color:var(--accent2);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">2</span>
-          Connection Type → <b style="color:var(--text)">"Notion Internal"</b> 선택
-        </li>
-        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
-          <span style="background:rgba(82,183,136,0.15);color:var(--accent2);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">3</span>
-          이름 입력 → 아까 복사한 <b style="color:var(--text)">API 토큰 붙여넣기</b> → <b style="color:var(--text)">Save</b>
-        </li>
-      </ul>
-    </div>
-
-    <div style="background:rgba(244,208,63,0.08);border-radius:10px;padding:14px 16px;margin-bottom:16px;">
-      <div style="font-size:13px;font-weight:800;color:var(--accent3);margin-bottom:10px;">PART C — 노션에서 DB에 연결 허용</div>
       <ul class="detail-steps" style="list-style:none;counter-reset:dc;">
-        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
-          <span style="background:rgba(244,208,63,0.15);color:#c8a800;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">1</span>
-          노션으로 돌아와서 연결할 <b style="color:var(--text)">DB 페이지</b> 열기
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#444;">
+          <span style="background:rgba(82,183,136,0.15);color:var(--accent2);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">1</span>
+          Make → Notion 모듈 → Connection <b style="color:var(--text)">Add</b> → Connection Type: <b style="color:var(--text)">"Notion Internal"</b>
         </li>
-        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
-          <span style="background:rgba(244,208,63,0.15);color:#c8a800;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">2</span>
-          오른쪽 위 <b style="color:var(--text)">··· → 연결</b> 클릭
-        </li>
-        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
-          <span style="background:rgba(244,208,63,0.15);color:#c8a800;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">3</span>
-          목록에서 <b style="color:var(--text)">방금 만든 연결 이름 (NEW API 등)</b> 선택 → 허용
-        </li>
-        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#bbb;">
-          <span style="background:rgba(244,208,63,0.15);color:#c8a800;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:'Space Mono',monospace;">4</span>
-          <b style="color:var(--text)">일일리포트DB + 학생DB 둘 다</b> 동일하게 반복
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#444;">
+          <span style="background:rgba(82,183,136,0.15);color:var(--accent2);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">2</span>
+          Internal Integration Token: <b style="color:var(--text)">PART A 토큰 붙여넣기</b> → Save
         </li>
       </ul>
     </div>
 
+    <div style="background:rgba(244,208,63,0.08);border-radius:10px;padding:14px 16px;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:800;color:var(--accent3);margin-bottom:10px;">PART C — DB에 연결 권한 부여</div>
+      <ul class="detail-steps" style="list-style:none;counter-reset:dc;">
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#444;">
+          <span style="background:rgba(244,208,63,0.15);color:#c8a800;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">1</span>
+          노션 <b style="color:var(--text)">데일리리포트DB</b> 페이지 → 우상단 <b style="color:var(--text)">··· → 연결</b>
+        </li>
+        <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#444;">
+          <span style="background:rgba(244,208,63,0.15);color:#c8a800;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">2</span>
+          목록에서 <b style="color:var(--text)">만든 API 통합 이름</b> 선택 → 전체학생DB, 교재비관리DB도 동일하게 반복
+        </li>
+      </ul>
+    </div>
     <div class="hl-box green">
-      <strong>✅ 완료 확인</strong> — Make에서 Database ID 검색창에 DB 이름이 보이면 연결 성공!
+      <strong>✅ 완료 확인</strong> — Make 시나리오에서 Data Source ID 드롭다운에 DB 이름이 보이면 성공!
     </div>
   </div>
 
   <div class="card">
-    <div class="card-title"><div class="num">1</div> Make 시나리오 만들기</div>
+    <div class="card-title"><div class="num">2</div> 시나리오 ① — 데일리리포트 문자</div>
+    <div class="make-flow" style="margin-bottom:16px;">
+      <div class="make-node">Notion<br>Search Objects</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">Filter<br>(오늘 날짜만)</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">Solapi<br>Send Text</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">Notion<br>Update</div>
+    </div>
     <ul class="step-list">
-      <li>make.com 로그인 → <b>Create a new scenario</b> 클릭</li>
-      <li>화면 중앙 <b>+</b> 버튼 클릭 → 검색창에 <b>Notion</b> 입력</li>
-      <li><b>Watch Database Items</b> 선택</li>
-      <li>Notion 계정 연결 (처음이면 로그인 팝업 나와요)</li>
-      <li>Database ID → 수업 기록 DB 선택</li>
+      <li><b>모듈 1</b> — Notion: <b>Search Objects (Data Source Items)</b><br>
+        Data Source: 데일리리포트DB · 필터: 카톡전송 = <b>미전송</b> · Limit: 50</li>
+      <li><b>필터 블록</b> — 날짜: Start = <code>formatDate(now ; YYYY-MM-DD ; Asia/Seoul)</code></li>
+      <li><b>모듈 2</b> — Solapi: <b>Send Text Message</b><br>
+        수신: <code>진화번호.Array[].phone_number</code> · 발신: 등록한 내 번호 · 내용: Ch3 문자 템플릿</li>
+      <li><b>모듈 3</b> — Notion: <b>Update a Data Source Item</b><br>
+        Item ID: <code>1. Page ID</code> (Map ON) · 카톡전송 = <b>전송완료</b></li>
     </ul>
-    <div class="hl-box orange">
-      <strong>💡 팁</strong> — "Watch"는 "감시한다"는 뜻이에요. 노션 DB에 변화가 생기면 Make가 감지해요.
+    <div class="hl-box yellow">
+      <strong>⚠️ Asia/Seoul 필수!</strong> — 없으면 UTC 기준으로 계산되어 밤 9시 전엔 어제 날짜로 인식돼요.
     </div>
   </div>
 
   <div class="card">
-    <div class="card-title"><div class="num">2</div> 조건 설정 (필터)</div>
+    <div class="card-title"><div class="num">3</div> 시나리오 ② — 교재비 문자</div>
+    <div class="make-flow" style="margin-bottom:16px;">
+      <div class="make-node">Notion<br>Search Objects</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">Solapi<br>Send Text</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">Notion<br>Update</div>
+    </div>
     <ul class="step-list">
-      <li>Notion 모듈 오른쪽 <b>+</b> 클릭 → <b>Filter</b> 검색 → <b>Router</b> 또는 <b>Filter</b> 선택</li>
-      <li>조건: <b>문자발송</b> 필드 → <b>Equal to</b> → <b>true</b></li>
-      <li>이렇게 하면 체크박스가 체크된 것만 통과해요</li>
+      <li><b>모듈 1 필터 3개 (AND)</b><br>
+        배부월(Select) = <b>4월</b> (매월 변경!) · 결제상태 = <b>미납</b> · 카톡전송 = <b>미전송</b></li>
+      <li><b>모듈 2</b> — Solapi Send · 수신: <code>전화번호.Array[].phone_number</code></li>
+      <li><b>모듈 3</b> — Notion Update · 카톡전송 = <b>전송완료</b></li>
     </ul>
   </div>
 
   <div class="card">
-    <div class="card-title"><div class="num">3</div> 솔라피 연결</div>
+    <div class="card-title"><div class="num">3-1</div> Solapi 모듈 — Make에 연결</div>
     <ul class="step-list">
-      <li>필터 다음 <b>+</b> 클릭 → 검색창에 <b>HTTP</b> 입력 → <b>Make an API Key Auth request</b> 선택</li>
-      <li>URL: <code>https://api.solapi.com/messages/v4/send</code></li>
-      <li>Method: <b>POST</b></li>
-      <li>Headers에 솔라피 API 키 입력</li>
-      <li>Body에 문자 내용 작성 (노션 필드 값 연결)</li>
+      <li>시나리오에서 <b>Solapi</b> 검색 → <b>Send a Text Message</b> 선택 → Connection <b>Add</b></li>
+      <li>API Key: 솔라피 대시보드 → 계정 → <b>API Key 관리</b>에서 복사한 키</li>
+      <li>API Secret: 같은 화면의 <b>API Secret</b> 붙여넣기 → <b>Save</b></li>
+      <li>수신번호: <code>1. Properties Value: 진화번호.Array[]: phone_number</code></li>
+      <li>발신번호: 솔라피에 등록·승인된 <b>내 전화번호</b> 직접 입력</li>
     </ul>
-    <div class="hl-box green">
-      <strong>✅ 솔라피 API 키 위치</strong><br>
-      솔라피 로그인 → 오른쪽 위 계정 클릭 → <b>API Key 관리</b>
+    <div class="hl-box yellow">
+      <strong>⚠️ 수신번호 매핑 주의</strong> — 텍스트 직접 입력이 아니라, 왼쪽 Notion 모듈에서 <b>드래그로 끌어다 연결</b>해야 해요.
     </div>
   </div>
 
   <div class="card">
     <div class="card-title"><div class="num">4</div> 테스트 & 활성화</div>
     <ul class="step-list">
-      <li>Make 화면 하단 <b>Run once</b> 클릭 → 테스트 실행</li>
-      <li>노션에서 테스트용 수업 기록 만들고 체크박스 체크</li>
-      <li>내 폰으로 문자 오는지 확인!</li>
-      <li>잘 되면 왼쪽 하단 토글 켜서 <b>자동화 활성화</b></li>
-      <li>스케줄 설정: <b>15분마다</b> 체크 추천</li>
+      <li>Make 하단 <b>Run once</b> → 데일리리포트DB에 테스트 데이터 입력 → 카톡전송 <b>미전송</b> 상태로 저장</li>
+      <li>내 폰으로 문자 오는지 확인! 왔으면 카톡전송이 <b>전송완료</b>로 바뀌었는지도 확인</li>
+      <li>잘 되면 시나리오 토글 켜서 <b>활성화</b> (15분 간격 추천)</li>
     </ul>
-    <div class="hl-box yellow">
-      <strong>⚠️ 주의</strong> — 활성화 후 노션에서 같은 행을 또 수정하면 문자가 중복 발송될 수 있어요.<br>체크박스 체크 후 수정하지 않는 습관을 들이세요!
+    <div class="hl-box green">
+      <strong>✅ 중복 방지 원리</strong> — 문자가 발송되면 카톡전송이 "전송완료"로 바뀌어요. Make는 "미전송"만 가져오니까 같은 줄이 두 번 발송되는 일이 없어요.
     </div>
+  </div>
+</div>
+
+<!-- SECTION 4b -->
+<div class="content section-gap" id="section4b">
+  <div class="sec-header">
+    <div class="sec-num" style="font-size:28px;">🔧</div>
+    <div class="sec-title-wrap">
+      <div class="sec-label">TROUBLESHOOTING</div>
+      <div class="sec-title">자주 막히는 에러 & 해결법</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">❗</div> 이런 에러, 이렇게 해결하세요</div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;">
+      <thead>
+        <tr style="background:rgba(255,107,53,0.1);">
+          <th style="padding:10px 12px;text-align:left;font-weight:800;color:var(--accent);border-bottom:2px solid rgba(255,107,53,0.2);width:42%">증상</th>
+          <th style="padding:10px 12px;text-align:left;font-weight:800;color:var(--text);border-bottom:2px solid rgba(255,107,53,0.2);">해결 방법</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:10px 12px;color:#c94a1a;font-weight:700;">DB가 드롭다운에 안 보여요</td>
+          <td style="padding:10px 12px;color:var(--muted);">PART C — 노션 DB 페이지에서 ··· → 연결 허용을 안 했어요. DB마다 반복해야 해요.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:rgba(0,0,0,0.02);">
+          <td style="padding:10px 12px;color:#c94a1a;font-weight:700;">문자가 안 와요 (에러 없음)</td>
+          <td style="padding:10px 12px;color:var(--muted);">날짜 필터에 <code>Asia/Seoul</code>이 빠졌거나, 오늘 날짜 데이터가 없는 경우예요.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:10px 12px;color:#c94a1a;font-weight:700;">발신번호 오류가 나요</td>
+          <td style="padding:10px 12px;color:var(--muted);">솔라피 발신번호 관리에서 상태가 <b>승인됨</b>인지 확인. 미승인이면 1~2일 대기해야 해요.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:rgba(0,0,0,0.02);">
+          <td style="padding:10px 12px;color:#c94a1a;font-weight:700;">같은 학생한테 문자가 2번 와요</td>
+          <td style="padding:10px 12px;color:var(--muted);">Update 모듈(카톡전송→전송완료)이 제대로 연결됐는지 확인. Item ID에 <code>Map ON</code> 해야 해요.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:10px 12px;color:#c94a1a;font-weight:700;">문자 내용에 변수가 그대로 보여요<br><small>(예: {{날짜.start}})</small></td>
+          <td style="padding:10px 12px;color:var(--muted);">이전 모듈에서 매핑이 안 된 거예요. Solapi 모듈 열어서 변수를 드래그로 다시 연결하세요.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:rgba(0,0,0,0.02);">
+          <td style="padding:10px 12px;color:#c94a1a;font-weight:700;">포인트 부족 에러</td>
+          <td style="padding:10px 12px;color:var(--muted);">솔라피 → 충전하기. 최소 50,000원 충전해야 해요.</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;color:#c94a1a;font-weight:700;">Make가 DB 변경을 못 감지해요</td>
+          <td style="padding:10px 12px;color:var(--muted);">시나리오 활성화(토글 ON)를 확인하고, 스케줄을 <b>15분</b>으로 설정했는지 확인하세요.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">📝</div> 메모</div>
+    <div style="min-height:80px;border-bottom:1px solid var(--border);margin-bottom:14px;"></div>
+    <div style="min-height:80px;border-bottom:1px solid var(--border);margin-bottom:14px;"></div>
+    <div style="min-height:80px;"></div>
   </div>
 </div>
 
@@ -614,6 +729,36 @@ code {
     </ul>
   </div>
 </div>
+
+
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-title"><div class="num">📬</div> 세미나 이후 질문은 여기로</div>
+    <div class="two-col" style="margin-top:4px;">
+      <div>
+        <p style="font-size:13px;color:var(--muted2);margin-bottom:6px;font-weight:700;">강사 — 홍보은</p>
+        <ul class="step-list">
+          <li>인스타그램: <code>@nauta325</code></li>
+          <li>세미나 자료: <code>nauta325.github.io/seminar</code></li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-size:13px;color:var(--muted2);margin-bottom:6px;font-weight:700;">전체 PDF 핸드아웃</p>
+        <div class="hl-box green">
+          <strong>📎 메일로 발송 예정</strong><br>
+          스크린샷 포함 45페이지 전체 자료를 세미나 후 이메일로 보내드려요.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-title"><div class="num">📝</div> 오늘의 메모</div>
+    <div style="min-height:70px;border-bottom:1px solid var(--border);margin-bottom:14px;"></div>
+    <div style="min-height:70px;border-bottom:1px solid var(--border);margin-bottom:14px;"></div>
+    <div style="min-height:70px;border-bottom:1px solid var(--border);margin-bottom:14px;"></div>
+    <div style="min-height:70px;"></div>
+  </div>
 
 
 <!-- SURVEY SECTION -->
@@ -668,7 +813,7 @@ function buildSurvey() {
   SURVEY_ITEMS.forEach(item => {
     const el = document.createElement('div');
     el.id = 'si-' + item.id;
-    el.style.cssText = 'background:#1a1a1a;border:1.5px solid #2e2e2e;border-radius:12px;padding:16px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;display:flex;align-items:flex-start;gap:14px;';
+    el.style.cssText = 'background:#f8f8f8;border:1.5px solid #e0e0e0;border-radius:12px;padding:16px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;display:flex;align-items:flex-start;gap:14px;';
     el.innerHTML = `
       <div style="font-size:24px;flex-shrink:0;margin-top:2px">${item.emoji}</div>
       <div style="flex:1">
@@ -686,8 +831,8 @@ function toggleSurveyItem(id, el) {
   const check = document.getElementById('check-' + id);
   if (selected.has(id)) {
     selected.delete(id);
-    el.style.borderColor = '#2e2e2e';
-    el.style.background = '#1a1a1a';
+    el.style.borderColor = '#e0e0e0';
+    el.style.background = '#f8f8f8';
     check.style.background = 'transparent';
     check.style.borderColor = '#444';
     check.innerHTML = '';

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>노션 학원 운영 템플릿 복제 방법 — 홍보은영어학원</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #2c3e5d;
+    --navy-soft: #4a5d7e;
+    --coral: #c0573e;
+    --coral-light: #e8a594;
+    --cream: #fdfcf9;
+    --cream-warm: #f5f1e8;
+    --gray-text: #5a5a5a;
+    --gray-line: #e5e0d6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--gray-line);
+  }
+  .badge {
+    display: inline-block;
+    background: var(--coral);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.35;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: var(--gray-text);
+    font-weight: 400;
+  }
+  .subtitle strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* CTA link box */
+  .cta-box {
+    background: var(--navy);
+    color: white;
+    border-radius: 14px;
+    padding: 28px 24px;
+    text-align: center;
+    margin-bottom: 48px;
+    box-shadow: 0 8px 24px rgba(44, 62, 93, 0.15);
+  }
+  .cta-label {
+    font-size: 13px;
+    color: var(--coral-light);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .cta-url {
+    font-family: 'SF Mono', 'Monaco', monospace;
+    font-size: 14px;
+    color: white;
+    word-break: break-all;
+    background: rgba(255,255,255,0.08);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 12px 0 16px;
+    display: block;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cta-url:hover { background: rgba(255,255,255,0.15); }
+  .cta-hint {
+    font-size: 13px;
+    color: var(--coral-light);
+    margin-top: 8px;
+  }
+
+  /* Section */
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--coral);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gray-line);
+  }
+
+  /* Steps */
+  .steps {
+    margin-bottom: 56px;
+  }
+  .step {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--gray-line);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: var(--cream-warm);
+    color: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    border: 2px solid var(--navy);
+  }
+  .step-body {
+    flex: 1;
+    padding-top: 4px;
+  }
+  .step-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .step-desc {
+    font-size: 14px;
+    color: var(--gray-text);
+    line-height: 1.65;
+  }
+  .step-desc strong {
+    color: var(--navy);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, #fff2c4 60%);
+    padding: 0 2px;
+  }
+
+  /* Checklist */
+  .checklist {
+    background: var(--cream-warm);
+    border-left: 4px solid var(--coral);
+    border-radius: 8px;
+    padding: 24px 24px 24px 28px;
+    margin-bottom: 56px;
+  }
+  .checklist-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .check-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 14px;
+    color: var(--gray-text);
+    line-height: 1.6;
+    border-top: 1px dashed rgba(192, 87, 62, 0.3);
+  }
+  .check-item:first-of-type { border-top: none; }
+  .check-box {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--coral);
+    border-radius: 4px;
+    margin-top: 3px;
+  }
+  .check-item strong { color: var(--navy); font-weight: 600; }
+
+  /* FAQ */
+  .faq {
+    margin-bottom: 48px;
+  }
+  .faq-item {
+    background: white;
+    border: 1px solid var(--gray-line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .faq-q {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+    display: flex;
+    gap: 8px;
+  }
+  .faq-q::before {
+    content: 'Q';
+    color: var(--coral);
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .faq-a {
+    font-size: 14px;
+    color: var(--gray-text);
+    line-height: 1.65;
+    padding-left: 20px;
+    border-left: 2px solid var(--cream-warm);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding-top: 32px;
+    border-top: 2px solid var(--gray-line);
+    color: var(--gray-text);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .footer strong { color: var(--navy); }
+  .footer-brand {
+    margin-top: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 14px;
+  }
+
+  /* Mobile */
+  @media (max-width: 540px) {
+    .container { padding: 32px 18px 60px; }
+    h1 { font-size: 24px; }
+    .step { gap: 14px; }
+    .step-num { width: 32px; height: 32px; font-size: 14px; }
+    .step-title { font-size: 16px; }
+    .checklist { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="badge">노션으로 학원 굴리는 법</div>
+    <h1>학원 운영 템플릿<br>내 노션으로 가져오기</h1>
+    <p class="subtitle">
+      오늘 세미나에서 보신 그 템플릿입니다.<br>
+      <strong>전체학생 · 교재 · 교재비관리 · 데일리리포트</strong> 4개 DB를 한 번에 복제하세요
+    </p>
+  </div>
+
+  <!-- CTA Link Box -->
+  <div class="cta-box">
+    <div class="cta-label">📋 복제 링크</div>
+    <a href="https://nimble-snow-d83.notion.site/Seminar-5-2-1f0" class="cta-url">
+      nimble-snow-d83.notion.site/Seminar-5-2
+    </a>
+    <div class="cta-hint">PC 브라우저 권장</div>
+  </div>
+
+  <!-- Steps -->
+  <div class="section-title">복제 4단계</div>
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">위 링크 클릭</div>
+        <div class="step-desc">
+          <strong>PC 브라우저</strong>를 권장합니다. 모바일에서도 가능하지만 복제 버튼이 메뉴 안에 숨어있을 수 있어요.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">우상단 "복제" 버튼 클릭</div>
+        <div class="step-desc">
+          페이지가 열리면 <strong>오른쪽 위에 "복제(Duplicate)" 버튼</strong>이 보입니다. 클릭하세요.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">워크스페이스 선택</div>
+        <div class="step-desc">
+          여러 개면 <strong>학원용 워크스페이스</strong>를 선택하세요. 하나만 있으면 자동으로 거기에 복사됩니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">완료! 사이드바 확인</div>
+        <div class="step-desc">
+          내 노션 사이드바에 페이지가 새로 생깁니다. 클릭하면 <strong>4개 DB가 관계형까지 살아있는 상태</strong>로 들어와 있어요.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Checklist -->
+  <div class="section-title">복제 후 가장 먼저 할 일</div>
+  <div class="checklist">
+    <div class="checklist-title">✏️ 내 학원에 맞게 바꿀 항목</div>
+
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div><strong>학원 이름</strong> — 페이지 제목을 본인 학원명으로 변경</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div><strong>발신번호</strong> — Make 시나리오에서 솔라피 발신번호를 본인 번호로 (지금은 01083629215)</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div><strong>계좌번호</strong> — 교재비 안내 문자의 계좌번호를 본인 계좌로 (카카오뱅크 3333-05-6958716 → 변경)</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div><strong>샘플 학생 데이터</strong> — 김민준 등 예시 데이터를 삭제하고 실제 학생으로 교체</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div><strong>교재 목록</strong> — 본인 학원에서 쓰는 교재로 교재DB 업데이트 (Brick, 천일문 등)</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div><strong>담당 선생님</strong> — 박정민·최은지 등 예시 선생님을 실제 강사명으로 교체</div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section-title">자주 막히는 부분</div>
+  <div class="faq">
+
+    <div class="faq-item">
+      <div class="faq-q">"복제" 버튼이 안 보여요</div>
+      <div class="faq-a">
+        모바일이면 우상단 ··· 메뉴 안에 숨어있을 수 있어요. <strong>PC 브라우저로 다시 접속</strong>하시면 잘 보입니다.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">어느 워크스페이스에 복사해야 해요?</div>
+      <div class="faq-a">
+        본인 <strong>학원용 워크스페이스</strong>에 복사하는 걸 추천합니다. 개인용이랑 분리해두면 나중에 관리가 편해요.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">복제했는데 페이지가 안 보여요</div>
+      <div class="faq-a">
+        브라우저 새로고침(Ctrl+R / Cmd+R) 한 번. 또는 사이드바 맨 아래 <strong>"개인 페이지"</strong> 섹션을 펼쳐보세요.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">롤업(전화번호·교재비합계)이 빈값으로 떠요</div>
+      <div class="faq-a">
+        복제 직후엔 정상입니다. 학생 데이터를 입력하고 <strong>학생이름 관계형 연결</strong>이 되면 자동으로 채워져요. 데이터 입력 후에도 빈값이면 학생이름 관계가 비어있는지 확인.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">복제 후 Make 자동화도 같이 따라오나요?</div>
+      <div class="faq-a">
+        ❌ <strong>Make 시나리오는 따라오지 않습니다.</strong> Make는 별도로 본인 계정에서 새로 만드셔야 해요. (오늘 세미나 Chapter 4에서 다룸)
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    천천히 시간 두고 복제해서 본인 학원에 맞게 세팅해보세요.<br>
+    오늘 받으신 <strong>핸드아웃의 Chapter 2·4</strong>를 참고하시면 더 쉽습니다.<br>
+    막히는 부분은 언제든 카톡으로 문의주세요.
+    <div class="footer-brand">홍보은영어학원 · 노션으로 학원 굴리는 법</div>
+  </div>
+
+</div>
+</body>
+</html>

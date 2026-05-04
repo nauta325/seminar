@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>다음 세미나 수요조사 — 홍보은 학원 자동화</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #2c3e5d;
+  --coral: #c0573e;
+  --cream: #fdfcf9;
+  --cream2: #f4f0e8;
+  --border: #e0d8cc;
+  --text: #1a1a1a;
+  --muted: #6b6560;
+  --green: #2d6a4f;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--navy);
+  color: white;
+  padding: 40px 24px 36px;
+  text-align: center;
+}
+.header-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 12px;
+}
+.header-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 8vw, 52px);
+  letter-spacing: 2px;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.header-title span { color: #f4d03f; }
+.header-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  max-width: 440px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── CONTENT ── */
+.wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+
+/* ── INTRO CARD ── */
+.intro-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--coral);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 22px;
+  margin-bottom: 28px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.intro-card strong { color: var(--text); font-weight: 700; }
+
+/* ── QUESTION BLOCK ── */
+.q-block {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.q-num {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--coral);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.q-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+.q-hint {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+/* ── CHECKBOX ITEMS ── */
+.check-list { display: flex; flex-direction: column; gap: 8px; }
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--cream);
+  user-select: none;
+}
+.check-item:hover { border-color: var(--navy); background: white; }
+.check-item.selected {
+  border-color: var(--navy);
+  background: rgba(44,62,93,0.06);
+}
+.check-item.selected .check-box {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.check-item.selected .check-box::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+.check-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+/* ── RADIO ITEMS ── */
+.radio-list { display: flex; flex-direction: column; gap: 8px; }
+.radio-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--cream);
+  user-select: none;
+}
+.radio-item:hover { border-color: var(--coral); background: white; }
+.radio-item.selected {
+  border-color: var(--coral);
+  background: rgba(192,87,62,0.05);
+}
+.radio-item.selected .radio-dot { border-color: var(--coral); }
+.radio-item.selected .radio-dot::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--coral);
+}
+.radio-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.item-body { flex: 1; }
+.item-title { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.4; }
+.item-desc { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+.item-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+.tag-price { background: rgba(44,62,93,0.1); color: var(--navy); }
+.tag-online { background: rgba(45,106,79,0.1); color: var(--green); }
+.tag-offline { background: rgba(192,87,62,0.1); color: var(--coral); }
+
+/* ── TEXT INPUT ── */
+.text-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--cream);
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.15s;
+  margin-top: 4px;
+}
+.text-input:focus { outline: none; border-color: var(--navy); background: white; }
+
+/* ── NAME INPUT ── */
+.name-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--cream);
+  transition: border-color 0.15s;
+}
+.name-input:focus { outline: none; border-color: var(--navy); background: white; }
+
+/* ── SUBMIT ── */
+.submit-wrap { margin-top: 28px; }
+.submit-btn {
+  width: 100%;
+  padding: 18px;
+  background: var(--navy);
+  color: white;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.submit-btn:hover { background: var(--coral); }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── SUCCESS ── */
+.success {
+  display: none;
+  text-align: center;
+  padding: 40px 24px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-top: 20px;
+}
+.success-icon { font-size: 48px; margin-bottom: 16px; }
+.success-title { font-size: 22px; font-weight: 900; color: var(--navy); margin-bottom: 8px; }
+.success-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* ── ERROR ── */
+.error-msg {
+  display: none;
+  background: rgba(192,87,62,0.08);
+  border: 1px solid rgba(192,87,62,0.3);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--coral);
+  margin-top: 12px;
+  font-weight: 700;
+}
+
+/* ── REQUIRED MARK ── */
+.req { color: var(--coral); margin-left: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">학원 운영 자동화 시리즈</div>
+  <div class="header-title">다음 세미나<br><span>수요조사</span></div>
+  <p class="header-sub">1분이면 끝나요. 원장님들의 응답이 다음 수업 내용을 결정합니다 🙏</p>
+</div>
+
+<div class="wrap">
+
+  <div class="intro-card">
+    지난 세미나에 참석해주셔서 감사합니다!<br>
+    <strong>다음 세미나</strong>를 준비하기 전에, 원장님께 가장 필요한 게 뭔지 먼저 여쭤보고 싶어요.<br>
+    응답해주신 분께는 다음 세미나 <strong>10% 할인 코드</strong>를 보내드려요.
+  </div>
+
+  <form id="surveyForm">
+
+    <!-- Q0: 이름 -->
+    <div class="q-block">
+      <div class="q-num">이름</div>
+      <div class="q-title">성함을 알려주세요 <span class="req">*</span></div>
+      <div class="q-hint">학원명도 같이 적어주시면 좋아요 (예: 홍보은 / 홍보은영어학원)</div>
+      <input type="text" class="name-input" id="inputName" placeholder="이름 / 학원명" required>
+    </div>
+
+    <!-- Q1: 시간 낭비 TOP3 -->
+    <div class="q-block">
+      <div class="q-num">질문 01</div>
+      <div class="q-title">학원 운영하면서 가장 시간을 많이 빼앗기는 작업은? <span class="req">*</span></div>
+      <div class="q-hint">최대 3개 선택</div>
+      <div class="check-list" id="q1List">
+        <div class="check-item" data-val="학부모 카톡·메시지 응대">
+          <div class="check-box"></div>
+          <div class="item-body">
+            <div class="item-title">📱 학부모 카톡·메시지 응대</div>
+            <div class="item-desc">매일 반복되는 문의, 수업 보고, 안내</div>
+          </div>
+        </div>
+        <div class="check-item" data-val="월말평가서·학습 보고서 작성">
+          <div class="check-box"></div>
+          <div class="item-body">
+            <div class="item-title">📝 월말평가서·학습 보고서 작성</div>
+            <div class="item-desc">매월 반복되는 학생별 보고서</div>
+          </div>
+        </div>
+        <div class="check-item" data-val="시험지 분석·시험 대비 자료 만들기">
+          <div class="check-box"></div>
+          <div class="item-body">
+            <div class="item-title">📊 시험지 분석·시험 대비 자료 만들기</div>
+            <div class="item-desc">시험 시즌마다 반복, 학교별로 다 달라서 힘든</div>
+          </div>
+        </div>
+        <div class="check-item" data-val="외부지문 분석·문제 만들기">
+          <div class="check-box"></div>
+          <div class="item-body">
+            <div class="item-title">📄 외부지문 분석·문제 만들기</div>
+            <div class="item-desc">매주 지문 가져다가 어휘·문법·문제 제작</div>
+          </div>
+        </div>
+        <div class="check-item" data-val="수업 자료·과제 만들기">
+          <div class="check-box"></div>
+          <div class="item-body">
+            <div class="item-title">✏️ 수업 자료·과제 만들기</div>
+            <div class="item-desc">매주 반복되는 프린트, 숙제지 제작</div>
+          </div>
+        </div>
+        <div class="check-item" data-val="신규생 상담·레벨테스트 정리">
+          <div class="check-box"></div>
+          <div class="item-body">
+            <div class="item-title">🎯 신규생 상담·레벨테스트 정리</div>
+            <div class="item-desc">상담 자료, 결과 정리, 반 배치</div>
+          </div>
+        </div>
+        <div class="check-item" data-val="수강료·교재비 관리">
+          <div class="check-box"></div>
+          <div class="item-body">
+            <div class="item-title">💰 수강료·교재비 관리</div>
+            <div class="item-desc">미납 확인, 안내 문자, 정산</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2: 다음 세미나 주제 -->
+    <div class="q-block">
+      <div class="q-num">질문 02</div>
+      <div class="q-title">다음 세미나에서 가장 배우고 싶은 주제는? <span class="req">*</span></div>
+      <div class="q-hint">1개만 선택해주세요</div>
+      <div class="radio-list" id="q2List">
+        <div class="radio-item" data-val="월말평가서 자동화">
+          <div class="radio-dot"></div>
+          <div class="item-body">
+            <div class="item-title">📋 월말평가서 완전 자동화</div>
+            <div class="item-desc">노션 수업 기록 → 앱스크립트 → 평가서 자동 작성 · PDF 변환 · 학부모 발송</div>
+            <span class="item-tag tag-price">30만원</span>
+            <span class="item-tag tag-offline">오프라인</span>
+          </div>
+        </div>
+        <div class="radio-item" data-val="학부모 커뮤니케이션 자동화">
+          <div class="radio-dot"></div>
+          <div class="item-body">
+            <div class="item-title">💬 학부모 커뮤니케이션 자동화 마스터</div>
+            <div class="item-desc">카톡 톤·템플릿 완성 + 학부모 페이지 HTML 제작 + GitHub 배포까지</div>
+            <span class="item-tag tag-price">25만원</span>
+            <span class="item-tag tag-online">줌+오프라인</span>
+          </div>
+        </div>
+        <div class="radio-item" data-val="시험지 분석·내신 대비 자료 자동화">
+          <div class="radio-dot"></div>
+          <div class="item-body">
+            <div class="item-title">📊 시험지 분석 + 내신 대비 자료 자동화</div>
+            <div class="item-desc">학교별 출제 패턴 분석, 학생 맞춤 학습 계획, 학부모 안내문 자동 생성</div>
+            <span class="item-tag tag-price">미정</span>
+            <span class="item-tag tag-online">줌+오프라인</span>
+          </div>
+        </div>
+        <div class="radio-item" data-val="웹앱 만들기">
+          <div class="radio-dot"></div>
+          <div class="item-body">
+            <div class="item-title">🖥️ 학원 전용 웹앱 만들기</div>
+            <div class="item-desc">출결 관리·시간표·선생님 대시보드 — 노션 너머의 학원 웹앱</div>
+            <span class="item-tag tag-price">미정</span>
+            <span class="item-tag tag-offline">오프라인</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3: 선호 방식 -->
+    <div class="q-block">
+      <div class="q-num">질문 03</div>
+      <div class="q-title">선호하는 수업 방식은? <span class="req">*</span></div>
+      <div class="q-hint">1개만 선택해주세요</div>
+      <div class="radio-list" id="q3List">
+        <div class="radio-item" data-val="줌 (온라인)">
+          <div class="radio-dot"></div>
+          <div class="item-body">
+            <div class="item-title">💻 줌 (온라인)</div>
+            <div class="item-desc">어디서든 참여 · 녹화본 제공</div>
+          </div>
+        </div>
+        <div class="radio-item" data-val="오프라인 일산">
+          <div class="radio-dot"></div>
+          <div class="item-body">
+            <div class="item-title">📍 오프라인 일산 (홍보은영어학원)</div>
+            <div class="item-desc">현장 실습 · 직접 질문 가능</div>
+          </div>
+        </div>
+        <div class="radio-item" data-val="둘 다 좋아요">
+          <div class="radio-dot"></div>
+          <div class="item-body">
+            <div class="item-title">🙆 둘 다 좋아요</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4: 자유 답변 -->
+    <div class="q-block">
+      <div class="q-num">질문 04 (선택)</div>
+      <div class="q-title">바라는 점이나 궁금한 점이 있으면 자유롭게 적어주세요</div>
+      <textarea class="text-input" id="q4Free" placeholder="다음 세미나 일정, 가격, 내용 등 자유롭게..."></textarea>
+    </div>
+
+    <div class="submit-wrap">
+      <button type="submit" class="submit-btn" id="submitBtn">
+        설문 제출하기
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <div class="error-msg" id="errorMsg">잠시 후 다시 시도해주세요.</div>
+    </div>
+
+  </form>
+
+  <div class="success" id="successBox">
+    <div class="success-icon">🎉</div>
+    <div class="success-title">응답해주셔서 감사합니다!</div>
+    <div class="success-desc">
+      원장님의 소중한 의견을 반영해서<br>
+      다음 세미나를 준비할게요.<br><br>
+      <strong>다음 세미나 10% 할인 코드</strong>는<br>
+      세미나 공지와 함께 안내드릴게요 😊
+    </div>
+  </div>
+
+</div>
+
+<script>
+const SUPABASE_URL = 'https://ypxkkzusllgwekdehmlp.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlweGtrenVzbGxnd2VrZGVobWxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTA5NzQsImV4cCI6MjA4NzE2Njk3NH0.CQG3XMDPK8_R1zWqs02V5pA0zvQymkKfmIbqE2Z-vw8';
+
+// ── 체크박스 토글 (최대 3개)
+document.querySelectorAll('#q1List .check-item').forEach(el => {
+  el.addEventListener('click', () => {
+    const selected = document.querySelectorAll('#q1List .check-item.selected');
+    if (!el.classList.contains('selected') && selected.length >= 3) return;
+    el.classList.toggle('selected');
+  });
+});
+
+// ── 라디오 토글
+['q2List', 'q3List'].forEach(listId => {
+  document.querySelectorAll(`#${listId} .radio-item`).forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll(`#${listId} .radio-item`).forEach(r => r.classList.remove('selected'));
+      el.classList.add('selected');
+    });
+  });
+});
+
+// ── 제출
+document.getElementById('surveyForm').addEventListener('submit', async e => {
+  e.preventDefault();
+
+  const name = document.getElementById('inputName').value.trim();
+  const q1 = [...document.querySelectorAll('#q1List .check-item.selected')].map(el => el.dataset.val);
+  const q2 = document.querySelector('#q2List .radio-item.selected')?.dataset.val;
+  const q3 = document.querySelector('#q3List .radio-item.selected')?.dataset.val;
+  const q4 = document.getElementById('q4Free').value.trim();
+
+  if (!name) { alert('성함을 입력해주세요.'); return; }
+  if (q1.length === 0) { alert('질문 01을 1개 이상 선택해주세요.'); return; }
+  if (!q2) { alert('질문 02를 선택해주세요.'); return; }
+  if (!q3) { alert('질문 03을 선택해주세요.'); return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '제출 중...';
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/seminar_survey`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        name,
+        q1_painpoints: q1,
+        q2_topic: q2,
+        q3_format: q3,
+        q4_freetext: q4 || null
+      })
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+
+    document.getElementById('surveyForm').style.display = 'none';
+    document.getElementById('successBox').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (err) {
+    const errEl = document.getElementById('errorMsg');
+    errEl.style.display = 'block';
+    errEl.textContent = '제출 중 오류가 발생했어요. 잠시 후 다시 시도해주세요. (' + err.message + ')';
+    btn.disabled = false;
+    btn.innerHTML = '설문 제출하기 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+  }
+});
+</script>
+</body>
+</html>

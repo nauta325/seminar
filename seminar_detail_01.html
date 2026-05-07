@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>월말평가서 완전 자동화 — 세미나 상세</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #2c3e5d;
+  --accent: #c0573e;
+  --text: #ffffff;
+  --muted: rgba(255,255,255,0.55);
+  --border: rgba(255,255,255,0.12);
+  --card-bg: rgba(255,255,255,0.06);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* HERO */
+.hero {
+  padding: 60px 32px 48px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.hero-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 700; color: var(--muted);
+  text-decoration: none; margin-bottom: 32px;
+  transition: color 0.15s;
+}
+.hero-back:hover { color: white; }
+.hero-tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 11px; font-weight: 800; letter-spacing: 3px;
+  text-transform: uppercase; padding: 5px 12px; border-radius: 3px;
+  margin-bottom: 20px;
+}
+.hero-emoji { font-size: 52px; margin-bottom: 16px; display: block; }
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 10vw, 80px);
+  line-height: 1.05; letter-spacing: -1px;
+  margin-bottom: 16px; white-space: pre-line;
+}
+.hero-sub {
+  font-size: 18px; color: var(--muted);
+  font-weight: 300; line-height: 1.6;
+  margin-bottom: 28px;
+}
+.price-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.1); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 18px;
+  font-size: 15px; font-weight: 700;
+}
+.price-badge span { font-size: 12px; color: var(--muted); font-weight: 400; }
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--border); margin: 40px 0; max-width: 680px; margin-left: auto; margin-right: auto; }
+
+/* SECTION */
+.section { max-width: 680px; margin: 0 auto; padding: 0 32px 40px; }
+.sec-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 4px;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.sec-label::after { content:''; flex:1; height:1px; background:var(--border); opacity:0.5; }
+
+/* WHAT YOU LEARN */
+.learn-list { display: flex; flex-direction: column; gap: 14px; }
+.learn-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  padding: 20px 22px;
+}
+.learn-title { font-size: 17px; font-weight: 800; margin-bottom: 6px; }
+.learn-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+/* FLOW */
+.flow {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px 24px;
+}
+.flow-node {
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 13px; font-weight: 800;
+  padding: 8px 14px; border-radius: 6px;
+  white-space: nowrap;
+}
+.flow-arrow { color: var(--muted); font-size: 16px; }
+
+/* FOR WHO */
+.for-who {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 24px 26px;
+}
+.for-who-text {
+  font-size: 15px; color: var(--muted); line-height: 2;
+  white-space: pre-line;
+}
+.for-who-text::before { content: '✅ '; }
+
+/* CTA */
+.cta {
+  max-width: 680px; margin: 0 auto;
+  padding: 0 32px 60px;
+}
+.cta-box {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 32px;
+  text-align: center;
+}
+.cta-title { font-size: 20px; font-weight: 900; margin-bottom: 8px; }
+.cta-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--accent); color: #ffffff;
+  font-size: 15px; font-weight: 800;
+  padding: 16px 32px; border-radius: 8px;
+  text-decoration: none; transition: opacity 0.2s;
+}
+.cta-btn:hover { opacity: 0.9; }
+.back-link {
+  text-align: center; margin-top: 20px;
+}
+.back-link a {
+  font-size: 13px; color: var(--muted); text-decoration: none;
+}
+.back-link a:hover { color: white; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <a class="hero-back" href="seminar_survey.html">← 설문으로 돌아가기</a>
+  <span class="hero-tag">세미나 02 예고</span>
+  <span class="hero-emoji">📋</span>
+  <div class="hero-title">월말평가서
+완전 자동화</div>
+  <div class="hero-sub">수업 기록 → 평가서 → 학부모 발송까지 한 번에</div>
+  <div class="price-badge">
+    💰 예상 ~30만원대 <span>· 수요 확인 후 확정</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="sec-label">이런 걸 만들어요</div>
+  <div class="learn-list">
+    <div class="learn-item"><div class="learn-title">노션 수업 기록 → 평가서 초안 자동 작성</div><div class="learn-desc">매달 반복하던 평가서 작성, Google Apps Script 한 번으로 끝냅니다.</div></div>
+    <div class="learn-item"><div class="learn-title">Google Docs 자동 저장 · PDF 변환</div><div class="learn-desc">학생별 평가서가 자동으로 Google Docs에 저장되고 PDF로 변환돼요.</div></div>
+    <div class="learn-item"><div class="learn-title">학부모 열람 링크 자동 생성</div><div class="learn-desc">링크 하나만 보내면 학부모가 바로 확인할 수 있어요. 카카오톡에 붙여넣기만 하면 끝.</div></div>
+    <div class="learn-item"><div class="learn-title">출석률·태도·단어통과율 차트 자동 생성</div><div class="learn-desc">숫자 데이터가 도넛차트로 자동 변환돼서 시각적으로 보기 좋아요.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">자동화 흐름</div>
+  <div class="flow">
+    <div class="flow-node">노션 수업 기록 입력</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Apps Script 자동 실행</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Google Docs 평가서 생성</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">PDF 변환</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">학부모 링크 발송</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">이런 분께 맞아요</div>
+  <div class="for-who">
+    <div class="for-who-text">매달 평가서 쓰는 데 반나절 이상 쓰는 분
+수업 기록은 있는데 정리가 안 되는 분
+학부모 신뢰를 높이고 싶은 분</div>
+  </div>
+</div>
+
+<div class="cta">
+  <div class="cta-box">
+    <div class="cta-title">이 주제가 마음에 드셨나요?</div>
+    <div class="cta-sub">설문에서 선택해주시면<br>가장 수요가 높은 주제부터 준비할게요 😊</div>
+    <a href="seminar_survey.html" class="cta-btn">← 설문 돌아가서 선택하기</a>
+  </div>
+  <div class="back-link"><a href="seminar_survey.html">설문으로 돌아가기</a></div>
+</div>
+
+</body>
+</html>

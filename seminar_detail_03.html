@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>시험지 분석 + 내신 대비 자료 자동화 — 세미나 상세</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #3d2b1f;
+  --accent: #d4a853;
+  --text: #ffffff;
+  --muted: rgba(255,255,255,0.55);
+  --border: rgba(255,255,255,0.12);
+  --card-bg: rgba(255,255,255,0.06);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* HERO */
+.hero {
+  padding: 60px 32px 48px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.hero-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 700; color: var(--muted);
+  text-decoration: none; margin-bottom: 32px;
+  transition: color 0.15s;
+}
+.hero-back:hover { color: white; }
+.hero-tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #0f0e0d;
+  font-size: 11px; font-weight: 800; letter-spacing: 3px;
+  text-transform: uppercase; padding: 5px 12px; border-radius: 3px;
+  margin-bottom: 20px;
+}
+.hero-emoji { font-size: 52px; margin-bottom: 16px; display: block; }
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 10vw, 80px);
+  line-height: 1.05; letter-spacing: -1px;
+  margin-bottom: 16px; white-space: pre-line;
+}
+.hero-sub {
+  font-size: 18px; color: var(--muted);
+  font-weight: 300; line-height: 1.6;
+  margin-bottom: 28px;
+}
+.price-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.1); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 18px;
+  font-size: 15px; font-weight: 700;
+}
+.price-badge span { font-size: 12px; color: var(--muted); font-weight: 400; }
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--border); margin: 40px 0; max-width: 680px; margin-left: auto; margin-right: auto; }
+
+/* SECTION */
+.section { max-width: 680px; margin: 0 auto; padding: 0 32px 40px; }
+.sec-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 4px;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.sec-label::after { content:''; flex:1; height:1px; background:var(--border); opacity:0.5; }
+
+/* WHAT YOU LEARN */
+.learn-list { display: flex; flex-direction: column; gap: 14px; }
+.learn-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  padding: 20px 22px;
+}
+.learn-title { font-size: 17px; font-weight: 800; margin-bottom: 6px; }
+.learn-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+/* FLOW */
+.flow {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px 24px;
+}
+.flow-node {
+  background: var(--accent);
+  color: #0f0e0d;
+  font-size: 13px; font-weight: 800;
+  padding: 8px 14px; border-radius: 6px;
+  white-space: nowrap;
+}
+.flow-arrow { color: var(--muted); font-size: 16px; }
+
+/* FOR WHO */
+.for-who {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 24px 26px;
+}
+.for-who-text {
+  font-size: 15px; color: var(--muted); line-height: 2;
+  white-space: pre-line;
+}
+.for-who-text::before { content: '✅ '; }
+
+/* CTA */
+.cta {
+  max-width: 680px; margin: 0 auto;
+  padding: 0 32px 60px;
+}
+.cta-box {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 32px;
+  text-align: center;
+}
+.cta-title { font-size: 20px; font-weight: 900; margin-bottom: 8px; }
+.cta-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--accent); color: #0f0e0d;
+  font-size: 15px; font-weight: 800;
+  padding: 16px 32px; border-radius: 8px;
+  text-decoration: none; transition: opacity 0.2s;
+}
+.cta-btn:hover { opacity: 0.9; }
+.back-link {
+  text-align: center; margin-top: 20px;
+}
+.back-link a {
+  font-size: 13px; color: var(--muted); text-decoration: none;
+}
+.back-link a:hover { color: white; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <a class="hero-back" href="seminar_survey.html">← 설문으로 돌아가기</a>
+  <span class="hero-tag">향후 세미나 예고</span>
+  <span class="hero-emoji">📊</span>
+  <div class="hero-title">시험지 분석 +
+내신 대비 자료 자동화</div>
+  <div class="hero-sub">학교별 출제 패턴 분석부터 맞춤 자료 생성까지</div>
+  <div class="price-badge">
+    💰 가격 미정 (수요 확인 후 결정) <span>· 수요 확인 후 확정</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="sec-label">이런 걸 만들어요</div>
+  <div class="learn-list">
+    <div class="learn-item"><div class="learn-title">학교별 출제 패턴 자동 분석</div><div class="learn-desc">매 시험마다 반복되는 출제 유형 분석을 자동화. 학교별 데이터가 쌓일수록 더 정확해져요.</div></div>
+    <div class="learn-item"><div class="learn-title">학생별 취약 유형 정리 → 맞춤 학습 계획 생성</div><div class="learn-desc">학생이 틀린 문항 유형을 분석해서 맞춤형 학습 계획을 자동으로 만들어요.</div></div>
+    <div class="learn-item"><div class="learn-title">학부모 안내문 자동 완성</div><div class="learn-desc">시험 결과 + 학습 계획을 묶어서 학부모 안내문으로 자동 완성해요.</div></div>
+    <div class="learn-item"><div class="learn-title">시험 시즌 반복 작업 한 번에 해결</div><div class="learn-desc">매 시험마다 똑같이 반복하던 작업을 한 번 세팅으로 자동화해요.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">자동화 흐름</div>
+  <div class="flow">
+    <div class="flow-node">시험지 업로드</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">출제 패턴 분석</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">학생별 취약점 추출</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">맞춤 학습 계획 생성</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">학부모 안내문 발송</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">이런 분께 맞아요</div>
+  <div class="for-who">
+    <div class="for-who-text">내신 대비 수업을 하는 분
+시험 시즌마다 자료 만드는 데 지치는 분
+중·고등 영어 학원 원장님</div>
+  </div>
+</div>
+
+<div class="cta">
+  <div class="cta-box">
+    <div class="cta-title">이 주제가 마음에 드셨나요?</div>
+    <div class="cta-sub">설문에서 선택해주시면<br>가장 수요가 높은 주제부터 준비할게요 😊</div>
+    <a href="seminar_survey.html" class="cta-btn">← 설문 돌아가서 선택하기</a>
+  </div>
+  <div class="back-link"><a href="seminar_survey.html">설문으로 돌아가기</a></div>
+</div>
+
+</body>
+</html>

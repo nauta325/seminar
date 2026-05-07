@@ -420,16 +420,7 @@ body {
           </div>
           <div class="item-body" style="margin-top:8px;padding-left:32px;">
             <span class="item-tag tag-price">예상 ~30만원대 (변경될 수 있어요)</span>
-            <button class="detail-toggle" onclick="toggleDetail(event, 'detail1')">자세히 보기 <span class="arrow">▶</span></button>
-            <div class="detail-box" id="detail1">
-              <ul>
-                <li>노션 수업 기록 → Google Apps Script → 평가서 초안 자동 작성</li>
-                <li>Google Docs로 자동 저장 · PDF 변환</li>
-                <li>학부모에게 열람 링크 발송</li>
-                <li>출석률·태도·단어통과율 차트 자동 생성</li>
-              </ul>
-            </div>
-          </div>
+            <button class="detail-toggle" onclick="window.open('seminar_detail_01.html','_blank')">자세히 보기 →</button></div>
         </div>
         <div class="radio-item" data-val="학부모 커뮤니케이션 자동화">
           <div class="radio-select-area">
@@ -441,16 +432,7 @@ body {
           </div>
           <div class="item-body" style="margin-top:8px;padding-left:32px;">
             <span class="item-tag tag-price">예상 ~25만원대 (변경될 수 있어요)</span>
-            <button class="detail-toggle" onclick="toggleDetail(event, 'detail2')">자세히 보기 <span class="arrow">▶</span></button>
-            <div class="detail-box" id="detail2">
-              <ul>
-                <li>카카오 알림톡 템플릿 등록 + Make 연동으로 자동 발송</li>
-                <li>학부모 전용 HTML 페이지 직접 제작</li>
-                <li>GitHub Pages로 무료 배포 (링크 하나로 학부모 열람)</li>
-                <li>세미나 1 SMS 자동화에서 카카오톡으로 업그레이드</li>
-              </ul>
-            </div>
-          </div>
+            <button class="detail-toggle" onclick="window.open('seminar_detail_02.html','_blank')">자세히 보기 →</button></div>
         </div>
         <div class="radio-item" data-val="시험지 분석·내신 대비 자료 자동화">
           <div class="radio-select-area">
@@ -462,16 +444,7 @@ body {
           </div>
           <div class="item-body" style="margin-top:8px;padding-left:32px;">
             <span class="item-tag tag-price">가격 미정 (수요 확인 후 결정)</span>
-            <button class="detail-toggle" onclick="toggleDetail(event, 'detail3')">자세히 보기 <span class="arrow">▶</span></button>
-            <div class="detail-box" id="detail3">
-              <ul>
-                <li>학교별 출제 패턴 분석 자동화</li>
-                <li>학생별 취약 유형 정리 → 맞춤 학습 계획 생성</li>
-                <li>학부모 안내문 자동 완성</li>
-                <li>시험 시즌마다 반복되는 작업을 한 번에 해결</li>
-              </ul>
-            </div>
-          </div>
+            <button class="detail-toggle" onclick="window.open('seminar_detail_03.html','_blank')">자세히 보기 →</button></div>
         </div>
         <div class="radio-item" data-val="웹앱 만들기">
           <div class="radio-select-area">
@@ -483,16 +456,7 @@ body {
           </div>
           <div class="item-body" style="margin-top:8px;padding-left:32px;">
             <span class="item-tag tag-price">가격 미정 (수요 확인 후 결정)</span>
-            <button class="detail-toggle" onclick="toggleDetail(event, 'detail4')">자세히 보기 <span class="arrow">▶</span></button>
-            <div class="detail-box" id="detail4">
-              <ul>
-                <li>실시간 출결 현황판 (출석 체크 → 화면에 바로 반영)</li>
-                <li>요일별 시간표 웹앱</li>
-                <li>선생님별 대시보드 (담당 학생·수업 현황 한눈에)</li>
-                <li>Claude Code로 직접 만드는 나만의 학원 앱</li>
-              </ul>
-            </div>
-          </div>
+            <button class="detail-toggle" onclick="window.open('seminar_detail_04.html','_blank')">자세히 보기 →</button></div>
         </div>
       </div>
     </div>
@@ -557,6 +521,18 @@ body {
 </div>
 
 <script>
+function toggleDetail(e, id) {
+  e.stopPropagation();
+  const box = document.getElementById(id);
+  const btn = e.currentTarget;
+  const isOpen = box.style.display === 'block';
+  box.style.display = isOpen ? 'none' : 'block';
+  btn.classList.toggle('open', !isOpen);
+  btn.innerHTML = isOpen
+    ? '자세히 보기 <span class="arrow">▶</span>'
+    : '접기 <span class="arrow open">▶</span>';
+}
+
 const SUPABASE_URL = 'https://ypxkkzusllgwekdehmlp.supabase.co';
 const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
 

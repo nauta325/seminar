@@ -162,16 +162,26 @@ body {
   padding: 14px 16px;
   border: 1.5px solid var(--border);
   border-radius: 8px;
-  cursor: pointer;
+  cursor: default;
   transition: all 0.15s;
   background: var(--cream);
   user-select: none;
 }
-.radio-item:hover { border-color: var(--coral); background: white; }
+.radio-item:hover { border-color: var(--border); background: var(--cream); }
+.radio-select-area {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  flex: 1;
+}
+.radio-select-area:hover ~ .radio-item,
+.radio-item:has(.radio-select-area:hover) { border-color: var(--coral); background: white; }
 .radio-item.selected {
   border-color: var(--coral);
   background: rgba(192,87,62,0.05);
 }
+.radio-item:has(.radio-select-area:hover) { border-color: var(--coral); background: white; }
 .radio-item.selected .radio-dot { border-color: var(--coral); }
 .radio-item.selected .radio-dot::after {
   content: '';
@@ -205,9 +215,25 @@ body {
   margin-top: 4px;
   letter-spacing: 0.5px;
 }
-.tag-price { background: rgba(44,62,93,0.1); color: var(--navy); }
-.tag-online { background: rgba(45,106,79,0.1); color: var(--green); }
-.tag-offline { background: rgba(192,87,62,0.1); color: var(--coral); }
+.tag-price { background: rgba(244,208,63,0.2); color: #7a5500; }
+.detail-toggle {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 800; color: var(--coral);
+  cursor: pointer; margin-top: 6px; user-select: none;
+  background: rgba(192,87,62,0.08); padding: 3px 9px;
+  border-radius: 4px; border: none; font-family: inherit;
+}
+.detail-toggle:hover { background: rgba(192,87,62,0.15); }
+.detail-toggle .arrow { transition: transform 0.2s; font-size: 9px; }
+.detail-toggle.open .arrow { transform: rotate(90deg); }
+.detail-box {
+  display: none; margin-top: 10px;
+  background: rgba(44,62,93,0.05); border-left: 3px solid var(--navy);
+  border-radius: 0 8px 8px 0; padding: 12px 14px;
+  font-size: 13px; color: var(--muted); line-height: 1.75;
+}
+.detail-box ul { padding-left: 16px; margin-top: 4px; }
+.detail-box li { margin-bottom: 4px; }
 
 /* ── TEXT INPUT ── */
 .text-input {
@@ -385,39 +411,87 @@ body {
       <div class="q-hint">1개만 선택해주세요</div>
       <div class="radio-list" id="q2List">
         <div class="radio-item" data-val="월말평가서 자동화">
-          <div class="radio-dot"></div>
-          <div class="item-body">
-            <div class="item-title">📋 월말평가서 완전 자동화</div>
-            <div class="item-desc">노션 수업 기록 → 앱스크립트 → 평가서 자동 작성 · PDF 변환 · 학부모 발송</div>
-            <span class="item-tag tag-price">30만원</span>
-            <span class="item-tag tag-offline">오프라인</span>
+          <div class="radio-select-area">
+            <div class="radio-dot"></div>
+            <div>
+              <div class="item-title">📋 월말평가서 완전 자동화</div>
+              <div class="item-desc">수업 기록 데이터로 평가서를 자동으로 만들어요</div>
+            </div>
+          </div>
+          <div class="item-body" style="margin-top:8px;padding-left:32px;">
+            <span class="item-tag tag-price">예상 ~30만원대 (변경될 수 있어요)</span>
+            <button class="detail-toggle" onclick="toggleDetail(event, 'detail1')">자세히 보기 <span class="arrow">▶</span></button>
+            <div class="detail-box" id="detail1">
+              <ul>
+                <li>노션 수업 기록 → Google Apps Script → 평가서 초안 자동 작성</li>
+                <li>Google Docs로 자동 저장 · PDF 변환</li>
+                <li>학부모에게 열람 링크 발송</li>
+                <li>출석률·태도·단어통과율 차트 자동 생성</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="radio-item" data-val="학부모 커뮤니케이션 자동화">
-          <div class="radio-dot"></div>
-          <div class="item-body">
-            <div class="item-title">💬 학부모 커뮤니케이션 자동화 마스터</div>
-            <div class="item-desc">카톡 톤·템플릿 완성 + 학부모 페이지 HTML 제작 + GitHub 배포까지</div>
-            <span class="item-tag tag-price">25만원</span>
-            <span class="item-tag tag-online">줌+오프라인</span>
+          <div class="radio-select-area">
+            <div class="radio-dot"></div>
+            <div>
+              <div class="item-title">💬 학부모 커뮤니케이션 자동화 마스터</div>
+              <div class="item-desc">카카오톡 알림톡 + 학부모 전용 페이지 만들기</div>
+            </div>
+          </div>
+          <div class="item-body" style="margin-top:8px;padding-left:32px;">
+            <span class="item-tag tag-price">예상 ~25만원대 (변경될 수 있어요)</span>
+            <button class="detail-toggle" onclick="toggleDetail(event, 'detail2')">자세히 보기 <span class="arrow">▶</span></button>
+            <div class="detail-box" id="detail2">
+              <ul>
+                <li>카카오 알림톡 템플릿 등록 + Make 연동으로 자동 발송</li>
+                <li>학부모 전용 HTML 페이지 직접 제작</li>
+                <li>GitHub Pages로 무료 배포 (링크 하나로 학부모 열람)</li>
+                <li>세미나 1 SMS 자동화에서 카카오톡으로 업그레이드</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="radio-item" data-val="시험지 분석·내신 대비 자료 자동화">
-          <div class="radio-dot"></div>
-          <div class="item-body">
-            <div class="item-title">📊 시험지 분석 + 내신 대비 자료 자동화</div>
-            <div class="item-desc">학교별 출제 패턴 분석, 학생 맞춤 학습 계획, 학부모 안내문 자동 생성</div>
-            <span class="item-tag tag-price">미정</span>
-            <span class="item-tag tag-online">줌+오프라인</span>
+          <div class="radio-select-area">
+            <div class="radio-dot"></div>
+            <div>
+              <div class="item-title">📊 시험지 분석 + 내신 대비 자료 자동화</div>
+              <div class="item-desc">학교별 시험지를 분석해서 맞춤 자료를 자동으로 만들어요</div>
+            </div>
+          </div>
+          <div class="item-body" style="margin-top:8px;padding-left:32px;">
+            <span class="item-tag tag-price">가격 미정 (수요 확인 후 결정)</span>
+            <button class="detail-toggle" onclick="toggleDetail(event, 'detail3')">자세히 보기 <span class="arrow">▶</span></button>
+            <div class="detail-box" id="detail3">
+              <ul>
+                <li>학교별 출제 패턴 분석 자동화</li>
+                <li>학생별 취약 유형 정리 → 맞춤 학습 계획 생성</li>
+                <li>학부모 안내문 자동 완성</li>
+                <li>시험 시즌마다 반복되는 작업을 한 번에 해결</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="radio-item" data-val="웹앱 만들기">
-          <div class="radio-dot"></div>
-          <div class="item-body">
-            <div class="item-title">🖥️ 학원 전용 웹앱 만들기</div>
-            <div class="item-desc">출결 관리·시간표·선생님 대시보드 — 노션 너머의 학원 웹앱</div>
-            <span class="item-tag tag-price">미정</span>
-            <span class="item-tag tag-offline">오프라인</span>
+          <div class="radio-select-area">
+            <div class="radio-dot"></div>
+            <div>
+              <div class="item-title">🖥️ 학원 전용 웹앱 만들기</div>
+              <div class="item-desc">노션의 한계를 넘어서 — 학원 전용 웹 시스템 구축</div>
+            </div>
+          </div>
+          <div class="item-body" style="margin-top:8px;padding-left:32px;">
+            <span class="item-tag tag-price">가격 미정 (수요 확인 후 결정)</span>
+            <button class="detail-toggle" onclick="toggleDetail(event, 'detail4')">자세히 보기 <span class="arrow">▶</span></button>
+            <div class="detail-box" id="detail4">
+              <ul>
+                <li>실시간 출결 현황판 (출석 체크 → 화면에 바로 반영)</li>
+                <li>요일별 시간표 웹앱</li>
+                <li>선생님별 대시보드 (담당 학생·수업 현황 한눈에)</li>
+                <li>Claude Code로 직접 만드는 나만의 학원 앱</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -484,7 +558,7 @@ body {
 
 <script>
 const SUPABASE_URL = 'https://ypxkkzusllgwekdehmlp.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlweGtrenVzbGxnd2VrZGVobWxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTA5NzQsImV4cCI6MjA4NzE2Njk3NH0.CQG3XMDPK8_R1zWqs02V5pA0zvQymkKfmIbqE2Z-vw8';
+const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
 
 // ── 체크박스 토글 (최대 3개)
 document.querySelectorAll('#q1List .check-item').forEach(el => {
@@ -497,11 +571,13 @@ document.querySelectorAll('#q1List .check-item').forEach(el => {
 
 // ── 라디오 토글
 ['q2List', 'q3List'].forEach(listId => {
-  document.querySelectorAll(`#${listId} .radio-item`).forEach(el => {
-    el.addEventListener('click', () => {
-      document.querySelectorAll(`#${listId} .radio-item`).forEach(r => r.classList.remove('selected'));
-      el.classList.add('selected');
-    });
+  document.getElementById(listId).addEventListener('click', e => {
+    const selectArea = e.target.closest('.radio-select-area');
+    if (!selectArea) return;
+    const item = selectArea.closest('.radio-item');
+    if (!item) return;
+    document.querySelectorAll(`#${listId} .radio-item`).forEach(r => r.classList.remove('selected'));
+    item.classList.add('selected');
   });
 });
 

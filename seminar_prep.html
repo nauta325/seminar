@@ -77,7 +77,9 @@
   .section-icon.green { background: #e8f5ee; }
   .section-icon.blue { background: #e8f0ff; }
   .section-icon.yellow { background: #fff8e0; }
-  .section-name { font-size: 17px; font-weight: 800; }
+  .section-icon.kakao { background: #fef3c7; }
+  .section-name { font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .new-badge { font-size: 10px; font-weight: 700; color: white; background: var(--accent); padding: 2px 8px; border-radius: 10px; letter-spacing: 0.05em; }
 
   .step-card { background: var(--card); border: 1.5px solid var(--border); border-radius: 16px; margin-bottom: 12px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; }
   .step-card.done { background: var(--done-bg); border-color: var(--done-border); }
@@ -107,6 +109,7 @@
   .link-btn:hover { opacity: 0.88; }
   .link-btn.green { background: var(--accent2); }
   .link-btn.blue { background: #3d6ee0; }
+  .link-btn.kakao { background: #fae100; color: #391b1b; }
   .divider { max-width: 800px; margin: 32px auto 0; padding: 0 24px; border: none; border-top: 2px dashed var(--border); }
   .complete-banner { display: none; max-width: 800px; margin: 32px auto 0; padding: 0 24px; }
   .complete-banner.show { display: block; }
@@ -189,17 +192,18 @@
 <div id="mainApp" style="display:none">
   <div class="hero">
     <h1>수업 전에<br>이것만 해오세요!</h1>
-    <p>노션 학원 운영 자동화 세미나<br>당일 바로 실습하려면 미리 준비가 필요해요 😊</p>
+    <p>노션 학원 운영 자동화 세미나 — 카톡 알림톡 편<br>당일 바로 실습하려면 미리 준비가 필요해요 😊</p>
     <button class="change-name-btn" onclick="showScreen('nameScreen')">✏️ <span id="heroName">이름</span> · 변경</button>
   </div>
   <div class="progress-wrap">
     <div class="progress-header">
       <span class="progress-label">✅ 준비 완료</span>
-      <span class="progress-count" id="progressCount">0 / 9</span>
+      <span class="progress-count" id="progressCount">0 / 12</span>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   </div>
 
+  <!-- STEP 1 - NOTION -->
   <div class="section">
     <div class="section-title"><div class="section-icon orange">📱</div><div class="section-name">STEP 1 — 노션 가입</div></div>
     <div class="step-card" id="step1" onclick="toggleStep('step1')">
@@ -237,12 +241,13 @@
   </div>
 
   <hr class="divider">
+  <!-- STEP 2 - SOLAPI -->
   <div class="section">
     <div class="section-title"><div class="section-icon green">💬</div><div class="section-name">STEP 2 — 솔라피 가입</div></div>
     <div class="step-card" id="step3" onclick="toggleStep('step3')">
       <div class="step-header">
         <div class="checkbox" onclick="checkStep(event,'step3')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="step-main"><div class="step-num">STEP 03</div><div class="step-title">솔라피(Solapi) 회원가입</div><div class="step-subtitle">학부모 문자 자동발송에 쓰는 서비스예요</div></div>
+        <div class="step-main"><div class="step-num">STEP 03</div><div class="step-title">솔라피(Solapi) 회원가입</div><div class="step-subtitle">학부모 문자·알림톡 자동발송에 쓰는 서비스예요</div></div>
         <div class="done-badge">완료 ✓</div>
       </div>
       <div class="step-detail">
@@ -289,12 +294,78 @@
   </div>
 
   <hr class="divider">
+  <!-- STEP 3 - KAKAOTALK (NEW for May 25) -->
   <div class="section">
-    <div class="section-title"><div class="section-icon blue">⚙️</div><div class="section-name">STEP 3 — Make 가입</div></div>
+    <div class="section-title">
+      <div class="section-icon kakao">💛</div>
+      <div class="section-name">STEP 3 — 카카오톡 알림톡 준비 <span class="new-badge">5/25 NEW</span></div>
+    </div>
+
+    <div class="step-card" id="step10" onclick="toggleStep('step10')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step10')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="step-main"><div class="step-num">STEP 06</div><div class="step-title">카카오톡 비즈니스 채널 만들기</div><div class="step-subtitle">center.kakao.com — 학원 채널 개설 (즉시 가능)</div></div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li>브라우저에서 <b>center.kakao.com</b> 접속</li>
+          <li>평소 쓰는 <b>카카오 계정으로 로그인</b> (개인 카톡 계정 OK)</li>
+          <li>오른쪽 위 <b>"채널 만들기"</b> 클릭</li>
+          <li>채널 이름(예: 정원영어학원), 카테고리(<b>교육 → 학원/공부방</b>) 선택</li>
+          <li><b>"검색용 ID"</b> 정하기 — 영문 소문자/숫자 가능 (예: <code>jungwoneng</code>)</li>
+          <li>채널 만들기 완료!</li>
+        </ul>
+        <div class="tip-box"><strong>💡 꿀팁 — 검색용 ID</strong><br>이 ID가 나중에 솔라피 연동할 때 꼭 필요해요. <b>학원 영문이름</b>으로 깔끔하게 만들어두세요. 한 번 정하면 바꾸기 까다로워요.</div>
+        <div class="warning-box"><strong>⚠️ 주의</strong><br>카카오톡 채널은 <b>사업자등록증이 없어도</b> 개인 카카오 계정으로 개설 가능해요. 단, 알림톡 발송 인증 단계에서 사업자 정보가 필요할 수 있습니다.</div>
+        <a href="https://center.kakao.com" target="_blank" class="link-btn kakao">👉 카카오톡 채널 관리자 센터</a>
+      </div>
+    </div>
+
+    <div class="step-card" id="step11" onclick="toggleStep('step11')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step11')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="step-main"><div class="step-num">STEP 07</div><div class="step-title">솔라피에서 카카오 알림톡 신청</div><div class="step-subtitle">방금 만든 채널을 솔라피에 연동해요</div></div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li>솔라피 로그인 → 왼쪽 메뉴 <b>"카카오 알림톡"</b> 클릭</li>
+          <li><b>"발신 프로필 등록"</b> 또는 <b>"채널 추가"</b> 버튼 클릭</li>
+          <li>STEP 6에서 만든 <b>검색용 ID</b> 입력 → 채널 정보 확인</li>
+          <li>카카오톡으로 <b>본인 인증 메시지</b>가 와요 (관리자 폰)</li>
+          <li>카톡에서 인증 완료하면 — 솔라피에 채널이 연결됩니다!</li>
+        </ul>
+        <div class="tip-box"><strong>💡 참고</strong><br>STEP 6의 채널이 있어야만 이 단계가 가능해요. <b>STEP 6 먼저</b> 완료해주세요.</div>
+      </div>
+    </div>
+
+    <div class="step-card" id="step12" onclick="toggleStep('step12')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step12')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="step-main"><div class="step-num">STEP 08</div><div class="step-title">알림톡이 뭔지 알아두기 (읽기만 OK)</div><div class="step-subtitle">템플릿 등록은 세미나에서 함께 해요</div></div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li><b>알림톡</b>은 카카오톡으로 학부모에게 안내문을 보내는 거예요</li>
+          <li>일반 문자(SMS)보다 <b>도달률이 훨씬 높고</b> 학부모가 잘 읽어요</li>
+          <li>대신 <b>"템플릿"을 미리 카카오에 등록</b>하고 심사받아야 해요 (1~3일)</li>
+          <li><b>템플릿 등록은 세미나에서 함께</b> 진행할 거니까 지금은 안 해도 OK!</li>
+        </ul>
+        <div class="warning-box"><strong>⏰ 미리 알아둘 것</strong><br>세미나 당일 템플릿을 등록해도 <b>카카오 심사가 1~3일</b> 걸려요. 즉, 세미나 직후엔 바로 못 보내고 며칠 기다려야 합니다. 그래도 한 번 만들어두면 평생 써요.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <!-- STEP 4 - MAKE -->
+  <div class="section">
+    <div class="section-title"><div class="section-icon blue">⚙️</div><div class="section-name">STEP 4 — Make 가입</div></div>
     <div class="step-card" id="step6" onclick="toggleStep('step6')">
       <div class="step-header">
         <div class="checkbox" onclick="checkStep(event,'step6')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="step-main"><div class="step-num">STEP 06</div><div class="step-title">Make(메이크) 회원가입</div><div class="step-subtitle">노션과 솔라피를 연결해주는 자동화 서비스예요</div></div>
+        <div class="step-main"><div class="step-num">STEP 09</div><div class="step-title">Make(메이크) 회원가입</div><div class="step-subtitle">노션·솔라피·카톡을 연결해주는 자동화 서비스예요</div></div>
         <div class="done-badge">완료 ✓</div>
       </div>
       <div class="step-detail">
@@ -311,12 +382,13 @@
   </div>
 
   <hr class="divider">
+  <!-- STEP 5 - DAY OF -->
   <div class="section">
-    <div class="section-title"><div class="section-icon yellow">🎒</div><div class="section-name">STEP 4 — 당일 챙겨올 것</div></div>
+    <div class="section-title"><div class="section-icon yellow">🎒</div><div class="section-name">STEP 5 — 당일 챙겨올 것</div></div>
     <div class="step-card" id="step7" onclick="toggleStep('step7')">
       <div class="step-header">
         <div class="checkbox" onclick="checkStep(event,'step7')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="step-main"><div class="step-num">STEP 07</div><div class="step-title">노트북 챙기기</div><div class="step-subtitle">맥북·윈도우 모두 OK. 충전기도 챙겨오세요</div></div>
+        <div class="step-main"><div class="step-num">STEP 10</div><div class="step-title">노트북 챙기기</div><div class="step-subtitle">맥북·윈도우 모두 OK. 충전기도 챙겨오세요</div></div>
         <div class="done-badge">완료 ✓</div>
       </div>
       <div class="step-detail">
@@ -331,20 +403,21 @@
     <div class="step-card" id="step8" onclick="toggleStep('step8')">
       <div class="step-header">
         <div class="checkbox" onclick="checkStep(event,'step8')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="step-main"><div class="step-num">STEP 08</div><div class="step-title">스마트폰 챙기기</div><div class="step-subtitle">문자 테스트 수신용으로 필요해요</div></div>
+        <div class="step-main"><div class="step-num">STEP 11</div><div class="step-title">스마트폰 챙기기</div><div class="step-subtitle">문자·알림톡 테스트 수신용으로 필요해요</div></div>
         <div class="done-badge">완료 ✓</div>
       </div>
       <div class="step-detail">
         <ul class="detail-steps">
           <li>솔라피에 등록한 번호와 <b>같은 폰</b>을 챙겨오세요</li>
-          <li>수업 중에 문자가 실제로 오는 걸 직접 확인할 수 있어요!</li>
+          <li>카카오톡이 설치되어 있어야 알림톡 테스트가 가능해요</li>
+          <li>수업 중에 문자·알림톡이 실제로 오는 걸 직접 확인할 수 있어요!</li>
         </ul>
       </div>
     </div>
     <div class="step-card" id="step9" onclick="toggleStep('step9')">
       <div class="step-header">
         <div class="checkbox" onclick="checkStep(event,'step9')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="step-main"><div class="step-num">STEP 09</div><div class="step-title">학원 기본 정보 떠올려 두기</div><div class="step-subtitle">학생 이름 3~5명, 교재 이름 1~2개면 충분해요</div></div>
+        <div class="step-main"><div class="step-num">STEP 12</div><div class="step-title">학원 기본 정보 떠올려 두기</div><div class="step-subtitle">학생 이름 3~5명, 교재 이름 1~2개면 충분해요</div></div>
         <div class="done-badge">완료 ✓</div>
       </div>
       <div class="step-detail">
@@ -387,34 +460,22 @@
 const SUPABASE_URL = 'https://ypxkkzusllgwekdehmlp.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlweGtrenVzbGxnd2VrZGVobWxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTA5NzQsImV4cCI6MjA4NzE2Njk3NH0.CQG3XMDPK8_R1zWqs02V5pA0zvQymkKfmIbqE2Z-vw8';
 const ADMIN_PW = '0502';
-const TOTAL = 9;
+const TOTAL = 12;
 
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const PARTICIPANTS = {
-  offline: [
-    { name: '한가진', academy: '진수학' },
-    { name: '채현정', academy: '공부방' },
+// All step IDs in display order — used for progress calc
+const ALL_STEPS = ['step1','step2','step3','step4','step5','step10','step11','step12','step6','step7','step8','step9'];
 
-    { name: '임수현', academy: '씨아이영어학원' },
-    { name: '이혜진', academy: '꼼꼼영어' },
-    { name: '김도균', academy: 'ILS어학원' },
-    { name: '이화연', academy: '써니사이드학원' },
-    { name: '김초록', academy: '원더리딩영어교습소' },
-    { name: '김혜영', academy: '개인수업' },
-    { name: '허승주', academy: '크리스티영어' },
-  ],
+const PARTICIPANTS = {
+  offline: [],
   online: [
-    { name: '홍보은', academy: '홍보은영어학원' },
-    { name: '김인애', academy: '시너지수학' },
-    { name: '공윤영', academy: '리드웰영어학원' },
-    { name: '채수빈', academy: '유니드영어' },
-    { name: '김광미', academy: 'Readwell English' },
-    { name: '정유진', academy: '해빛' },
-    { name: '김민서', academy: '올영어교습소' },
-    { name: '김유리', academy: '유리영어교습소' },
-    { name: '김보란', academy: '김보란영어학원' },
-    { name: '최경은', academy: '어썸잉글리쉬' },
+    { name: '김정원', academy: '정원영어' },
+    { name: '천예지', academy: '유피아카데미' },
+    { name: '최가영', academy: '최가영영어' },
+    { name: '양예빈', academy: '오성영어학원' },
+    { name: '강다연', academy: '루트영어' },
+    { name: '이상은', academy: '미래엔수학학원' }
   ]
 };
 
@@ -462,10 +523,11 @@ async function selectUser(name) {
     const { data } = await sb.from('seminar_prep').select('steps').eq('name', name).single();
     if (data && data.steps) data.steps.forEach(s => checkedSteps.add(s));
   } catch(e) {}
-  for (let i = 1; i <= TOTAL; i++) {
-    const card = document.getElementById('step' + i);
-    checkedSteps.has('step' + i) ? card.classList.add('done') : card.classList.remove('done');
-  }
+  ALL_STEPS.forEach(stepId => {
+    const card = document.getElementById(stepId);
+    if (!card) return;
+    checkedSteps.has(stepId) ? card.classList.add('done') : card.classList.remove('done');
+  });
   updateProgress();
   showScreen('mainApp');
 }
@@ -490,7 +552,9 @@ async function checkStep(e, id) {
 }
 
 function updateProgress() {
-  const count = checkedSteps.size;
+  // Only count steps that are in ALL_STEPS (handles legacy data)
+  const validChecked = [...checkedSteps].filter(s => ALL_STEPS.includes(s));
+  const count = validChecked.length;
   document.getElementById('progressCount').textContent = count + ' / ' + TOTAL;
   document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
   const banner = document.getElementById('completeBanner');
@@ -521,7 +585,7 @@ async function loadAdmin() {
   ];
   const { data: rows } = await sb.from('seminar_prep').select('name, steps');
   const rowMap = {};
-  (rows || []).forEach(r => { rowMap[r.name] = r.steps || []; });
+  (rows || []).forEach(r => { rowMap[r.name] = (r.steps || []).filter(s => ALL_STEPS.includes(s)); });
   const results = allP.map(p => ({ ...p, steps: rowMap[p.name] || [], count: (rowMap[p.name] || []).length }));
 
   const total = results.length;
@@ -537,6 +601,7 @@ async function loadAdmin() {
   `;
 
   function renderGroup(list, label) {
+    if (!list.length) return '';
     return `<div class="admin-group-title">${label}</div><div class="admin-grid">${list.map(p => `
       <div class="admin-card ${p.count===TOTAL?'all-done':''}">
         <div class="admin-card-top">
@@ -544,17 +609,16 @@ async function loadAdmin() {
           <div class="admin-pct">${p.count}/${TOTAL}</div>
         </div>
         <div class="admin-bar"><div class="admin-bar-fill" style="width:${p.count/TOTAL*100}%"></div></div>
-        <div class="admin-steps">${Array.from({length:TOTAL},(_,i)=>`<div class="admin-dot ${p.steps.includes('step'+(i+1))?'done':''}">${i+1}</div>`).join('')}</div>
+        <div class="admin-steps">${ALL_STEPS.map((stepId, i)=>`<div class="admin-dot ${p.steps.includes(stepId)?'done':''}">${i+1}</div>`).join('')}</div>
       </div>`).join('')}</div>`;
   }
 
   document.getElementById('adminContent').innerHTML =
-    renderGroup(results.filter(r=>r.type==='offline'), '📍 5월 2일 오프라인') +
-    renderGroup(results.filter(r=>r.type==='online'), '💻 5월 3일 온라인 ZOOM');
+    renderGroup(results.filter(r=>r.type==='offline'), '📍 오프라인') +
+    renderGroup(results.filter(r=>r.type==='online'), '💻 5월 25일 온라인 ZOOM');
 }
 
 document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key==='Enter') checkPw(); });
-
 document.getElementById('nameInput').addEventListener('keydown', e => { if (e.key==='Enter') submitName(); });
 document.getElementById('loadingScreen').style.display = 'none';
 showScreen('nameScreen');

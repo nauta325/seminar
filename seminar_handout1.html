@@ -14,6 +14,9 @@
   --accent: #ff6b35;
   --accent2: #52b788;
   --accent3: #c67c00;
+  --kakao: #fae100;
+  --kakao-text: #391b1b;
+  --kakao-deep: #8a6c00;
   --text: #1a1a1a;
   --muted: #555;
   --muted2: #777;
@@ -37,227 +40,103 @@ body {
   padding-bottom: 80px;
 }
 
-/* ── HERO ── */
-.hero {
-  background: var(--accent);
-  padding: 60px 32px 56px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: 'NOTION';
-  position: absolute;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 200px;
-  color: rgba(0,0,0,0.08);
-  bottom: -20px; right: -10px;
-  line-height: 1;
-  pointer-events: none;
-}
+/* HERO */
+.hero { background: var(--accent); padding: 60px 32px 56px; position: relative; overflow: hidden; }
+.hero::before { content: 'NOTION'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 200px; color: rgba(0,0,0,0.08); bottom: -20px; right: -10px; line-height: 1; pointer-events: none; }
 .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
-.hero-tag {
-  display: inline-block;
-  background: rgba(255,255,255,0.9);
-  color: white;
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 0.12em;
-  padding: 5px 14px; border-radius: 20px;
-  margin-bottom: 20px;
-}
-.hero h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(48px, 8vw, 88px);
-  line-height: 0.95;
-  color: white;
-  margin-bottom: 20px;
-  letter-spacing: 0.02em;
-}
-.hero-desc {
-  font-size: 16px;
-  color: rgba(255,255,255,0.85);
-  line-height: 1.7;
-  max-width: 480px;
-}
-.hero-meta {
-  display: flex; gap: 24px; flex-wrap: wrap;
-  margin-top: 28px;
-}
-.hero-meta-item {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 13px; color: rgba(255,255,255,0.75); font-weight: 500;
-}
+.hero-tag { display: inline-block; background: rgba(255,255,255,0.9); color: white; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; }
+.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 8vw, 88px); line-height: 0.95; color: white; margin-bottom: 20px; letter-spacing: 0.02em; }
+.hero-desc { font-size: 16px; color: rgba(255,255,255,0.85); line-height: 1.7; max-width: 480px; }
+.hero-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; }
+.hero-meta-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.75); font-weight: 500; }
 
-/* ── NAV ── */
-.nav-bar {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  position: sticky; top: 0; z-index: 100;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
+/* NAV */
+.nav-bar { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; overflow-x: auto; scrollbar-width: none; }
 .nav-bar::-webkit-scrollbar { display: none; }
-.nav-inner {
-  max-width: 860px; margin: 0 auto;
-  display: flex; gap: 0; white-space: nowrap;
-  padding: 0 24px;
-}
-.nav-item {
-  padding: 14px 20px;
-  font-size: 13px; font-weight: 700;
-  color: var(--muted2);
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s;
-  display: inline-block;
-}
+.nav-inner { max-width: 860px; margin: 0 auto; display: flex; gap: 0; white-space: nowrap; padding: 0 24px; }
+.nav-item { padding: 14px 20px; font-size: 13px; font-weight: 700; color: var(--muted2); text-decoration: none; border-bottom: 2px solid transparent; transition: all 0.2s; display: inline-block; }
 .nav-item:hover { color: var(--text); border-bottom-color: var(--accent); }
+.nav-item.kakao-nav { color: var(--kakao-deep); }
+.nav-item.kakao-nav:hover { border-bottom-color: var(--kakao); color: var(--kakao-text); }
 
-/* ── CONTENT ── */
+/* CONTENT */
 .content { max-width: 860px; margin: 0 auto; padding: 48px 24px 0; }
 
-/* ── SECTION HEADER ── */
-.sec-header {
-  display: flex; align-items: center; gap: 16px;
-  margin-bottom: 32px; padding-bottom: 20px;
-  border-bottom: 1px solid var(--border);
-}
-.sec-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 56px; color: var(--accent);
-  line-height: 1; flex-shrink: 0;
-  opacity: 0.4;
-}
-.sec-title-wrap {}
+/* SECTION HEADER */
+.sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.sec-num { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--accent); line-height: 1; flex-shrink: 0; opacity: 0.4; }
+.sec-num.kakao-num { color: #c4a000; opacity: 0.55; }
 .sec-label { font-size: 11px; font-weight: 700; color: var(--muted2); letter-spacing: 0.1em; margin-bottom: 4px; }
 .sec-title { font-size: 26px; font-weight: 900; line-height: 1.2; }
+.upgrade-badge { display: inline-block; background: var(--kakao); color: var(--kakao-text); font-size: 10px; font-weight: 800; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 5px; margin-left: 8px; vertical-align: 4px; }
 
-/* ── CARDS ── */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 16px;
-}
-.card-title {
-  font-size: 16px; font-weight: 800;
-  margin-bottom: 12px;
-  display: flex; align-items: center; gap: 10px;
-}
-.card-title .num {
-  width: 26px; height: 26px;
-  background: var(--accent);
-  color: white;
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 800;
-  font-family: 'Space Mono', monospace;
-  flex-shrink: 0;
-}
+/* CARDS */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+.card.kakao-card { background: #fffdf2; border-color: #f0e1a0; }
+.card-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.card-title .num { width: 26px; height: 26px; background: var(--accent); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; font-family: 'Space Mono', monospace; flex-shrink: 0; }
+.card.kakao-card .card-title .num { background: var(--kakao-text); color: var(--kakao); }
 .card p { font-size: 14px; line-height: 1.8; color: #444; }
 .card p + p { margin-top: 10px; }
 
-/* ── STEP LIST ── */
+/* STEP LIST */
 .step-list { list-style: none; counter-reset: sc; }
-.step-list li {
-  counter-increment: sc;
-  display: flex; gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 14px; line-height: 1.7; color: #444;
-}
+.step-list li { counter-increment: sc; display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14px; line-height: 1.7; color: #444; }
 .step-list li:last-child { border-bottom: none; }
-.step-list li::before {
-  content: counter(sc, decimal-leading-zero);
-  font-family: 'Space Mono', monospace;
-  font-size: 11px; font-weight: 700;
-  color: var(--accent);
-  background: rgba(255,107,53,0.1);
-  min-width: 32px; height: 32px;
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 2px;
-}
+.step-list li::before { content: counter(sc, decimal-leading-zero); font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: var(--accent); background: rgba(255,107,53,0.1); min-width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.kakao-card .step-list li::before { color: var(--kakao-deep); background: rgba(250,225,0,0.25); }
 .step-list li b { color: var(--text); }
 
-/* ── HIGHLIGHT BOX ── */
-.hl-box {
-  border-radius: 12px;
-  padding: 16px 20px;
-  margin-top: 16px;
-  font-size: 14px; line-height: 1.7;
-}
+/* HIGHLIGHT BOX */
+.hl-box { border-radius: 12px; padding: 16px 20px; margin-top: 16px; font-size: 14px; line-height: 1.7; }
 .hl-box.orange { background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.35); color: #c94a1a; }
 .hl-box.green { background: rgba(82,183,136,0.12); border: 1px solid rgba(82,183,136,0.35); color: #1e7a50; }
 .hl-box.yellow { background: rgba(244,208,63,0.15); border: 1px solid rgba(244,208,63,0.4); color: #5a4400; }
+.hl-box.kakao { background: rgba(250,225,0,0.18); border: 1px solid rgba(250,225,0,0.5); color: #6a5400; }
 .hl-box strong { color: inherit; font-weight: 800; }
 
-/* ── TAG CHIPS ── */
+/* CHIPS */
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.chip {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--muted2);
-  font-size: 12px; font-weight: 700;
-  padding: 5px 12px; border-radius: 20px;
-  font-family: 'Space Mono', monospace;
-}
+.chip { background: var(--surface2); border: 1px solid var(--border); color: var(--muted2); font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 20px; font-family: 'Space Mono', monospace; }
 .chip.accent { background: rgba(255,107,53,0.1); border-color: rgba(255,107,53,0.3); color: var(--accent); }
 
-/* ── TWO COL ── */
+/* TWO COL */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
 
-/* ── LINK CARD ── */
-.link-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 20px;
-  text-decoration: none;
-  display: block;
-  transition: all 0.2s;
-}
+/* LINK CARD */
+.link-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-decoration: none; display: block; transition: all 0.2s; }
 .link-card:hover { border-color: var(--accent); background: rgba(255,107,53,0.05); }
 .link-card .lc-label { font-size: 11px; font-weight: 700; color: var(--muted2); letter-spacing: 0.08em; margin-bottom: 6px; }
 .link-card .lc-title { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
 .link-card .lc-url { font-size: 12px; color: var(--accent); font-family: 'Space Mono', monospace; }
 
-/* ── MAKE FLOW ── */
+/* MAKE FLOW */
 .make-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
-.make-node {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 16px;
-  font-size: 13px; font-weight: 700;
-  display: flex; align-items: center; gap: 6px;
-}
+.make-node { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.make-node.kakao-node { background: rgba(250,225,0,0.2); border-color: rgba(250,225,0,0.5); color: var(--kakao-text); }
 .make-arrow { color: var(--muted); font-size: 18px; }
 
-/* ── DIVIDER ── */
-.section-divider { margin: 56px 0 48px; border: none; border-top: 1px solid var(--border); }
+/* COMPARE TABLE */
+.cmp-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+.cmp-table th { background: rgba(250,225,0,0.15); padding: 12px; text-align: left; font-weight: 800; font-size: 13px; border-bottom: 2px solid rgba(250,225,0,0.4); }
+.cmp-table th:first-child { width: 30%; color: var(--muted); }
+.cmp-table th.sms { color: var(--accent); }
+.cmp-table th.alimtalk { color: var(--kakao-text); }
+.cmp-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); vertical-align: top; font-size: 13px; line-height: 1.5; }
+.cmp-table td.label { font-weight: 700; color: var(--text); }
+.cmp-table td.sms { color: #888; }
+.cmp-table td.alimtalk { color: var(--kakao-text); font-weight: 600; }
+.cmp-table tr:last-child td { border-bottom: none; }
 
-/* ── FOOTER ── */
-.footer {
-  max-width: 860px; margin: 56px auto 0;
-  padding: 32px 24px;
-  border-top: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 16px;
-}
+/* FOOTER */
+.footer { max-width: 860px; margin: 56px auto 0; padding: 32px 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
 .footer-left .ft-title { font-size: 15px; font-weight: 900; margin-bottom: 4px; }
 .footer-left .ft-sub { font-size: 12px; color: var(--muted2); }
 .footer-right { font-size: 12px; color: var(--muted); text-align: right; line-height: 1.8; }
 
-/* ── CODE ── */
-code {
-  background: var(--surface2);
-  color: var(--accent3);
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  padding: 2px 7px; border-radius: 5px;
-}
+/* CODE */
+code { background: var(--surface2); color: var(--accent3); font-family: 'Space Mono', monospace; font-size: 12px; padding: 2px 7px; border-radius: 5px; }
 
 .section-gap { margin-top: 56px; }
 </style>
@@ -285,8 +164,9 @@ code {
     <a class="nav-item" href="#section2">② DB 만들기</a>
     <a class="nav-item" href="#section3">③ 자동화</a>
     <a class="nav-item" href="#section4">④ Make 설정</a>
-    <a class="nav-item" href="#section5">⑤ 링크 모음</a>
-    <a class="nav-item" href="#section6">⑥ 다음 수업 수요조사</a>
+    <a class="nav-item kakao-nav" href="#section5">⑤ 💛 알림톡 업그레이드</a>
+    <a class="nav-item" href="#section6">⑥ 링크 모음</a>
+    <a class="nav-item" href="#section7">⑦ 다음 수업 수요조사</a>
   </div>
 </div>
 
@@ -294,12 +174,11 @@ code {
 <div class="content" id="section1">
   <div class="sec-header">
     <div class="sec-num">01</div>
-    <div class="sec-title-wrap">
+    <div>
       <div class="sec-label">CHAPTER 1</div>
       <div class="sec-title">노션 기초 — 이것만 알면 돼요</div>
     </div>
   </div>
-
   <div class="two-col">
     <div class="card">
       <div class="card-title"><div class="num">1</div> 노션이 뭐예요?</div>
@@ -319,7 +198,6 @@ code {
       <p style="margin-top:14px">모든 내용은 <b style="color:var(--text)">블록</b>으로 이루어져요.<br>텍스트, 표, 이미지, 체크박스 모두 블록이에요.</p>
     </div>
   </div>
-
   <div class="card" style="margin-top:0">
     <div class="card-title"><div class="num">3</div> 꼭 알아야 할 단축키</div>
     <div class="two-col" style="margin-top:4px">
@@ -339,17 +217,15 @@ code {
   </div>
 </div>
 
-
 <!-- SECTION 2 -->
 <div class="content section-gap" id="section2">
   <div class="sec-header">
     <div class="sec-num">02</div>
-    <div class="sec-title-wrap">
+    <div>
       <div class="sec-label">CHAPTER 2</div>
       <div class="sec-title">학원 DB 만들기 — 따라하기</div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">1</div> 전체학생 DB</div>
     <ul class="step-list">
@@ -364,7 +240,6 @@ code {
       별도 DB가 아니에요. 전체학생DB에서 <b>+ 보기 추가 → 그룹화 → 월-등원시간</b> 선택하면 시간대별로 자동 분류돼요.
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">2</div> 교재 DB</div>
     <ul class="step-list">
@@ -373,7 +248,6 @@ code {
       <li>교재비관리DB 연결 후 → <b>배포된수량(롤업)</b>, <b>재고(수식: <code>누적교재수량 - 배포된수량</code>)</b> 추가</li>
     </ul>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">3</div> 교재비관리 DB</div>
     <ul class="step-list">
@@ -384,7 +258,6 @@ code {
       <li>Make 문자용 수식: <b>이름값(<code>format(학생이름)</code>), 배부교재값(<code>format(배부교재)</code>)</b></li>
     </ul>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">4</div> 데일리리포트 DB</div>
     <ul class="step-list">
@@ -402,7 +275,6 @@ code {
       관계형 속성은 Make에서 바로 텍스트로 쓸 수 없어요. <code>format(리딩교재)</code> 수식을 만들어두면 Make에서 문자 내용에 바로 넣을 수 있어요.
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">💡</div> DB 만드는 순서</div>
     <p style="margin-bottom:14px">4개 DB가 서로 관계형으로 연결되어 있어서 "한 DB 완성 → 다음 DB" 순서로는 못 만들어요.</p>
@@ -418,21 +290,19 @@ code {
   </div>
 </div>
 
-
-  <div style="margin-top:16px;padding:12px 16px;border:1px dashed var(--border);border-radius:10px;min-height:52px;">
-    <span style="font-size:11px;color:var(--muted2);font-weight:700;letter-spacing:0.05em;">MEMO</span>
-  </div>
+<div style="margin:16px auto 0;padding:12px 16px;border:1px dashed var(--border);border-radius:10px;min-height:52px;max-width:860px;">
+  <span style="font-size:11px;color:var(--muted2);font-weight:700;letter-spacing:0.05em;">MEMO</span>
+</div>
 
 <!-- SECTION 3 -->
 <div class="content section-gap" id="section3">
   <div class="sec-header">
     <div class="sec-num">03</div>
-    <div class="sec-title-wrap">
+    <div>
       <div class="sec-label">CHAPTER 3</div>
       <div class="sec-title">자동화 흐름 이해하기</div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">1</div> 전체 자동화 흐름</div>
     <div class="make-flow">
@@ -448,7 +318,6 @@ code {
     </div>
     <p>체크박스 대신 <b>카톡전송 = 미전송</b>이 트리거예요. 문자가 나가면 자동으로 <b>전송완료</b>로 바뀌어서 중복 발송이 없어요.</p>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">2</div> 시나리오 ① 데일리리포트 문자</div>
     <div class="hl-box orange" style="font-family:'Space Mono',monospace; font-size:12px; line-height:1.9">
@@ -466,7 +335,6 @@ code {
       추가사항 : {{추가사항[].plain_text}}
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">3</div> 시나리오 ② 교재비 안내 문자</div>
     <div class="hl-box orange" style="font-family:'Space Mono',monospace; font-size:12px; line-height:1.9">
@@ -485,40 +353,36 @@ code {
   </div>
 </div>
 
-
-  <div style="margin-top:16px;padding:12px 16px;border:1px dashed var(--border);border-radius:10px;min-height:52px;">
-    <span style="font-size:11px;color:var(--muted2);font-weight:700;letter-spacing:0.05em;">MEMO</span>
-  </div>
+<div style="margin:16px auto 0;padding:12px 16px;border:1px dashed var(--border);border-radius:10px;min-height:52px;max-width:860px;">
+  <span style="font-size:11px;color:var(--muted2);font-weight:700;letter-spacing:0.05em;">MEMO</span>
+</div>
 
 <!-- SECTION 4 -->
 <div class="content section-gap" id="section4">
   <div class="sec-header">
     <div class="sec-num">04</div>
-    <div class="sec-title-wrap">
+    <div>
       <div class="sec-label">CHAPTER 4</div>
       <div class="sec-title">Make 자동화 설정 — 따라하기</div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">0</div> 사전 준비 — 솔라피 설정</div>
     <ul class="step-list">
       <li><b>solapi.com</b> 회원가입 → 로그인</li>
       <li>좌측 메뉴 <b>발신번호 관리</b> → 학원 전화번호 등록 → <b>승인됨</b> 상태 확인 (1~2일 소요, 미리 해두세요!)</li>
-      <li>최소 <b>50,000원</b> 충전 (SMS 1건 약 7~8원)</li>
+      <li>최소 <b>10,000원</b> 충전 (SMS 1건 약 7~8원)</li>
       <li>우상단 계정 → <b>API Key 관리</b> → API Key + API Secret 복사해두기</li>
     </ul>
     <div class="hl-box green">
-      <strong>✅ 준비물 체크</strong> — 발신번호 승인됨 · 포인트 50,000원 이상 · API Key 복사 완료
+      <strong>✅ 준비물 체크</strong> — 발신번호 승인됨 · 포인트 10,000원 이상 · API Key 복사 완료
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">1</div> 노션 ↔ Make 연결 — Internal API 3단계</div>
-
     <div style="background:rgba(255,107,53,0.08);border-radius:10px;padding:14px 16px;margin-bottom:14px;">
       <div style="font-size:13px;font-weight:800;color:var(--accent);margin-bottom:10px;">PART A — 노션에서 API 토큰 발급</div>
-      <ul class="detail-steps" style="list-style:none;counter-reset:dc;">
+      <ul style="list-style:none;counter-reset:dc;">
         <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#444;">
           <span style="background:rgba(255,107,53,0.15);color:var(--accent);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">1</span>
           노션 <b style="color:var(--text)">설정</b> → 왼쪽 메뉴 <b style="color:var(--text)">연결</b> → 하단 <b style="color:var(--text)">"연결 개발 또는 관리"</b> 클릭
@@ -533,10 +397,9 @@ code {
         </li>
       </ul>
     </div>
-
     <div style="background:rgba(82,183,136,0.08);border-radius:10px;padding:14px 16px;margin-bottom:14px;">
       <div style="font-size:13px;font-weight:800;color:var(--accent2);margin-bottom:10px;">PART B — Make에서 연결 만들기</div>
-      <ul class="detail-steps" style="list-style:none;counter-reset:dc;">
+      <ul style="list-style:none;counter-reset:dc;">
         <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#444;">
           <span style="background:rgba(82,183,136,0.15);color:var(--accent2);font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">1</span>
           Make → Notion 모듈 → Connection <b style="color:var(--text)">Add</b> → Connection Type: <b style="color:var(--text)">"Notion Internal"</b>
@@ -547,10 +410,9 @@ code {
         </li>
       </ul>
     </div>
-
     <div style="background:rgba(244,208,63,0.08);border-radius:10px;padding:14px 16px;margin-bottom:14px;">
       <div style="font-size:13px;font-weight:800;color:var(--accent3);margin-bottom:10px;">PART C — DB에 연결 권한 부여</div>
-      <ul class="detail-steps" style="list-style:none;counter-reset:dc;">
+      <ul style="list-style:none;counter-reset:dc;">
         <li style="counter-increment:dc;display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.65;color:#444;">
           <span style="background:rgba(244,208,63,0.15);color:#7a5500;font-weight:800;font-size:12px;min-width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">1</span>
           노션 <b style="color:var(--text)">데일리리포트DB</b> 페이지 → 우상단 <b style="color:var(--text)">··· → 연결</b>
@@ -565,7 +427,6 @@ code {
       <strong>✅ 완료 확인</strong> — Make 시나리오에서 Data Source ID 드롭다운에 DB 이름이 보이면 성공!
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">2</div> 시나리오 ① — 데일리리포트 문자</div>
     <div class="make-flow" style="margin-bottom:16px;">
@@ -578,19 +439,15 @@ code {
       <div class="make-node">Notion<br>Update</div>
     </div>
     <ul class="step-list">
-      <li><b>모듈 1</b> — Notion: <b>Search Objects (Data Source Items)</b><br>
-        Data Source: 데일리리포트DB · 필터: 카톡전송 = <b>미전송</b> · Limit: 50</li>
+      <li><b>모듈 1</b> — Notion: <b>Search Objects (Data Source Items)</b><br>Data Source: 데일리리포트DB · 필터: 카톡전송 = <b>미전송</b> · Limit: 50</li>
       <li><b>필터 블록</b> — 날짜: Start = <code>formatDate(now ; YYYY-MM-DD ; Asia/Seoul)</code></li>
-      <li><b>모듈 2</b> — Solapi: <b>Send Text Message</b><br>
-        수신: <code>진화번호.Array[].phone_number</code> · 발신: 등록한 내 번호 · 내용: Ch3 문자 템플릿</li>
-      <li><b>모듈 3</b> — Notion: <b>Update a Data Source Item</b><br>
-        Item ID: <code>1. Page ID</code> (Map ON) · 카톡전송 = <b>전송완료</b></li>
+      <li><b>모듈 2</b> — Solapi: <b>Send Text Message</b><br>수신: <code>진화번호.Array[].phone_number</code> · 발신: 등록한 내 번호 · 내용: Ch3 문자 템플릿</li>
+      <li><b>모듈 3</b> — Notion: <b>Update a Data Source Item</b><br>Item ID: <code>1. Page ID</code> (Map ON) · 카톡전송 = <b>전송완료</b></li>
     </ul>
     <div class="hl-box yellow">
       <strong>⚠️ Asia/Seoul 필수!</strong> — 없으면 UTC 기준으로 계산되어 밤 9시 전엔 어제 날짜로 인식돼요.
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">3</div> 시나리오 ② — 교재비 문자</div>
     <div class="make-flow" style="margin-bottom:16px;">
@@ -601,13 +458,11 @@ code {
       <div class="make-node">Notion<br>Update</div>
     </div>
     <ul class="step-list">
-      <li><b>모듈 1 필터 3개 (AND)</b><br>
-        배부월(Select) = <b>4월</b> (매월 변경!) · 결제상태 = <b>미납</b> · 카톡전송 = <b>미전송</b></li>
+      <li><b>모듈 1 필터 3개 (AND)</b><br>배부월(Select) = <b>4월</b> (매월 변경!) · 결제상태 = <b>미납</b> · 카톡전송 = <b>미전송</b></li>
       <li><b>모듈 2</b> — Solapi Send · 수신: <code>전화번호.Array[].phone_number</code></li>
       <li><b>모듈 3</b> — Notion Update · 카톡전송 = <b>전송완료</b></li>
     </ul>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">3-1</div> Solapi 모듈 — Make에 연결</div>
     <ul class="step-list">
@@ -621,7 +476,6 @@ code {
       <strong>⚠️ 수신번호 매핑 주의</strong> — 텍스트 직접 입력이 아니라, 왼쪽 Notion 모듈에서 <b>드래그로 끌어다 연결</b>해야 해요.
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">4</div> 테스트 & 활성화</div>
     <ul class="step-list">
@@ -639,12 +493,11 @@ code {
 <div class="content section-gap" id="section4b">
   <div class="sec-header">
     <div class="sec-num" style="font-size:28px;">🔧</div>
-    <div class="sec-title-wrap">
+    <div>
       <div class="sec-label">TROUBLESHOOTING</div>
       <div class="sec-title">자주 막히는 에러 & 해결법</div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">❗</div> 이런 에러, 이렇게 해결하세요</div>
     <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;">
@@ -677,7 +530,7 @@ code {
         </tr>
         <tr style="border-bottom:1px solid var(--border);background:rgba(0,0,0,0.02);">
           <td style="padding:10px 12px;color:#c94a1a;font-weight:700;">포인트 부족 에러</td>
-          <td style="padding:10px 12px;color:var(--muted);">솔라피 → 충전하기. 최소 50,000원 충전해야 해요.</td>
+          <td style="padding:10px 12px;color:var(--muted);">솔라피 → 충전하기. 최소 10,000원 충전해야 해요.</td>
         </tr>
         <tr>
           <td style="padding:10px 12px;color:#c94a1a;font-weight:700;">Make가 DB 변경을 못 감지해요</td>
@@ -686,7 +539,6 @@ code {
       </tbody>
     </table>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">📝</div> 메모</div>
     <div style="min-height:80px;border-bottom:1px solid var(--border);margin-bottom:14px;"></div>
@@ -695,16 +547,245 @@ code {
   </div>
 </div>
 
-<!-- SECTION 5 -->
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- SECTION 5 — ALIMTALK UPGRADE (NEW for 5/25 seminar)         -->
+<!-- ════════════════════════════════════════════════════════════ -->
 <div class="content section-gap" id="section5">
   <div class="sec-header">
-    <div class="sec-num">05</div>
-    <div class="sec-title-wrap">
-      <div class="sec-label">CHAPTER 5</div>
-      <div class="sec-title">유용한 링크 모음</div>
+    <div class="sec-num kakao-num">05</div>
+    <div>
+      <div class="sec-label">CHAPTER 5 · UPGRADE GUIDE</div>
+      <div class="sec-title">💛 알림톡 업그레이드 가이드<span class="upgrade-badge">5/25 NEW</span></div>
     </div>
   </div>
 
+  <div class="card kakao-card">
+    <div class="card-title"><div class="num">0</div> 왜 SMS → 알림톡으로 업그레이드?</div>
+    <p style="margin-bottom:14px">SMS도 좋지만, <b style="color:var(--text)">학부모가 진짜로 읽게 하려면</b> 카카오톡 알림톡이 한 단계 위예요.</p>
+    <table class="cmp-table">
+      <thead>
+        <tr>
+          <th>항목</th>
+          <th class="sms">📱 SMS</th>
+          <th class="alimtalk">💛 알림톡</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label">학부모 입장에서</td>
+          <td class="sms">"또 광고인가" 무시</td>
+          <td class="alimtalk">"학원 공지왔네" 즉시 확인</td>
+        </tr>
+        <tr>
+          <td class="label">도달률</td>
+          <td class="sms">약 95%</td>
+          <td class="alimtalk">99%+ (실패 시 SMS 폴백)</td>
+        </tr>
+        <tr>
+          <td class="label">길이</td>
+          <td class="sms">SMS 90자 / LMS 2000자</td>
+          <td class="alimtalk">최대 1000자</td>
+        </tr>
+        <tr>
+          <td class="label">건당 비용</td>
+          <td class="sms">7~30원</td>
+          <td class="alimtalk">8~9원 (LMS보다 저렴!)</td>
+        </tr>
+        <tr>
+          <td class="label">사전 준비</td>
+          <td class="sms">발신번호 등록</td>
+          <td class="alimtalk">채널 + 템플릿 심사</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hl-box kakao">
+      <strong>💡 학원에 알림톡이 잘 맞는 이유</strong><br>
+      매일 가는 안내(진도·결석·교재비)는 <b>"정보 전달"</b>이라 카카오가 좋아하는 카테고리예요.
+      길어도 30원이던 LMS가 알림톡에선 8~9원이라 <b>장기적으로 통신비도 절약</b>됩니다.
+    </div>
+  </div>
+
+  <div class="card kakao-card">
+    <div class="card-title"><div class="num">1</div> 사전 준비물 체크 (사전 준비 페이지에서 했어요)</div>
+    <ul class="step-list">
+      <li><b>카카오톡 비즈니스 채널 개설</b> — center-pf.kakao.com에서 학원 채널 만들기 (검색용 ID 필수)</li>
+      <li><b>솔라피 → 카카오 알림톡</b> 메뉴에서 발신 프로필 등록 (방금 만든 채널의 검색용 ID로 인증)</li>
+      <li><b>솔라피 발신번호 승인</b> — SMS 폴백용으로 그대로 사용</li>
+    </ul>
+    <div class="hl-box green">
+      <strong>✅ 확인하는 법</strong> — 솔라피 로그인 → "카카오 알림톡" → "발신 프로필"에 내 학원 채널이 <b>활성</b> 상태로 보이면 OK!
+    </div>
+  </div>
+
+  <div class="card kakao-card">
+    <div class="card-title"><div class="num">2</div> 알림톡 템플릿 등록 — 가장 중요한 단계</div>
+    <p style="margin-bottom:14px">알림톡은 <b style="color:var(--text)">"이런 내용으로 보낼 거예요"</b>를 카카오에 미리 신고하고 심사 받아야 발송할 수 있어요. SMS와의 가장 큰 차이.</p>
+    <ul class="step-list">
+      <li>솔라피 로그인 → <b>카카오 알림톡</b> → <b>템플릿 관리</b> 클릭</li>
+      <li>우상단 <b>"새 템플릿 등록"</b> 버튼</li>
+      <li><b>발신 프로필 선택</b> — 사전 준비에서 등록한 학원 채널</li>
+      <li><b>템플릿 이름</b> 입력 (관리용. 예: "데일리리포트")</li>
+      <li>카테고리: <b>교육</b> → <b>수업/강좌</b> 선택</li>
+      <li>메시지 유형: <b>기본형</b> (가장 단순한 형태)</li>
+      <li><b>본문 작성</b> — 변수는 <code>#{변수명}</code> 형식! (SMS는 <code>{{}}</code>, 알림톡은 <code>#{}</code>)</li>
+      <li>(선택) 강조표기 — 첫 줄을 굵게 강조 가능</li>
+      <li><b>심사 신청</b> → 카카오에서 1~3일 검토</li>
+    </ul>
+    <div class="hl-box yellow">
+      <strong>⏰ 심사 기간 1~3일 — 미리미리</strong><br>
+      템플릿 등록부터 승인까지 영업일 기준 <b>1~3일</b>이 걸려요. 세미나 당일 등록하면 <b>며칠 기다려야</b> 자동화 켤 수 있어요.
+    </div>
+    <div class="hl-box orange">
+      <strong>❗ 광고성 문구는 거부됨</strong><br>
+      <b>"할인 / 무료 / 이벤트 / 신규생 모집"</b> 같은 광고 단어 들어가면 카카오 심사 거부됩니다.
+      <span style="color:var(--text);font-weight:700;">정보 전달성 문구</span>로만 작성하세요. 거부되면 수정해서 다시 신청 가능.
+    </div>
+  </div>
+
+  <div class="card kakao-card">
+    <div class="card-title"><div class="num">3</div> 데일리리포트 알림톡 템플릿 (복사해서 쓰세요)</div>
+    <p style="margin-bottom:12px"><b style="color:var(--text)">학원 이름</b>만 본인 학원으로 바꿔서 솔라피 템플릿 등록 화면에 그대로 붙여넣으세요.</p>
+    <div class="hl-box kakao" style="font-family:'Space Mono',monospace; font-size:12px; line-height:1.95; white-space:pre-wrap">[홍보은영어학원]
+#{학생이름} 학생 수업 보고서
+
+📅 #{날짜}
+
+▶ 과제수행 : #{과제}
+▶ 수업태도 : #{태도}
+▶ 지각여부 : #{지각}
+▶ 단어테스트 : #{단어테스트}
+
+[학습사항]
+• 리딩 : #{리딩교재} #{리딩진도}
+• 문법 : #{문법교재} #{문법진도}
+• 어휘 : #{단어교재} #{단어진도}
+
+추가사항 : #{추가사항}</div>
+    <div class="hl-box yellow" style="margin-top:14px">
+      <strong>📌 변수 12개</strong> — 학생이름 · 날짜 · 과제 · 태도 · 지각 · 단어테스트 · 리딩교재 · 리딩진도 · 문법교재 · 문법진도 · 단어교재 · 단어진도 · 추가사항.
+      Make에서 모두 노션 데이터로 매핑해야 해요.
+    </div>
+  </div>
+
+  <div class="card kakao-card">
+    <div class="card-title"><div class="num">4</div> 교재비 안내 알림톡 템플릿</div>
+    <div class="hl-box kakao" style="font-family:'Space Mono',monospace; font-size:12px; line-height:1.95; white-space:pre-wrap">[홍보은영어학원]
+#{이름} 학생 #{배부월} 교재비 안내
+
+배부교재 : #{배부교재}
+총금액 : #{교재비}원
+
+입금계좌
+카카오뱅크 3333-05-XXXXXXX 홍보은
+
+납부 기한 : 매월 5일까지
+문의 : 02-XXXX-XXXX</div>
+    <div class="hl-box orange" style="margin-top:14px">
+      <strong>⚠️ 계좌번호·전화번호는 고정 텍스트</strong> — 변수로 만들지 마세요. 학원 정보는 템플릿에 그대로 박아두는 게 심사 통과율 ↑
+    </div>
+  </div>
+
+  <div class="card kakao-card">
+    <div class="card-title"><div class="num">5</div> Make 시나리오 수정 — Solapi 모듈 교체</div>
+    <p style="margin-bottom:14px">기존 SMS 시나리오를 알림톡용으로 바꿉니다. 노션 모듈은 그대로 두고, <b style="color:var(--text)">중간 Solapi 모듈만 교체</b>하면 돼요.</p>
+    <div class="make-flow" style="margin-bottom:16px;">
+      <div class="make-node">Notion<br>Search Objects</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">Filter</div>
+      <div class="make-arrow">→</div>
+      <div class="make-node kakao-node">Solapi<br><b>Send Alimtalk</b></div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">Notion<br>Update</div>
+    </div>
+    <ul class="step-list">
+      <li>기존 시나리오 열기 → 기존 <b>"Send a Text Message"</b> 모듈 우클릭 → <b>Delete module</b></li>
+      <li>같은 자리에 <b>"+"</b> 클릭 → Solapi 검색 → <b>"Send an Alimtalk Message"</b> 선택</li>
+      <li>Connection: 기존 솔라피 Connection 재사용 (다시 만들 필요 없음)</li>
+      <li><b>PFID</b> (발신 프로필 ID) — 사전 준비에서 등록한 채널 선택</li>
+      <li><b>Template ID</b> — 승인받은 템플릿 선택 (드롭다운에서 보임)</li>
+      <li><b>변수 매핑</b> — 템플릿의 <code>#{변수}</code> 자리마다 노션 데이터 끌어와 연결<br>예: <code>#{학생이름}</code> ← <code>1. 학생이름값.string</code></li>
+      <li><b>수신번호 (To)</b> — 기존과 동일 (<code>1. 진화번호.Array[].phone_number</code>)</li>
+      <li>저장 → 다음 카드(SMS 폴백) 설정 후 테스트</li>
+    </ul>
+    <div class="hl-box yellow">
+      <strong>💡 시나리오 백업 추천</strong> — 기존 SMS 시나리오를 <b>복제</b>해서 알림톡용으로 새로 만들면 문제 생겨도 SMS로 되돌릴 수 있어요. 시나리오 우클릭 → <b>Clone</b>.
+    </div>
+  </div>
+
+  <div class="card kakao-card">
+    <div class="card-title"><div class="num">6</div> SMS 자동 폴백 — 강력 추천 ★</div>
+    <p style="margin-bottom:14px">알림톡은 받는 사람이 <b style="color:var(--text)">카카오톡 안 쓰거나 / 채널 차단했거나 / 알림 꺼두면</b> 발송 실패해요.
+    이럴 때 자동으로 SMS로 전환되게 설정하면 — <b style="color:var(--text)">학부모는 무조건 받습니다</b>.</p>
+    <ul class="step-list">
+      <li>Make의 Alimtalk 모듈 설정에서 <b>"Fallback Message" 옵션 ON</b></li>
+      <li>Fallback Type: <b>LMS</b> (긴 문자) 선택</li>
+      <li>Fallback 본문 — 알림톡 본문과 비슷하게 작성하되, <b><code>#{변수}</code> 대신 노션 데이터 직접 매핑</b><br>예: "#{학생이름}" → "<code>1. 학생이름값.string</code>" 끌어다 놓기</li>
+      <li>Fallback 발신번호: 솔라피 등록 번호 (기존과 동일)</li>
+      <li>저장</li>
+    </ul>
+    <div class="hl-box green">
+      <strong>✅ 폴백 작동 시나리오</strong><br>
+      ① 알림톡 발송 시도 → 성공 = 알림톡으로 도착<br>
+      ② 알림톡 발송 시도 → 실패(카톡 미사용 등) → <b>자동으로 SMS 발송</b> → SMS로 도착<br>
+      <small style="opacity:0.7">건당 비용은 둘 중 하나만 청구됩니다.</small>
+    </div>
+  </div>
+
+  <div class="card kakao-card">
+    <div class="card-title"><div class="num">7</div> 알림톡 특유의 에러 & 해결</div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;">
+      <thead>
+        <tr style="background:rgba(250,225,0,0.2);">
+          <th style="padding:10px 12px;text-align:left;font-weight:800;color:var(--kakao-text);border-bottom:2px solid rgba(250,225,0,0.5);width:42%">증상</th>
+          <th style="padding:10px 12px;text-align:left;font-weight:800;color:var(--text);border-bottom:2px solid rgba(250,225,0,0.5);">해결 방법</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:10px 12px;color:#6a5400;font-weight:700;">"템플릿 매칭 실패" 에러</td>
+          <td style="padding:10px 12px;color:var(--muted);">Make에서 입력한 메시지와 솔라피에 등록된 템플릿이 <b>한 글자라도 다르면 거부</b>돼요. 띄어쓰기·줄바꿈까지 똑같이. 가장 안전한 건 솔라피 템플릿 화면에서 본문을 복사해 Make에 그대로 붙여넣기.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:rgba(0,0,0,0.02);">
+          <td style="padding:10px 12px;color:#6a5400;font-weight:700;">카카오 심사 거부</td>
+          <td style="padding:10px 12px;color:var(--muted);">사유 확인 → 대부분 "광고성"으로 분류된 거예요. <b>할인·무료·이벤트·신규생 모집</b> 같은 단어 제거하고 정보 전달성으로 수정 → 재신청.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:10px 12px;color:#6a5400;font-weight:700;">발송됐는데 학부모가 못 받음</td>
+          <td style="padding:10px 12px;color:var(--muted);">학부모가 학원 카카오 채널을 <b>차단</b>했을 가능성. SMS 폴백이 켜져있으면 자동으로 SMS로 들어가요. 폴백 안 켰다면 → Card 6 보고 켜기.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:rgba(0,0,0,0.02);">
+          <td style="padding:10px 12px;color:#6a5400;font-weight:700;">#{변수}가 그대로 보임</td>
+          <td style="padding:10px 12px;color:var(--muted);">Make에서 변수 매핑이 빠진 거예요. Alimtalk 모듈 열어서 <b>각 #{변수}마다 노션 데이터를 드래그로 다시 연결</b>하세요.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:10px 12px;color:#6a5400;font-weight:700;">"발신 프로필 비활성" 에러</td>
+          <td style="padding:10px 12px;color:var(--muted);">솔라피 → 카카오 알림톡 → 발신 프로필 → <b>상태 확인</b>. 비활성이면 카카오톡 채널 관리자에서 채널이 살아있는지 확인.</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;color:#6a5400;font-weight:700;">학부모가 "알림톡 안 받겠다" 요청</td>
+          <td style="padding:10px 12px;color:var(--muted);">법적으로 정보성 알림톡은 거부 옵션 제공 의무가 있어요. 학원 카톡 채널에서 해당 학부모를 친구 목록에서 제거하거나, 노션 학생DB에 "알림톡 제외" 컬럼 만들어 필터로 빼주세요.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hl-box kakao">
+      <strong>💛 알림톡 도입 = 학원 신뢰도 ↑</strong><br>
+      알림톡은 "검증된 비즈니스"만 보낼 수 있어요. 학부모 입장에서 학원 카톡 채널로 안내가 오면 — <b>"진짜 학원이구나"</b> 느낌이 들어요.
+      학원 브랜딩에도 도움됩니다.
+    </div>
+  </div>
+</div>
+
+
+<!-- SECTION 6 — USEFUL LINKS (was 5) -->
+<div class="content section-gap" id="section6">
+  <div class="sec-header">
+    <div class="sec-num">06</div>
+    <div>
+      <div class="sec-label">CHAPTER 6</div>
+      <div class="sec-title">유용한 링크 모음</div>
+    </div>
+  </div>
   <div class="two-col">
     <a class="link-card" href="https://notion.so" target="_blank">
       <div class="lc-label">TOOL 01</div>
@@ -713,7 +794,7 @@ code {
     </a>
     <a class="link-card" href="https://solapi.com" target="_blank">
       <div class="lc-label">TOOL 02</div>
-      <div class="lc-title">💬 솔라피 (문자 발송)</div>
+      <div class="lc-title">💬 솔라피 (문자·알림톡)</div>
       <div class="lc-url">solapi.com</div>
     </a>
     <a class="link-card" href="https://make.com" target="_blank">
@@ -721,25 +802,31 @@ code {
       <div class="lc-title">⚙️ Make (자동화)</div>
       <div class="lc-url">make.com</div>
     </a>
+    <a class="link-card" href="https://center-pf.kakao.com" target="_blank">
+      <div class="lc-label">TOOL 04</div>
+      <div class="lc-title">💛 카카오톡 채널 관리자</div>
+      <div class="lc-url">center-pf.kakao.com</div>
+    </a>
     <a class="link-card" href="https://www.notion.so/ko-kr/templates" target="_blank">
       <div class="lc-label">RESOURCE</div>
       <div class="lc-title">🗂 노션 공식 템플릿</div>
       <div class="lc-url">notion.so/ko-kr/templates</div>
     </a>
+    <a class="link-card" href="https://docs.solapi.com" target="_blank">
+      <div class="lc-label">DOCS</div>
+      <div class="lc-title">📘 솔라피 개발 문서</div>
+      <div class="lc-url">docs.solapi.com</div>
+    </a>
   </div>
-
   <div class="card" style="margin-top:16px">
     <div class="card-title"><div class="num">💡</div> 막히면 여기서 찾아보세요</div>
     <ul class="step-list">
-      <li>유튜브에 <b>"노션 입문"</b> 검색 → 한국어 영상 많아요</li>
+      <li>유튜브에 <b>"노션 입문"</b>, <b>"카카오 알림톡 솔라피"</b> 검색 → 한국어 영상 많아요</li>
       <li>Make 공식 문서: <code>make.com/help</code></li>
-      <li>솔라피 개발 문서: <code>docs.solapi.com</code></li>
+      <li>솔라피 알림톡 가이드: <code>docs.solapi.com</code> → 카카오 알림톡</li>
       <li>막히는 부분은 언제든 질문 주세요! 😊</li>
     </ul>
   </div>
-</div>
-
-
 
   <div class="card" style="margin-top:16px">
     <div class="card-title"><div class="num">📬</div> 세미나 이후 질문은 여기로</div>
@@ -755,7 +842,7 @@ code {
         <p style="font-size:13px;color:var(--muted2);margin-bottom:6px;font-weight:700;">전체 PDF 핸드아웃</p>
         <div class="hl-box green">
           <strong>📎 메일로 발송 예정</strong><br>
-          스크린샷 포함 45페이지 전체 자료를 세미나 후 이메일로 보내드려요.
+          스크린샷 포함 전체 자료를 세미나 후 이메일로 보내드려요.
         </div>
       </div>
     </div>
@@ -768,31 +855,30 @@ code {
     <div style="min-height:70px;border-bottom:1px solid var(--border);margin-bottom:14px;"></div>
     <div style="min-height:70px;"></div>
   </div>
+</div>
 
 
-<!-- SURVEY SECTION -->
-<div class="content section-gap" id="section6">
+<!-- SECTION 7 — SURVEY (was 6) -->
+<div class="content section-gap" id="section7">
   <div class="sec-header">
-    <div class="sec-num">06</div>
-    <div class="sec-title-wrap">
+    <div class="sec-num">07</div>
+    <div>
       <div class="sec-label">NEXT STEP</div>
       <div class="sec-title">다음 수업, 뭐가 필요하세요?</div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">💬</div> 이번 세미나 이후 추가로 배우고 싶은 것을 골라주세요</div>
-    <p style="margin-bottom:20px">오늘 배운 <b style="color:var(--text)">시간표 관리 + 일일 리포트 문자 + 교재비 문자 + 교재 유닛별 진도 관리</b> 외에,<br>다음 중 어떤 게 가장 필요하신가요?</p>
-        <div id="surveyItems"></div>
-    <div id="surveyResult" style="display:none" class="hl-box green" style="margin-top:20px">
+    <p style="margin-bottom:20px">오늘 배운 <b style="color:var(--text)">시간표 + 일일 리포트 + 교재비 + 알림톡 업그레이드</b> 외에,<br>다음 중 어떤 게 가장 필요하신가요?</p>
+    <div id="surveyItems"></div>
+    <div id="surveyResult" class="hl-box green" style="display:none; margin-top:20px">
       <strong>✅ 선택 완료!</strong><br>
       <span id="surveyResultText"></span>
     </div>
-    <button id="surveySubmit" style="display:none" style="display:none; margin-top:16px; background:var(--accent); color:white; border:none; border-radius:12px; padding:12px 24px; font-size:14px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; width:100%">
+    <button id="surveySubmit" onclick="submitSurvey()" style="display:none; margin-top:16px; background:var(--accent); color:white; border:none; border-radius:12px; padding:12px 24px; font-size:14px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; width:100%">
       선택 완료 →
     </button>
   </div>
-
   <div class="card">
     <div class="card-title"><div class="num">🗓</div> 다음 세미나 예고</div>
     <p>수요가 많은 주제로 다음 세미나를 준비할게요.<br>결과는 인스타그램 또는 카톡으로 안내드릴 예정이에요 😊</p>
@@ -803,7 +889,6 @@ code {
     </div>
   </div>
 </div>
-
 
 
 <!-- FOOTER -->

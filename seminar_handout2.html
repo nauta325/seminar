@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>앱스크립트 학원 자동화 — 세미나 2 자료</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --surface: #f6f7f9;
+  --surface2: #eef0f4;
+  --border: #e2e5ec;
+  --navy: #2c3e5d;
+  --navy2: #1f2d45;
+  --coral: #c0573e;
+  --coral2: #e0613f;
+  --gold: #c08a2d;
+  --green: #2d8a5f;
+  --text: #161c28;
+  --muted: #515a6b;
+  --muted2: #818a9c;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+@media print {
+  .card { page-break-inside: avoid; break-inside: avoid; }
+  .sec-header { page-break-after: avoid; break-after: avoid; }
+  .hl-box { page-break-inside: avoid; break-inside: avoid; }
+  .flow { page-break-inside: avoid; break-inside: avoid; }
+  .two-col { page-break-inside: avoid; break-inside: avoid; }
+  table { page-break-inside: avoid; break-inside: avoid; }
+  tr { page-break-inside: avoid; break-inside: avoid; }
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* HERO */
+.hero { background: var(--navy); padding: 60px 32px 56px; position: relative; overflow: hidden; }
+.hero::before { content: 'SCRIPT'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 180px; color: rgba(255,255,255,0.05); bottom: -10px; right: -10px; line-height: 1; pointer-events: none; letter-spacing: 4px; }
+.hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-tag { display: inline-block; background: var(--coral); color: white; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; }
+.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 8vw, 88px); line-height: 0.95; color: #fff; margin-bottom: 20px; letter-spacing: 0.02em; }
+.hero h1 .c { color: var(--coral2); }
+.hero-desc { font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.7; max-width: 520px; }
+.hero-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; }
+.hero-meta-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.65); font-weight: 500; }
+
+/* NAV */
+.nav-bar { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; overflow-x: auto; scrollbar-width: none; }
+.nav-bar::-webkit-scrollbar { display: none; }
+.nav-inner { max-width: 860px; margin: 0 auto; display: flex; gap: 0; white-space: nowrap; padding: 0 24px; }
+.nav-item { padding: 14px 18px; font-size: 13px; font-weight: 700; color: var(--muted2); text-decoration: none; border-bottom: 2px solid transparent; transition: all 0.2s; display: inline-block; }
+.nav-item:hover { color: var(--navy); border-bottom-color: var(--coral); }
+
+/* CONTENT */
+.content { max-width: 860px; margin: 0 auto; padding: 48px 24px 0; }
+
+/* SECTION HEADER */
+.sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.sec-num { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--coral); line-height: 1; flex-shrink: 0; opacity: 0.5; }
+.sec-label { font-size: 11px; font-weight: 700; color: var(--muted2); letter-spacing: 0.1em; margin-bottom: 4px; }
+.sec-title { font-size: 26px; font-weight: 900; line-height: 1.2; }
+.hi-badge { display: inline-block; background: var(--coral); color: #fff; font-size: 10px; font-weight: 800; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 5px; margin-left: 8px; vertical-align: 4px; }
+
+/* CARDS */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+.card.navy-card { background: var(--navy); border-color: var(--navy); }
+.card.navy-card .card-title { color: #fff; }
+.card.navy-card p { color: rgba(255,255,255,0.8); }
+.card-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.card-title .num { width: 26px; height: 26px; background: var(--navy); color: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; font-family: 'Space Mono', monospace; flex-shrink: 0; }
+.card.navy-card .card-title .num { background: var(--coral); }
+.card p { font-size: 14px; line-height: 1.8; color: #3a4151; }
+.card p + p { margin-top: 10px; }
+
+/* STEP LIST */
+.step-list { list-style: none; counter-reset: sc; }
+.step-list li { counter-increment: sc; display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14px; line-height: 1.7; color: #3a4151; }
+.step-list li:last-child { border-bottom: none; }
+.step-list li::before { content: counter(sc, decimal-leading-zero); font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: var(--coral); background: rgba(192,87,62,0.1); min-width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.step-list li b { color: var(--text); }
+
+/* HIGHLIGHT BOX */
+.hl-box { border-radius: 12px; padding: 16px 20px; margin-top: 16px; font-size: 14px; line-height: 1.7; }
+.hl-box.coral { background: rgba(192,87,62,0.09); border: 1px solid rgba(192,87,62,0.32); color: #9a4128; }
+.hl-box.green { background: rgba(45,138,95,0.1); border: 1px solid rgba(45,138,95,0.32); color: #1d6644; }
+.hl-box.gold { background: rgba(192,138,45,0.12); border: 1px solid rgba(192,138,45,0.38); color: #7a5612; }
+.hl-box.navy { background: rgba(44,62,93,0.08); border: 1px solid rgba(44,62,93,0.25); color: var(--navy); }
+.hl-box strong { color: inherit; font-weight: 800; }
+
+/* CHIPS */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.chip { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 20px; font-family: 'Space Mono', monospace; }
+.chip.coral { background: rgba(192,87,62,0.1); border-color: rgba(192,87,62,0.3); color: var(--coral); }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+/* FLOW */
+.flow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.fnode { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px; line-height: 1.3; }
+.fnode.coral-node { background: rgba(192,87,62,0.12); border-color: rgba(192,87,62,0.4); color: var(--coral); }
+.farrow { color: var(--muted2); font-size: 18px; }
+
+/* FILE TABLE */
+.ftable { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
+.ftable th { background: var(--navy); color:#fff; padding:11px 12px; text-align:left; font-weight:700; font-size:12px; }
+.ftable th:first-child { border-radius:8px 0 0 0; }
+.ftable th:last-child { border-radius:0 8px 0 0; }
+.ftable td { padding:11px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.5; }
+.ftable td.mono { font-family:'Space Mono',monospace; font-size:12px; color:var(--coral); font-weight:700; }
+.ftable tr:last-child td { border-bottom:none; }
+.ftable tr:nth-child(even) td { background:rgba(0,0,0,0.015); }
+
+/* TROUBLE TABLE */
+.tbl { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
+.tbl th { background:rgba(192,87,62,0.1); padding:10px 12px; text-align:left; font-weight:800; color:var(--coral); border-bottom:2px solid rgba(192,87,62,0.25); }
+.tbl th:first-child { width:40%; }
+.tbl td { padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.55; }
+.tbl td.sym { color:#9a4128; font-weight:700; }
+.tbl td.fix { color:var(--muted); }
+.tbl tr:nth-child(even) td { background:rgba(0,0,0,0.015); }
+.tbl tr:last-child td { border-bottom:none; }
+
+/* CODE */
+code { background: var(--surface2); color: var(--gold); font-family: 'Space Mono', monospace; font-size: 12px; padding: 2px 7px; border-radius: 5px; }
+.codeblock { background:#1f2d45; color:#dfe6f2; border-radius:12px; padding:20px 22px; margin-top:14px; font-family:'Space Mono',monospace; font-size:12.5px; line-height:1.85; white-space:pre-wrap; overflow-x:auto; }
+.codeblock .cm { color:#7d8aa3; }
+.codeblock .v { color:#e0a060; }
+
+/* LINK CARD */
+.link-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-decoration: none; display: block; transition: all 0.2s; }
+.link-card:hover { border-color: var(--coral); background: rgba(192,87,62,0.04); }
+.link-card .lc-label { font-size: 11px; font-weight: 700; color: var(--muted2); letter-spacing: 0.08em; margin-bottom: 6px; }
+.link-card .lc-title { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+.link-card .lc-url { font-size: 12px; color: var(--coral); font-family: 'Space Mono', monospace; }
+
+/* FOOTER */
+.footer { max-width: 860px; margin: 56px auto 0; padding: 32px 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-left .ft-title { font-size: 15px; font-weight: 900; margin-bottom: 4px; }
+.footer-left .ft-sub { font-size: 12px; color: var(--muted2); }
+.footer-right { font-size: 12px; color: var(--muted); text-align: right; line-height: 1.8; }
+
+.section-gap { margin-top: 56px; }
+.memo { margin:16px auto 0; padding:12px 16px; border:1px dashed var(--border); border-radius:10px; min-height:52px; max-width:860px; }
+.memo span { font-size:11px; color:var(--muted2); font-weight:700; letter-spacing:0.05em; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">⚙️ 세미나 2 · 배포 자료</div>
+    <h1>앱스크립트로<br><span class="c">전부 자동화</span></h1>
+    <p class="hero-desc">노션 + 구글 앱스크립트만으로 — 코딩 몰라도 학원 자동화 5종을 복사·붙여넣기로 설치합니다. 이 자료로 집에서 그대로 따라 설치하세요.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">🏫 HongLab</div>
+      <div class="hero-meta-item">⏱ 약 3시간 수업</div>
+      <div class="hero-meta-item">💻 코드 자료실 제공</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-bar">
+  <div class="nav-inner">
+    <a class="nav-item" href="#s1">① 앱스크립트란</a>
+    <a class="nav-item" href="#s2">② 노션 DB 6개</a>
+    <a class="nav-item" href="#s3">③ 연결 준비</a>
+    <a class="nav-item" href="#s4">④ 설치 순서</a>
+    <a class="nav-item" href="#s5">⑤ 출결·리포트</a>
+    <a class="nav-item" href="#s6">⑥ 알림톡</a>
+    <a class="nav-item" href="#s7">⑦ 월말평가서</a>
+    <a class="nav-item" href="#s8">⑧ 트러블슈팅</a>
+    <a class="nav-item" href="#s9">⑨ 자료실</a>
+  </div>
+</div>
+
+<!-- ════ SECTION 1 — 앱스크립트란 ════ -->
+<div class="content" id="s1">
+  <div class="sec-header">
+    <div class="sec-num">01</div>
+    <div>
+      <div class="sec-label">CHAPTER 1</div>
+      <div class="sec-title">앱스크립트가 뭐예요?</div>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"><div class="num">1</div> 구글이 주는 무료 코드 도구</div>
+      <p>구글 앱스크립트(Apps Script)는 구글 계정만 있으면 <b style="color:var(--text)">무료로 쓰는 코드 실행 도구</b>예요. 따로 설치할 것 없이 브라우저에서 <code>script.google.com</code> 으로 바로 써요.</p>
+      <div class="hl-box green" style="margin-top:14px">이 수업은 코드를 <b>짜는</b> 게 아니라, 완성 코드를 <b>복사 → 붙여넣기 → 내 값만 교체</b>하는 수업이에요.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="num">2</div> Make와 뭐가 달라요?</div>
+      <p>1차의 Make는 노션과 솔라피를 이어주는 <b style="color:var(--text)">중간 다리</b>(월 사용량 제한 있음)였어요.</p>
+      <p>앱스크립트는 코드가 <b style="color:var(--text)">노션·솔라피를 직접</b> 호출해요. 중간 다리가 없으니 제한도 없고, 출결·웹앱처럼 더 정교한 것까지 가능해요.</p>
+    </div>
+  </div>
+  <div class="card navy-card">
+    <div class="card-title"><div class="num">3</div> 세미나 2가 설치하는 5가지</div>
+    <div class="flow" style="margin-top:6px">
+      <div class="fnode">📲 출결 키오스크<br>(PIN 등·하원)</div>
+      <div class="fnode">📋 출결현황판</div>
+      <div class="fnode">📝 데일리리포트<br>자동생성</div>
+      <div class="fnode coral-node">💬 카카오 알림톡<br>자동발송</div>
+      <div class="fnode coral-node">📊 월말평가서<br>+ 학부모 열람</div>
+    </div>
+    <p style="margin-top:6px">학생이 핀을 누르는 순간부터 월말평가서가 학부모에게 발송되기까지 — 한 시스템으로 이어집니다.</p>
+  </div>
+</div>
+
+<!-- ════ SECTION 2 — 노션 DB 6개 ════ -->
+<div class="content section-gap" id="s2">
+  <div class="sec-header">
+    <div class="sec-num">02</div>
+    <div>
+      <div class="sec-label">CHAPTER 2</div>
+      <div class="sec-title">노션 데이터베이스 6개 만들기</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">📋</div> 전체 DB 목록</div>
+    <table class="ftable">
+      <thead><tr><th>#</th><th>DB 이름</th><th>생성</th><th>용도</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><b>전체학생DB</b></td><td>직접</td><td>학생 마스터 (핀·교재·등원시간)</td></tr>
+        <tr><td>2</td><td><b>데일리리포트DB</b></td><td>직접</td><td>매일 수업 기록 + 출결시간 (1차 DB)</td></tr>
+        <tr><td>3</td><td><b>교재DB</b></td><td>직접</td><td>교재비·재고 관리</td></tr>
+        <tr><td>4</td><td><b>결석보강DB</b></td><td>직접</td><td>결석·보강 처리</td></tr>
+        <tr><td>5</td><td><b>월말참고사항DB</b></td><td>직접</td><td>월말평가서용 선생님 코멘트</td></tr>
+        <tr><td>6</td><td><b>월말평가서DB</b></td><td class="mono">자동</td><td>코드 1회 실행 → 자동 생성</td></tr>
+      </tbody>
+    </table>
+    <div class="hl-box coral">
+      <strong>⚠️ 속성명은 글자까지 정확히</strong><br>
+      코드가 한글 속성명을 그대로 읽어요. <b>띄어쓰기·괄호까지 일치</b>해야 합니다. (예: <code>출결PIN</code>은 텍스트, <code>담당 선생님</code>은 띄어쓰기)
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">1</div> 전체학생DB</div>
+    <ul class="step-list">
+      <li>학생이름(<b>제목</b>), 학생ID(텍스트), 재원상태(선택 재원/퇴원), 담당선생님(선택·띄어쓰기X), 수업시간(숫자·분), 학년(텍스트/선택)</li>
+      <li><b>출결PIN(텍스트)</b> — 키오스크에서 학생이 누를 번호</li>
+      <li>전화번호(전화/텍스트/수식 다 인식)</li>
+      <li>요일별 등원시간: <b>월~금-등원시간</b> (단일/다중선택 둘 다 인식)</li>
+      <li>교재 Relation 3개 → 교재DB: <b>문법교재 / 리딩교재 / 단어교재</b> (안 쓰는 과목은 비움)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">2</div> 데일리리포트DB <span style="font-size:12px;color:var(--coral);font-weight:700;">(가장 중요)</span></div>
+    <ul class="step-list">
+      <li><b>키</b>: 제목 · <b>학생이름</b>(Relation→전체학생DB, 월말평가서 조회 키·필수) · 날짜(날짜)</li>
+      <li><b>자동 채워짐</b>: 카톡전송(선택), 태도/과제/지각(선택), 문법·리딩·단어교재(Relation, 학생DB에서 복사), 실제등원시간/실제하원시간(텍스트)</li>
+      <li><b>수업 후 수기</b>: 문법진도/리딩진도/단어진도(텍스트, 예 <code>Unit 5</code>), 단어테스트_결과(선택)</li>
+      <li>Select 옵션 미리 생성: 태도(상/중/하) · 과제(100%완료/상/중/하) · 지각(정시등원/지각/결석) · 카톡전송(미전송/전송/실패) · 단어테스트(통과/불통과)</li>
+    </ul>
+    <div class="hl-box gold">
+      <strong>⚠️ 학생ID 수식 불필요</strong> — 월말평가서는 <b>학생이름 Relation</b>으로 조회해요. 데일리리포트DB에 학생ID 수식 속성은 안 만들어도 됩니다.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">3</div> 교재DB <span style="font-size:12px;color:var(--muted2);font-weight:700;">(교재비·재고 관리용)</span></div>
+    <ul class="step-list">
+      <li><b>교재명(제목)</b> — 코드가 읽는 유일한 값</li>
+      <li>종류(선택 문법/리딩/단어), 가격(숫자), 누적교재수량(숫자), 배포된 수량(롤업), 재고(수식)</li>
+    </ul>
+    <div class="hl-box navy">
+      <strong>💡 교재DB는 진도용이 아니에요</strong> — 코드는 제목(교재명)만 읽어요. 나머지 가격·재고는 학원 운영용입니다.
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"><div class="num">4</div> 결석보강DB</div>
+      <ul class="step-list">
+        <li>학생이름(Relation)</li>
+        <li>결석 예정일 / 보강 예정일 (날짜)</li>
+        <li>보강시간, 비고</li>
+        <li>담당 선생님(롤업/선택·<b>띄어쓰기</b>)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="num">5</div> 월말참고사항DB</div>
+      <ul class="step-list">
+        <li>학생(Relation→전체학생DB·필수)</li>
+        <li>연월(이름에 연월/기간/월 포함)</li>
+        <li>참고사항(이름에 참고/코멘트/메모 포함)</li>
+        <li>중학생(체크박스)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">6</div> 월말평가서DB <span style="font-size:12px;color:var(--green);font-weight:700;">(자동 생성 — 직접 안 만듦)</span></div>
+    <p>이 DB는 <code>createReportDatabase()</code> 함수를 <b>1회 실행</b>하면 코드가 알아서 만들어요. (제목·학생·평가서본문·진도·열람링크·카톡전송 등 속성 자동 포함)</p>
+    <div class="hl-box green">
+      <strong>✅ 자동 생성되는 것</strong> — 월말평가서DB · 교재DB ID 연결 · 학부모 링크 URL. 이 세 가지는 손대지 않아도 됩니다.
+    </div>
+  </div>
+</div>
+
+<div class="memo"><span>MEMO</span></div>
+
+<!-- ════ SECTION 3 — 연결 준비 ════ -->
+<div class="content section-gap" id="s3">
+  <div class="sec-header">
+    <div class="sec-num">03</div>
+    <div>
+      <div class="sec-label">CHAPTER 3</div>
+      <div class="sec-title">연결 준비 — 값 모으기</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">1</div> 노션 토큰 + DB ID 4개</div>
+    <ul class="step-list">
+      <li>노션 설정 → 연결 → <b>새 API 통합 만들기</b> → 토큰 복사 (1차에서 만든 것 재사용 가능)</li>
+      <li>각 DB 페이지 → ··· → 연결 → 만든 통합 선택 (DB마다 반복)</li>
+      <li><b>DB ID 찾기</b>: DB를 풀페이지로 열고 주소창 URL에서 <code>notion.so/</code> 뒤 ~ <code>?v=</code> 앞 32자리</li>
+      <li>모을 ID 4개: <b>데일리리포트 / 전체학생 / 결석보강 / 월말참고사항</b></li>
+    </ul>
+    <div class="hl-box navy">
+      <strong>💡 안 모아도 되는 것</strong> — 교재DB ID, 월말평가서DB ID는 코드가 자동 연결해요.
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">2</div> 솔라피 값 (알림톡용)</div>
+    <ul class="step-list">
+      <li>API Key / API Secret</li>
+      <li>발신번호 (등록·승인된 번호)</li>
+      <li>카카오 채널 PFID</li>
+      <li>알림톡 템플릿 ID 4개 (Chapter 6에서 등록 → 승인 후 입력)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">3</div> Claude API 키 (월말평가서 본문 작성용)</div>
+    <p>월말평가서 본문을 AI가 자동으로 써줍니다. 이를 위한 Claude API 키 1개가 필요해요. (발급처는 자료실 가이드 참고)</p>
+  </div>
+  <div class="hl-box coral">
+    <strong>📌 정리 — 내가 모을 값</strong><br>
+    노션 토큰 · DB ID 4개 · 솔라피 7개(키·시크릿·발신번호·PFID·템플릿4) · 월말참고사항 ID · Claude 키 · 교사 이름
+  </div>
+</div>
+
+<!-- ════ SECTION 4 — 설치 순서 ════ -->
+<div class="content section-gap" id="s4">
+  <div class="sec-header">
+    <div class="sec-num">04</div>
+    <div>
+      <div class="sec-label">CHAPTER 4</div>
+      <div class="sec-title">설치 순서 — 따라하기</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">⚙️</div> 10단계 설치 흐름</div>
+    <ul class="step-list">
+      <li>노션 DB 5개 생성 + <b>Integration(통합) 연결</b></li>
+      <li>앱스크립트 새 프로젝트 → <code>Code.gs</code> 붙여넣기</li>
+      <li><b>monthly_comment_addon</b> 스크립트 추가 (별도 파일 필수)</li>
+      <li>HTML 4개 추가: <code>attendance_student</code> / <code>attendance_board</code> / <code>monthly_report</code> / <code>parent_report</code></li>
+      <li>Code.gs <b>[설정]</b> 입력: 노션토큰 · DB ID 4개 · 솔라피 7개</li>
+      <li><b>monthly_comment_addon.gs</b>에 월말참고사항 ID 입력</li>
+      <li><code>setClaudeApiKey</code>에 Claude 키 넣고 ▶ 실행 (1회)</li>
+      <li><code>createReportDatabase</code> ▶ 실행 (1회) → 월말평가서DB 자동 생성</li>
+      <li>웹앱 <b>배포</b> (실행=나, 액세스=<b>모든 사용자</b>)</li>
+      <li>트리거 등록: <code>createTodayStudentsPlannerRows</code> 매일 새벽 + 솔라피 템플릿 4개 등록 + 현황판 교사이름 교체</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">📁</div> 앱스크립트에 넣는 파일 6개</div>
+    <table class="ftable">
+      <thead><tr><th>파일</th><th>종류</th><th>역할</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">Code.gs</td><td>스크립트</td><td>메인 로직</td></tr>
+        <tr><td class="mono">monthly_comment_addon</td><td>스크립트</td><td>월말참고사항 (별도 추가 필수)</td></tr>
+        <tr><td class="mono">attendance_student</td><td>HTML</td><td>출결 키오스크</td></tr>
+        <tr><td class="mono">attendance_board</td><td>HTML</td><td>출결현황판</td></tr>
+        <tr><td class="mono">monthly_report</td><td>HTML</td><td>선생님 평가서 화면</td></tr>
+        <tr><td class="mono">parent_report</td><td>HTML</td><td>학부모 열람 화면</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">🔑</div> Code.gs [설정] 부분 예시</div>
+    <p>코드 맨 위 [설정]에서 <b>이 값들만</b> 내 것으로 바꾸면 돼요. 나머지 로직은 건드리지 마세요.</p>
+    <div class="codeblock"><span class="cm">// ===== [설정] 여기만 내 값으로 =====</span>
+var NOTION_TOKEN          = <span class="v">'...'</span>;
+var DAILY_REPORT_DB_ID    = <span class="v">'...'</span>;
+var STUDENTS_DB_ID        = <span class="v">'...'</span>;
+var ABSENT_MAKEUP_DB_ID   = <span class="v">'...'</span>;
+
+var SOLAPI_API_KEY    = <span class="v">'...'</span>;
+var SOLAPI_API_SECRET = <span class="v">'...'</span>;
+var SOLAPI_SENDER     = <span class="v">'01000000000'</span>;  <span class="cm">// 발신번호</span>
+var SOLAPI_PF_ID      = <span class="v">'KA01PF...'</span>;     <span class="cm">// 카카오채널</span>
+var TPL_CHECKIN  = <span class="v">'KA01TP...'</span>;  <span class="cm">// 등원</span>
+var TPL_CHECKOUT = <span class="v">'KA01TP...'</span>;  <span class="cm">// 하원</span>
+var TPL_LATE     = <span class="v">'KA01TP...'</span>;  <span class="cm">// 미등원</span>
+var TPL_REPORT   = <span class="v">'KA01TP...'</span>;  <span class="cm">// 월말평가서</span></div>
+    <div class="hl-box green" style="margin-top:14px">
+      <strong>✅ 변수명은 그대로</strong> — 따옴표 안의 값만 바꾸면 됩니다. 변수 이름(<code>NOTION_TOKEN</code> 등)은 건드리지 마세요.
+    </div>
+  </div>
+</div>
+
+<div class="memo"><span>MEMO</span></div>
+
+<!-- ════ SECTION 5 — 출결·리포트 ════ -->
+<div class="content section-gap" id="s5">
+  <div class="sec-header">
+    <div class="sec-num">05</div>
+    <div>
+      <div class="sec-label">CHAPTER 5</div>
+      <div class="sec-title">출결 + 데일리리포트 자동화<span class="hi-badge">하이라이트</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">1</div> 출결 키오스크 (학생 PIN)</div>
+    <p>웹앱 주소 뒤에 <code>?page=attendance</code> 를 붙이면 키오스크 화면. 태블릿·폰을 학원 입구에 두면 학생이 <b style="color:var(--text)">자기 핀(PIN)</b>을 눌러 등·하원합니다.</p>
+    <ul class="step-list">
+      <li>학생이 핀 입력 → <b>실제등원시간</b>이 데일리리포트DB에 자동 기록</li>
+      <li>하원 시 다시 핀 입력 → <b>실제하원시간</b> 기록</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">2</div> 출결현황판 (선생님용)</div>
+    <p>웹앱 주소 뒤 <code>?page=attendance_board</code>. 오늘 누가 왔고 안 왔는지 실시간으로 보여줘요.</p>
+    <ul class="step-list">
+      <li>터치로 <b>하원 처리</b> · <b>미등원 알림</b> 발송</li>
+      <li>교사 필터로 담당 학생만 보기 (설치 시 <code>선생님A/B</code>를 실제 이름으로 교체)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">3</div> 데일리리포트 자동 생성</div>
+    <p>매일 새벽 트리거(<code>createTodayStudentsPlannerRows</code>)가 <b style="color:var(--text)">오늘 올 학생</b>을 요일로 판단 → 등원생별 리포트 빈 행을 자동 생성. 교재(Relation)는 학생DB에서 자동 복사돼요.</p>
+    <div class="flow">
+      <div class="fnode">🌙 새벽 트리거</div>
+      <div class="farrow">→</div>
+      <div class="fnode">오늘 등원생 판단</div>
+      <div class="farrow">→</div>
+      <div class="fnode">리포트 행 자동생성</div>
+      <div class="farrow">→</div>
+      <div class="fnode coral-node">교재 자동복사</div>
+    </div>
+    <div class="hl-box gold">
+      <strong>자동 vs 수기</strong> — 교재·출결시간은 <b>자동</b>, 진도(유닛 번호)와 단어테스트 결과는 수업 후 <b>수기</b> 입력.
+    </div>
+  </div>
+</div>
+
+<!-- ════ SECTION 6 — 알림톡 ════ -->
+<div class="content section-gap" id="s6">
+  <div class="sec-header">
+    <div class="sec-num">06</div>
+    <div>
+      <div class="sec-label">CHAPTER 6</div>
+      <div class="sec-title">💬 카카오 알림톡 템플릿 4개</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">⚠️</div> 먼저 — 미리 등록 + 검수</div>
+    <p>알림톡은 <b style="color:var(--text)">사전 등록 + 카카오 검수(승인)</b>가 필요해요. 검수는 보통 영업일 <b style="color:var(--text)">1~3일</b>. 세미나 전에 미리 신청해두세요. 승인 후 받은 <b>템플릿 ID</b>를 Code.gs [설정]에 넣습니다.</p>
+    <div class="hl-box coral">
+      <strong>❗ 변수명을 글자까지 똑같이</strong> — <code>#{학생이름}</code> 같은 변수명이 템플릿과 코드에서 한 글자라도 다르면 치환이 안 됩니다.
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">📋</div> 등록할 템플릿 4개</div>
+    <table class="ftable">
+      <thead><tr><th>용도</th><th>Code 변수</th><th>변수</th><th>발송 시점</th></tr></thead>
+      <tbody>
+        <tr><td><b>등원 알림</b></td><td class="mono">TPL_CHECKIN</td><td>학생이름·등원시간·하원시간</td><td>핀 등원 시</td></tr>
+        <tr><td><b>하원 알림</b></td><td class="mono">TPL_CHECKOUT</td><td>학생이름·하원시간</td><td>하원 처리 시</td></tr>
+        <tr><td><b>미등원 알림</b></td><td class="mono">TPL_LATE</td><td>학생이름·예정시간</td><td>미등원 알림 시</td></tr>
+        <tr><td><b>월말평가서</b></td><td class="mono">TPL_REPORT</td><td>학생이름·연월·출결번호·링크</td><td>일괄 발송 버튼</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"><div class="num">1</div> 등원 알림</div>
+      <div class="hl-box navy" style="font-family:'Space Mono',monospace;font-size:12px;line-height:1.85;white-space:pre-wrap;margin-top:4px">[OO영어학원] 등원 안내
+#{학생이름} 학생이 #{등원시간}에 등원했습니다.
+예상 하원 시간은 #{하원시간}입니다.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="num">2</div> 하원 알림</div>
+      <div class="hl-box navy" style="font-family:'Space Mono',monospace;font-size:12px;line-height:1.85;white-space:pre-wrap;margin-top:4px">[OO영어학원] 하원 안내
+#{학생이름} 학생이 #{하원시간}에 하원했습니다.
+오늘도 수고 많았습니다.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="num">3</div> 미등원 알림</div>
+      <div class="hl-box navy" style="font-family:'Space Mono',monospace;font-size:12px;line-height:1.85;white-space:pre-wrap;margin-top:4px">[OO영어학원] 미등원 안내
+#{학생이름} 학생이 예정 시간(#{예정시간})에 등원하지 않았습니다.
+확인 부탁드립니다.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="num">4</div> 월말평가서</div>
+      <div class="hl-box navy" style="font-family:'Space Mono',monospace;font-size:12px;line-height:1.85;white-space:pre-wrap;margin-top:4px">[OO영어학원]
+안녕하세요. #{학생이름} 학생의 #{연월} 월말 보고서입니다.
+아래 링크에서 확인하실 수 있습니다.
+
+로그인: 학생 이름 + 출결번호
+출결번호: #{출결번호}
+
+▶ #{링크}
+
+확인 부탁드리며, 앞으로도 꾸준한 성장을 위해 지도하겠습니다.</div>
+    </div>
+  </div>
+  <div class="hl-box gold">
+    <strong>검수 팁</strong> — ① 광고성 문구(할인·무료·모집) 빼고 정보성 톤 유지 ② <code>[채널명]</code>을 실제 채널 표시명과 일치 ③ 링크는 학생마다 다르니 반드시 <code>#{링크}</code> 변수로 (고정 URL 금지)
+  </div>
+</div>
+
+<div class="memo"><span>MEMO</span></div>
+
+<!-- ════ SECTION 7 — 월말평가서 ════ -->
+<div class="content section-gap" id="s7">
+  <div class="sec-header">
+    <div class="sec-num">07</div>
+    <div>
+      <div class="sec-label">CHAPTER 7</div>
+      <div class="sec-title">📊 월말평가서 + 학부모 발송<span class="hi-badge">하이라이트</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">1</div> 두 가지 생성 방식</div>
+    <div class="two-col" style="margin-top:4px">
+      <div style="background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:18px 20px;">
+        <div style="font-weight:800;color:var(--navy);margin-bottom:8px;font-size:15px;">① 전체 일괄 생성</div>
+        <div style="font-size:13.5px;color:var(--muted);line-height:1.6;">월말참고사항DB에 학생별 코멘트를 적어두면, 전체 학생 평가서를 <b style="color:var(--text)">한 번에</b> 생성.</div>
+      </div>
+      <div style="background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:18px 20px;">
+        <div style="font-weight:800;color:var(--coral);margin-bottom:8px;font-size:15px;">② 개별 생성</div>
+        <div style="font-size:13.5px;color:var(--muted);line-height:1.6;">월말평가서 생성기 화면에서 <b style="color:var(--text)">한 명씩</b> 쓰면서 생성.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">2</div> 생성 흐름</div>
+    <div class="flow">
+      <div class="fnode">한 달 데일리리포트</div>
+      <div class="farrow">→</div>
+      <div class="fnode">+ 월말참고사항</div>
+      <div class="farrow">→</div>
+      <div class="fnode coral-node">🤖 AI 본문 작성</div>
+      <div class="farrow">→</div>
+      <div class="fnode">월말평가서DB 저장</div>
+    </div>
+    <p>화면: <code>?page=monthly_report</code> (선생님) — 출석률·태도·진도가 정리되고, AI가 평가서 본문을 자동으로 써요.</p>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">3</div> 학부모 열람 + 카톡 일괄 발송</div>
+    <ul class="step-list">
+      <li>학부모 화면: <code>?page=parent_report</code> — 출석률·태도·진도를 학부모가 링크로 확인</li>
+      <li>monthly_report 화면의 <b>📨 미전송 학부모에게 카톡 일괄 발송</b> 버튼 클릭</li>
+      <li>월말평가서DB에서 <b>카톡전송=미전송</b> 행만 골라 → 학부모에게 알림톡(열람링크) 발송 → <b>전송</b> 표시</li>
+    </ul>
+    <div class="hl-box green">
+      <strong>✅ Make 불필요</strong> — 월말평가서 발송도 앱스크립트가 솔라피로 직접 보냅니다. 학생별 링크는 자동 생성돼요.
+    </div>
+  </div>
+</div>
+
+<!-- ════ SECTION 8 — 트러블슈팅 ════ -->
+<div class="content section-gap" id="s8">
+  <div class="sec-header">
+    <div class="sec-num">08</div>
+    <div>
+      <div class="sec-label">TROUBLESHOOTING</div>
+      <div class="sec-title">🔧 자주 막히는 곳 & 해결</div>
+    </div>
+  </div>
+  <div class="card">
+    <table class="tbl">
+      <thead><tr><th>증상</th><th>원인 → 해결</th></tr></thead>
+      <tbody>
+        <tr><td class="sym">API token is invalid (401)</td><td class="fix">[설정]에 placeholder가 그대로예요 → 실제 토큰·ID 입력</td></tr>
+        <tr><td class="sym">"전체 학생 행 생성" 안 됨</td><td class="fix">monthly_comment_addon 미추가 또는 ID 미입력 → 별도 스크립트 추가 + ID 입력</td></tr>
+        <tr><td class="sym">월말평가서 "수업 데이터 없음"</td><td class="fix">그 달 데일리리포트 행이 없어요 → 해당 월에 수업 기록 행이 있어야 함</td></tr>
+        <tr><td class="sym">저장 실패 "...is not a property"</td><td class="fix">월말평가서DB 스키마가 옛 버전 → <code>REPORT_DB_ID</code> 삭제 후 <code>createReportDatabase</code> 재실행</td></tr>
+        <tr><td class="sym">알림톡 변수가 그대로 보임</td><td class="fix">템플릿 변수명과 코드가 불일치 → <code>#{학생이름}</code> 등 글자까지 똑같이</td></tr>
+        <tr><td class="sym">알림톡 발송 오류</td><td class="fix">템플릿 검수 미완료/ID 미입력 → 승인 후 템플릿 ID 입력 (다른 기능엔 영향 없음)</td></tr>
+        <tr><td class="sym">학부모 링크가 이상함</td><td class="fix">웹앱 재배포하면 URL이 자동 갱신 → 링크는 코드가 현재 배포 주소로 자동 생성</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">🔄</div> 월말평가서DB 다시 만들기</div>
+    <div class="codeblock"><span class="cm">// 스키마가 꼬였을 때, 이 줄 실행 후</span>
+PropertiesService.getScriptProperties()
+  .deleteProperty(<span class="v">'REPORT_DB_ID'</span>);
+<span class="cm">// → createReportDatabase 재실행</span></div>
+  </div>
+</div>
+
+<div class="memo"><span>MEMO</span></div>
+
+<!-- ════ SECTION 9 — 자료실 & 링크 ════ -->
+<div class="content section-gap" id="s9">
+  <div class="sec-header">
+    <div class="sec-num">09</div>
+    <div>
+      <div class="sec-label">RESOURCES</div>
+      <div class="sec-title">자료실 + 링크</div>
+    </div>
+  </div>
+  <div class="card navy-card">
+    <div class="card-title"><div class="num">💻</div> 코드 자료실</div>
+    <p>Code.gs · monthly_comment_addon · HTML 4개 — 복사용 전체 코드는 <b style="color:#fff">자료실 페이지</b>에서 받으세요. (수강생 전용 링크 별도 안내)</p>
+    <p style="margin-top:8px;color:rgba(255,255,255,0.6);font-size:13px;">막혔을 때: 코드 전체를 Claude AI에 붙여넣고 "내 학원 정보에 맞게 [설정] 부분만 바꿔줘"라고 하면 도와줍니다. (수정 프롬프트 자료실 제공)</p>
+  </div>
+  <div class="two-col">
+    <a class="link-card" href="https://script.google.com" target="_blank">
+      <div class="lc-label">TOOL 01</div>
+      <div class="lc-title">⚙️ 구글 앱스크립트</div>
+      <div class="lc-url">script.google.com</div>
+    </a>
+    <a class="link-card" href="https://notion.so" target="_blank">
+      <div class="lc-label">TOOL 02</div>
+      <div class="lc-title">📝 Notion</div>
+      <div class="lc-url">notion.so</div>
+    </a>
+    <a class="link-card" href="https://solapi.com" target="_blank">
+      <div class="lc-label">TOOL 03</div>
+      <div class="lc-title">💬 솔라피 (알림톡)</div>
+      <div class="lc-url">solapi.com</div>
+    </a>
+    <a class="link-card" href="https://center-pf.kakao.com" target="_blank">
+      <div class="lc-label">TOOL 04</div>
+      <div class="lc-title">💛 카카오톡 채널 관리자</div>
+      <div class="lc-url">center-pf.kakao.com</div>
+    </a>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="card-title"><div class="num">📬</div> 질문은 여기로</div>
+    <ul class="step-list">
+      <li>강사 — 홍보은 · 인스타그램 <code>@nauta325</code></li>
+      <li>세미나 자료 <code>nauta325.github.io/seminar</code></li>
+      <li>막히는 부분은 언제든 질문 주세요 😊</li>
+    </ul>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="card-title"><div class="num">📝</div> 오늘의 메모</div>
+    <div style="min-height:70px;border-bottom:1px solid var(--border);margin-bottom:14px;"></div>
+    <div style="min-height:70px;border-bottom:1px solid var(--border);margin-bottom:14px;"></div>
+    <div style="min-height:70px;"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="content">
+  <div class="footer">
+    <div class="footer-left">
+      <div class="ft-title">HongLab · 앱스크립트 학원 자동화</div>
+      <div class="ft-sub">세미나 2 배포 자료 · 노션 + 구글 앱스크립트</div>
+    </div>
+    <div class="footer-right">
+      이 자료는 수강생 전용입니다<br>
+      문의: 홍보은영어학원
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

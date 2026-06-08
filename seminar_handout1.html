@@ -139,6 +139,17 @@ body {
 code { background: var(--surface2); color: var(--accent3); font-family: 'Space Mono', monospace; font-size: 12px; padding: 2px 7px; border-radius: 5px; }
 
 .section-gap { margin-top: 56px; }
+
+/* COPY BOX */
+.copy-box { position: relative; background: #1f2230; border-radius: 12px; padding: 16px 18px; margin-top: 12px; }
+.copy-box pre { font-family: 'Space Mono', monospace; font-size: 13px; line-height: 1.7; color: #e8e6f0; white-space: pre-wrap; word-break: break-all; margin: 0; padding-right: 60px; }
+.copy-box .copy-btn { position: absolute; top: 12px; right: 12px; background: var(--accent); color: #fff; border: none; border-radius: 7px; padding: 6px 12px; font-size: 11px; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; transition: all 0.15s; }
+.copy-box .copy-btn:hover { opacity: 0.85; }
+.copy-box .copy-btn.copied { background: var(--accent2); }
+.copy-box .cb-label { font-size: 11px; color: #8b90a8; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.04em; font-family: 'Noto Sans KR', sans-serif; }
+.copy-box .cm { color: #6a6f88; }
+.formula-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+.formula-name { font-size: 13px; font-weight: 700; color: var(--text); min-width: 110px; }
 </style>
 </head>
 <body>
@@ -162,9 +173,10 @@ code { background: var(--surface2); color: var(--accent3); font-family: 'Space M
   <div class="nav-inner">
     <a class="nav-item" href="#section1">① 노션 기초</a>
     <a class="nav-item" href="#section2">② DB 만들기</a>
+    <a class="nav-item" href="#section2b">②⁺ 관계형·롤업·수식</a>
     <a class="nav-item" href="#section3">③ 자동화</a>
     <a class="nav-item" href="#section4">④ Make 설정</a>
-    <a class="nav-item kakao-nav" href="#section5">⑤ 💛 알림톡 업그레이드</a>
+    <a class="nav-item kakao-nav" href="#section5">⑤ 💛 카카오 알림톡</a>
     <a class="nav-item" href="#section6">⑥ 링크 모음</a>
     <a class="nav-item" href="#section7">⑦ 다음 수업 수요조사</a>
   </div>
@@ -213,6 +225,66 @@ code { background: var(--surface2); color: var(--accent3); font-family: 'Space M
         <li><code>Ctrl+/</code> → 블록 타입 변경</li>
         <li>드래그 → 블록 순서 이동</li>
       </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">4</div> 데이터베이스를 보는 5가지 방법 — 뷰(View)</div>
+    <p style="margin-bottom:14px">데이터는 <b style="color:var(--text)">하나</b>인데, 보는 방법은 여러 개예요. 같은 표를 용도에 맞게 다르게 펼쳐 보는 게 노션의 핵심이에요.</p>
+    <div class="make-flow" style="flex-wrap:wrap;">
+      <div class="make-node">📋 표(Table)</div>
+      <div class="make-node">🗂 보드(Board)</div>
+      <div class="make-node">📅 캘린더</div>
+      <div class="make-node">🖼 갤러리</div>
+      <div class="make-node">📃 목록(List)</div>
+    </div>
+    <ul class="step-list" style="margin-top:8px">
+      <li>DB 좌측 상단 뷰 이름 옆 <b>+ (보기 추가)</b> 클릭 → 원하는 형태 선택</li>
+      <li><b>표</b> — 전체 데이터를 한눈에 (기본)</li>
+      <li><b>보드</b> — 칸반처럼 상태별로 카드 정리 (예: 재원/휴원)</li>
+      <li><b>캘린더</b> — 날짜 속성 기준으로 달력에 표시 (예: 보강 일정)</li>
+      <li><b>갤러리</b> — 카드 형태, 표지 이미지와 함께 (예: 교재 표지)</li>
+    </ul>
+    <div class="hl-box orange">
+      <strong>💡 뷰는 무한정 추가 가능</strong><br>
+      같은 DB에 "표 뷰 + 캘린더 뷰 + 보드 뷰"를 동시에 둘 수 있어요. 데이터는 그대로, 보는 창만 늘어나는 거예요.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">5</div> 필터 · 정렬 · 그룹화 — 원하는 것만 꺼내기</div>
+    <div class="two-col" style="margin-top:4px">
+      <ul class="step-list">
+        <li><b>필터(Filter)</b> — 조건에 맞는 행만 보기<br><span style="color:var(--muted2);font-size:13px">예: 재원상태 = 재원 / 결제상태 = 미납</span></li>
+        <li><b>정렬(Sort)</b> — 순서대로 줄 세우기<br><span style="color:var(--muted2);font-size:13px">예: 등원시간 빠른 순 / 이름 가나다순</span></li>
+      </ul>
+      <ul class="step-list">
+        <li><b>그룹화(Group)</b> — 같은 값끼리 묶어서 블록으로<br><span style="color:var(--muted2);font-size:13px">예: 담당선생님별 / 요일별 / 학년별</span></li>
+        <li>DB 우측 상단 <b>··· (점 세 개)</b> → 필터 / 정렬 / 그룹화 메뉴</li>
+      </ul>
+    </div>
+    <div class="hl-box green">
+      <strong>✅ 실전 예시</strong> — 전체학생DB 하나로 "재원생만(필터) → 등원시간순(정렬) → 요일별로 묶기(그룹화)" 하면 그게 바로 <b>시간표</b>가 돼요. 새 DB를 안 만들어도 돼요.
+    </div>
+    <div class="hl-box yellow">
+      <strong>⚠️ 필터·정렬·그룹화는 "뷰별로" 저장돼요</strong><br>
+      한 뷰에 필터를 걸어도 다른 뷰에는 영향 없어요. 그래서 "재원생 뷰", "미납 뷰"를 따로 만들어 둘 수 있어요.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">6</div> 버튼(Button) 만들기 — 반복 작업 한 번에</div>
+    <p style="margin-bottom:14px">매번 똑같이 하는 작업(새 행 추가, 날짜 채우기)을 <b style="color:var(--text)">버튼 하나</b>로 끝내요.</p>
+    <ul class="step-list">
+      <li>페이지에서 <code>/버튼</code> 또는 <code>/button</code> 입력 → 버튼 블록 생성</li>
+      <li>버튼 이름 입력 (예: <b>오늘 리포트 추가</b>)</li>
+      <li><b>+ 단계 추가</b> → <b>"페이지 추가 위치"</b> 선택 → 대상 DB 지정 (예: 데일리리포트DB)</li>
+      <li><b>속성 자동 편집</b> — 날짜 = <b>오늘</b>, 카톡전송 = <b>미전송</b> 등 미리 채워두기</li>
+      <li>완성! 이제 버튼만 누르면 값이 채워진 새 행이 자동 생성돼요</li>
+    </ul>
+    <div class="hl-box orange">
+      <strong>💡 버튼이 빛나는 순간</strong><br>
+      "오늘 날짜 + 미전송 상태"가 자동으로 들어간 리포트 행이 클릭 한 번에 만들어져요. 매일 반복하는 일일수록 버튼의 효과가 커요.
     </div>
   </div>
 </div>
@@ -287,6 +359,146 @@ code { background: var(--surface2); color: var(--accent3); font-family: 'Space M
       <div class="make-arrow">→</div>
       <div class="make-node">④ 롤업·수식<br>마지막</div>
     </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">5</div> 출결·보강 DB — 하나의 DB, 세 가지 뷰</div>
+    <p style="margin-bottom:14px">결석과 보강을 한 DB로 관리하고, <b style="color:var(--text)">뷰</b>만 바꿔서 "오늘 보강 / 이번주 보강 / 이번달 결석"을 꺼내봐요.</p>
+    <ul class="step-list">
+      <li>새 페이지 → <b>출결보강DB</b></li>
+      <li>속성: <b>학생(관계형→전체학생DB), 구분(선택: 결석/보강), 날짜(날짜)</b></li>
+      <li><b>사유(선택: 병결/개인사정/학교행사…), 상태(선택: 예정/완료), 메모(텍스트)</b></li>
+      <li>담당선생님: <b>롤업</b>(학생 → 담당선생님)으로 자동으로 가져오기</li>
+    </ul>
+    <p style="margin-top:6px;margin-bottom:8px;font-weight:700;color:var(--text);font-size:14px;">▶ 같은 DB에 뷰 3개 만들기</p>
+    <div class="make-flow" style="flex-wrap:wrap;">
+      <div class="make-node">📅 오늘 보강<br><span style="font-weight:400;font-size:11px">구분=보강 · 날짜=오늘</span></div>
+      <div class="make-node">📅 이번주 보강<br><span style="font-weight:400;font-size:11px">캘린더 뷰 · 다음 7일</span></div>
+      <div class="make-node">📋 이번달 결석<br><span style="font-weight:400;font-size:11px">구분=결석 · 이번 달</span></div>
+    </div>
+    <ul class="step-list" style="margin-top:8px">
+      <li><b>오늘 보강 뷰</b> — 표 뷰 + 필터: 구분 = 보강 <b>AND</b> 날짜 = 오늘</li>
+      <li><b>이번주 보강 뷰</b> — <b>캘린더 뷰</b> + 필터: 구분 = 보강 · 날짜 = 다음 7일<br><span style="color:var(--muted2);font-size:13px">"일주일 뒤 누가 보강인지" 달력으로 한눈에 보여요</span></li>
+      <li><b>이번달 결석 뷰</b> — 표 뷰 + 필터: 구분 = 결석 · 날짜 = 이번 달</li>
+    </ul>
+    <div class="hl-box orange">
+      <strong>💡 왜 캘린더 뷰가 좋을까?</strong><br>
+      보강은 "미래 일정"이라 표보다 <b>달력</b>이 직관적이에요. 며칠 뒤 보강이 몰려 있는지 한눈에 보여서 수업 준비가 쉬워져요.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">6</div> 원장 스케줄 캘린더 — 내 하루를 한 곳에</div>
+    <p style="margin-bottom:14px">상담·행정·수업·개인 일정을 한 DB에 모으고 <b style="color:var(--text)">캘린더 뷰</b>로 봐요. 분류별로 색을 다르게 하면 하루가 한눈에 정리돼요.</p>
+    <ul class="step-list">
+      <li>새 페이지 → <b>원장일정DB</b></li>
+      <li>속성: <b>제목(제목), 날짜(날짜), 분류(선택: 상담/행정/수업/개인), 메모(텍스트)</b></li>
+      <li><b>+ 보기 추가 → 캘린더</b> 선택 → 날짜 속성 기준으로 표시</li>
+      <li>캘린더 우측 <b>··· → 색 지정 → 분류 기준</b> → 분류별로 다른 색</li>
+    </ul>
+    <div class="make-flow" style="flex-wrap:wrap;">
+      <div class="make-node">🟧 상담</div>
+      <div class="make-node">🟦 행정</div>
+      <div class="make-node">🟩 수업</div>
+      <div class="make-node">⬜ 개인</div>
+    </div>
+    <div class="hl-box green" style="margin-top:8px">
+      <strong>✅ 버튼과 함께 쓰면 더 빨라요</strong><br>
+      Chapter 1에서 배운 <b>버튼</b>으로 "오늘 상담 추가"를 만들어두면, 클릭 한 번에 오늘 날짜·분류가 채워진 일정이 캘린더에 바로 떠요.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2b — NOTION DEEP DIVE -->
+<div class="content section-gap" id="section2b">
+  <div class="sec-header">
+    <div class="sec-num">2+</div>
+    <div>
+      <div class="sec-label">CHAPTER 2 · 심화</div>
+      <div class="sec-title">관계형 · 롤업 · 수식 — 노션의 핵심 3가지</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="num">1</div> 관계형(Relation) — DB끼리 연결하기</div>
+    <p>두 데이터베이스를 <b style="color:var(--text)">서로 연결</b>하는 기능이에요. "이 리포트는 어느 학생 것인가"를 연결해두면, 학생 정보를 그 리포트에서 끌어다 쓸 수 있어요.</p>
+    <div class="make-flow">
+      <div class="make-node">데일리리포트DB</div>
+      <div class="make-arrow">↔</div>
+      <div class="make-node">전체학생DB</div>
+    </div>
+    <ul class="step-list">
+      <li>속성 추가 → 타입 <b>관계형(Relation)</b> 선택 → 연결할 DB 고르기</li>
+      <li>예: 데일리리포트DB의 <b>학생이름</b> 속성을 전체학생DB와 관계형 연결</li>
+      <li>이제 리포트마다 "어느 학생인지" 지정 가능, 학생 정보도 따라옴</li>
+    </ul>
+    <div class="hl-box orange">
+      <strong>💡 관계형이 모든 것의 시작</strong><br>
+      롤업도, 자동화도 관계형 연결이 있어야 작동해요. "학생이름"을 관계형으로 연결하는 게 첫 단추예요.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">2</div> 롤업(Rollup) — 연결된 DB에서 값 가져오기</div>
+    <p>관계형으로 연결한 DB에서 <b style="color:var(--text)">특정 값을 끌어오는</b> 기능이에요. 직접 입력 안 해도 연결된 곳의 정보가 자동으로 들어와요.</p>
+    <ul class="step-list">
+      <li>속성 추가 → 타입 <b>롤업(Rollup)</b> 선택</li>
+      <li><b>관계형</b>: 어떤 연결을 통해 가져올지 (예: 학생이름)</li>
+      <li><b>속성</b>: 그 DB의 어떤 값을 가져올지 (예: 전화번호)</li>
+      <li><b>계산</b>: 원본 그대로 / 합계 / 개수 등</li>
+    </ul>
+    <div class="two-col" style="margin-top:4px">
+      <div class="hl-box green" style="margin-top:0">
+        <strong>예시 1 — 전화번호 가져오기</strong><br>
+        데일리리포트에서 학생 전화번호를 직접 안 적어도, 롤업으로 전체학생DB의 전화번호를 자동으로 끌어와요. (Make 문자 발송에 사용)
+      </div>
+      <div class="hl-box green" style="margin-top:0">
+        <strong>예시 2 — 교재비 합계</strong><br>
+        교재비관리DB에서 배부한 교재들의 가격을 <b>합계</b>로 롤업하면 총 교재비가 자동 계산돼요.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">3</div> 수식(Formula) — 값을 계산·변환하기</div>
+    <p>엑셀 함수처럼 <b style="color:var(--text)">계산하거나 형식을 바꾸는</b> 기능이에요. 학원 자동화에서 특히 중요한 게 <code>format()</code> 함수예요.</p>
+    <div class="hl-box yellow">
+      <strong>⚡ 왜 format()이 필요할까?</strong><br>
+      관계형 속성은 Make에서 바로 텍스트로 못 써요 (내부적으로 ID로 저장되기 때문). <code>format(관계형속성)</code>으로 감싸면 <b>사람이 읽는 텍스트</b>로 바뀌어서 Make 문자에 넣을 수 있어요.
+    </div>
+    <div class="copy-box">
+      <div class="cb-label">📋 데일리리포트DB — 복사용 수식 모음</div>
+      <button class="copy-btn" onclick="copyCode(this)">복사</button>
+      <pre>format(학생이름)
+format(리딩교재)
+format(문법교재)
+format(단어교재)</pre>
+    </div>
+    <p style="margin-top:12px;font-size:13px;color:var(--muted2);">각 수식 속성 이름은 <code>학생이름값</code>, <code>리딩교재값</code>처럼 "값"을 붙여 만들면 구분하기 좋아요.</p>
+    <div class="copy-box">
+      <div class="cb-label">📋 교재비관리DB — 복사용 수식</div>
+      <button class="copy-btn" onclick="copyCode(this)">복사</button>
+      <pre>format(학생이름)
+format(배부교재)</pre>
+    </div>
+    <div class="copy-box">
+      <div class="cb-label">📋 교재DB — 재고 계산 수식</div>
+      <button class="copy-btn" onclick="copyCode(this)">복사</button>
+      <pre>누적교재수량 - 배포된수량</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">💡</div> 3가지가 함께 작동하는 흐름</div>
+    <div class="make-flow" style="flex-wrap:wrap;">
+      <div class="make-node">관계형<br><span style="font-weight:400;font-size:11px">학생 연결</span></div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">롤업<br><span style="font-weight:400;font-size:11px">전화번호 가져옴</span></div>
+      <div class="make-arrow">→</div>
+      <div class="make-node">수식<br><span style="font-weight:400;font-size:11px">format()로 변환</span></div>
+      <div class="make-arrow">→</div>
+      <div class="make-node" style="background:rgba(255,107,53,0.12);border-color:rgba(255,107,53,0.4);">Make<br><span style="font-weight:400;font-size:11px">문자 발송</span></div>
+    </div>
+    <p>관계형으로 학생을 연결하고 → 롤업으로 전화번호를 끌어오고 → 수식으로 이름을 텍스트화하면 → Make가 그 값들로 문자를 보냅니다.</p>
   </div>
 </div>
 
@@ -440,12 +652,18 @@ code { background: var(--surface2); color: var(--accent3); font-family: 'Space M
     </div>
     <ul class="step-list">
       <li><b>모듈 1</b> — Notion: <b>Search Objects (Data Source Items)</b><br>Data Source: 데일리리포트DB · 필터: 카톡전송 = <b>미전송</b> · Limit: 50</li>
-      <li><b>필터 블록</b> — 날짜: Start = <code>formatDate(now ; YYYY-MM-DD ; Asia/Seoul)</code></li>
+      <li><b>필터 블록</b> — 날짜: Start <b>Equal to</b> 아래 수식 (복사해서 붙여넣기)</li>
       <li><b>모듈 2</b> — Solapi: <b>Send Text Message</b><br>수신: <code>진화번호.Array[].phone_number</code> · 발신: 등록한 내 번호 · 내용: Ch3 문자 템플릿</li>
       <li><b>모듈 3</b> — Notion: <b>Update a Data Source Item</b><br>Item ID: <code>1. Page ID</code> (Map ON) · 카톡전송 = <b>전송완료</b></li>
     </ul>
+    <div class="copy-box">
+      <div class="cb-label">📋 Make 필터 — "오늘 날짜만" 보내기 (복사용)</div>
+      <button class="copy-btn" onclick="copyCode(this)">복사</button>
+      <pre>formatDate(now; YYYY-MM-DD; Asia/Seoul)</pre>
+    </div>
+    <p style="margin-top:10px;font-size:13px;color:var(--muted2);">Make 필터 설정: <b>Properties Value: 날짜: Start</b> <code>Equal to</code> 위 수식. 이러면 오늘 작성된 리포트만 발송돼요.</p>
     <div class="hl-box yellow">
-      <strong>⚠️ Asia/Seoul 필수!</strong> — 없으면 UTC 기준으로 계산되어 밤 9시 전엔 어제 날짜로 인식돼요.
+      <strong>⚠️ Asia/Seoul 필수!</strong> — 없으면 UTC 기준으로 계산되어 밤 9시 전엔 어제 날짜로 인식돼요. 세미콜론(;)과 대소문자(YYYY-MM-DD)까지 정확히 복사하세요.
     </div>
   </div>
   <div class="card">
@@ -555,14 +773,14 @@ code { background: var(--surface2); color: var(--accent3); font-family: 'Space M
   <div class="sec-header">
     <div class="sec-num kakao-num">05</div>
     <div>
-      <div class="sec-label">CHAPTER 5 · UPGRADE GUIDE</div>
-      <div class="sec-title">💛 알림톡 업그레이드 가이드<span class="upgrade-badge">5/25 NEW</span></div>
+      <div class="sec-label">CHAPTER 5</div>
+      <div class="sec-title">💛 카카오 알림톡 보내기</div>
     </div>
   </div>
 
   <div class="card kakao-card">
-    <div class="card-title"><div class="num">0</div> 왜 SMS → 알림톡으로 업그레이드?</div>
-    <p style="margin-bottom:14px">SMS도 좋지만, <b style="color:var(--text)">학부모가 진짜로 읽게 하려면</b> 카카오톡 알림톡이 한 단계 위예요.</p>
+    <div class="card-title"><div class="num">0</div> SMS와 알림톡, 뭐가 다를까?</div>
+    <p style="margin-bottom:14px">학원 안내는 <b style="color:var(--text)">SMS</b>로도, <b style="color:var(--text)">카카오톡 알림톡</b>으로도 보낼 수 있어요. 둘의 차이를 알면 학원에 맞는 걸 고를 수 있어요.</p>
     <table class="cmp-table">
       <thead>
         <tr>
@@ -966,6 +1184,30 @@ function submitSurvey() {
 }
 
 buildSurvey();
+
+function copyCode(btn) {
+  const pre = btn.parentElement.querySelector('pre');
+  const text = pre.innerText;
+  const done = () => {
+    const orig = btn.textContent;
+    btn.textContent = '복사됨 ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  } else {
+    fallbackCopy(text, done);
+  }
+}
+function fallbackCopy(text, done) {
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); done(); } catch(e) {}
+  document.body.removeChild(ta);
+}
+
 </script>
 
 </body>

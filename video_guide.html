@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>노션 세미나 영상강의 안내 — HongLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #2c3e5d;
+    --navy-soft: #4a5d7e;
+    --coral: #c0573e;
+    --coral-light: #e8a594;
+    --cream: #fdfcf9;
+    --cream-warm: #f5f1e8;
+    --gray-text: #5a5a5a;
+    --gray-line: #e5e0d6;
+    --green: #3f8a6e;
+    --green-light: #9cc9b6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* Header */
+  .header { text-align: center; padding-bottom: 32px; margin-bottom: 40px; border-bottom: 2px solid var(--gray-line); }
+  .badge { display: inline-block; background: var(--coral); color: white; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; padding: 6px 14px; border-radius: 20px; margin-bottom: 16px; }
+  h1 { font-size: 30px; font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .subtitle { font-size: 15px; color: var(--gray-text); font-weight: 400; }
+  .subtitle strong { color: var(--navy); font-weight: 600; }
+
+  /* Flow intro */
+  .flow {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .flow-item {
+    background: var(--cream-warm); border: 1px solid var(--gray-line);
+    border-radius: 10px; padding: 12px 18px; font-size: 14px; font-weight: 600;
+    color: var(--navy); display: flex; align-items: center; gap: 8px;
+  }
+  .flow-item .n { background: var(--navy); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; }
+  .flow-arrow { display: flex; align-items: center; color: var(--coral); font-weight: 700; }
+
+  /* Section */
+  .section-num {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-bottom: 18px;
+  }
+  .section-num .sn-badge {
+    background: var(--coral); color: #fff; font-size: 13px; font-weight: 700;
+    padding: 5px 14px; border-radius: 20px; letter-spacing: 0.05em;
+  }
+  .section-num .sn-text { font-size: 20px; font-weight: 700; color: var(--navy); }
+  .section-block { margin-bottom: 56px; }
+
+  /* CTA link box */
+  .cta-box { background: var(--navy); color: white; border-radius: 14px; padding: 28px 24px; text-align: center; box-shadow: 0 8px 24px rgba(44, 62, 93, 0.15); }
+  .cta-box.coral { background: var(--coral); box-shadow: 0 8px 24px rgba(192,87,62,0.2); }
+  .cta-box.green { background: var(--green); box-shadow: 0 8px 24px rgba(63,138,110,0.18); }
+  .cta-label { font-size: 13px; color: var(--coral-light); font-weight: 500; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .cta-box.coral .cta-label { color: #ffe0d5; }
+  .cta-box.green .cta-label { color: var(--green-light); }
+  .cta-url { font-family: 'SF Mono','Monaco',monospace; font-size: 14px; color: white; word-break: break-all; background: rgba(255,255,255,0.08); padding: 14px 16px; border-radius: 8px; margin: 12px 0 4px; display: block; text-decoration: none; transition: background 0.2s; font-weight: 600; }
+  .cta-url:hover { background: rgba(255,255,255,0.18); }
+  .cta-hint { font-size: 13px; color: var(--coral-light); margin-top: 10px; }
+  .cta-box.coral .cta-hint { color: #ffe0d5; }
+  .cta-box.green .cta-hint { color: var(--green-light); }
+
+  /* Steps */
+  .steps { margin-top: 20px; }
+  .step { display: flex; gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--gray-line); }
+  .step:last-child { border-bottom: none; }
+  .step-num { flex-shrink: 0; width: 32px; height: 32px; background: var(--cream-warm); color: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; border: 2px solid var(--navy); }
+  .step-body { flex: 1; padding-top: 3px; }
+  .step-title { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .step-desc { font-size: 14px; color: var(--gray-text); line-height: 1.6; }
+  .step-desc strong { color: var(--navy); font-weight: 600; background: linear-gradient(transparent 60%, #fff2c4 60%); padding: 0 2px; }
+
+  /* note box */
+  .note { background: var(--cream-warm); border-left: 4px solid var(--coral); border-radius: 8px; padding: 16px 20px; margin-top: 18px; font-size: 14px; color: var(--gray-text); line-height: 1.65; }
+  .note strong { color: var(--navy); font-weight: 600; }
+  .note.green { border-left-color: var(--green); }
+
+  /* big button */
+  .big-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    color: #fff; text-decoration: none; border-radius: 14px; padding: 20px 24px;
+    font-weight: 600; font-size: 16px; transition: transform .15s; margin-top: 8px;
+  }
+  .big-btn:hover { transform: translateY(-2px); }
+  .big-btn .sub { font-size: 13px; font-weight: 400; opacity: .9; }
+
+  /* Footer */
+  .footer { text-align: center; padding-top: 32px; border-top: 2px solid var(--gray-line); color: var(--gray-text); font-size: 13px; line-height: 1.8; }
+  .footer strong { color: var(--navy); }
+  .footer-brand { margin-top: 16px; font-weight: 600; color: var(--navy); font-size: 14px; }
+
+  @media (max-width: 540px) {
+    .container { padding: 32px 18px 60px; }
+    h1 { font-size: 24px; }
+    .flow { gap: 6px; }
+    .flow-item { padding: 10px 12px; font-size: 13px; }
+    .section-num .sn-text { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="badge">노션으로 학원 굴리는 법 · 영상강의</div>
+    <h1>영상강의 안내</h1>
+    <p class="subtitle">
+      신청해주셔서 감사합니다 :)<br>
+      <strong>이 페이지 하나면 시작부터 끝까지</strong> 다 됩니다.<br>
+      아래 순서대로 따라오세요.
+    </p>
+  </div>
+
+  <!-- Flow -->
+  <div class="flow">
+    <div class="flow-item"><span class="n">1</span> 준비하기</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-item"><span class="n">2</span> 영상 보기</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-item"><span class="n">3</span> 템플릿 복제</div>
+  </div>
+
+  <!-- STEP 1 — 준비 -->
+  <div class="section-block">
+    <div class="section-num"><span class="sn-badge">STEP 1</span><span class="sn-text">준비사항 먼저 하기</span></div>
+    <p class="subtitle" style="text-align:left;margin-bottom:16px;">
+      영상을 보기 전에 <strong>노션·솔라피·카카오 알림톡</strong>을 미리 세팅해두세요.
+      특히 <strong>알림톡 템플릿은 승인에 1~2영업일</strong>이 걸려서, 미리 신청해두셔야 영상 보며 실습할 때 막히지 않아요.
+    </p>
+    <a href="https://nauta325.github.io/seminar/prep_s1.html" target="_blank" rel="noopener" class="big-btn" style="background:var(--navy);box-shadow:0 8px 24px rgba(44,62,93,0.15);">
+      ✅ 준비사항 체크리스트 열기
+      <span class="sub">(성함 입력 후 항목 체크)</span>
+    </a>
+    <div class="note">
+      <strong>📌 1차는 모든 세미나의 기초예요.</strong><br>
+      노션·DB·관계형·자동화의 기본을 여기서 다집니다. 천천히 따라오시면 노션이 처음이어도 충분히 하실 수 있어요.
+    </div>
+  </div>
+
+  <!-- STEP 2 — 영상 -->
+  <div class="section-block">
+    <div class="section-num"><span class="sn-badge">STEP 2</span><span class="sn-text">영상 강의 보기</span></div>
+    <div class="cta-box coral">
+      <div class="cta-label">🎬 영상 시청 링크 · 신청일로부터 한 달간 시청 가능</div>
+      <a href="https://seminar-replay.vercel.app" target="_blank" rel="noopener" class="cta-url">
+        seminar-replay.vercel.app
+      </a>
+      <div class="cta-hint">신청 시 사용하신 이메일로 로그인하세요</div>
+    </div>
+    <div class="note" style="border-left-color:var(--coral);background:#fbeae5;">
+      <strong>⚠️ 꼭 PC(컴퓨터)에서 열어주세요.</strong><br>
+      카카오톡으로 받은 링크를 그냥 누르면 <strong>카카오 안에서 열려 영상이 재생되지 않아요.</strong><br><br>
+      · <strong>PC</strong>: 가장 안정적이에요. 되도록 PC에서 보세요.<br>
+      · <strong>모바일</strong>이라면 — 링크를 복사해서 <strong>사파리(Safari)</strong>에 붙여넣어 여세요. (카카오·인앱 브라우저 ❌)
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">PC 브라우저(또는 사파리)에서 링크 접속</div><div class="step-desc">카카오톡 안에서 바로 누르지 말고, <strong>PC 또는 사파리</strong>에서 여세요.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">이메일 입력</div><div class="step-desc"><strong>신청 시 사용하신 이메일</strong>을 입력하세요. (다른 이메일이면 로그인 안 돼요)</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">"로그인 링크 받기" 클릭</div><div class="step-desc">입력한 이메일로 로그인 링크가 전송됩니다.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">메일함에서 링크 클릭</div><div class="step-desc">받은 메일의 <strong>로그인 링크</strong>를 클릭하세요. (이때도 PC·사파리에서)</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">영상 자동 재생</div><div class="step-desc">로그인되면 영상이 바로 재생됩니다. 막히는 부분은 멈추고 돌려보며 따라 하세요.</div></div></div>
+    </div>
+    <div class="note">
+      <strong>⚠️ 로그인 링크는 일회용이에요.</strong><br>
+      한 번 쓰면 다시 못 써요. 그리고 <strong>카카오톡·메일 앱 안의 브라우저</strong>에서 열면 로그인이 풀려요. 반드시 <strong>PC 또는 사파리</strong>에서 열어주세요.
+    </div>
+    <a href="https://nauta325.github.io/seminar/%EB%85%B8%EC%85%98%EC%9C%BC%EB%A1%9C_%ED%95%99%EC%9B%90_%EA%B5%B4%EB%A6%AC%EB%8A%94_%EB%B2%95_%EC%A0%84%EC%B2%B4_%EC%8B%A4%EC%A0%84%ED%8F%AC%ED%95%A8-0523.pdf" target="_blank" rel="noopener" class="big-btn" style="background:var(--coral);box-shadow:0 8px 24px rgba(192,87,62,0.2);">
+      📎 전체 교재 PDF 받기
+      <span class="sub">(스크린샷 포함 전체본 · PC 보기 권장)</span>
+    </a>
+    <a href="https://nauta325.github.io/seminar/seminar_handout1.html" target="_blank" rel="noopener" class="big-btn" style="background:var(--navy-soft);box-shadow:0 8px 24px rgba(74,93,126,0.2);">
+      📄 세미나 핸드아웃 열기
+      <span class="sub">(요약 + 복사용 코드 · 영상 보며 띄워두기)</span>
+    </a>
+    <div class="note green">
+      <strong>💡 이렇게 보세요</strong><br>
+      영상을 보면서 <strong>핸드아웃</strong>을 같이 띄워두면 편해요. 핸드아웃엔 수식·문자 템플릿을 <strong>바로 복사</strong>할 수 있는 버튼이 있어요. (복사 버튼은 PC에서 잘 작동해요)
+    </div>
+  </div>
+
+  <!-- STEP 3 — 템플릿 복제 -->
+  <div class="section-block">
+    <div class="section-num"><span class="sn-badge">STEP 3</span><span class="sn-text">노션 템플릿 복제하기</span></div>
+    <p class="subtitle" style="text-align:left;margin-bottom:16px;">
+      영상에서 보신 그 템플릿입니다. <strong>직접 만들지 말고 복제만</strong> 하면 돼요.
+      DB를 처음부터 만들 필요 없이, 관계형까지 살아있는 상태로 들어옵니다.
+    </p>
+
+    <div class="cta-box">
+      <div class="cta-label">① 기본 세트 · 전체학생 · 교재 · 교재비관리 · 데일리리포트</div>
+      <a href="https://nimble-snow-d83.notion.site/Seminar-5-2-1ffe238008ea8030ba45df6b0231c664?source=copy_link" target="_blank" rel="noopener" class="cta-url">
+        nimble-snow-d83.notion.site/Seminar-5-2
+      </a>
+      <div class="cta-hint">PC 브라우저 권장</div>
+    </div>
+
+    <div class="cta-box green" style="margin-top:16px;">
+      <div class="cta-label">② 보너스 · 학원관리 허브 (공지·통합일정·전 영역 한눈에)</div>
+      <a href="https://nimble-snow-d83.notion.site/19be238008ea80aba277d4e9f4fdcd6d?source=copy_link" target="_blank" rel="noopener" class="cta-url">
+        nimble-snow-d83.notion.site/학원관리
+      </a>
+      <div class="cta-hint">복제 방법은 아래 4단계와 동일</div>
+    </div>
+
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">위 링크 클릭</div><div class="step-desc"><strong>PC 브라우저</strong> 권장. 모바일은 복제 버튼이 ··· 메뉴 안에 숨어있을 수 있어요.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">우상단 "복제(Duplicate)" 클릭</div><div class="step-desc">페이지가 열리면 <strong>오른쪽 위 복제 버튼</strong>을 누르세요.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">학원용 워크스페이스 선택</div><div class="step-desc">여러 개면 <strong>학원용</strong>을 선택. 하나면 자동으로 복사돼요.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">완료! 사이드바 확인</div><div class="step-desc">사이드바에 페이지가 생기고, <strong>4개 DB가 관계형까지 살아있는 상태</strong>로 들어와 있어요.</div></div></div>
+    </div>
+
+    <div class="note green">
+      <strong>💡 순서 팁</strong><br>
+      먼저 <strong>① 기본 세트(4개 DB)</strong>를 복제해 익숙해진 뒤, 한 화면에서 운영하고 싶어지면 <strong>② 허브</strong>를 복제하세요.
+    </div>
+  </div>
+
+  <!-- Kakao Q&A -->
+  <div class="section-block">
+    <div class="section-num"><span class="sn-badge" style="background:#3f8a6e;">Q&amp;A</span><span class="sn-text">막히면 여기로 질문하세요</span></div>
+    <p class="subtitle" style="text-align:left;margin-bottom:16px;">
+      영상 보다가 막히는 부분, 세팅하다 안 되는 것 — <strong>언제든 카톡으로 물어보세요.</strong>
+      혼자 끙끙대지 마시고 질문방에 올려주시면 함께 봐드릴게요.
+    </p>
+    <a href="https://open.kakao.com/o/gVlXQWzi" target="_blank" rel="noopener" class="big-btn" style="background:#fae100;color:#3a2929;box-shadow:0 8px 24px rgba(250,225,0,0.3);">
+      💬 1차 세미나 영상강의 질문방 입장
+      <span class="sub" style="opacity:.7;">(카카오 오픈채팅)</span>
+    </a>
+    <div class="note green">
+      <strong>🔎 검색으로도 들어올 수 있어요</strong><br>
+      카카오톡 오픈채팅에서 <strong>"1차세미나 영상강의 질문방"</strong>으로 검색하셔도 됩니다.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    천천히 시간 두고 영상 보며 본인 학원에 맞게 세팅해보세요.<br>
+    막히는 부분은 <strong>언제든 질문방으로 문의</strong>주세요. 함께 봐드릴게요.
+    <div class="footer-brand">HongLab · 노션으로 학원 굴리는 법</div>
+  </div>
+
+</div>
+</body>
+</html>

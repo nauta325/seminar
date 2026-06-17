@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>세미나 3 · 바이브 코딩으로 원서 시스템 만들기</title>
+<meta name="description" content="Claude Code로 말만 하면 코드가 짜이고, GitHub·Vercel·Supabase로 배포까지 자동. 앱스크립트의 동시접속 한계를 넘어 원서 읽기·퀴즈·진도 관리 시스템을 직접 만드는 상위 코스.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#2c3e5d; --navy-deep:#1d2a40; --coral:#c0573e; --coral-bright:#e0613f;
+  --cream:#fdfcf9; --cream-warm:#f5f1e8; --ink:#23303f; --muted:#6b7686;
+  --line:rgba(44,62,93,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:'Noto Sans KR',sans-serif;
+  font-size:16px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+::selection{background:var(--coral);color:#fff}
+
+.topbar{position:fixed;top:0;left:0;right:0;z-index:60;
+  background:rgba(253,252,249,0.85);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.topbar .home{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;
+  border:1.5px solid var(--navy);border-radius:100px;padding:8px 15px;color:var(--navy);transition:.2s}
+.topbar .home:hover{background:var(--navy);color:var(--cream)}
+.topbar .apply-top{background:var(--coral);color:#fff;font-size:13px;font-weight:700;
+  padding:9px 18px;border-radius:100px;transition:.2s}
+.topbar .apply-top:hover{opacity:.88}
+
+.hero{position:relative;padding:148px 48px 76px;overflow:hidden;
+  background:radial-gradient(900px 500px at 80% -10%,rgba(192,87,62,.10),transparent 60%),
+    radial-gradient(700px 600px at 5% 110%,rgba(44,62,93,.06),transparent 60%),var(--cream);
+  border-bottom:2px solid var(--navy)}
+.flag{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;
+  font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--coral);
+  background:rgba(192,87,62,.09);border:1px solid rgba(192,87,62,.25);
+  padding:6px 14px;border-radius:100px;margin-bottom:24px}
+.hero h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(40px,6.6vw,76px);line-height:1.05;
+  letter-spacing:-0.02em;color:var(--navy);max-width:860px;margin-bottom:22px}
+.hero h1 em{font-style:italic;color:var(--coral)}
+.hero-sub{font-size:18px;color:var(--muted);max-width:600px}
+.hero-sub strong{color:var(--ink);font-weight:700}
+.hero-meta{display:flex;gap:30px;flex-wrap:wrap;margin-top:34px}
+.hm{display:flex;flex-direction:column;gap:3px}
+.hm .k{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.hm .v{font-size:17px;font-weight:700;color:var(--navy)}
+.hm .v.soon{color:var(--coral)}
+.stack-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.chip{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--navy);
+  background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:7px}
+
+section{padding:76px 48px;border-bottom:1px solid var(--line);position:relative}
+.section-no{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--coral);margin-bottom:14px}
+.section-title{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4.5vw,46px);
+  line-height:1.12;letter-spacing:-0.02em;color:var(--navy);margin-bottom:14px}
+.section-title em{font-style:italic;color:var(--coral)}
+.section-intro{color:var(--muted);font-size:15.5px;max-width:700px;margin-bottom:40px}
+
+/* concept banner */
+.concept{background:var(--navy);border-radius:20px;padding:40px;color:var(--cream);
+  position:relative;overflow:hidden;box-shadow:0 22px 50px rgba(44,62,93,.2)}
+.concept::before{content:'';position:absolute;top:-50px;right:-40px;width:180px;height:180px;
+  background:radial-gradient(circle,rgba(224,97,63,.4),transparent 70%)}
+.concept . co-mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--coral-bright);
+  letter-spacing:.05em;margin-bottom:12px}
+.concept h3{font-family:'Fraunces',serif;font-weight:600;font-size:26px;line-height:1.3;margin-bottom:14px}
+.concept p{color:rgba(253,252,249,.72);font-size:15px;max-width:620px}
+.flow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:24px;position:relative;z-index:2}
+.flow .step{background:rgba(253,252,249,.08);border:1px solid rgba(253,252,249,.16);
+  border-radius:10px;padding:12px 16px;font-size:13.5px;font-weight:500}
+.flow .arr{color:var(--coral-bright);font-weight:700}
+
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.sum{border:1px solid var(--line);border-radius:14px;padding:24px;background:#fff}
+.sum .ic{font-size:22px;margin-bottom:10px}
+.sum h3{font-size:17px;font-weight:700;margin-bottom:6px;color:var(--navy)}
+.sum p{font-size:13.5px;color:var(--muted);line-height:1.6}
+
+/* 왜 vercel (비교) */
+.compare{margin-top:8px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.crow{display:grid;grid-template-columns:1.4fr 1fr 1fr;border-bottom:1px solid var(--line)}
+.crow:last-child{border-bottom:none}
+.crow > div{padding:16px 18px;font-size:14px}
+.crow.head > div{background:var(--cream-warm);font-weight:700;font-size:13px;color:var(--navy)}
+.crow .lbl{font-weight:700;color:var(--navy)}
+.crow .old{color:var(--muted)}
+.crow .new{color:var(--coral);font-weight:600}
+@media(max-width:640px){.crow{grid-template-columns:1fr}.crow.head{display:none}
+  .crow > div{border-bottom:1px solid var(--line)}}
+
+.curri{list-style:none;counter-reset:item;margin-top:8px}
+.curri > li{counter-increment:item;display:flex;gap:26px;padding:34px 0;border-bottom:1px solid var(--line)}
+.curri > li:last-child{border-bottom:none}
+.cnum{font-family:'Fraunces',serif;font-weight:600;font-size:42px;color:rgba(192,87,62,.3);line-height:.9;min-width:54px}
+.cnum::before{content:'0' counter(item)}
+.cbody{flex:1}
+.ctitle{font-size:21px;font-weight:700;margin-bottom:6px;color:var(--navy)}
+.ctag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:1px;text-transform:uppercase;
+  padding:3px 10px;border:1px solid var(--coral);color:var(--coral);border-radius:6px;margin-bottom:12px}
+.ctag.hl{background:var(--coral);border-color:var(--coral);color:#fff}
+.cdesc{font-size:14.5px;color:#3a4654;line-height:1.7;margin-bottom:14px}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.cgrid{grid-template-columns:1fr}}
+.cbox{background:var(--cream-warm);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.cbox .bk{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--coral);margin-bottom:5px}
+.cbox .bv{font-size:13.5px;color:#3a4654;line-height:1.55}
+
+/* apply */
+.apply-sec{background:var(--navy-deep);color:var(--cream);border-bottom:none}
+.apply-sec .section-no{color:var(--coral-bright)}
+.apply-sec .section-title{color:var(--cream)}
+.apply-sec .section-intro{color:rgba(253,252,249,.65)}
+.apply-card{max-width:560px;background:rgba(253,252,249,.05);border:1px solid rgba(253,252,249,.18);border-radius:16px;padding:38px}
+.ac-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:1px;text-transform:uppercase;
+  padding:5px 12px;border-radius:6px;background:rgba(224,97,63,.2);color:var(--coral-bright);margin-bottom:18px}
+.ac-info{display:flex;flex-direction:column;gap:11px;margin-bottom:8px}
+.ac-row{display:flex;gap:14px;align-items:flex-start}
+.ac-k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:rgba(253,252,249,.45);min-width:64px;padding-top:3px}
+.ac-v{font-size:15.5px;font-weight:600;line-height:1.5}
+.soon-box{background:rgba(224,97,63,.12);border:1px solid rgba(224,97,63,.35);border-radius:10px;
+  padding:16px 18px;margin:16px 0 4px;font-size:14px;line-height:1.7;color:rgba(253,252,249,.9)}
+.soon-box b{color:var(--coral-bright)}
+.apply-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--coral);color:#fff;
+  font-size:15px;font-weight:700;padding:17px;margin-top:22px;transition:opacity .2s,transform .15s;border-radius:10px}
+.apply-btn:hover{opacity:.92;transform:translateY(-1px)}
+
+.faq{max-width:780px}
+.faq details{border-bottom:1px solid var(--line);padding:18px 0}
+.faq summary{font-size:16px;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:14px;color:var(--navy)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';color:var(--coral);font-weight:400;font-size:22px;line-height:1}
+.faq details[open] summary::after{content:'−'}
+.faq p{font-size:14.5px;color:#3a4654;line-height:1.7;margin-top:12px}
+
+footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-between;
+  border-top:2px solid var(--navy);background:var(--cream);flex-wrap:wrap;gap:14px}
+.fb{font-family:'Fraunces',serif;font-weight:600;font-size:22px;color:var(--navy)}
+.fb b{color:var(--coral)}
+.fn{font-size:12px;color:var(--muted)}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+@media(max-width:768px){
+  .hero,section{padding:60px 22px}.hero{padding-top:120px}
+  .summary{grid-template-columns:1fr}
+  .curri>li{gap:14px}.cnum{font-size:32px;min-width:38px}
+  .concept{padding:28px}
+  footer{flex-direction:column;text-align:center}
+}
+:focus-visible{outline:2.5px solid var(--coral);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="home">← HongLab</a>
+  <a href="#apply" class="apply-top">신청 안내 →</a>
+</div>
+
+<section class="hero">
+  <span class="flag">⭐ 세미나 3 · 신규 · 1·2차보다 상위 코스</span>
+  <h1>바이브 코딩으로<br><em>원서 시스템</em>을 만든다</h1>
+  <p class="hero-sub">완성된 코드를 드립니다. <strong>클로드한테 말로 시키면 코드가 고쳐지고, 배포는 자동.</strong>
+    앱스크립트의 동시접속 한계를 넘어, 원서 읽기·퀴즈·진도 관리 시스템을 직접 만들어 내 학원에 맞게 굴립니다.</p>
+  <div class="stack-row">
+    <span class="chip">Claude Code</span><span class="chip">Vercel</span>
+    <span class="chip">GitHub</span><span class="chip">Supabase</span>
+  </div>
+  <div class="hero-meta">
+    <div class="hm"><span class="k">단계</span><span class="v">코딩으로 직접 제작</span></div>
+    <div class="hm"><span class="k">전제</span><span class="v">1·2차 또는 동급</span></div>
+    <div class="hm"><span class="k">일정</span><span class="v soon">준비 중</span></div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section>
+  <div class="section-no">01 — CONCEPT</div>
+  <h2 class="section-title reveal">코드를 안 봐도,<br>코드를 굴립니다</h2>
+  <p class="section-intro reveal">터미널도, 로컬 설치도 없습니다. 브라우저에서 클로드한테 말로 시키면 끝.
+    수강생은 코드를 직접 짜지도, 보지도 않습니다.</p>
+  <div class="concept reveal">
+    <div class="co-mono">THE WORKFLOW</div>
+    <h3>"우리 학원 이름으로 바꿔줘", "퀴즈 10문제로 늘려줘"<br>— 말하면, 바뀝니다.</h3>
+    <p>클로드가 GitHub 레포의 코드를 직접 수정·푸시하면, Vercel이 자동으로 재배포합니다.
+      수강생이 할 일은 변경을 승인(머지)하는 것뿐.</p>
+    <div class="flow">
+      <span class="step">클로드(웹)에 말함</span><span class="arr">→</span>
+      <span class="step">코드 수정·푸시</span><span class="arr">→</span>
+      <span class="step">Vercel 자동 재배포</span><span class="arr">→</span>
+      <span class="step">끝</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHY VERCEL -->
+<section>
+  <div class="section-no">02 — WHY · 왜 코드로 넘어오나</div>
+  <h2 class="section-title reveal">앱스크립트로는<br><em>안 되는 영역</em>이 있습니다</h2>
+  <p class="section-intro reveal">출결 키오스크처럼 한 명씩 순차로 처리되면 앱스크립트로 충분합니다.
+    하지만 원서 퀴즈처럼 <strong>여러 명이 동시에 풀고 저장</strong>하면 구조적 한계에 부딪혀요. 이게 3차로 넘어오는 이유입니다.</p>
+  <div class="compare reveal">
+    <div class="crow head"><div>항목</div><div>앱스크립트</div><div>Vercel + Supabase</div></div>
+    <div class="crow"><div class="lbl">동시 처리</div><div class="old">동시 실행 한도에 금방 막힘</div><div class="new">자동 스케일 · 수십 명 거뜬</div></div>
+    <div class="crow"><div class="lbl">응답 속도</div><div class="old">콜드스타트로 1~3초 지연</div><div class="new">0.05초대 · 즉시 반응</div></div>
+    <div class="crow"><div class="lbl">동시 쓰기</div><div class="old">줄 서서 하나씩 처리</div><div class="new">동시에 저장 OK</div></div>
+    <div class="crow"><div class="lbl">적합한 용도</div><div class="old">순차 처리 (출결 키오스크)</div><div class="new">동시 다발 (원서 퀴즈)</div></div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section>
+  <div class="section-no">03 — WHO</div>
+  <h2 class="section-title reveal">이런 분께 맞습니다</h2>
+  <div class="summary reveal">
+    <div class="sum"><div class="ic">📚</div><h3>원서 수업을 한다면</h3>
+      <p>학생들이 동시에 원서를 읽고 퀴즈를 푸는 시스템이 필요한 학원</p></div>
+    <div class="sum"><div class="ic">🚀</div><h3>한계를 느꼈다면</h3>
+      <p>앱스크립트·노션으로 만들다 동시접속·속도에서 막혀본 분</p></div>
+    <div class="sum"><div class="ic">🛠️</div><h3>직접 굴리고 싶다면</h3>
+      <p>외주 말고, 내 손으로 만들어 계속 고쳐 쓰고 싶은 원장</p></div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section>
+  <div class="section-no">04 — CURRICULUM · 당일 만드는 것들</div>
+  <h2 class="section-title reveal">내 레포, 내 배포,<br><em>내 원서 시스템</em></h2>
+  <p class="section-intro reveal">완성 템플릿에서 시작해, 클로드로 내 학원에 맞게 고치고, 진짜 작동하는 주소(URL)까지
+    손에 넣고 돌아갑니다.</p>
+
+  <ul class="curri">
+    <li class="reveal"><span class="cnum"></span><div class="cbody">
+      <span class="ctag">셋업</span>
+      <div class="ctitle">계정 4개 연결 — GitHub · Claude · Vercel · Supabase</div>
+      <div class="cdesc">템플릿 레포를 내 소유로 복제하고, 클로드(웹)에 레포를 연결, Vercel로 자동 배포를 켜고,
+        Supabase 데이터베이스를 만듭니다. 한 번만 하면 끝나는 셋업.</div>
+      <div class="cgrid">
+        <div class="cbox"><div class="bk">제일 막히는 곳</div><div class="bv">환경변수 입력 — 스크린샷으로 단계별로 떠먹여 드려, 초보도 통과합니다.</div></div>
+        <div class="cbox"><div class="bk">끝나면</div><div class="bv">내 소유의 레포 + 내 주소(URL)가 생기고, 푸시하면 자동 배포되는 파이프라인 완성.</div></div>
+      </div>
+    </div></li>
+
+    <li class="reveal"><span class="cnum"></span><div class="cbody">
+      <span class="ctag hl">하이라이트</span>
+      <div class="ctitle">바이브 코딩 — 말로 시키면 코드가 바뀐다</div>
+      <div class="cdesc">"학원 이름 바꿔줘", "메인 색을 우리 브랜드로", "퀴즈를 10문제로" — 클로드한테 말로
+        시키고, 바뀐 코드가 자동 배포되는 걸 직접 확인합니다. 코드를 안 봐도 됩니다.</div>
+      <div class="cgrid">
+        <div class="cbox"><div class="bk">핵심 자산</div><div class="bv">CLAUDE.md — 클로드가 프로젝트를 이해하게 해주는 안내문. 초보가 막 시켜도 안전하게 고쳐줍니다.</div></div>
+        <div class="cbox"><div class="bk">끝나면</div><div class="bv">앞으로 기능이 필요할 때마다 말로 시켜서 직접 늘릴 수 있게 됩니다.</div></div>
+      </div>
+    </div></li>
+
+    <li class="reveal"><span class="cnum"></span><div class="cbody">
+      <span class="ctag hl">하이라이트</span>
+      <div class="ctitle">원서 시스템 — 읽기 · 퀴즈 · 진도 관리</div>
+      <div class="cdesc">학생이 로그인해 원서를 읽고, 퀴즈를 풀고, 진도가 자동으로 쌓이는 시스템.
+        여러 학생이 동시에 풀어도 빠르게 저장됩니다 — 앱스크립트로는 안 되던 그 부분.</div>
+      <div class="cgrid">
+        <div class="cbox"><div class="bk">만드는 것</div><div class="bv">학생 로그인 · 원서별 퀴즈 · 진도/점수 자동 누적 · 선생님 확인 화면</div></div>
+        <div class="cbox"><div class="bk">끝나면</div><div class="bv">학생들이 자기 속도로 원서를 읽고 푸는 동안, 원장은 진도를 한눈에 봅니다.</div></div>
+      </div>
+    </div></li>
+
+    <li class="reveal"><span class="cnum"></span><div class="cbody">
+      <span class="ctag">운영</span>
+      <div class="ctitle">내 학원에 맞게 — 커스터마이즈 & 확장</div>
+      <div class="cdesc">브랜드 색·문구·퀴즈 난이도를 내 학원에 맞춰 바꾸고, 앞으로 기능을 어떻게
+        더 붙일지(말로 시키는 법)까지 익힙니다. 세미나 후에도 혼자 굴릴 수 있게.</div>
+      <div class="cgrid">
+        <div class="cbox"><div class="bk">비용 안내</div><div class="bv">Vercel·Supabase 무료 티어로 학원 1곳 30명은 여유. (Claude 유료 플랜은 필요)</div></div>
+        <div class="cbox"><div class="bk">끝나면</div><div class="bv">막히면 클로드한테 물어 고치는 습관이 들어, 더는 외주가 필요 없습니다.</div></div>
+      </div>
+    </div></li>
+  </ul>
+</section>
+
+<!-- APPLY -->
+<section class="apply-sec" id="apply">
+  <div class="section-no">05 — APPLY</div>
+  <h2 class="section-title reveal">세미나 3 신청</h2>
+  <p class="section-intro reveal">일정과 가격을 준비 중입니다. 먼저 관심 신청을 남겨주시면, 열리는 즉시 우선 안내해 드려요.</p>
+  <div class="apply-card reveal">
+    <span class="ac-badge">신규 · 상위 코스</span>
+    <div class="ac-info">
+      <div class="ac-row"><span class="ac-k">만드는 것</span><span class="ac-v">원서 읽기·퀴즈·진도 관리 시스템</span></div>
+      <div class="ac-row"><span class="ac-k">스택</span><span class="ac-v">Claude Code · Vercel · GitHub · Supabase</span></div>
+      <div class="ac-row"><span class="ac-k">전제</span><span class="ac-v">1·2차 수강 또는 동급 경험 권장</span></div>
+      <div class="ac-row"><span class="ac-k">준비물</span><span class="ac-v">Claude 유료 플랜 · 노트북</span></div>
+    </div>
+    <div class="soon-box"><b>일정·형식·가격은 준비 중입니다.</b><br>
+      열리면 가장 먼저 안내해 드릴게요. 관심 신청을 남겨주세요.</div>
+    <a href="https://www.instagram.com/hongboeun_eng/" target="_blank" rel="noopener" class="apply-btn">
+      관심 신청 · 소식 받기 (Instagram)
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="section-no">06 — FAQ</div>
+  <h2 class="section-title reveal">자주 묻는 질문</h2>
+  <div class="faq reveal">
+    <details><summary>코딩을 정말 몰라도 되나요?</summary>
+      <p>네. 코드를 직접 짜지도, 보지도 않습니다. 완성 템플릿에서 시작해, 클로드한테 말로 시켜서 내 학원에 맞게 고치는 방식이에요. 배포도 자동입니다.</p></details>
+    <details><summary>세미나 1·2를 안 들었어도 되나요?</summary>
+      <p>1·2차보다 상위 코스라, 노션·자동화 개념을 알고 오시면 훨씬 매끄럽습니다. 동급의 경험이 있다면 바로 들으셔도 괜찮아요.</p></details>
+    <details><summary>비용이 많이 드나요?</summary>
+      <p>Vercel·Supabase는 무료 티어로 학원 1곳 30명 정도는 여유 있게 돌아갑니다. 다만 클로드로 코드를 고치려면 Claude 유료 플랜이 필요해요. 이 부분은 미리 안내해 드립니다.</p></details>
+    <details><summary>앱스크립트(2차)랑 뭐가 다른가요?</summary>
+      <p>2차는 한 명씩 순차 처리되는 자동화에 강합니다. 3차는 여러 학생이 동시에 풀고 저장하는 원서 퀴즈처럼, 동시접속·속도가 필요한 시스템을 만듭니다.</p></details>
+    <details><summary>세미나 후에 혼자 고칠 수 있을까요?</summary>
+      <p>그게 목표입니다. 막히면 클로드한테 말로 물어 고치는 습관을 들이도록 구성했어요. CLAUDE.md라는 안내문이 클로드를 똑똑하게 만들어, 초보가 시켜도 안전하게 고쳐줍니다.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div><div class="fb">Hong<b>Lab</b></div><div class="fn">세미나 3 · 바이브 코딩으로 원서 시스템 만들기</div></div>
+  <a href="index.html" class="home" style="border:1.5px solid var(--navy);border-radius:100px;padding:9px 16px;font-size:13px;font-weight:700;color:var(--navy)">← HongLab 소개로</a>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting){
+  e.target.style.transitionDelay=(i%4*70)+'ms';e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

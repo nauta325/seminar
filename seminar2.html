@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>세미나 2 · 앱스크립트로 전부 자동화</title>
+<meta name="description" content="출결 핀 등·하원부터 알림톡 자동 발송, 데일리리포트, 월말평가서 AI 자동 작성, 학부모 열람 페이지까지. 완성 코드를 복사해 붙이는 코드 자동화 세미나.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f0e0d; --paper:#f5f2ec; --cream:#ede9e0;
+  --accent:#2d6a4f; --accent2:#1b4332; --warm:#d4a853; --red:#c1440e;
+  --muted:#7a7670; --light-line:rgba(15,14,13,0.12);
+  --dk:#14110d; --dk2:#1c1813;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--dk);color:var(--paper);font-family:'Noto Sans KR',sans-serif;
+  font-size:16px;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.5}
+a{text-decoration:none;color:inherit}
+
+.topbar{position:fixed;top:0;left:0;right:0;z-index:60;
+  background:rgba(20,17,13,0.9);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.topbar .home{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;
+  border:1.5px solid rgba(255,255,255,0.4);border-radius:100px;padding:8px 15px;color:var(--paper);transition:.2s}
+.topbar .home:hover{background:var(--paper);color:var(--ink)}
+.topbar .apply-top{background:var(--warm);color:var(--ink);font-size:13px;font-weight:700;
+  padding:9px 18px;border-radius:100px;transition:.2s}
+.topbar .apply-top:hover{opacity:.88}
+
+.hero{position:relative;padding:140px 48px 70px;border-bottom:2px solid var(--warm);overflow:hidden}
+.hero-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(110px,20vw,240px);
+  color:#fff;opacity:0.045;white-space:nowrap;pointer-events:none;user-select:none;letter-spacing:.02em}
+.flag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  padding:6px 14px;border-radius:2px;background:var(--warm);color:var(--ink);margin-bottom:20px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(40px,7vw,82px);line-height:1.02;
+  letter-spacing:-0.02em;max-width:840px;margin-bottom:24px}
+.hero h1 em{font-style:italic;color:var(--warm)}
+.hero-sub{font-size:18px;color:rgba(245,242,236,0.6);max-width:580px;font-weight:300}
+.hero-meta{display:flex;gap:30px;flex-wrap:wrap;margin-top:34px;position:relative;z-index:2}
+.hm{display:flex;flex-direction:column;gap:3px}
+.hm .k{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.4)}
+.hm .v{font-size:17px;font-weight:700}
+.hm .v.open{color:var(--warm)}
+
+section{padding:72px 48px;border-bottom:1px solid rgba(255,255,255,0.08);position:relative}
+.section-no{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:4px;color:rgba(245,242,236,0.4);
+  margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-no::after{content:'';display:block;height:1px;width:40px;background:rgba(245,242,236,0.3)}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(30px,4.5vw,48px);
+  line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px}
+.section-title em{font-style:italic;color:var(--warm)}
+.section-intro{color:rgba(245,242,236,0.55);font-size:15.5px;max-width:700px;margin-bottom:40px}
+
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.sum{border:1.5px solid rgba(255,255,255,0.18);padding:24px;background:rgba(255,255,255,0.03)}
+.sum .ic{font-size:22px;margin-bottom:10px}
+.sum h3{font-size:17px;font-weight:700;margin-bottom:6px}
+.sum p{font-size:13.5px;color:rgba(245,242,236,0.55);line-height:1.6}
+
+.curri{list-style:none;counter-reset:item;margin-top:8px}
+.curri > li{counter-increment:item;display:flex;gap:26px;padding:34px 0;border-bottom:1px solid rgba(255,255,255,0.08)}
+.curri > li:last-child{border-bottom:none}
+.cnum{font-family:'Bebas Neue',sans-serif;font-size:42px;color:rgba(212,168,83,0.4);line-height:.9;min-width:54px}
+.cnum::before{content:counter(item,decimal-leading-zero)}
+.cbody{flex:1}
+.ctitle{font-size:21px;font-weight:700;margin-bottom:6px}
+.ctag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:3px 10px;border:1px solid var(--warm);color:var(--warm);border-radius:2px;margin-bottom:12px}
+.ctag.hl{background:var(--warm);border-color:var(--warm);color:var(--ink)}
+.cdesc{font-size:14.5px;color:rgba(245,242,236,0.78);line-height:1.7;margin-bottom:14px}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+@media(max-width:640px){.cgrid{grid-template-columns:1fr}}
+.cbox{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:14px 16px}
+.cbox .bk{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--warm);margin-bottom:5px}
+.cbox .bv{font-size:13.5px;color:rgba(245,242,236,0.72);line-height:1.55}
+.cnote{font-size:12.5px;color:rgba(245,242,236,0.5);margin-top:12px;padding-left:14px;border-left:2px solid var(--warm)}
+
+/* prep box */
+.prep{margin-top:40px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.4);
+  border-left:4px solid var(--warm);border-radius:4px;padding:24px 26px;max-width:780px}
+.prep .pt{font-size:15px;font-weight:800;color:var(--warm);margin-bottom:10px}
+.prep .pb{font-size:14px;color:rgba(245,242,236,0.82);line-height:1.8}
+.prep .pb b{color:#fff}
+
+/* apply */
+.apply-card{max-width:540px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,168,83,0.3);padding:38px}
+.ac-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:4px 10px;border-radius:2px;background:var(--warm);color:var(--ink);margin-bottom:18px}
+.ac-info{display:flex;flex-direction:column;gap:11px;margin-bottom:8px}
+.ac-row{display:flex;gap:14px;align-items:center}
+.ac-k{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.4);min-width:64px}
+.ac-v{font-size:16px;font-weight:700}
+.apply-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--warm);color:var(--ink);
+  font-size:15px;font-weight:700;letter-spacing:1px;padding:17px;margin-top:22px;transition:opacity .2s;border-radius:4px}
+.apply-btn:hover{opacity:.9}
+.warn{margin-top:16px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.3);
+  border-radius:8px;padding:14px 16px;font-size:13px;line-height:1.75;color:rgba(245,242,236,0.82)}
+.warn .wt{font-weight:800;color:var(--warm);margin-bottom:6px}
+.warn b{color:#fff}
+
+.faq{max-width:780px}
+.faq details{border-bottom:1px solid rgba(255,255,255,0.1);padding:18px 0}
+.faq summary{font-size:16px;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:14px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';color:var(--warm);font-weight:400;font-size:22px;line-height:1}
+.faq details[open] summary::after{content:'−'}
+.faq p{font-size:14.5px;color:rgba(245,242,236,0.7);line-height:1.7;margin-top:12px}
+
+footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-between;
+  border-top:2px solid var(--warm);background:var(--dk2);flex-wrap:wrap;gap:14px}
+.fb{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px}
+.fn{font-size:12px;color:rgba(245,242,236,0.5)}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+@media(max-width:768px){
+  .hero,section{padding:60px 22px}.hero{padding-top:120px}
+  .summary{grid-template-columns:1fr}
+  .curri>li{gap:14px}.cnum{font-size:32px;min-width:38px}
+  footer{flex-direction:column;text-align:center}
+}
+:focus-visible{outline:2.5px solid var(--warm);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="home">← HongLab</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdz2Xd9l6AQRfSy-00uEqbGMC4T9x3U6lJuR_MePfa6nTqaqQ/viewform" target="_blank" rel="noopener" class="apply-top">신청하기 →</a>
+</div>
+
+<section class="hero">
+  <div class="hero-bg">SCRIPT</div>
+  <span class="flag">세미나 2 · 앱스크립트 · 1차를 전제로 함</span>
+  <h1>코드 하나로<br><em>전부 자동화</em></h1>
+  <p class="hero-sub">세미나 1의 다음 단계. Make 없이 Google Apps Script가 노션·솔라피를 직접 제어합니다.
+    완성 코드를 자료실에서 복사 → 내 학원 정보만 바꿔 붙이면 끝. 코딩을 몰라도 따라옵니다.</p>
+  <div class="hero-meta">
+    <div class="hm"><span class="k">형식</span><span class="v">줌 또는 오프라인</span></div>
+    <div class="hm"><span class="k">시간</span><span class="v">약 3시간</span></div>
+    <div class="hm"><span class="k">정원</span><span class="v">각 10명</span></div>
+    <div class="hm"><span class="k">일정</span><span class="v open">7/4 줌 · 7/5 오프</span></div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section>
+  <div class="section-no">01 — WHO</div>
+  <h2 class="section-title reveal">한 단계 더 자동화하고<br>싶은 분께</h2>
+  <p class="section-intro reveal">노션·Make를 써봤고, 이제 출결·리포트·평가서를 손이 아니라 코드로 굴리고 싶은 선생님.
+    코딩을 몰라도 됩니다 — 완성 코드를 복사해 붙입니다.</p>
+  <div class="summary reveal">
+    <div class="sum"><div class="ic">🎯</div><h3>이런 상황이라면</h3>
+      <p>출결 체크·리포트 생성·월말평가서를 매번 손으로 하느라 지친 분</p></div>
+    <div class="sum"><div class="ic">⚡</div><h3>이런 목표라면</h3>
+      <p>등원 판단부터 알림톡·평가서까지 코드 하나로 자동으로 굴리고 싶은 분</p></div>
+    <div class="sum"><div class="ic">💻</div><h3>이런 수준이라면</h3>
+      <p>코딩을 몰라도 OK — 완성 코드를 자료실에서 복사해 내 정보만 바꿔 붙입니다</p></div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section>
+  <div class="section-no">02 — CURRICULUM · 당일 만드는 것들</div>
+  <h2 class="section-title reveal">손으로 하던 일이<br><em>코드로 사라집니다</em></h2>
+  <p class="section-intro reveal">Make가 하던 일을 Apps Script가 직접 합니다. 더 빠르고, 더 많은 학생을 동시에,
+    그리고 카카오 알림톡 직접 발송까지.</p>
+
+  <ul class="curri">
+    <li class="reveal"><span class="cnum"></span><div class="cbody">
+      <span class="ctag hl">하이라이트</span>
+      <div class="ctitle">출결 핀(PIN) 등·하원 + 실시간 현황판</div>
+      <div class="cdesc">학생이 키오스크에서 핀만 누르면 등·하원이 자동 기록됩니다. 웹앱 현황판으로
+        오늘 누가 왔는지 실시간 확인, 결석은 출결보강 DB에 자동 기록됩니다.</div>
+      <div class="cgrid">
+        <div class="cbox"><div class="bk">왜 코드인가</div><div class="bv">여러 학생이 동시에 핀을 눌러도 순서대로 정확히 기록 — 노션 수동 입력으로는 불가능한 영역.</div></div>
+        <div class="cbox"><div class="bk">끝나면</div><div class="bv">출석부를 따로 적을 필요가 없고, 현황판만 보면 지금 학원 상황이 한눈에.</div></div>
+      </div>
+    </div></li>
+
+    <li class="reveal"><span class="cnum"></span><div class="cbody">
+      <span class="ctag">자동화</span>
+      <div class="ctitle">등·하원 카카오 알림톡 자동 발송</div>
+      <div class="cdesc">"○○ 등원했습니다" 알림톡이 학부모에게 자동 전송됩니다. Make 없이
+        Apps Script가 솔라피를 직접 호출해요. 세미나 1의 SMS에서 알림톡으로 업그레이드되는 지점.</div>
+      <div class="cgrid">
+        <div class="cbox"><div class="bk">1차와 다른 점</div><div class="bv">1차는 SMS, 2차는 정식 알림톡. 발송 비용도 저렴하고 학부모 신뢰도 올라갑니다.</div></div>
+        <div class="cbox"><div class="bk">끝나면</div><div class="bv">등·하원 즉시 학부모에게 알림이 가, 따로 챙길 일이 없어집니다.</div></div>
+      </div>
+    </div></li>
+
+    <li class="reveal"><span class="cnum"></span><div class="cbody">
+      <span class="ctag">자동화</span>
+      <div class="ctitle">데일리리포트 자동 생성</div>
+      <div class="cdesc">오늘 올 학생을 코드가 알아서 판단 → 등원생별 리포트 빈 양식을 자동 생성합니다.
+        선생님은 진도·태도만 채우면 끝.</div>
+      <div class="cgrid">
+        <div class="cbox"><div class="bk">핵심</div><div class="bv">"오늘 누구 리포트를 만들지" 고민을 코드가 대신합니다. 시간표 기반 자동 판단.</div></div>
+        <div class="cbox"><div class="bk">끝나면</div><div class="bv">빈 양식이 미리 깔려 있어, 수업 직후 바로 채워 발송.</div></div>
+      </div>
+    </div></li>
+
+    <li class="reveal"><span class="cnum"></span><div class="cbody">
+      <span class="ctag hl">하이라이트</span>
+      <div class="ctitle">월말평가서 AI 자동 작성</div>
+      <div class="cdesc">한 달 누적 수업 기록을 AI가 모아 평가서 본문까지 자동으로 작성합니다.
+        전체 학생을 한 번에, 또는 한 명씩 생성할 수 있어요. 이 세미나의 진짜 핵심.</div>
+      <div class="cgrid">
+        <div class="cbox"><div class="bk">왜 핵심인가</div><div class="bv">월말마다 학생 수만큼 글을 쓰던 그 며칠이, 버튼 한 번으로 끝납니다.</div></div>
+        <div class="cbox"><div class="bk">제공</div><div class="bv">완성 코드 + 평가서 톤을 내 학원에 맞게 바꾸는 커스터마이즈 프롬프트.</div></div>
+      </div>
+    </div></li>
+
+    <li class="reveal"><span class="cnum"></span><div class="cbody">
+      <span class="ctag hl">하이라이트</span>
+      <div class="ctitle">학부모 열람 페이지 + 자동 발송</div>
+      <div class="cdesc">출석률·태도·진도가 정리된 학부모 전용 페이지가 자동 생성되고, 링크가 학부모에게
+        발송됩니다. 학원이 따로 정리할 필요가 없습니다.</div>
+      <div class="cgrid">
+        <div class="cbox"><div class="bk">만드는 것</div><div class="bv">학생별 열람 페이지(로그인=학생이름+출결번호) + 자동 발송 흐름</div></div>
+        <div class="cbox"><div class="bk">끝나면</div><div class="bv">학부모가 언제든 자녀 현황을 직접 확인 — 상담 문의가 줄어듭니다.</div></div>
+      </div>
+    </div></li>
+  </ul>
+
+  <div class="prep reveal">
+    <div class="pt">⚠️ 수강 전, 꼭 미리 준비하세요</div>
+    <div class="pb">카카오 알림톡 템플릿은 <b>승인까지 1~2영업일</b>이 걸립니다.
+      세미나 당일 바로 발송 테스트를 하시려면 <b>수강 전에 미리 알림톡 템플릿을 신청</b>해두셔야 합니다.
+      신청 방법과 템플릿 양식은 <b>수강 확정 시 안내</b>해 드립니다.</div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section id="apply">
+  <div class="section-no">03 — APPLY</div>
+  <h2 class="section-title reveal">세미나 2 신청</h2>
+  <p class="section-intro reveal">선착순 마감 · 입금 확인 후 확정 · 코드 자료실 + 녹화 영상 제공</p>
+  <div class="apply-card reveal">
+    <span class="ac-badge">줌 또는 오프라인</span>
+    <div class="ac-info">
+      <div class="ac-row"><span class="ac-k">줌</span><span class="ac-v">7/4(토) 오후 12시</span></div>
+      <div class="ac-row"><span class="ac-k">오프라인</span><span class="ac-v">7/5(일) 오후 12시 · 일산</span></div>
+      <div class="ac-row"><span class="ac-k">시간</span><span class="ac-v">약 3시간 · 정원 각 10명</span></div>
+      <div class="ac-row"><span class="ac-k">가격</span><span class="ac-v">300,000원 (줌·오프 동일)</span></div>
+    </div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdz2Xd9l6AQRfSy-00uEqbGMC4T9x3U6lJuR_MePfa6nTqaqQ/viewform" target="_blank" rel="noopener" class="apply-btn">
+      세미나 2 신청하기 (신청서에서 줌/오프 선택)
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <div class="warn">
+      <div class="wt">📌 수강 전 준비물</div>
+      <div>• <b>알림톡 템플릿 미리 신청</b> (승인 1~2영업일 소요)</div>
+      <div>• 솔라피 사업자 계정 · 노션 워크스페이스</div>
+      <div style="margin-top:8px">• 완성 코드 <b>자료실</b> 제공 — 코딩을 몰라도 따라올 수 있습니다 💻</div>
+      <div style="font-size:12px;color:rgba(245,242,236,0.5);margin-top:8px">세미나 1 수강 후 들으시면 가장 매끄럽습니다</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="section-no">04 — FAQ</div>
+  <h2 class="section-title reveal">자주 묻는 질문</h2>
+  <div class="faq reveal">
+    <details><summary>코딩을 전혀 모르는데 따라갈 수 있나요?</summary>
+      <p>네. 완성 코드를 자료실에서 제공합니다. 직접 짜는 게 아니라, 복사해서 내 학원 정보(학원명·연락처 등)만 바꿔 붙이는 방식이에요.</p></details>
+    <details><summary>세미나 1을 안 들었어도 되나요?</summary>
+      <p>세미나 2는 노션·알림톡이 기본 전제입니다. 1차를 먼저 듣거나 영상 강의를 보고 오시길 권합니다. 그래야 가장 매끄럽게 따라올 수 있어요.</p></details>
+    <details><summary>알림톡 템플릿은 왜 미리 신청해야 하나요?</summary>
+      <p>카카오 알림톡은 템플릿 승인에 1~2영업일이 걸려서, 세미나 당일 바로 만들면 테스트를 못 합니다. 수강 확정 시 신청 방법과 양식을 안내해 드려요.</p></details>
+    <details><summary>줌과 오프라인 중 뭐가 나은가요?</summary>
+      <p>내용은 같습니다. 오프라인(7/5, 일산)은 막히는 부분을 바로 옆에서 봐드릴 수 있어 설치 성공률이 높고, 줌(7/4)은 어디서든 참여할 수 있어요.</p></details>
+    <details><summary>월말평가서 AI는 어떤 도구를 쓰나요?</summary>
+      <p>Apps Script가 한 달 수업 기록을 모아 AI API로 평가서 본문을 생성합니다. 평가서 톤을 내 학원에 맞게 바꾸는 커스터마이즈 프롬프트도 함께 드려요.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div><div class="fb">HongLab</div><div class="fn">세미나 2 · 앱스크립트로 전부 자동화</div></div>
+  <a href="index.html" class="home" style="border:1.5px solid rgba(255,255,255,0.4);border-radius:100px;padding:9px 16px;font-size:13px;font-weight:700;color:var(--paper)">← HongLab 소개로</a>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting){
+  e.target.style.transitionDelay=(i%4*70)+'ms';e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

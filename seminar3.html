@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>세미나 3 · 우리 학원만의 원서 시스템 만들기</title>
-<meta name="description" content="유튜브에서 본문을 1초에 가져오고, AI가 퀴즈를 통째로 만들고, 녹음·점수가 한곳에 자동으로 모이고, 결과는 실시간 대시보드로. 르네상스처럼 매달 수백만 원 내는 대신, 우리 학원 방식 그대로 도는 원서 시스템을 직접 만듭니다.">
+<meta name="description" content="본문을 넣으면 AI가 퀴즈를 통째로 만들고, 녹음·점수가 한곳에 자동으로 모이고, 결과는 실시간 대시보드로. 르네상스처럼 매달 수백만 원 내는 대신, 우리 학원 방식 그대로 도는 원서 시스템을 직접 만듭니다.">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -238,7 +238,7 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
   <div class="section-no">01 — 지금 이거, 며칠 걸리세요?</div>
   <p class="pain-line reveal">원서 한 권 수업하려면,<br>해야 할 일이 이만큼입니다.</p>
   <div class="pain-steps reveal">
-    <span class="pain-step">책 고르기</span><span class="pain-step">자막 복사·붙여넣기</span>
+    <span class="pain-step">책 고르기</span><span class="pain-step">본문 준비</span>
     <span class="pain-step">단어 정리</span><span class="pain-step">퀴즈 만들기</span>
     <span class="pain-step">학생별 배정</span><span class="pain-step">녹음 받기</span>
     <span class="pain-step">채점</span><span class="pain-step">엑셀에 점수 정리</span>
@@ -344,7 +344,7 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
   <p class="section-intro reveal">사서 쓰는 원서 프로그램은 그 회사가 정한 책, 그 회사가 정한 레벨이에요.
     <b>이건 반대입니다.</b> 전부 우리 학원에 맞춥니다.</p>
   <div class="mine reveal">
-    <div class="mitem"><div class="mk">내 책</div><div class="mv">우리 학원이 쓰는 원서를 유튜브 링크 + 클릭 몇 번으로 직접 추가</div></div>
+    <div class="mitem"><div class="mk">내 책</div><div class="mv">우리 학원이 쓰는 원서를 클릭 몇 번으로 직접 추가</div></div>
     <div class="mitem"><div class="mk">내 단계</div><div class="mv">1단계·2단계·3단계… 우리 학원 레벨 체계 그대로</div></div>
     <div class="mitem"><div class="mk">내 시리즈</div><div class="mv">Henry and Mudge, Fancy Nancy… 우리가 쓰는 시리즈로 묶음</div></div>
     <div class="mitem"><div class="mk">내 기준</div><div class="mv">통과 점수(예: 70점), 재시험 횟수, 퀴즈 난이도·유형까지 조정</div></div>
@@ -396,8 +396,8 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
     위 화면들이 전부 그 증거입니다.</p>
   <ul class="stage reveal">
     <li><div class="st-mark done">✓</div><div class="st-body">
-      <h3>유튜브 본문 자동 가져오기 · AI 퀴즈 생성 <span class="st-tag">작동 중</span></h3>
-      <p>영상 링크 하나로 본문을 끌어와 단어카드·단어퀴즈·원서퀴즈를 한 번에 생성·저장.</p></div></li>
+      <h3>AI 퀴즈 자동 생성 (단어·원서) <span class="st-tag">작동 중</span></h3>
+      <p>본문을 넣으면 단어카드·단어퀴즈·원서퀴즈를 한 번에 생성·저장.</p></div></li>
     <li><div class="st-mark done">✓</div><div class="st-body">
       <h3>레벨 기반 배정 + 중복 방지 <span class="st-tag">작동 중</span></h3>
       <p>학생 레벨에 맞는 책만 노출, 읽은 책은 자동 표시.</p></div></li>
@@ -461,7 +461,7 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
     <details><summary>코딩을 정말 몰라도 되나요?</summary>
       <p>네. 코드를 직접 짜지도, 보지도 않습니다. 완성된 시스템에서 시작해, 클로드한테 "우리 학원 이름으로 바꿔줘"처럼 말로 시켜서 내 학원에 맞게 고치는 방식이에요.</p></details>
     <details><summary>우리 학원이 쓰는 책도 넣을 수 있나요?</summary>
-      <p>네. 사서 쓰는 프로그램은 정해진 책만 되지만, 이건 우리가 쓰는 원서를 유튜브 링크와 클릭 몇 번으로 직접 추가합니다. 레벨·시리즈도 우리 학원 체계 그대로 만들 수 있어요.</p></details>
+      <p>네. 사서 쓰는 프로그램은 정해진 책만 되지만, 이건 우리가 쓰는 원서를 클릭 몇 번으로 직접 추가합니다. 레벨·시리즈도 우리 학원 체계 그대로 만들 수 있어요.</p></details>
     <details><summary>이미 노션·구글시트로 관리 중인데 갈아엎어야 하나요?</summary>
       <p>아니요. 쓰던 건 그대로 두고 옆에 새 기능을 천천히 붙입니다. 검증될 때까지 양쪽에 같이 기록하고, 문제가 생기면 바로 되돌릴 수 있어요.</p></details>
   </div>

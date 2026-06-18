@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>세미나 2 · 앱스크립트로 전부 자동화</title>
-<meta name="description" content="출결 핀 등·하원부터 알림톡 자동 발송, 데일리리포트, 월말평가서 AI 자동 작성, 학부모 열람 페이지까지. 완성 코드를 복사해 붙이는 코드 자동화 세미나.">
+<title>세미나 2 · 월말평가서 + 출결, 버튼 하나로 자동화</title>
+<meta name="description" content="한 명당 20분, 30명이면 10시간 걸리던 월말평가서를 버튼 하나 5분으로. PIN 하나로 끝나는 출결과 학부모 알림톡까지. 앱스크립트로 만드는 학원 자동화 세미나.">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -39,48 +39,117 @@ a{text-decoration:none;color:inherit}
   color:#fff;opacity:0.045;white-space:nowrap;pointer-events:none;user-select:none;letter-spacing:.02em}
 .flag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
   padding:6px 14px;border-radius:2px;background:var(--warm);color:var(--ink);margin-bottom:20px}
-.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(40px,7vw,82px);line-height:1.02;
-  letter-spacing:-0.02em;max-width:840px;margin-bottom:24px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(38px,6.6vw,78px);line-height:1.04;
+  letter-spacing:-0.02em;max-width:860px;margin-bottom:24px}
 .hero h1 em{font-style:italic;color:var(--warm)}
-.hero-sub{font-size:18px;color:rgba(245,242,236,0.6);max-width:580px;font-weight:300}
+.hero-sub{font-size:18px;color:rgba(245,242,236,0.62);max-width:600px;font-weight:300}
+.hero-sub strong{color:#fff;font-weight:700}
 .hero-meta{display:flex;gap:30px;flex-wrap:wrap;margin-top:34px;position:relative;z-index:2}
 .hm{display:flex;flex-direction:column;gap:3px}
 .hm .k{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.4)}
 .hm .v{font-size:17px;font-weight:700}
 .hm .v.open{color:var(--warm)}
 
-section{padding:72px 48px;border-bottom:1px solid rgba(255,255,255,0.08);position:relative}
+section{padding:74px 48px;border-bottom:1px solid rgba(255,255,255,0.08);position:relative}
 .section-no{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:4px;color:rgba(245,242,236,0.4);
   margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .section-no::after{content:'';display:block;height:1px;width:40px;background:rgba(245,242,236,0.3)}
 .section-title{font-family:'DM Serif Display',serif;font-size:clamp(30px,4.5vw,48px);
   line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px}
 .section-title em{font-style:italic;color:var(--warm)}
-.section-intro{color:rgba(245,242,236,0.55);font-size:15.5px;max-width:700px;margin-bottom:40px}
+.section-intro{color:rgba(245,242,236,0.55);font-size:15.5px;max-width:720px;margin-bottom:40px}
 
-.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
-.sum{border:1.5px solid rgba(255,255,255,0.18);padding:24px;background:rgba(255,255,255,0.03)}
-.sum .ic{font-size:22px;margin-bottom:10px}
-.sum h3{font-size:17px;font-weight:700;margin-bottom:6px}
-.sum p{font-size:13.5px;color:rgba(245,242,236,0.55);line-height:1.6}
+/* PAIN */
+.pain{}
+.pain-stat{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+@media(max-width:680px){.pain-stat{grid-template-columns:1fr}}
+.pstat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:26px 24px}
+.pstat .big{font-family:'DM Serif Display',serif;font-size:38px;color:var(--warm);line-height:1;margin-bottom:8px}
+.pstat .t{font-size:14px;color:rgba(245,242,236,0.7);line-height:1.6}
+.pain-punch{margin-top:28px;font-family:'DM Serif Display',serif;font-size:clamp(22px,3.2vw,32px);
+  line-height:1.35;color:#fff;max-width:760px}
+.pain-punch em{color:var(--warm);font-style:italic}
 
-.curri{list-style:none;counter-reset:item;margin-top:8px}
-.curri > li{counter-increment:item;display:flex;gap:26px;padding:34px 0;border-bottom:1px solid rgba(255,255,255,0.08)}
-.curri > li:last-child{border-bottom:none}
-.cnum{font-family:'Bebas Neue',sans-serif;font-size:42px;color:rgba(212,168,83,0.4);line-height:.9;min-width:54px}
-.cnum::before{content:counter(item,decimal-leading-zero)}
-.cbody{flex:1}
-.ctitle{font-size:21px;font-weight:700;margin-bottom:6px}
-.ctag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  padding:3px 10px;border:1px solid var(--warm);color:var(--warm);border-radius:2px;margin-bottom:12px}
-.ctag.hl{background:var(--warm);border-color:var(--warm);color:var(--ink)}
-.cdesc{font-size:14.5px;color:rgba(245,242,236,0.78);line-height:1.7;margin-bottom:14px}
-.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
-@media(max-width:640px){.cgrid{grid-template-columns:1fr}}
-.cbox{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:14px 16px}
-.cbox .bk{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--warm);margin-bottom:5px}
-.cbox .bv{font-size:13.5px;color:rgba(245,242,236,0.72);line-height:1.55}
-.cnote{font-size:12.5px;color:rgba(245,242,236,0.5);margin-top:12px;padding-left:14px;border-left:2px solid var(--warm)}
+/* FLOW */
+.flow-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:16px;
+  padding:30px 32px;margin-top:8px;max-width:820px}
+.flow-step{display:flex;gap:16px;align-items:flex-start;padding:14px 0}
+.flow-step:not(:last-child){border-bottom:1px solid rgba(255,255,255,0.08)}
+.fs-ic{width:34px;height:34px;border-radius:9px;background:rgba(212,168,83,0.18);color:var(--warm);
+  display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:14px}
+.fs-t{font-size:15px;color:rgba(245,242,236,0.85);line-height:1.6}
+.fs-t b{color:#fff}
+.flow-end{text-align:center;margin-top:18px;font-family:'DM Serif Display',serif;font-size:22px;color:var(--warm)}
+
+/* COMPARE generic */
+.compare{margin-top:8px;border:1px solid rgba(255,255,255,0.14);border-radius:14px;overflow:hidden;background:rgba(255,255,255,0.03)}
+.crow{display:grid;grid-template-columns:0.9fr 1.1fr 1.1fr;border-bottom:1px solid rgba(255,255,255,0.1)}
+.crow:last-child{border-bottom:none}
+.crow > div{padding:15px 18px;font-size:14px;line-height:1.5}
+.crow.head > div{background:rgba(255,255,255,0.06);font-weight:700;font-size:13px;color:#fff}
+.crow .lbl{font-weight:700;color:#fff}
+.crow .old{color:rgba(245,242,236,0.5)}
+.crow .new{color:var(--warm);font-weight:600}
+@media(max-width:640px){.crow{grid-template-columns:1fr}.crow.head{display:none}
+  .crow > div{border-bottom:1px solid rgba(255,255,255,0.08)}
+  .crow .lbl{background:rgba(255,255,255,0.05)}}
+
+/* 학부모 리포트 비교 (before/after) */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+@media(max-width:680px){.ba{grid-template-columns:1fr}}
+.bacard{border-radius:14px;padding:26px 24px}
+.bacard.before{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12)}
+.bacard.after{background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.4)}
+.bacard .bt{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.bacard.before .bt{color:rgba(245,242,236,0.5)}
+.bacard.after .bt{color:var(--warm)}
+.bacard .plain{font-size:15px;color:rgba(245,242,236,0.6);font-style:italic;line-height:1.7}
+.bacard ul{list-style:none}
+.bacard li{display:flex;gap:10px;padding:8px 0;font-size:14.5px;color:rgba(245,242,236,0.85)}
+.bacard li .e{flex-shrink:0}
+
+/* 출결 현황판 상태 */
+.statuses{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:8px;max-width:820px}
+@media(max-width:600px){.statuses{grid-template-columns:1fr}}
+.stat-item{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px 18px}
+.dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.dot.green{background:#4ade80}.dot.gray{background:#9ca3af}
+.dot.red{background:#ef4444;box-shadow:0 0 0 0 rgba(239,68,68,.6);animation:blink 1.4s infinite}
+.dot.yellow{background:#facc15}.dot.blue{background:#60a5fa}.dot.done{background:#34d399}
+@keyframes blink{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.5)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+.stat-item .si-t{font-size:14.5px;color:rgba(245,242,236,0.85)}
+.stat-item .si-t b{color:#fff}
+.alert-banner{margin-top:18px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.4);
+  border-radius:10px;padding:16px 20px;font-size:14.5px;color:#fca5a5;display:flex;gap:12px;align-items:center;max-width:820px}
+.alert-banner b{color:#fff}
+
+/* features list */
+.feat{list-style:none;margin-top:8px}
+.feat li{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,0.08);align-items:flex-start}
+.feat li:last-child{border-bottom:none}
+.feat .fic{font-size:22px;flex-shrink:0;margin-top:2px}
+.feat h3{font-size:18px;font-weight:700;margin-bottom:5px}
+.feat p{font-size:14px;color:rgba(245,242,236,0.62);line-height:1.65}
+.feat .tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  border:1px solid var(--warm);color:var(--warm);border-radius:4px;padding:2px 8px;margin-top:8px}
+
+/* 커스터마이즈 */
+.custom{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:8px}
+@media(max-width:680px){.custom{grid-template-columns:1fr}}
+.citem{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:11px;padding:18px 20px}
+.citem .ck{font-weight:700;color:var(--warm);font-size:15px;margin-bottom:4px}
+.citem .cv{font-size:13.5px;color:rgba(245,242,236,0.7);line-height:1.55}
+
+/* 비용 */
+.cost-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+@media(max-width:680px){.cost-grid{grid-template-columns:1fr}}
+.cost-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:22px}
+.cost-item .ci-n{font-weight:700;font-size:16px;margin-bottom:4px}
+.cost-item .ci-p{font-family:'DM Serif Display',serif;font-size:24px;color:var(--warm);margin-bottom:8px}
+.cost-item .ci-d{font-size:13px;color:rgba(245,242,236,0.6)}
+.cost-note{margin-top:16px;font-size:14px;color:rgba(245,242,236,0.6)}
+.cost-note b{color:var(--warm)}
 
 /* prep box */
 .prep{margin-top:40px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.4);
@@ -90,15 +159,15 @@ section{padding:72px 48px;border-bottom:1px solid rgba(255,255,255,0.08);positio
 .prep .pb b{color:#fff}
 
 /* apply */
-.apply-card{max-width:540px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,168,83,0.3);padding:38px}
+.apply-card{max-width:540px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,168,83,0.3);padding:38px;border-radius:14px}
 .ac-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
   padding:4px 10px;border-radius:2px;background:var(--warm);color:var(--ink);margin-bottom:18px}
 .ac-info{display:flex;flex-direction:column;gap:11px;margin-bottom:8px}
-.ac-row{display:flex;gap:14px;align-items:center}
-.ac-k{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.4);min-width:64px}
-.ac-v{font-size:16px;font-weight:700}
+.ac-row{display:flex;gap:14px;align-items:flex-start}
+.ac-k{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.4);min-width:64px;padding-top:3px}
+.ac-v{font-size:15.5px;font-weight:700;line-height:1.5}
 .apply-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--warm);color:var(--ink);
-  font-size:15px;font-weight:700;letter-spacing:1px;padding:17px;margin-top:22px;transition:opacity .2s;border-radius:4px}
+  font-size:15px;font-weight:700;letter-spacing:1px;padding:17px;margin-top:22px;transition:opacity .2s;border-radius:10px}
 .apply-btn:hover{opacity:.9}
 .warn{margin-top:16px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.3);
   border-radius:8px;padding:14px 16px;font-size:13px;line-height:1.75;color:rgba(245,242,236,0.82)}
@@ -120,11 +189,9 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
 
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}html{scroll-behavior:auto}.dot.red{animation:none}}
 @media(max-width:768px){
   .hero,section{padding:60px 22px}.hero{padding-top:120px}
-  .summary{grid-template-columns:1fr}
-  .curri>li{gap:14px}.cnum{font-size:32px;min-width:38px}
   footer{flex-direction:column;text-align:center}
 }
 :focus-visible{outline:2.5px solid var(--warm);outline-offset:3px}
@@ -140,9 +207,9 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
 <section class="hero">
   <div class="hero-bg">SCRIPT</div>
   <span class="flag">세미나 2 · 앱스크립트 · 1차를 전제로 함</span>
-  <h1>코드 하나로<br><em>전부 자동화</em></h1>
-  <p class="hero-sub">세미나 1의 다음 단계. Make 없이 Google Apps Script가 노션·솔라피를 직접 제어합니다.
-    완성 코드를 자료실에서 복사 → 내 학원 정보만 바꿔 붙이면 끝. 코딩을 몰라도 따라옵니다.</p>
+  <h1>월말평가서 10시간이<br><em>버튼 하나 5분</em>으로</h1>
+  <p class="hero-sub">한 명당 20분, 30명이면 10시간. 매달 같은 말 반복하던 월말평가서를
+    <strong>버튼 하나로</strong> 끝냅니다. PIN 하나로 끝나는 출결과 학부모 알림톡까지, 앱스크립트로 전부 자동화합니다.</p>
   <div class="hero-meta">
     <div class="hm"><span class="k">형식</span><span class="v">줌 또는 오프라인</span></div>
     <div class="hm"><span class="k">시간</span><span class="v">약 3시간</span></div>
@@ -151,99 +218,138 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
   </div>
 </section>
 
-<!-- WHO -->
+<!-- PAIN -->
+<section class="pain">
+  <div class="section-no">01 — 월말평가서, 어떻게 쓰세요?</div>
+  <h2 class="section-title reveal">매달 이걸<br>손으로 쓰고 계시죠?</h2>
+  <div class="pain-stat reveal">
+    <div class="pstat"><div class="big">20분</div><div class="t">학생 한 명당 평가서 작성 시간</div></div>
+    <div class="pstat"><div class="big">10시간+</div><div class="t">30명이면 매달 이만큼</div></div>
+    <div class="pstat"><div class="big">매번 반복</div><div class="t">"열심히 했습니다" 같은 비슷한 문장</div></div>
+  </div>
+  <p class="pain-punch reveal">학부모는 읽고 "그래서 우리 아이가 뭘 배운 건데?"<br>
+    <em>제가 이걸 5분으로 줄였습니다. 버튼 하나로.</em></p>
+</section>
+
+<!-- 월말평가서 작동 흐름 -->
 <section>
-  <div class="section-no">01 — WHO</div>
-  <h2 class="section-title reveal">한 단계 더 자동화하고<br>싶은 분께</h2>
-  <p class="section-intro reveal">노션·Make를 써봤고, 이제 출결·리포트·평가서를 손이 아니라 코드로 굴리고 싶은 선생님.
-    코딩을 몰라도 됩니다 — 완성 코드를 복사해 붙입니다.</p>
-  <div class="summary reveal">
-    <div class="sum"><div class="ic">🎯</div><h3>이런 상황이라면</h3>
-      <p>출결 체크·리포트 생성·월말평가서를 매번 손으로 하느라 지친 분</p></div>
-    <div class="sum"><div class="ic">⚡</div><h3>이런 목표라면</h3>
-      <p>등원 판단부터 알림톡·평가서까지 코드 하나로 자동으로 굴리고 싶은 분</p></div>
-    <div class="sum"><div class="ic">💻</div><h3>이런 수준이라면</h3>
-      <p>코딩을 몰라도 OK — 완성 코드를 자료실에서 복사해 내 정보만 바꿔 붙입니다</p></div>
+  <div class="section-no">02 — 월말평가서 제작기</div>
+  <h2 class="section-title reveal">매일 2분 기록이,<br><em>월말엔 버튼 하나</em></h2>
+  <p class="section-intro reveal">평소엔 수업 후 노션에 태도·과제·테스트만 클릭으로 기록. 월말에 버튼을 누르면 나머지는 시스템이 합니다.</p>
+  <div class="flow-box reveal">
+    <div class="flow-step"><div class="fs-ic">1</div><div class="fs-t"><b>한 달치 데이터 자동 수집</b> — 출석·태도·과제·테스트·진도를 노션에서 끌어옵니다</div></div>
+    <div class="flow-step"><div class="fs-ic">2</div><div class="fs-t"><b>AI가 평가서 본문 작성</b> — 800~1000자, 자연스러운 문장으로</div></div>
+    <div class="flow-step"><div class="fs-ic">3</div><div class="fs-t"><b>문서 자동 생성</b> — Google Doc으로 영구 보관 (PDF 저장 가능)</div></div>
+    <div class="flow-step"><div class="fs-ic">4</div><div class="fs-t"><b>학부모용 웹 리포트 생성</b> — 차트가 포함된 페이지가 자동으로</div></div>
+    <div class="flow-end">→ 학부모에게 링크 전송, 끝!</div>
   </div>
 </section>
 
-<!-- CURRICULUM -->
+<!-- ChatGPT와 다른 점 -->
 <section>
-  <div class="section-no">02 — CURRICULUM · 당일 만드는 것들</div>
-  <h2 class="section-title reveal">손으로 하던 일이<br><em>코드로 사라집니다</em></h2>
-  <p class="section-intro reveal">Make가 하던 일을 Apps Script가 직접 합니다. 더 빠르고, 더 많은 학생을 동시에,
-    그리고 카카오 알림톡 직접 발송까지.</p>
+  <div class="section-no">03 — "그냥 ChatGPT에 시키면 되지 않나요?"</div>
+  <h2 class="section-title reveal">완전히 다릅니다</h2>
+  <p class="section-intro reveal">AI한테 글 써달라는 건 누구나 합니다. 데이터 수집 → AI 작성 → 문서 생성 → 차트 리포트 → 학부모 전달이
+    <em>원클릭으로 이어지는 것</em>이 차이예요.</p>
+  <div class="compare reveal">
+    <div class="crow head"><div></div><div>ChatGPT에 직접 시키기</div><div>이 시스템</div></div>
+    <div class="crow"><div class="lbl">데이터</div><div class="old">매번 선생님이 정리해 복붙</div><div class="new">노션에서 한 달치 자동 수집</div></div>
+    <div class="crow"><div class="lbl">품질</div><div class="old">매번 다른 결과, 숫자 그대로</div><div class="new">"18회 출석"→"거의 빠짐없이 출석"</div></div>
+    <div class="crow"><div class="lbl">호칭</div><div class="old">"태민 학생은"</div><div class="new">"태민이는" (학부모 친화적)</div></div>
+    <div class="crow"><div class="lbl">저장</div><div class="old">대화창에서 사라짐</div><div class="new">Google Doc + 노션에 영구 보관</div></div>
+    <div class="crow"><div class="lbl">전달</div><div class="old">복사해서 카톡</div><div class="new">웹 링크 하나로 차트까지</div></div>
+  </div>
+</section>
 
-  <ul class="curri">
-    <li class="reveal"><span class="cnum"></span><div class="cbody">
-      <span class="ctag hl">하이라이트</span>
-      <div class="ctitle">출결 핀(PIN) 등·하원 + 실시간 현황판</div>
-      <div class="cdesc">학생이 키오스크에서 핀만 누르면 등·하원이 자동 기록됩니다. 웹앱 현황판으로
-        오늘 누가 왔는지 실시간 확인, 결석은 출결보강 DB에 자동 기록됩니다.</div>
-      <div class="cgrid">
-        <div class="cbox"><div class="bk">왜 코드인가</div><div class="bv">여러 학생이 동시에 핀을 눌러도 순서대로 정확히 기록 — 노션 수동 입력으로는 불가능한 영역.</div></div>
-        <div class="cbox"><div class="bk">끝나면</div><div class="bv">출석부를 따로 적을 필요가 없고, 현황판만 보면 지금 학원 상황이 한눈에.</div></div>
-      </div>
-    </div></li>
+<!-- 학부모가 받는 리포트 -->
+<section>
+  <div class="section-no">04 — 학부모가 받는 리포트</div>
+  <h2 class="section-title reveal">"이 학원은<br><em>관리가 다르다</em>"</h2>
+  <div class="ba reveal">
+    <div class="bacard before">
+      <div class="bt">일반 학원 평가서</div>
+      <p class="plain">"태민이는 열심히 했습니다.<br>조금 더 노력하면 좋겠습니다."</p>
+    </div>
+    <div class="bacard after">
+      <div class="bt">이 시스템의 평가서</div>
+      <ul>
+        <li><span class="e">📊</span>도넛 차트 4개 (출석·태도·단어테스트·과제)</li>
+        <li><span class="e">📍</span>교재별 진도 카드 (리딩: Unit 5 → Unit 9)</li>
+        <li><span class="e">✏️</span>AI가 쓴 자연스러운 평가 본문 (800자)</li>
+        <li><span class="e">📄</span>Google Doc 링크 (PDF 저장 가능)</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <li class="reveal"><span class="cnum"></span><div class="cbody">
-      <span class="ctag">자동화</span>
-      <div class="ctitle">등·하원 카카오 알림톡 자동 발송</div>
-      <div class="cdesc">"○○ 등원했습니다" 알림톡이 학부모에게 자동 전송됩니다. Make 없이
-        Apps Script가 솔라피를 직접 호출해요. 세미나 1의 SMS에서 알림톡으로 업그레이드되는 지점.</div>
-      <div class="cgrid">
-        <div class="cbox"><div class="bk">1차와 다른 점</div><div class="bv">1차는 SMS, 2차는 정식 알림톡. 발송 비용도 저렴하고 학부모 신뢰도 올라갑니다.</div></div>
-        <div class="cbox"><div class="bk">끝나면</div><div class="bv">등·하원 즉시 학부모에게 알림이 가, 따로 챙길 일이 없어집니다.</div></div>
-      </div>
-    </div></li>
-
-    <li class="reveal"><span class="cnum"></span><div class="cbody">
-      <span class="ctag">자동화</span>
-      <div class="ctitle">데일리리포트 자동 생성</div>
-      <div class="cdesc">오늘 올 학생을 코드가 알아서 판단 → 등원생별 리포트 빈 양식을 자동 생성합니다.
-        선생님은 진도·태도만 채우면 끝.</div>
-      <div class="cgrid">
-        <div class="cbox"><div class="bk">핵심</div><div class="bv">"오늘 누구 리포트를 만들지" 고민을 코드가 대신합니다. 시간표 기반 자동 판단.</div></div>
-        <div class="cbox"><div class="bk">끝나면</div><div class="bv">빈 양식이 미리 깔려 있어, 수업 직후 바로 채워 발송.</div></div>
-      </div>
-    </div></li>
-
-    <li class="reveal"><span class="cnum"></span><div class="cbody">
-      <span class="ctag hl">하이라이트</span>
-      <div class="ctitle">월말평가서 AI 자동 작성</div>
-      <div class="cdesc">한 달 누적 수업 기록을 AI가 모아 평가서 본문까지 자동으로 작성합니다.
-        전체 학생을 한 번에, 또는 한 명씩 생성할 수 있어요. 이 세미나의 진짜 핵심.</div>
-      <div class="cgrid">
-        <div class="cbox"><div class="bk">왜 핵심인가</div><div class="bv">월말마다 학생 수만큼 글을 쓰던 그 며칠이, 버튼 한 번으로 끝납니다.</div></div>
-        <div class="cbox"><div class="bk">제공</div><div class="bv">완성 코드 + 평가서 톤을 내 학원에 맞게 바꾸는 커스터마이즈 프롬프트.</div></div>
-      </div>
-    </div></li>
-
-    <li class="reveal"><span class="cnum"></span><div class="cbody">
-      <span class="ctag hl">하이라이트</span>
-      <div class="ctitle">학부모 열람 페이지 + 자동 발송</div>
-      <div class="cdesc">출석률·태도·진도가 정리된 학부모 전용 페이지가 자동 생성되고, 링크가 학부모에게
-        발송됩니다. 학원이 따로 정리할 필요가 없습니다.</div>
-      <div class="cgrid">
-        <div class="cbox"><div class="bk">만드는 것</div><div class="bv">학생별 열람 페이지(로그인=학생이름+출결번호) + 자동 발송 흐름</div></div>
-        <div class="cbox"><div class="bk">끝나면</div><div class="bv">학부모가 언제든 자녀 현황을 직접 확인 — 상담 문의가 줄어듭니다.</div></div>
-      </div>
-    </div></li>
+<!-- 출결 시스템 -->
+<section>
+  <div class="section-no">05 — 출결 시스템</div>
+  <h2 class="section-title reveal">PIN 하나로<br><em>등·하원이 끝납니다</em></h2>
+  <p class="section-intro reveal">QR도, 앱 설치도 필요 없어요. 학생이 PIN 4자리만 누르면 등·하원이 기록되고, 학부모에게 알림톡이 즉시 발송됩니다.</p>
+  <ul class="feat reveal">
+    <li><div class="fic">📲</div><div>
+      <h3>PIN 입력 → 알림톡 즉시 발송</h3>
+      <p>"홍블랑 학생이 3:05에 등원하였습니다. 예상 하원 시간은 5:05입니다." 등원·하원 모두 자동 발송.</p></div></li>
+    <li><div class="fic">⏱️</div><div>
+      <h3>지각 자동 판단 + 하원시간 자동 계산</h3>
+      <p>예정 3:00 + 유예 10분 → 3:11부터 지각. 등원시간 + 수업시간으로 예상 하원시간까지 자동 계산해 알림톡에 포함. 유예시간은 학원에 맞게 변경 가능.</p></div></li>
   </ul>
 
-  <div class="prep reveal">
-    <div class="pt">⚠️ 수강 전, 꼭 미리 준비하세요</div>
-    <div class="pb">카카오 알림톡 템플릿은 <b>승인까지 1~2영업일</b>이 걸립니다.
-      세미나 당일 바로 발송 테스트를 하시려면 <b>수강 전에 미리 알림톡 템플릿을 신청</b>해두셔야 합니다.
-      신청 방법과 템플릿 양식은 <b>수강 확정 시 안내</b>해 드립니다.</div>
+  <h3 style="margin-top:40px;margin-bottom:8px;font-size:19px;color:#fff;">선생님 화면 — 실시간 출결 현황판</h3>
+  <p style="color:rgba(245,242,236,0.55);font-size:14.5px;margin-bottom:20px;">지금 누가 와 있고, 누가 안 왔는지 한눈에. 색으로 상태가 구분됩니다.</p>
+  <div class="statuses reveal">
+    <div class="stat-item"><span class="dot green"></span><div class="si-t"><b>수업중</b> — 등원 완료한 학생</div></div>
+    <div class="stat-item"><span class="dot gray"></span><div class="si-t"><b>미등원</b> — 아직 안 온 학생</div></div>
+    <div class="stat-item"><span class="dot red"></span><div class="si-t"><b>지각 미등원</b> — 깜빡이는 경고</div></div>
+    <div class="stat-item"><span class="dot yellow"></span><div class="si-t"><b>곧 하원</b> — 하원 5분 전부터 표시</div></div>
+    <div class="stat-item"><span class="dot blue"></span><div class="si-t"><b>오늘 예정</b> — 오늘 올 학생 수</div></div>
+    <div class="stat-item"><span class="dot done"></span><div class="si-t"><b>하원 완료</b> — 집에 간 학생</div></div>
+  </div>
+  <div class="alert-banner reveal">🚨 <div>미등원 10분 초과 시 빨간 배너 + <b>"미등원 알림 발송" 버튼 한 번</b>으로 학부모에게 카톡</div></div>
+</section>
+
+<!-- 커스터마이즈 -->
+<section>
+  <div class="section-no">06 — 내 학원에 맞게</div>
+  <h2 class="section-title reveal">원장님마다 스타일이 다르죠,<br><em>다 바꿀 수 있습니다</em></h2>
+  <div class="custom reveal">
+    <div class="citem"><div class="ck">AI 문체</div><div class="cv">격식 있게 / 친근하게 — 프롬프트만 바꾸면 됩니다</div></div>
+    <div class="citem"><div class="ck">글자 수</div><div class="cv">800~1000자? 더 짧게? 원하는 만큼</div></div>
+    <div class="citem"><div class="ck">포함 내용</div><div class="cv">진도만? 태도도? 숙제 이행률도? 자유 선택</div></div>
+    <div class="citem"><div class="ck">중학생 모드</div><div class="cv">내신·수행평가 언급을 자동으로 추가</div></div>
+    <div class="citem"><div class="ck">선생님 참고사항</div><div class="cv">"단어 암기 어려워함" 입력 → AI가 반영</div></div>
+    <div class="citem"><div class="ck">출결 유예시간</div><div class="cv">5분·10분·15분 등 학원에 맞게</div></div>
+  </div>
+</section>
+
+<!-- 비용 + 기존 앱 비교 -->
+<section>
+  <div class="section-no">07 — 비용</div>
+  <h2 class="section-title reveal">기존 학원 앱보다<br><em>싸고, 내 것</em></h2>
+  <p class="section-intro reveal">서버 비용은 0원이에요. Google Apps Script가 무료로 서버 역할을 합니다.</p>
+  <div class="cost-grid reveal">
+    <div class="cost-item"><div class="ci-n">Notion</div><div class="ci-p">무료</div><div class="ci-d">학생·수업 데이터 관리</div></div>
+    <div class="cost-item"><div class="ci-n">Solapi</div><div class="ci-p">월 1~2만원</div><div class="ci-d">학부모 카카오 알림톡</div></div>
+    <div class="cost-item"><div class="ci-n">Claude API</div><div class="ci-p">월 5천원 수준</div><div class="ci-d">AI 평가서 작성</div></div>
+  </div>
+  <p class="cost-note reveal">※ 서버 비용 <b>0원</b> · 학원 관리 앱(월 3~10만원)보다 저렴하면서, 데이터는 내 노션·구글 드라이브에 남습니다.</p>
+
+  <div class="compare reveal" style="margin-top:36px">
+    <div class="crow head"><div></div><div>클래스카드·학원관리 앱</div><div>이 시스템</div></div>
+    <div class="crow"><div class="lbl">월 비용</div><div class="old">3~10만원</div><div class="new">1~2만원</div></div>
+    <div class="crow"><div class="lbl">AI 평가서</div><div class="old">없음</div><div class="new">AI 자동 작성</div></div>
+    <div class="crow"><div class="lbl">커스터마이징</div><div class="old">불가 (정해진 틀)</div><div class="new">완전 자유</div></div>
+    <div class="crow"><div class="lbl">데이터 소유</div><div class="old">업체 서버 (탈퇴하면 사라짐)</div><div class="new">내 노션 + 구글 드라이브</div></div>
+    <div class="crow"><div class="lbl">학부모 리포트</div><div class="old">단순 출석 확인</div><div class="new">차트 + 진도 + AI 평가서</div></div>
   </div>
 </section>
 
 <!-- APPLY -->
 <section id="apply">
-  <div class="section-no">03 — APPLY</div>
+  <div class="section-no">08 — APPLY</div>
   <h2 class="section-title reveal">세미나 2 신청</h2>
-  <p class="section-intro reveal">선착순 마감 · 입금 확인 후 확정 · 코드 자료실 + 녹화 영상 제공</p>
+  <p class="section-intro reveal">선착순 마감 · 입금 확인 후 확정 · 완성 코드 자료실 + 녹화 영상 제공</p>
   <div class="apply-card reveal">
     <span class="ac-badge">줌 또는 오프라인</span>
     <div class="ac-info">
@@ -267,30 +373,30 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
 
 <!-- FAQ -->
 <section>
-  <div class="section-no">04 — FAQ</div>
+  <div class="section-no">09 — FAQ</div>
   <h2 class="section-title reveal">자주 묻는 질문</h2>
   <div class="faq reveal">
+    <details><summary>그냥 ChatGPT에 평가서 써달라고 하면 안 되나요?</summary>
+      <p>AI한테 글 써달라는 건 누구나 합니다. 차이는 데이터 수집부터 문서 생성·차트 리포트·학부모 전달까지 원클릭으로 이어진다는 거예요. 매번 데이터 정리해 복붙하고, 결과를 복사해 카톡 보내는 그 과정이 통째로 사라집니다.</p></details>
     <details><summary>코딩을 전혀 모르는데 따라갈 수 있나요?</summary>
-      <p>네. 완성 코드를 자료실에서 제공합니다. 직접 짜는 게 아니라, 복사해서 내 학원 정보(학원명·연락처 등)만 바꿔 붙이는 방식이에요.</p></details>
+      <p>네. 완성 코드를 자료실에서 제공합니다. 직접 짜는 게 아니라, 코드를 붙여넣고 API 키만 바꾸면 돼요. 설치는 30분 정도 걸립니다.</p></details>
+    <details><summary>설치하는 데 뭐가 필요한가요?</summary>
+      <p>노션(무료), 솔라피(월 1~2만원, 알림톡용), Claude API(월 5천원 수준)면 됩니다. 서버 비용은 0원이에요 — 구글 앱스크립트가 무료로 서버 역할을 합니다.</p></details>
     <details><summary>세미나 1을 안 들었어도 되나요?</summary>
-      <p>세미나 2는 노션·알림톡이 기본 전제입니다. 1차를 먼저 듣거나 영상 강의를 보고 오시길 권합니다. 그래야 가장 매끄럽게 따라올 수 있어요.</p></details>
+      <p>세미나 2는 노션·알림톡이 기본 전제입니다. 1차를 먼저 듣거나 영상 강의를 보고 오시길 권합니다.</p></details>
     <details><summary>알림톡 템플릿은 왜 미리 신청해야 하나요?</summary>
-      <p>카카오 알림톡은 템플릿 승인에 1~2영업일이 걸려서, 세미나 당일 바로 만들면 테스트를 못 합니다. 수강 확정 시 신청 방법과 양식을 안내해 드려요.</p></details>
-    <details><summary>줌과 오프라인 중 뭐가 나은가요?</summary>
-      <p>내용은 같습니다. 오프라인(7/5, 일산)은 막히는 부분을 바로 옆에서 봐드릴 수 있어 설치 성공률이 높고, 줌(7/4)은 어디서든 참여할 수 있어요.</p></details>
-    <details><summary>월말평가서 AI는 어떤 도구를 쓰나요?</summary>
-      <p>Apps Script가 한 달 수업 기록을 모아 AI API로 평가서 본문을 생성합니다. 평가서 톤을 내 학원에 맞게 바꾸는 커스터마이즈 프롬프트도 함께 드려요.</p></details>
+      <p>카카오 알림톡은 템플릿 승인에 1~2영업일이 걸려서, 당일 만들면 테스트를 못 합니다. 수강 확정 시 신청 방법과 양식(등원·하원·미등원 템플릿)을 안내해 드려요.</p></details>
   </div>
 </section>
 
 <footer>
-  <div><div class="fb">HongLab</div><div class="fn">세미나 2 · 앱스크립트로 전부 자동화</div></div>
+  <div><div class="fb">HongLab</div><div class="fn">세미나 2 · 월말평가서 + 출결 자동화</div></div>
   <a href="index.html" class="home" style="border:1.5px solid rgba(255,255,255,0.4);border-radius:100px;padding:9px 16px;font-size:13px;font-weight:700;color:var(--paper)">← HongLab 소개로</a>
 </footer>
 
 <script>
 const obs=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting){
-  e.target.style.transitionDelay=(i%4*70)+'ms';e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.12});
+  e.target.style.transitionDelay=(i%3*70)+'ms';e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>세미나 3 · 바이브 코딩으로 원서 시스템 만들기</title>
-<meta name="description" content="Claude Code로 말만 하면 코드가 짜이고, GitHub·Vercel·Supabase로 배포까지 자동. 앱스크립트의 동시접속 한계를 넘어 원서 읽기·퀴즈·진도 관리 시스템을 직접 만드는 상위 코스.">
+<title>세미나 3 · 우리 학원만의 원서 시스템 만들기</title>
+<meta name="description" content="유튜브에서 본문을 1초에 가져오고, AI가 퀴즈를 통째로 만들고, 녹음·점수가 한곳에 자동으로 모이고, 결과는 실시간 대시보드로. 르네상스처럼 매달 수백만 원 내는 대신, 우리 학원 방식 그대로 도는 원서 시스템을 직접 만듭니다.">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -18,6 +18,7 @@ body{background:var(--cream);color:var(--ink);font-family:'Noto Sans KR',sans-se
   font-size:16px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
 ::selection{background:var(--coral);color:#fff}
+img{display:block;max-width:100%}
 
 .topbar{position:fixed;top:0;left:0;right:0;z-index:60;
   background:rgba(253,252,249,0.85);backdrop-filter:blur(10px);
@@ -38,78 +39,139 @@ a{text-decoration:none;color:inherit}
   font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--coral);
   background:rgba(192,87,62,.09);border:1px solid rgba(192,87,62,.25);
   padding:6px 14px;border-radius:100px;margin-bottom:24px}
-.hero h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(40px,6.6vw,76px);line-height:1.05;
-  letter-spacing:-0.02em;color:var(--navy);max-width:860px;margin-bottom:22px}
+.hero h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(38px,6.2vw,72px);line-height:1.08;
+  letter-spacing:-0.02em;color:var(--navy);max-width:880px;margin-bottom:22px}
 .hero h1 em{font-style:italic;color:var(--coral)}
-.hero-sub{font-size:18px;color:var(--muted);max-width:600px}
+.hero-sub{font-size:18px;color:var(--muted);max-width:620px}
 .hero-sub strong{color:var(--ink);font-weight:700}
 .hero-meta{display:flex;gap:30px;flex-wrap:wrap;margin-top:34px}
 .hm{display:flex;flex-direction:column;gap:3px}
 .hm .k{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
 .hm .v{font-size:17px;font-weight:700;color:var(--navy)}
 .hm .v.soon{color:var(--coral)}
-.stack-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
-.chip{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--navy);
-  background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:7px}
 
 section{padding:76px 48px;border-bottom:1px solid var(--line);position:relative}
 .section-no{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;
   color:var(--coral);margin-bottom:14px}
-.section-title{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4.5vw,46px);
-  line-height:1.12;letter-spacing:-0.02em;color:var(--navy);margin-bottom:14px}
+.section-title{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(28px,4.3vw,44px);
+  line-height:1.14;letter-spacing:-0.02em;color:var(--navy);margin-bottom:14px}
 .section-title em{font-style:italic;color:var(--coral)}
-.section-intro{color:var(--muted);font-size:15.5px;max-width:700px;margin-bottom:40px}
+.section-intro{color:var(--muted);font-size:15.5px;max-width:720px;margin-bottom:40px}
 
-/* concept banner */
-.concept{background:var(--navy);border-radius:20px;padding:40px;color:var(--cream);
-  position:relative;overflow:hidden;box-shadow:0 22px 50px rgba(44,62,93,.2)}
-.concept::before{content:'';position:absolute;top:-50px;right:-40px;width:180px;height:180px;
-  background:radial-gradient(circle,rgba(224,97,63,.4),transparent 70%)}
-.concept . co-mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--coral-bright);
-  letter-spacing:.05em;margin-bottom:12px}
-.concept h3{font-family:'Fraunces',serif;font-weight:600;font-size:26px;line-height:1.3;margin-bottom:14px}
-.concept p{color:rgba(253,252,249,.72);font-size:15px;max-width:620px}
-.flow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:24px;position:relative;z-index:2}
-.flow .step{background:rgba(253,252,249,.08);border:1px solid rgba(253,252,249,.16);
-  border-radius:10px;padding:12px 16px;font-size:13.5px;font-weight:500}
-.flow .arr{color:var(--coral-bright);font-weight:700}
+.pain{background:var(--cream-warm)}
+.pain-line{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(24px,3.6vw,38px);
+  line-height:1.4;color:var(--navy);max-width:820px}
+.pain-steps{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 22px}
+.pain-step{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 16px;
+  font-size:14px;font-weight:500;color:var(--muted)}
+.pain-punch{font-size:17px;color:var(--ink);font-weight:500;max-width:700px}
+.pain-punch b{color:var(--coral);font-weight:700}
+/* 녹음 통증 강조 박스 */
+.pain-rec{margin-top:26px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--coral);
+  border-radius:10px;padding:22px 24px;max-width:760px}
+.pain-rec .pr-t{font-weight:800;color:var(--coral);margin-bottom:8px;font-size:15px}
+.pain-rec .pr-b{font-size:14.5px;color:#3a4654;line-height:1.7}
+.pain-rec .pr-b b{color:var(--navy)}
 
-.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
-.sum{border:1px solid var(--line);border-radius:14px;padding:24px;background:#fff}
-.sum .ic{font-size:22px;margin-bottom:10px}
-.sum h3{font-size:17px;font-weight:700;margin-bottom:6px;color:var(--navy)}
-.sum p{font-size:13.5px;color:var(--muted);line-height:1.6}
+.tech-once{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:22px 24px;max-width:760px;margin-top:8px}
+.tech-once .ic{font-size:22px;flex-shrink:0}
+.tech-once p{font-size:14.5px;color:#3a4654;line-height:1.7}
+.tech-once b{color:var(--navy)}
+.tech-once .mono{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--coral);background:var(--cream-warm);padding:1px 7px;border-radius:5px}
 
-/* 왜 vercel (비교) */
+/* WOW with screenshot */
+.wow-block{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:center;
+  padding:40px 0;border-bottom:1px solid var(--line)}
+.wow-block:last-child{border-bottom:none}
+.wow-block.flip .wow-text{order:2}
+.wow-block.flip .wow-shot{order:1}
+@media(max-width:860px){.wow-block{grid-template-columns:1fr;gap:22px}
+  .wow-block.flip .wow-text{order:1}.wow-block.flip .wow-shot{order:2}}
+.wow-text .wn{font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--coral);margin-bottom:8px}
+.wow-text h3{font-family:'Fraunces',serif;font-weight:600;font-size:24px;color:var(--navy);line-height:1.25;margin-bottom:12px}
+.wow-text p{font-size:14.5px;color:#3a4654;line-height:1.7;margin-bottom:12px}
+.wow-text .quote{font-size:14px;color:var(--coral);font-style:italic;border-left:2px solid var(--coral);padding-left:12px}
+.wow-shot{border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  box-shadow:0 18px 44px rgba(44,62,93,.14);background:#fff}
+.wow-shot img{width:100%}
+.wow-shot .cap{font-size:12px;color:var(--muted);padding:8px 14px;border-top:1px solid var(--line);background:var(--cream-warm)}
+
+/* 갤러리 (학생화면) */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+@media(max-width:760px){.gallery{grid-template-columns:1fr}}
+.gcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 12px 30px rgba(44,62,93,.1)}
+.gcard img{width:100%}
+.gcard .gc-b{padding:14px 16px}
+.gcard .gc-t{font-weight:700;color:var(--navy);font-size:15px;margin-bottom:4px}
+.gcard .gc-d{font-size:13px;color:var(--muted);line-height:1.55}
+
+.mine-sec{background:var(--navy);color:var(--cream);border-bottom:none}
+.mine-sec .section-no{color:var(--coral-bright)}
+.mine-sec .section-title{color:var(--cream)}
+.mine-sec .section-intro{color:rgba(253,252,249,.68)}
+.mine-sec .section-intro b{color:#fff}
+.mine{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px}
+@media(max-width:680px){.mine{grid-template-columns:1fr}}
+.mitem{background:rgba(253,252,249,.05);border:1px solid rgba(253,252,249,.14);border-radius:12px;padding:20px 22px}
+.mitem .mk{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--coral-bright);margin-bottom:6px}
+.mitem .mv{font-size:14px;color:rgba(253,252,249,.78);line-height:1.6}
+.mine-punch{margin-top:26px;font-family:'Fraunces',serif;font-style:italic;font-weight:500;
+  font-size:clamp(20px,2.8vw,26px);line-height:1.45;color:var(--cream);max-width:720px}
+.mine-punch em{color:var(--coral-bright);font-style:italic}
+
+/* 비용 강조 (르네상스) */
+.cost-sec{background:var(--cream-warm)}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+@media(max-width:680px){.cost-grid{grid-template-columns:1fr}}
+.cost{border-radius:16px;padding:30px 28px}
+.cost.them{background:#fff;border:1px solid var(--line)}
+.cost.us{background:var(--navy);color:var(--cream)}
+.cost .ct{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.cost.them .ct{color:var(--muted)}
+.cost.us .ct{color:var(--coral-bright)}
+.cost h3{font-family:'Fraunces',serif;font-weight:600;font-size:22px;margin-bottom:18px}
+.cost.them h3{color:var(--navy)}
+.cost.us h3{color:#fff}
+.cost ul{list-style:none}
+.cost li{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid;font-size:14.5px}
+.cost.them li{border-color:var(--line);color:#3a4654}
+.cost.us li{border-color:rgba(253,252,249,.14);color:rgba(253,252,249,.85)}
+.cost li:last-child{border-bottom:none}
+.cost li .amt{font-weight:700;white-space:nowrap}
+.cost.them li .amt{color:var(--coral)}
+.cost.us li .amt{color:var(--coral-bright)}
+.cost .total{margin-top:14px;padding-top:14px;border-top:2px solid;font-family:'Fraunces',serif;font-weight:700;font-size:20px;
+  display:flex;justify-content:space-between;align-items:baseline}
+.cost.them .total{border-color:var(--line);color:var(--navy)}
+.cost.us .total{border-color:rgba(253,252,249,.2);color:#fff}
+.cost-note{margin-top:22px;font-size:13.5px;color:var(--muted);max-width:720px}
+.cost-note b{color:var(--coral)}
+
+.stage{list-style:none;margin-top:8px}
+.stage li{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.stage li:last-child{border-bottom:none}
+.st-mark{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:700;margin-top:2px}
+.st-mark.done{background:var(--coral);color:#fff}
+.st-mark.live{background:rgba(192,87,62,.16);color:var(--coral);border:1.5px solid var(--coral)}
+.st-body h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.st-body p{font-size:14px;color:#3a4654;line-height:1.6}
+.st-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--coral);border:1px solid var(--coral);border-radius:5px;padding:2px 8px;margin-left:8px}
+
 .compare{margin-top:8px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
-.crow{display:grid;grid-template-columns:1.4fr 1fr 1fr;border-bottom:1px solid var(--line)}
+.crow{display:grid;grid-template-columns:1fr 1.1fr 1.1fr;border-bottom:1px solid var(--line)}
 .crow:last-child{border-bottom:none}
-.crow > div{padding:16px 18px;font-size:14px}
+.crow > div{padding:15px 18px;font-size:14px}
 .crow.head > div{background:var(--cream-warm);font-weight:700;font-size:13px;color:var(--navy)}
 .crow .lbl{font-weight:700;color:var(--navy)}
 .crow .old{color:var(--muted)}
 .crow .new{color:var(--coral);font-weight:600}
 @media(max-width:640px){.crow{grid-template-columns:1fr}.crow.head{display:none}
-  .crow > div{border-bottom:1px solid var(--line)}}
+  .crow > div{border-bottom:1px solid var(--line)}
+  .crow .lbl{background:var(--cream-warm)}}
 
-.curri{list-style:none;counter-reset:item;margin-top:8px}
-.curri > li{counter-increment:item;display:flex;gap:26px;padding:34px 0;border-bottom:1px solid var(--line)}
-.curri > li:last-child{border-bottom:none}
-.cnum{font-family:'Fraunces',serif;font-weight:600;font-size:42px;color:rgba(192,87,62,.3);line-height:.9;min-width:54px}
-.cnum::before{content:'0' counter(item)}
-.cbody{flex:1}
-.ctitle{font-size:21px;font-weight:700;margin-bottom:6px;color:var(--navy)}
-.ctag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:1px;text-transform:uppercase;
-  padding:3px 10px;border:1px solid var(--coral);color:var(--coral);border-radius:6px;margin-bottom:12px}
-.ctag.hl{background:var(--coral);border-color:var(--coral);color:#fff}
-.cdesc{font-size:14.5px;color:#3a4654;line-height:1.7;margin-bottom:14px}
-.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:640px){.cgrid{grid-template-columns:1fr}}
-.cbox{background:var(--cream-warm);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
-.cbox .bk{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--coral);margin-bottom:5px}
-.cbox .bv{font-size:13.5px;color:#3a4654;line-height:1.55}
-
-/* apply */
 .apply-sec{background:var(--navy-deep);color:var(--cream);border-bottom:none}
 .apply-sec .section-no{color:var(--coral-bright)}
 .apply-sec .section-title{color:var(--cream)}
@@ -147,9 +209,6 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
 @media(max-width:768px){
   .hero,section{padding:60px 22px}.hero{padding-top:120px}
-  .summary{grid-template-columns:1fr}
-  .curri>li{gap:14px}.cnum{font-size:32px;min-width:38px}
-  .concept{padding:28px}
   footer{flex-direction:column;text-align:center}
 }
 :focus-visible{outline:2.5px solid var(--coral);outline-offset:3px}
@@ -163,134 +222,222 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
 </div>
 
 <section class="hero">
-  <span class="flag">⭐ 세미나 3 · 신규 · 1·2차보다 상위 코스</span>
-  <h1>바이브 코딩으로<br><em>원서 시스템</em>을 만든다</h1>
-  <p class="hero-sub">완성된 코드를 드립니다. <strong>클로드한테 말로 시키면 코드가 고쳐지고, 배포는 자동.</strong>
-    앱스크립트의 동시접속 한계를 넘어, 원서 읽기·퀴즈·진도 관리 시스템을 직접 만들어 내 학원에 맞게 굴립니다.</p>
-  <div class="stack-row">
-    <span class="chip">Claude Code</span><span class="chip">Vercel</span>
-    <span class="chip">GitHub</span><span class="chip">Supabase</span>
-  </div>
+  <span class="flag">⭐ 세미나 3 · 신규 · 우리 학원만의 원서 시스템</span>
+  <h1>원서 수업의 반복 노동을<br><em>클릭 몇 번</em>으로</h1>
+  <p class="hero-sub">책 고르고 → 퀴즈 만들고 → 배정하고 → 녹음 받고 → 채점하고… <strong>이거 다 손으로 하시죠?</strong>
+    그걸 클릭 몇 번으로 끝내면서도, 100% 우리 학원 책·레벨·방식 그대로 도는 원서 시스템을 직접 만듭니다.</p>
   <div class="hero-meta">
-    <div class="hm"><span class="k">단계</span><span class="v">코딩으로 직접 제작</span></div>
-    <div class="hm"><span class="k">전제</span><span class="v">1·2차 또는 동급</span></div>
+    <div class="hm"><span class="k">만드는 것</span><span class="v">우리 학원 원서 시스템</span></div>
+    <div class="hm"><span class="k">난이도</span><span class="v">코드 안 봐도 됨</span></div>
     <div class="hm"><span class="k">일정</span><span class="v soon">준비 중</span></div>
   </div>
 </section>
 
-<!-- CONCEPT -->
+<!-- PAIN -->
+<section class="pain">
+  <div class="section-no">01 — 지금 이거, 며칠 걸리세요?</div>
+  <p class="pain-line reveal">원서 한 권 수업하려면,<br>해야 할 일이 이만큼입니다.</p>
+  <div class="pain-steps reveal">
+    <span class="pain-step">책 고르기</span><span class="pain-step">자막 복사·붙여넣기</span>
+    <span class="pain-step">단어 정리</span><span class="pain-step">퀴즈 만들기</span>
+    <span class="pain-step">학생별 배정</span><span class="pain-step">녹음 받기</span>
+    <span class="pain-step">채점</span><span class="pain-step">엑셀에 점수 정리</span>
+  </div>
+  <p class="pain-punch reveal">한 권에 <b>30분에서 며칠</b>씩. 학생이 많아질수록 더 늘어나죠.</p>
+
+  <div class="pain-rec reveal">
+    <div class="pr-t">🎙️ 특히, 녹음 음원 받는 거 얼마나 번거로우세요?</div>
+    <div class="pr-b">학생마다 <b>카톡으로 음원을 따로 받고</b>, 누가 보냈는지 <b>일일이 확인하고</b>,
+      받았다고 <b>표시하고</b>… 매번 반복이죠. 이 시스템에서는 학생이 올린 녹음이 <b>한곳에 자동으로 모이고</b>,
+      제출 여부도 <b>자동으로 표시</b>되고, <b>클릭 하나로 바로 들어볼 수</b> 있어요.</div>
+  </div>
+</section>
+
+<!-- TECH ONCE -->
 <section>
-  <div class="section-no">01 — CONCEPT</div>
-  <h2 class="section-title reveal">코드를 안 봐도,<br>코드를 굴립니다</h2>
-  <p class="section-intro reveal">터미널도, 로컬 설치도 없습니다. 브라우저에서 클로드한테 말로 시키면 끝.
-    수강생은 코드를 직접 짜지도, 보지도 않습니다.</p>
-  <div class="concept reveal">
-    <div class="co-mono">THE WORKFLOW</div>
-    <h3>"우리 학원 이름으로 바꿔줘", "퀴즈 10문제로 늘려줘"<br>— 말하면, 바뀝니다.</h3>
-    <p>클로드가 GitHub 레포의 코드를 직접 수정·푸시하면, Vercel이 자동으로 재배포합니다.
-      수강생이 할 일은 변경을 승인(머지)하는 것뿐.</p>
-    <div class="flow">
-      <span class="step">클로드(웹)에 말함</span><span class="arr">→</span>
-      <span class="step">코드 수정·푸시</span><span class="arr">→</span>
-      <span class="step">Vercel 자동 재배포</span><span class="arr">→</span>
-      <span class="step">끝</span>
+  <div class="section-no">02 — 기술 이야기는 딱 한 번</div>
+  <h2 class="section-title reveal">이게 전부예요.<br>몰라도 됩니다.</h2>
+  <p class="section-intro reveal">이 세미나에서 기술 용어는 여기서 끝입니다. 나머지는 전부 "편해지는 경험"만 보여드려요.</p>
+  <div class="tech-once reveal">
+    <span class="ic">🛠️</span>
+    <p>이 시스템은 <b class="mono">Claude Code</b>로 만들고, <b class="mono">Vercel</b>이라는 곳에 올려두고,
+      데이터는 <b class="mono">Supabase</b>에 담아둡니다. <b>이 세 가지가 뭔지는 몰라도 괜찮아요.</b>
+      여러분이 할 일은 클로드한테 <b>"이렇게 바꿔줘"</b> 하고 말하는 것뿐입니다.</p>
+  </div>
+</section>
+
+<!-- WOW with real screenshots -->
+<section>
+  <div class="section-no">03 — 실제 화면입니다 (데모 아님)</div>
+  <h2 class="section-title reveal">손이 하던 일을<br><em>시스템이</em> 합니다</h2>
+  <p class="section-intro reveal">아래는 지금 학원에서 매일 돌아가는 진짜 화면이에요.</p>
+
+  <div class="wow-block reveal">
+    <div class="wow-text">
+      <div class="wn">와 ①</div>
+      <h3>배정은 클릭 세 번,<br>중복 사고 없이</h3>
+      <p>학생을 고르면 그 학생 레벨(단계)에 맞는 시리즈·책만 떠요. 이미 읽은 책은
+        <b>읽음 ✅</b>, 배정한 책은 <b>배정됨</b>으로 표시돼 잘못 배정할 일이 없습니다.</p>
+      <div class="quote">"누가 뭘 읽었는지 헷갈릴 일이 없어요."</div>
+    </div>
+    <div class="wow-shot"><img src="img/01_assign.png" alt="원서 배정 화면 - 학생별 레벨에 맞는 책 목록과 읽음/배정 표시">
+      <div class="cap">원서 배정 화면 — 레벨별 책 노출 + 읽음·배정 자동 표시</div></div>
+  </div>
+
+  <div class="wow-block flip reveal">
+    <div class="wow-text">
+      <div class="wn">와 ②</div>
+      <h3>결과가 실시간<br>대시보드로</h3>
+      <p>활동 학생 수, 푼 퀴즈 수, 평균 통과율, 점수 분포가 즉시 한눈에. 학생별 평균 점수·통과율·읽은 권수까지
+        <b>엑셀 정리 없이 자동</b>으로 쌓입니다.</p>
+      <div class="quote">"엑셀에 점수 옮기던 거, 이제 자동이에요."</div>
+    </div>
+    <div class="wow-shot"><img src="img/02_dashboard.png" alt="원서 결과 대시보드 - 활동 학생 수, 푼 퀴즈, 평균 통과율, 점수 분포">
+      <div class="cap">실시간 결과 대시보드 — 통과율·분포·학생별 현황</div></div>
+  </div>
+
+  <div class="wow-block reveal">
+    <div class="wow-text">
+      <div class="wn">와 ③</div>
+      <h3>학부모 상담 리포트가<br>한 장으로 자동 완성</h3>
+      <p>완독 권수·평균 점수·통과율·월별 추이, 책별 결과까지 정리된 <b>상담용 리포트(PDF)</b>가
+        버튼 한 번에. 상담 전에 따로 정리할 필요가 없습니다.</p>
+      <div class="quote">"상담 준비, 출력 한 번으로 끝나요."</div>
+    </div>
+    <div class="wow-shot"><img src="img/03_report.png" alt="원서 학습 리포트 - 월별 추이와 책별 결과가 정리된 인쇄용 상담 리포트">
+      <div class="cap">학부모 상담 리포트(PDF) — 월별 추이 + 책별 결과</div></div>
+  </div>
+
+  <div class="wow-block flip reveal">
+    <div class="wow-text">
+      <div class="wn">와 ④ · 이게 진짜 편해요</div>
+      <h3>녹음이 한곳에 모이고,<br>클릭 하나로 들어봅니다</h3>
+      <p>학생이 책을 소리 내어 읽고 <b>직접 올리면</b>, 녹음 파일이 학생·책별로 <b>한곳에 자동 정리</b>돼요.
+        카톡으로 따로 받을 필요도, 받았는지 일일이 체크할 필요도 없습니다. <b>제출 여부가 자동 표시</b>되고,
+        선생님은 <b>클릭 하나로 바로 재생</b>해서 들어보면 끝.</p>
+      <div class="quote">"카톡으로 음원 받고 체크하던 그 일이 통째로 사라져요."</div>
+    </div>
+    <div class="wow-shot"><img src="img/07_record.png" alt="원서 녹음 화면 - 학생이 책을 읽고 녹음해서 업로드하는 화면">
+      <div class="cap">학생 녹음 화면 — 읽고 녹음해서 바로 업로드</div></div>
+  </div>
+</section>
+
+<!-- 학생 화면 갤러리 -->
+<section>
+  <div class="section-no">04 — 학생이 보는 화면</div>
+  <h2 class="section-title reveal">학생은 게임하듯,<br>순서대로 따라갑니다</h2>
+  <p class="section-intro reveal">단어 학습 → 녹음 → 퀴즈 순으로 잠금이 풀리는 구조라, 학생이 빠뜨리지 않고 끝까지 합니다.</p>
+  <div class="gallery reveal">
+    <div class="gcard"><img src="img/05_student.png" alt="학생 학습 단계 화면 - 단어학습, 녹음, 퀴즈가 순서대로 잠금 해제">
+      <div class="gc-b"><div class="gc-t">단계별 잠금 해제</div><div class="gc-d">단어 → 녹음 → 퀴즈 순으로 하나씩 열려, 순서대로 완수합니다.</div></div></div>
+    <div class="gcard"><img src="img/06_quiz.png" alt="원서 퀴즈 화면 - 객관식 단어 뜻 문제">
+      <div class="gc-b"><div class="gc-t">원서 퀴즈</div><div class="gc-d">본문에서 AI가 만든 문제. 학생은 풀고, 점수는 자동 기록.</div></div></div>
+    <div class="gcard"><img src="img/04_books.png" alt="학생별 읽은 책 목록 - 날짜, 책, 단어, 퀴즈 점수">
+      <div class="gc-b"><div class="gc-t">읽은 책 기록</div><div class="gc-d">학생별로 읽은 책·점수·재시 횟수가 차곡차곡 쌓입니다.</div></div></div>
+  </div>
+</section>
+
+<!-- MINE -->
+<section class="mine-sec">
+  <div class="section-no">05 — 이게 핵심</div>
+  <h2 class="section-title reveal">기성 프로그램은 그 회사 방식,<br>이건 <em>우리 학원 방식</em></h2>
+  <p class="section-intro reveal">사서 쓰는 원서 프로그램은 그 회사가 정한 책, 그 회사가 정한 레벨이에요.
+    <b>이건 반대입니다.</b> 전부 우리 학원에 맞춥니다.</p>
+  <div class="mine reveal">
+    <div class="mitem"><div class="mk">내 책</div><div class="mv">우리 학원이 쓰는 원서를 유튜브 링크 + 클릭 몇 번으로 직접 추가</div></div>
+    <div class="mitem"><div class="mk">내 단계</div><div class="mv">1단계·2단계·3단계… 우리 학원 레벨 체계 그대로</div></div>
+    <div class="mitem"><div class="mk">내 시리즈</div><div class="mv">Henry and Mudge, Fancy Nancy… 우리가 쓰는 시리즈로 묶음</div></div>
+    <div class="mitem"><div class="mk">내 기준</div><div class="mv">통과 점수(예: 70점), 재시험 횟수, 퀴즈 난이도·유형까지 조정</div></div>
+    <div class="mitem"><div class="mk">내 화면</div><div class="mv">"정렬 이렇게, 이 칸 추가해줘" — 말 한마디로 바뀝니다</div></div>
+    <div class="mitem"><div class="mk">내 데이터</div><div class="mv">우리 학생·점수·녹음은 우리 것. 그 회사 서버에 갇히지 않습니다</div></div>
+  </div>
+  <p class="mine-punch reveal">"이거 불편한데?" 하면,<br><em>그 자리에서 고쳐지는</em> 시스템이에요.</p>
+</section>
+
+<!-- COST (르네상스 비교) -->
+<section class="cost-sec">
+  <div class="section-no">06 — 비용 이야기</div>
+  <h2 class="section-title reveal">르네상스(AR)는 매달 수백만 원,<br>이건 <em>추가 비용 0원</em></h2>
+  <p class="section-intro reveal">유명 원서 프로그램은 처음 세팅에만 수백만 원, 매달도 수백만 원씩 나갑니다.
+    이 시스템은 내가 직접 만든 거라, 만들고 나면 더 드는 돈이 없어요.</p>
+  <div class="cost-grid reveal">
+    <div class="cost them">
+      <div class="ct">사서 쓰는 프로그램 (예: 르네상스/AR)</div>
+      <h3>매달 빠져나가는 구독료</h3>
+      <ul>
+        <li>초기 세팅비 <span class="amt">수백만 원</span></li>
+        <li>월 이용료 <span class="amt">300~400만 원</span></li>
+        <li>책·레벨 <span class="amt">회사 마음대로</span></li>
+        <li>해지하면 <span class="amt">데이터도 사라짐</span></li>
+      </ul>
+      <div class="total"><span>1년이면</span><span>수천만 원+</span></div>
+    </div>
+    <div class="cost us">
+      <div class="ct">내가 만든 시스템</div>
+      <h3>만들고 나면 내 것</h3>
+      <ul>
+        <li>세팅비 <span class="amt">0원 (직접 제작)</span></li>
+        <li>월 이용료 <span class="amt">0원</span></li>
+        <li>책·레벨 <span class="amt">내가 정함</span></li>
+        <li>데이터 <span class="amt">평생 내 것</span></li>
+      </ul>
+      <div class="total"><span>1년이면</span><span>0원</span></div>
     </div>
   </div>
+  <p class="cost-note reveal">※ 시스템을 굴리는 서버 비용은 무료 범위로 충분하고, 코드를 고칠 때 쓰는 <b>Claude 유료 플랜 정도</b>만 듭니다.
+    르네상스 한 달 치면 몇 년을 쓰고도 남아요.</p>
 </section>
 
-<!-- WHY VERCEL -->
+<!-- STAGE -->
 <section>
-  <div class="section-no">02 — WHY · 왜 코드로 넘어오나</div>
-  <h2 class="section-title reveal">앱스크립트로는<br><em>안 되는 영역</em>이 있습니다</h2>
-  <p class="section-intro reveal">출결 키오스크처럼 한 명씩 순차로 처리되면 앱스크립트로 충분합니다.
-    하지만 원서 퀴즈처럼 <strong>여러 명이 동시에 풀고 저장</strong>하면 구조적 한계에 부딪혀요. 이게 3차로 넘어오는 이유입니다.</p>
-  <div class="compare reveal">
-    <div class="crow head"><div>항목</div><div>앱스크립트</div><div>Vercel + Supabase</div></div>
-    <div class="crow"><div class="lbl">동시 처리</div><div class="old">동시 실행 한도에 금방 막힘</div><div class="new">자동 스케일 · 수십 명 거뜬</div></div>
-    <div class="crow"><div class="lbl">응답 속도</div><div class="old">콜드스타트로 1~3초 지연</div><div class="new">0.05초대 · 즉시 반응</div></div>
-    <div class="crow"><div class="lbl">동시 쓰기</div><div class="old">줄 서서 하나씩 처리</div><div class="new">동시에 저장 OK</div></div>
-    <div class="crow"><div class="lbl">적합한 용도</div><div class="old">순차 처리 (출결 키오스크)</div><div class="new">동시 다발 (원서 퀴즈)</div></div>
-  </div>
-</section>
-
-<!-- WHO -->
-<section>
-  <div class="section-no">03 — WHO</div>
-  <h2 class="section-title reveal">이런 분께 맞습니다</h2>
-  <div class="summary reveal">
-    <div class="sum"><div class="ic">📚</div><h3>원서 수업을 한다면</h3>
-      <p>학생들이 동시에 원서를 읽고 퀴즈를 푸는 시스템이 필요한 학원</p></div>
-    <div class="sum"><div class="ic">🚀</div><h3>한계를 느꼈다면</h3>
-      <p>앱스크립트·노션으로 만들다 동시접속·속도에서 막혀본 분</p></div>
-    <div class="sum"><div class="ic">🛠️</div><h3>직접 굴리고 싶다면</h3>
-      <p>외주 말고, 내 손으로 만들어 계속 고쳐 쓰고 싶은 원장</p></div>
-  </div>
-</section>
-
-<!-- CURRICULUM -->
-<section>
-  <div class="section-no">04 — CURRICULUM · 당일 만드는 것들</div>
-  <h2 class="section-title reveal">내 레포, 내 배포,<br><em>내 원서 시스템</em></h2>
-  <p class="section-intro reveal">완성 템플릿에서 시작해, 클로드로 내 학원에 맞게 고치고, 진짜 작동하는 주소(URL)까지
-    손에 넣고 돌아갑니다.</p>
-
-  <ul class="curri">
-    <li class="reveal"><span class="cnum"></span><div class="cbody">
-      <span class="ctag">셋업</span>
-      <div class="ctitle">계정 4개 연결 — GitHub · Claude · Vercel · Supabase</div>
-      <div class="cdesc">템플릿 레포를 내 소유로 복제하고, 클로드(웹)에 레포를 연결, Vercel로 자동 배포를 켜고,
-        Supabase 데이터베이스를 만듭니다. 한 번만 하면 끝나는 셋업.</div>
-      <div class="cgrid">
-        <div class="cbox"><div class="bk">제일 막히는 곳</div><div class="bv">환경변수 입력 — 스크린샷으로 단계별로 떠먹여 드려, 초보도 통과합니다.</div></div>
-        <div class="cbox"><div class="bk">끝나면</div><div class="bv">내 소유의 레포 + 내 주소(URL)가 생기고, 푸시하면 자동 배포되는 파이프라인 완성.</div></div>
-      </div>
-    </div></li>
-
-    <li class="reveal"><span class="cnum"></span><div class="cbody">
-      <span class="ctag hl">하이라이트</span>
-      <div class="ctitle">바이브 코딩 — 말로 시키면 코드가 바뀐다</div>
-      <div class="cdesc">"학원 이름 바꿔줘", "메인 색을 우리 브랜드로", "퀴즈를 10문제로" — 클로드한테 말로
-        시키고, 바뀐 코드가 자동 배포되는 걸 직접 확인합니다. 코드를 안 봐도 됩니다.</div>
-      <div class="cgrid">
-        <div class="cbox"><div class="bk">핵심 자산</div><div class="bv">CLAUDE.md — 클로드가 프로젝트를 이해하게 해주는 안내문. 초보가 막 시켜도 안전하게 고쳐줍니다.</div></div>
-        <div class="cbox"><div class="bk">끝나면</div><div class="bv">앞으로 기능이 필요할 때마다 말로 시켜서 직접 늘릴 수 있게 됩니다.</div></div>
-      </div>
-    </div></li>
-
-    <li class="reveal"><span class="cnum"></span><div class="cbody">
-      <span class="ctag hl">하이라이트</span>
-      <div class="ctitle">원서 시스템 — 읽기 · 퀴즈 · 진도 관리</div>
-      <div class="cdesc">학생이 로그인해 원서를 읽고, 퀴즈를 풀고, 진도가 자동으로 쌓이는 시스템.
-        여러 학생이 동시에 풀어도 빠르게 저장됩니다 — 앱스크립트로는 안 되던 그 부분.</div>
-      <div class="cgrid">
-        <div class="cbox"><div class="bk">만드는 것</div><div class="bv">학생 로그인 · 원서별 퀴즈 · 진도/점수 자동 누적 · 선생님 확인 화면</div></div>
-        <div class="cbox"><div class="bk">끝나면</div><div class="bv">학생들이 자기 속도로 원서를 읽고 푸는 동안, 원장은 진도를 한눈에 봅니다.</div></div>
-      </div>
-    </div></li>
-
-    <li class="reveal"><span class="cnum"></span><div class="cbody">
-      <span class="ctag">운영</span>
-      <div class="ctitle">내 학원에 맞게 — 커스터마이즈 & 확장</div>
-      <div class="cdesc">브랜드 색·문구·퀴즈 난이도를 내 학원에 맞춰 바꾸고, 앞으로 기능을 어떻게
-        더 붙일지(말로 시키는 법)까지 익힙니다. 세미나 후에도 혼자 굴릴 수 있게.</div>
-      <div class="cgrid">
-        <div class="cbox"><div class="bk">비용 안내</div><div class="bv">Vercel·Supabase 무료 티어로 학원 1곳 30명은 여유. (Claude 유료 플랜은 필요)</div></div>
-        <div class="cbox"><div class="bk">끝나면</div><div class="bv">막히면 클로드한테 물어 고치는 습관이 들어, 더는 외주가 필요 없습니다.</div></div>
-      </div>
-    </div></li>
+  <div class="section-no">07 — 지금 어디까지 됐나</div>
+  <h2 class="section-title reveal">데모용이 아니라,<br><em>지금 매일 돌아가는</em> 시스템</h2>
+  <p class="section-intro reveal">토이 프로젝트가 아닙니다. 실제 운영 중인 학원에서, 수업을 매일 하면서 무중단으로 만들어졌어요.
+    위 화면들이 전부 그 증거입니다.</p>
+  <ul class="stage reveal">
+    <li><div class="st-mark done">✓</div><div class="st-body">
+      <h3>유튜브 본문 자동 가져오기 · AI 퀴즈 생성 <span class="st-tag">작동 중</span></h3>
+      <p>영상 링크 하나로 본문을 끌어와 단어카드·단어퀴즈·원서퀴즈를 한 번에 생성·저장.</p></div></li>
+    <li><div class="st-mark done">✓</div><div class="st-body">
+      <h3>레벨 기반 배정 + 중복 방지 <span class="st-tag">작동 중</span></h3>
+      <p>학생 레벨에 맞는 책만 노출, 읽은 책은 자동 표시.</p></div></li>
+    <li><div class="st-mark done">✓</div><div class="st-body">
+      <h3>녹음 자동 수집 + 클릭 재생 <span class="st-tag">작동 중</span></h3>
+      <p>학생이 올린 녹음이 한곳에 모이고, 제출 여부 자동 표시 + 바로 재생.</p></div></li>
+    <li><div class="st-mark done">✓</div><div class="st-body">
+      <h3>실시간 대시보드 + 상담 리포트(PDF) <span class="st-tag">작동 중</span></h3>
+      <p>점수·통과율·월별 추이를 즉시 확인하고, 상담용 리포트로 출력.</p></div></li>
+    <li><div class="st-mark live">→</div><div class="st-body">
+      <h3>계속 진화 중</h3>
+      <p>이번 세미나 준비 중에도 기능이 늘었습니다. 쓰면서 매일 개선되는 살아있는 시스템이에요.</p></div></li>
   </ul>
+</section>
+
+<!-- 비교표 -->
+<section>
+  <div class="section-no">08 — 한눈에 비교</div>
+  <h2 class="section-title reveal">사서 쓰는 것과<br>만들어 쓰는 것의 차이</h2>
+  <div class="compare reveal">
+    <div class="crow head"><div>항목</div><div>사서 쓰는 원서 프로그램</div><div>우리가 만든 시스템</div></div>
+    <div class="crow"><div class="lbl">비용</div><div class="old">세팅 수백만 + 월 수백만 원</div><div class="new">직접 제작 · 추가 비용 0</div></div>
+    <div class="crow"><div class="lbl">책</div><div class="old">정해진 라인업만</div><div class="new">우리가 쓰는 책 자유 추가</div></div>
+    <div class="crow"><div class="lbl">레벨·단계</div><div class="old">회사 기준</div><div class="new">우리 학원 기준 그대로</div></div>
+    <div class="crow"><div class="lbl">녹음</div><div class="old">카톡으로 따로 받고 수기 체크</div><div class="new">자동 수집·표시·클릭 재생</div></div>
+    <div class="crow"><div class="lbl">데이터</div><div class="old">그 회사 서버에 갇힘</div><div class="new">우리 데이터는 우리 것</div></div>
+    <div class="crow"><div class="lbl">변경</div><div class="old">요청해도 안 됨</div><div class="new">말하면 그날 바뀜</div></div>
+  </div>
 </section>
 
 <!-- APPLY -->
 <section class="apply-sec" id="apply">
-  <div class="section-no">05 — APPLY</div>
+  <div class="section-no">09 — APPLY</div>
   <h2 class="section-title reveal">세미나 3 신청</h2>
   <p class="section-intro reveal">일정과 가격을 준비 중입니다. 먼저 관심 신청을 남겨주시면, 열리는 즉시 우선 안내해 드려요.</p>
   <div class="apply-card reveal">
     <span class="ac-badge">신규 · 상위 코스</span>
     <div class="ac-info">
-      <div class="ac-row"><span class="ac-k">만드는 것</span><span class="ac-v">원서 읽기·퀴즈·진도 관리 시스템</span></div>
-      <div class="ac-row"><span class="ac-k">스택</span><span class="ac-v">Claude Code · Vercel · GitHub · Supabase</span></div>
+      <div class="ac-row"><span class="ac-k">만드는 것</span><span class="ac-v">우리 학원 책·레벨·방식대로 도는 원서 시스템</span></div>
+      <div class="ac-row"><span class="ac-k">난이도</span><span class="ac-v">코드 안 봐도 됨 · "이렇게 바꿔줘"만</span></div>
       <div class="ac-row"><span class="ac-k">전제</span><span class="ac-v">1·2차 수강 또는 동급 경험 권장</span></div>
       <div class="ac-row"><span class="ac-k">준비물</span><span class="ac-v">Claude 유료 플랜 · 노트북</span></div>
     </div>
@@ -304,30 +451,30 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
 
 <!-- FAQ -->
 <section>
-  <div class="section-no">06 — FAQ</div>
+  <div class="section-no">10 — FAQ</div>
   <h2 class="section-title reveal">자주 묻는 질문</h2>
   <div class="faq reveal">
+    <details><summary>르네상스(AR)랑 비교하면 정말 돈이 안 드나요?</summary>
+      <p>르네상스는 초기 세팅비 수백만 원에 매달 수백만 원씩 나갑니다. 이 시스템은 직접 만든 거라 그 구독료가 없어요. 코드를 고칠 때 쓰는 Claude 유료 플랜과 무료 범위의 서버 정도만 들어, 르네상스 한 달 치면 몇 년을 씁니다.</p></details>
+    <details><summary>녹음은 어떻게 받나요? 카톡으로 따로 받아야 하나요?</summary>
+      <p>아니요, 그게 핵심 편의예요. 학생이 시스템에서 직접 녹음해 올리면 학생·책별로 한곳에 자동으로 모입니다. 제출 여부도 자동 표시되고, 선생님은 클릭 한 번으로 바로 들어볼 수 있어요. 카톡으로 받고 체크하던 일이 통째로 사라집니다.</p></details>
     <details><summary>코딩을 정말 몰라도 되나요?</summary>
-      <p>네. 코드를 직접 짜지도, 보지도 않습니다. 완성 템플릿에서 시작해, 클로드한테 말로 시켜서 내 학원에 맞게 고치는 방식이에요. 배포도 자동입니다.</p></details>
-    <details><summary>세미나 1·2를 안 들었어도 되나요?</summary>
-      <p>1·2차보다 상위 코스라, 노션·자동화 개념을 알고 오시면 훨씬 매끄럽습니다. 동급의 경험이 있다면 바로 들으셔도 괜찮아요.</p></details>
-    <details><summary>비용이 많이 드나요?</summary>
-      <p>Vercel·Supabase는 무료 티어로 학원 1곳 30명 정도는 여유 있게 돌아갑니다. 다만 클로드로 코드를 고치려면 Claude 유료 플랜이 필요해요. 이 부분은 미리 안내해 드립니다.</p></details>
-    <details><summary>앱스크립트(2차)랑 뭐가 다른가요?</summary>
-      <p>2차는 한 명씩 순차 처리되는 자동화에 강합니다. 3차는 여러 학생이 동시에 풀고 저장하는 원서 퀴즈처럼, 동시접속·속도가 필요한 시스템을 만듭니다.</p></details>
-    <details><summary>세미나 후에 혼자 고칠 수 있을까요?</summary>
-      <p>그게 목표입니다. 막히면 클로드한테 말로 물어 고치는 습관을 들이도록 구성했어요. CLAUDE.md라는 안내문이 클로드를 똑똑하게 만들어, 초보가 시켜도 안전하게 고쳐줍니다.</p></details>
+      <p>네. 코드를 직접 짜지도, 보지도 않습니다. 완성된 시스템에서 시작해, 클로드한테 "우리 학원 이름으로 바꿔줘"처럼 말로 시켜서 내 학원에 맞게 고치는 방식이에요.</p></details>
+    <details><summary>우리 학원이 쓰는 책도 넣을 수 있나요?</summary>
+      <p>네. 사서 쓰는 프로그램은 정해진 책만 되지만, 이건 우리가 쓰는 원서를 유튜브 링크와 클릭 몇 번으로 직접 추가합니다. 레벨·시리즈도 우리 학원 체계 그대로 만들 수 있어요.</p></details>
+    <details><summary>이미 노션·구글시트로 관리 중인데 갈아엎어야 하나요?</summary>
+      <p>아니요. 쓰던 건 그대로 두고 옆에 새 기능을 천천히 붙입니다. 검증될 때까지 양쪽에 같이 기록하고, 문제가 생기면 바로 되돌릴 수 있어요.</p></details>
   </div>
 </section>
 
 <footer>
-  <div><div class="fb">Hong<b>Lab</b></div><div class="fn">세미나 3 · 바이브 코딩으로 원서 시스템 만들기</div></div>
+  <div><div class="fb">Hong<b>Lab</b></div><div class="fn">세미나 3 · 우리 학원만의 원서 시스템 만들기</div></div>
   <a href="index.html" class="home" style="border:1.5px solid var(--navy);border-radius:100px;padding:9px 16px;font-size:13px;font-weight:700;color:var(--navy)">← HongLab 소개로</a>
 </footer>
 
 <script>
 const obs=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting){
-  e.target.style.transitionDelay=(i%4*70)+'ms';e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.12});
+  e.target.style.transitionDelay=(i%3*70)+'ms';e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>

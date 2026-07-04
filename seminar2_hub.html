@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HongLab 세미나 2차 · 자료실</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#1e4642;      /* 전자책 표지 딥그린 */
+  --forest:#2c5850;
+  --sage:#7c9a86;
+  --mint:#bfd6bc;
+  --pale:#a9bdb2;
+  --cream:#f2f0e9;
+  --card:#ffffff;
+  --ink:#1c2724;
+  --muted:#6a7871;
+  --line:#e3e0d6;
+  --warn:#c0573e;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Noto Sans KR',sans-serif;
+  line-height:1.7;
+  padding-bottom:70px;
+}
+.wrap{max-width:740px;margin:0 auto;padding:0 22px;}
+
+/* HERO */
+.hero{background:var(--deep);color:#fff;padding:52px 0 46px;position:relative;overflow:hidden;}
+.hero::after{content:"";position:absolute;left:0;top:0;width:100%;height:6px;background:var(--sage);}
+.hero .wrap{position:relative;z-index:1;}
+.hero .eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--pale);margin-bottom:16px;}
+.hero h1{font-size:34px;font-weight:900;line-height:1.2;letter-spacing:-.01em;color:var(--mint);}
+.hero h1 span{color:#fff;}
+.hero p{margin-top:16px;font-size:15px;color:rgba(255,255,255,.82);max-width:520px;}
+.hero .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+.hero .chip{font-size:12px;font-weight:600;color:var(--mint);border:1px solid rgba(191,214,188,.35);padding:5px 13px;border-radius:20px;}
+
+/* QUICK NAV */
+.quicknav{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:-26px;position:relative;z-index:5;}
+@media(max-width:600px){.quicknav{grid-template-columns:repeat(3,1fr);}}
+.qn{
+  background:var(--card);border:1px solid var(--line);border-radius:13px;
+  padding:16px 12px;text-decoration:none;text-align:center;
+  transition:transform .15s,border-color .15s;
+}
+.qn:hover{transform:translateY(-3px);border-color:var(--sage);}
+.qn .ic{font-size:24px;display:block;margin-bottom:7px;}
+.qn .t{font-size:13px;font-weight:800;color:var(--ink);}
+
+/* SECTION */
+.sec{margin-top:46px;}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid var(--deep);}
+.sec-head .no{font-size:14px;font-weight:900;color:var(--sage);font-variant-numeric:tabular-nums;}
+.sec-head h2{font-size:21px;font-weight:900;color:var(--deep);}
+.sec-head .sub{margin-left:auto;font-size:12.5px;color:var(--muted);font-weight:600;}
+
+/* RESOURCE CARD */
+.res{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:24px;margin-bottom:14px;
+}
+.res h3{font-size:17px;font-weight:800;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:9px;}
+.res .desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px;}
+.res .desc b{color:var(--ink);font-weight:700;}
+
+/* BIG BUTTON */
+.btn{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--deep);border-radius:12px;padding:15px 20px;
+  text-decoration:none;transition:background .15s;
+}
+.btn:hover{background:var(--forest);}
+.btn .lab{color:#fff;font-size:14.5px;font-weight:700;}
+.btn .go{flex-shrink:0;background:var(--sage);color:#fff;font-size:13px;font-weight:800;padding:7px 15px;border-radius:8px;white-space:nowrap;}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);}
+.btn.ghost .lab{color:var(--deep);}
+.btn.ghost:hover{border-color:var(--sage);background:rgba(124,154,134,.06);}
+.btn.ghost .go{background:var(--deep);}
+
+/* PLACEHOLDER LINK */
+.btn.todo{background:rgba(192,87,62,.07);border:1.5px dashed rgba(192,87,62,.5);}
+.btn.todo .lab{color:var(--warn);}
+.btn.todo .go{background:var(--warn);}
+.fill-note{margin-top:9px;font-size:12px;color:var(--warn);font-weight:600;}
+
+/* STEP LIST */
+.steps{list-style:none;counter-reset:s;margin-top:6px;}
+.steps li{counter-increment:s;display:flex;gap:13px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink);}
+.steps li:last-child{border-bottom:none;}
+.steps li::before{content:counter(s);flex-shrink:0;width:25px;height:25px;background:var(--sage);color:#fff;border-radius:7px;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.steps li b{color:var(--deep);font-weight:800;}
+
+/* NOTE BOX */
+.note{background:rgba(124,154,134,.1);border:1px solid rgba(124,154,134,.3);border-radius:12px;padding:15px 18px;margin-top:14px;font-size:13.5px;color:#3c5249;line-height:1.7;}
+.note b{color:var(--deep);font-weight:800;}
+
+/* TWO COL for template links */
+.twocol{display:grid;grid-template-columns:1fr;gap:12px;}
+
+/* FAQ inline */
+.faq{margin-top:6px;}
+.faq details{border-bottom:1px solid var(--line);}
+.faq details:last-child{border-bottom:none;}
+.faq summary{list-style:none;cursor:pointer;padding:15px 28px 15px 0;font-size:14.5px;font-weight:700;color:var(--deep);position:relative;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:"+";position:absolute;right:2px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--sage);}
+.faq details[open] summary::after{content:"–";}
+.faq .ans{padding:0 0 16px;font-size:13.5px;color:var(--muted);line-height:1.75;}
+.faq .ans b{color:var(--ink);}
+
+/* FOOTER */
+.foot{margin-top:52px;padding-top:26px;border-top:1px solid var(--line);text-align:center;font-size:13px;color:var(--muted);}
+.foot b{color:var(--deep);font-weight:800;}
+.foot .small{margin-top:8px;font-size:12px;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">HONGLAB 세미나 2차 · 학원 자동화</div>
+    <h1>출결 시스템 + AI 월말평가서<br><span>자료실</span></h1>
+    <p>세미나에서 만든 두 시스템을 집에서 끝까지 설치할 수 있게 모아뒀어요. 교재 보면서 영상 따라오고, 템플릿 복제하면 끝. 막히면 Q&A로 오세요.</p>
+    <div class="chips">
+      <span class="chip">Google Apps Script</span>
+      <span class="chip">Notion</span>
+      <span class="chip">Solapi 알림톡</span>
+      <span class="chip">Claude AI</span>
+      <span class="chip">Google Docs</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- QUICK NAV -->
+  <nav class="quicknav">
+    <a class="qn" href="#book"><span class="ic">📘</span><span class="t">전체 교재</span></a>
+    <a class="qn" href="#video"><span class="ic">🎬</span><span class="t">영상강의</span></a>
+    <a class="qn" href="#template"><span class="ic">🗂️</span><span class="t">노션 템플릿</span></a>
+    <a class="qn" href="#hub"><span class="ic">📂</span><span class="t">자료실</span></a>
+    <a class="qn" href="#qna"><span class="ic">💬</span><span class="t">Q&A</span></a>
+  </nav>
+
+  <!-- 1. 전체 교재 -->
+  <section class="sec" id="book">
+    <div class="sec-head">
+      <span class="no">01</span>
+      <h2>전체 교재 (전자책)</h2>
+      <span class="sub">PDF · 27p</span>
+    </div>
+    <div class="res">
+      <h3>📘 출결 시스템 + 월말평가서 제작기</h3>
+      <p class="desc">
+        표지부터 PART 0~7까지 전체 설치 과정을 담은 전자책이에요.
+        <b>앱스크립트 첫 실습 → 사전 준비 → Notion DB → 코드 붙여넣기 → 값 채우기 → 테스트 → 커스터마이징</b>까지 순서대로.
+        혼자 보면서 끝까지 따라올 수 있어요.
+      </p>
+      <a class="btn" href="./HongLab_세미나2_전자책.pdf" target="_blank" rel="noopener">
+        <span class="lab">전자책 PDF 열기 / 다운로드</span>
+        <span class="go">열기 →</span>
+      </a>
+      <div class="note">
+        <b>📌 PDF 위치</b> — 전자책 파일을 <b>seminar 폴더</b>에 함께 올린 뒤,
+        링크가 <code style="background:rgba(0,0,0,.05);padding:1px 5px;border-radius:4px;">HongLab_세미나2_전자책.pdf</code> 파일명과 맞는지 확인하세요.
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 영상강의 -->
+  <section class="sec" id="video">
+    <div class="sec-head">
+      <span class="no">02</span>
+      <h2>영상강의</h2>
+      <span class="sub">한 달 시청</span>
+    </div>
+    <div class="res">
+      <h3>🎬 세미나 전체 영상</h3>
+      <p class="desc">
+        막힐 때마다 멈추고 돌려보며 <b>내 속도로</b> 따라 하세요.
+        신청하신 이메일로 로그인하면 한 달간 시청할 수 있어요.
+      </p>
+      <a class="btn todo" href="#" target="_blank" rel="noopener">
+        <span class="lab">⚠️ 영상 시청 링크 (주소 넣기)</span>
+        <span class="go">열기 →</span>
+      </a>
+      <p class="fill-note">→ 2차 영상 주소로 교체하세요 (예: seminar-replay.vercel.app 계열)</p>
+      <ol class="steps" style="margin-top:16px;">
+        <li><div>위 링크 접속 → <b>신청하신 이메일</b> 입력</div></li>
+        <li><div><b>"로그인 링크 받기"</b> 클릭 → 메일함에서 링크 클릭</div></li>
+        <li><div>영상 자동 재생 — 로그인 링크는 일회용이에요</div></li>
+      </ol>
+      <div class="note">
+        ⚠️ <b>카카오톡 안에서는 영상이 안 열려요.</b> 꼭 <b>PC</b>에서, 모바일이면 <b>사파리·크롬</b>에 링크를 복사해서 열어주세요.
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 노션 템플릿 -->
+  <section class="sec" id="template">
+    <div class="sec-head">
+      <span class="no">03</span>
+      <h2>노션 템플릿 복제</h2>
+      <span class="sub">DB 세트</span>
+    </div>
+    <div class="res">
+      <h3>🗂️ 출결 · 월말평가서 DB 템플릿</h3>
+      <p class="desc">
+        교재 PART 2에서 쓰는 <b>Notion DB 구조</b>예요. 복제해서 내 워크스페이스로 가져온 뒤,
+        코드의 DB ID만 내 것으로 바꾸면 바로 연결돼요.
+      </p>
+      <div class="twocol">
+        <a class="btn" href="https://nimble-snow-d83.notion.site/2-051e238008ea83f68e8a81992f5f78d6" target="_blank" rel="noopener">
+          <span class="lab">출결·평가서 DB 템플릿 복제하기</span>
+          <span class="go">복제 →</span>
+        </a>
+      </div>
+
+      <p style="font-size:13.5px;font-weight:800;color:var(--deep);margin:20px 0 4px;">복제 방법</p>
+      <ol class="steps">
+        <li><div>위 링크 클릭 → <b>PC 브라우저</b> 권장</div></li>
+        <li><div>우상단 <b>"복제(Duplicate)"</b> 버튼 클릭</div></li>
+        <li><div>내 <b>학원용 워크스페이스</b> 선택</div></li>
+        <li><div>사이드바에 DB가 생기면 완료 → 교재 보고 <b>DB ID</b> 확인</div></li>
+      </ol>
+      <div class="note">
+        <b>💡 복제 후 할 일</b> — 코드(PART 4)에서 <b>DB ID·API 키</b>를 내 값으로 바꿔야 연결돼요.
+        Make 자동화나 실제 학생 데이터는 복제에 안 따라오니, 교재 순서대로 채워주세요.
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 코드 자료실 -->
+  <section class="sec" id="hub">
+    <div class="sec-head">
+      <span class="no">04</span>
+      <h2>세미나2 자료실</h2>
+      <span class="sub">코드 · 전체 자료</span>
+    </div>
+    <div class="res">
+      <h3>📂 학원 자동화 시스템 만들기 — 자료실</h3>
+      <p class="desc">
+        세미나에서 쓴 <b>코드 파일과 설치 자료</b>를 한 노션 페이지에 모아뒀어요.
+        교재와 함께 열어두고, 필요한 코드를 <b>복사해서 붙여넣기</b> 하세요.
+        UI가 바뀌거나 새 자료가 나오면 여기에 계속 업데이트돼요.
+      </p>
+      <a class="btn" href="https://shrouded-toast-e09.notion.site/2-392b9587aca580a9a416d93f794a0d03" target="_blank" rel="noopener">
+        <span class="lab">노션 자료실 열기 (코드 전체)</span>
+        <span class="go">열기 →</span>
+      </a>
+      <div class="note">
+        <b>🔖 북마크 추천</b> — 이 자료실은 계속 업데이트되니 즐겨찾기 해두세요.
+        코드를 붙여넣을 땐 <b>파일 순서(교재 PART 3)</b>대로 넣어야 서로 연결돼요.
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Q&A -->
+  <section class="sec" id="qna">
+    <div class="sec-head">
+      <span class="no">05</span>
+      <h2>질문 &amp; 도움받기</h2>
+      <span class="sub">1주 1:1</span>
+    </div>
+    <div class="res">
+      <h3>💬 카톡 질문방</h3>
+      <p class="desc">
+        설치하다 막히면 <b>화면 캡처 + 어디서 막혔는지 한 줄</b>만 남겨주세요.
+        세미나 후 <b>1주일간 1:1 답변</b>도 갑니다.
+      </p>
+      <a class="btn todo" href="#" target="_blank" rel="noopener">
+        <span class="lab">⚠️ 카톡 질문방 링크 (주소 넣기)</span>
+        <span class="go">입장 →</span>
+      </a>
+      <p class="fill-note">→ 오픈카톡 링크로 교체하세요</p>
+
+      <div class="faq" style="margin-top:18px;">
+        <details>
+          <summary>알림톡이 안 나가요</summary>
+          <div class="ans">솔라피 <b>발신 프로필</b>이 활성인지, <b>템플릿 심사</b>가 통과됐는지 확인하세요. 심사는 영업일 1~3일 걸려요. Make 본문과 등록 템플릿이 한 글자라도 다르면 거부돼요.</div>
+        </details>
+        <details>
+          <summary>"apiKey length must be 16" 에러가 떠요</summary>
+          <div class="ans">솔라피 <b>API Key와 Secret을 바꿔 넣은</b> 경우가 대부분이에요. API Key는 16자 — 콘솔에서 다시 복사하고, 앞뒤 공백이 없는지 확인하세요.</div>
+        </details>
+        <details>
+          <summary>평가서 문체를 바꾸고 싶어요</summary>
+          <div class="ans">교재 PART 7 참고. 코드에서 <code style="background:rgba(0,0,0,.05);padding:1px 5px;border-radius:4px;">getReportGuideline</code>을 찾아 <b>프롬프트(한글 명령문)</b>만 고치면 돼요. 코드를 짤 줄 몰라도 됩니다.</div>
+        </details>
+        <details>
+          <summary>Claude API 키는 어디서 발급받나요</summary>
+          <div class="ans">Claude Console → API 키 → <b>키 생성</b>. 발급 직후 딱 한 번만 전체가 보이니 바로 복사해두세요. 실습용 키는 각자 발급받아 각자 환경변수에 넣습니다.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">
+    천천히, 하나씩. 오늘 다 못 해도 괜찮아요 — 우선 한 시스템만 돌려보세요.<br>
+    <b>HongLab</b> · 홍보은영어학원 · 학원 자동화 세미나 2차
+    <span class="small">이 자료는 수강생 전용입니다.</span>
+  </p>
+
+</main>
+</body>
+</html>

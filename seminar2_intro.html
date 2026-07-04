@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오늘 우리가 만들 것 · HongLab 세미나 2차</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#1e4642;
+  --forest:#2c5850;
+  --sage:#7c9a86;
+  --mint:#bfd6bc;
+  --pale:#a9bdb2;
+  --cream:#f2f0e9;
+  --card:#ffffff;
+  --ink:#1c2724;
+  --muted:#6a7871;
+  --line:#dfe3d9;
+  --gold:#d9a441;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Noto Sans KR',sans-serif;
+  line-height:1.7;
+  padding-bottom:60px;
+}
+.wrap{max-width:780px;margin:0 auto;padding:0 24px;}
+
+/* HERO */
+.hero{background:var(--deep);color:#fff;padding:64px 0 72px;position:relative;overflow:hidden;}
+.hero::before{
+  content:"";position:absolute;right:-80px;top:-80px;width:340px;height:340px;
+  border:2px solid rgba(124,154,134,.18);border-radius:50%;
+}
+.hero::after{
+  content:"";position:absolute;right:10px;bottom:-120px;width:220px;height:220px;
+  border:2px solid rgba(124,154,134,.12);border-radius:50%;
+}
+.hero .wrap{position:relative;z-index:1;}
+.hero .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--pale);margin-bottom:20px;}
+.hero h1{font-size:clamp(30px,5vw,44px);font-weight:900;line-height:1.18;letter-spacing:-.015em;color:#fff;}
+.hero h1 .hl{color:var(--mint);}
+.hero .lead{margin-top:20px;font-size:16px;color:rgba(255,255,255,.84);max-width:560px;line-height:1.75;}
+.hero .lead b{color:var(--mint);font-weight:700;}
+
+/* RESULT STRIP */
+.results{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:-42px;position:relative;z-index:5;}
+@media(max-width:600px){.results{grid-template-columns:1fr;}}
+.result{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px 20px;box-shadow:0 6px 20px rgba(30,70,66,.06);}
+.result .rlabel{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--sage);margin-bottom:10px;}
+.result h3{font-size:19px;font-weight:900;color:var(--deep);margin-bottom:8px;}
+.result p{font-size:13.5px;color:var(--muted);line-height:1.65;}
+.result .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.result .tag{font-size:11px;font-weight:700;color:var(--forest);background:rgba(124,154,134,.14);padding:4px 10px;border-radius:14px;}
+
+/* SECTION TITLE */
+.block-title{margin:56px 0 8px;}
+.block-title .k{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--sage);}
+.block-title h2{font-size:24px;font-weight:900;color:var(--deep);margin-top:6px;}
+.block-title p{font-size:14px;color:var(--muted);margin-top:8px;}
+
+/* TIMELINE */
+.timeline{margin-top:32px;position:relative;padding-left:8px;}
+.timeline::before{
+  content:"";position:absolute;left:26px;top:14px;bottom:40px;width:2px;
+  background:linear-gradient(var(--sage),var(--mint));
+}
+.step{position:relative;padding:0 0 26px 66px;}
+.step:last-child{padding-bottom:0;}
+.step .dot{
+  position:absolute;left:8px;top:0;width:38px;height:38px;border-radius:12px;
+  background:var(--deep);color:#fff;font-size:14px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;z-index:2;
+  box-shadow:0 0 0 5px var(--cream);
+}
+.step.mustdo .dot{background:var(--gold);color:#3a2a06;}
+.step .body{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;}
+.step .phase{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--sage);margin-bottom:5px;}
+.step h4{font-size:16.5px;font-weight:800;color:var(--ink);margin-bottom:7px;}
+.step h4 .part{color:var(--sage);font-weight:900;margin-right:7px;}
+.step .desc{font-size:13.5px;color:var(--muted);line-height:1.7;}
+.step .desc b{color:var(--ink);font-weight:700;}
+.step .meta{display:inline-flex;align-items:center;gap:6px;margin-top:11px;font-size:11.5px;font-weight:700;color:var(--forest);background:rgba(124,154,134,.12);padding:4px 11px;border-radius:12px;}
+.step.mustdo .meta{color:#7a5406;background:rgba(217,164,65,.16);}
+
+/* PHASE DIVIDER */
+.phase-tag{display:flex;align-items:center;gap:10px;margin:6px 0 20px 66px;}
+.phase-tag .line{flex:1;height:1px;background:var(--line);}
+.phase-tag span{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--muted);}
+
+/* CALLOUT before start */
+.pre{background:var(--deep);color:#fff;border-radius:18px;padding:28px 26px;margin-top:44px;}
+.pre h3{font-size:17px;font-weight:800;color:var(--mint);margin-bottom:14px;display:flex;align-items:center;gap:9px;}
+.pre ul{list-style:none;}
+.pre li{display:flex;gap:11px;padding:9px 0;font-size:14px;color:rgba(255,255,255,.9);border-bottom:1px solid rgba(255,255,255,.1);}
+.pre li:last-child{border-bottom:none;}
+.pre li .c{color:var(--mint);font-weight:900;flex-shrink:0;}
+.pre li b{color:#fff;font-weight:800;}
+
+/* FINISH */
+.finish{text-align:center;margin-top:48px;padding:36px 24px;background:linear-gradient(135deg,#2c5850,#1e4642);border-radius:20px;color:#fff;}
+.finish .big{font-size:22px;font-weight:900;color:var(--mint);line-height:1.4;}
+.finish .big b{color:#fff;}
+.finish p{margin-top:12px;font-size:14px;color:rgba(255,255,255,.8);}
+
+.foot{margin-top:40px;text-align:center;font-size:13px;color:var(--muted);}
+.foot b{color:var(--deep);font-weight:800;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">HONGLAB 세미나 2차 · 학원 자동화</div>
+    <h1>오늘, 이 두 개를<br><span class="hl">직접 만들어</span> 갑니다.</h1>
+    <p class="lead">
+      한 명당 20분 × 30명 = 매달 <b>10시간</b> 걸리던 일을 —
+      코딩을 몰라도, <b>완성 코드를 붙여넣고 내 값만 바꿔서</b> 끝냅니다.
+      오늘 우리가 지나갈 길을 먼저 펼쳐볼게요.
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 결과물 2개 -->
+  <div class="results">
+    <div class="result">
+      <div class="rlabel">SYSTEM 01</div>
+      <h3>📲 출결 시스템</h3>
+      <p>PIN 4자리로 등·하원 체크 → 학부모에게 카카오 알림톡 자동 발송. 지각·미등원 감지에 실시간 현황판까지.</p>
+      <div class="tags"><span class="tag">PIN 등하원</span><span class="tag">알림톡</span><span class="tag">현황판</span></div>
+    </div>
+    <div class="result">
+      <div class="rlabel">SYSTEM 02</div>
+      <h3>🤖 AI 월말평가서</h3>
+      <p>매일 2분 기록 → 월말에 버튼 한 번 → Claude가 평가서 작성. 도넛 차트 4개와 Google Doc까지 자동.</p>
+      <div class="tags"><span class="tag">2분 기록</span><span class="tag">AI 작성</span><span class="tag">학부모 리포트</span></div>
+    </div>
+  </div>
+
+  <!-- 커리큘럼 흐름 -->
+  <div class="block-title">
+    <div class="k">TODAY'S JOURNEY</div>
+    <h2>오늘의 여정 — PART 0 → 7</h2>
+    <p>준비 → 뼈대 → 코드 → 연결 → 완성. 한 계단씩 올라가면 두 시스템이 살아납니다.</p>
+  </div>
+
+  <div class="timeline">
+
+    <!-- PART 0 -->
+    <div class="step">
+      <div class="dot">0</div>
+      <div class="body">
+        <div class="phase">이해하기</div>
+        <h4><span class="part">PART 0</span>앱스크립트, 이게 뭐예요?</h4>
+        <div class="desc">
+          첫 실습으로 감을 잡아요. 구글 계정만 있으면 <b>서버 비용 0원</b>으로 웹앱이 돌아갑니다.
+          그리고 왜 "30명 동시"에서 한계가 오는지도 미리 짚고 가요.
+        </div>
+        <span class="meta">☕ 몸풀기</span>
+      </div>
+    </div>
+
+    <!-- PART 1 -->
+    <div class="step mustdo">
+      <div class="dot">1</div>
+      <div class="body">
+        <div class="phase">준비</div>
+        <h4><span class="part">PART 1</span>사전 준비 — 계정 · 알림톡 검수</h4>
+        <div class="desc">
+          솔라피·카카오 채널 계정을 준비하고 <b>알림톡 템플릿 검수</b>를 넣어둬요.
+          검수는 영업일 1~3일 걸려서 — <b>오늘 제일 먼저</b> 넣어두는 게 핵심이에요.
+        </div>
+        <span class="meta">⏰ 제일 먼저 할 것</span>
+      </div>
+    </div>
+
+    <div class="phase-tag"><span>여기서부터 시스템 뼈대</span><div class="line"></div></div>
+
+    <!-- PART 2 -->
+    <div class="step">
+      <div class="dot">2</div>
+      <div class="body">
+        <div class="phase">뼈대</div>
+        <h4><span class="part">PART 2</span>Notion DB 구조 만들기</h4>
+        <div class="desc">
+          데이터가 사는 곳을 만들어요. 필요한 <b>속성을 추가</b>하고, DB 하나를 새로 만들어
+          출결·평가 기록이 쌓일 자리를 잡습니다.
+        </div>
+        <span class="meta">🗂️ 데이터의 집</span>
+      </div>
+    </div>
+
+    <!-- PART 3 -->
+    <div class="step">
+      <div class="dot">3</div>
+      <div class="body">
+        <div class="phase">코드</div>
+        <h4><span class="part">PART 3</span>프로젝트 생성 + 코드 붙여넣기</h4>
+        <div class="desc">
+          앱스크립트 프로젝트를 만들고 <b>완성된 코드 파일 5개</b>를 그대로 붙여넣어요.
+          짜는 게 아니라 <b>붙여넣는</b> 겁니다 — 코딩 몰라도 여기서 안 막혀요.
+        </div>
+        <span class="meta">📋 파일 5개</span>
+      </div>
+    </div>
+
+    <!-- PART 4 -->
+    <div class="step">
+      <div class="dot">4</div>
+      <div class="body">
+        <div class="phase">연결</div>
+        <h4><span class="part">PART 4</span>코드 설정 — 내 값 채우기</h4>
+        <div class="desc">
+          붙여넣은 코드에 <b>API 키 · DB ID</b>를 내 것으로 바꿔 넣어요.
+          "내 값만 바꾸면 끝"의 그 부분. 여기까지 하면 껍데기에 피가 돌기 시작해요.
+        </div>
+        <span class="meta">🔑 내 값으로 교체</span>
+      </div>
+    </div>
+
+    <!-- PART 5 -->
+    <div class="step mustdo">
+      <div class="dot">5</div>
+      <div class="body">
+        <div class="phase">연결</div>
+        <h4><span class="part">PART 5</span>카카오 알림톡 연결</h4>
+        <div class="desc">
+          PART 1에서 검수 넣어둔 <b>알림톡</b>을 시스템에 연결해요.
+          이제 등원하면 학부모 폰으로 안내가 자동으로 날아갑니다.
+        </div>
+        <span class="meta">💛 학부모 자동 안내</span>
+      </div>
+    </div>
+
+    <div class="phase-tag"><span>이제 돌려보고, 내 것으로</span><div class="line"></div></div>
+
+    <!-- PART 6 -->
+    <div class="step">
+      <div class="dot">6</div>
+      <div class="body">
+        <div class="phase">완성</div>
+        <h4><span class="part">PART 6</span>테스트 — 진짜로 돌려보기</h4>
+        <div class="desc">
+          배포 주소로 각 화면(출결 PIN·현황판·평가서·학부모 리포트)을 열어
+          <b>내 폰으로 실제 알림톡</b>을 받아봐요. 작동 확인하는 순간이 제일 짜릿해요.
+        </div>
+        <span class="meta">✅ 내 폰에 도착</span>
+      </div>
+    </div>
+
+    <!-- PART 7 -->
+    <div class="step">
+      <div class="dot">7</div>
+      <div class="body">
+        <div class="phase">내 것으로</div>
+        <h4><span class="part">PART 7</span>커스터마이징 — 내 학원 스타일로</h4>
+        <div class="desc">
+          AI 평가서의 <b>문체·길이·내용</b>을 바꿔요. 비결은 코드가 아니라
+          AI에게 주는 <b>한글 명령문(프롬프트)</b>. 수학학원이든 격식체든, 누구나 고칠 수 있어요.
+        </div>
+        <span class="meta">🎨 내 학원 색깔</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 시작 전 준비물 -->
+  <div class="pre">
+    <h3>🧰 시작 전에 — 이것만 열어두세요</h3>
+    <ul>
+      <li><span class="c">·</span><div>노트북 (되도록 <b>PC·크롬</b>) — 모바일로는 코드 작업이 어려워요</div></li>
+      <li><span class="c">·</span><div><b>구글 계정</b> 로그인 상태 — 앱스크립트가 여기서 돌아가요</div></li>
+      <li><span class="c">·</span><div>솔라피 계정 (있으면) — 없으면 PART 1에서 같이 만들어요</div></li>
+      <li><span class="c">·</span><div>교재 PDF·자료실 링크 — 화면에 띄워두고 따라오면 편해요</div></li>
+    </ul>
+  </div>
+
+  <!-- 도착점 -->
+  <div class="finish">
+    <div class="big">오늘 끝나면 —<br><b>출결 + AI 평가서, 두 시스템이 내 손에.</b></div>
+    <p>완벽하게 하려 하지 말고, 우선 하나만 끝까지 돌려봐요. 나머지는 집에서 자료 보며 이어가면 됩니다.</p>
+  </div>
+
+  <p class="foot">
+    <b>HongLab</b> · 홍보은영어학원 · 학원 자동화 세미나 2차<br>
+    Google Apps Script · Notion · Solapi 알림톡 · Claude AI
+  </p>
+
+</main>
+</body>
+</html>

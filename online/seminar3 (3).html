@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>원서 시스템 만들기 — 바이브 코딩 세미나 | HongLab</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{--navy:#2c3e5d;--navy-deep:#1f2d45;--coral:#c0573e;--coral-bright:#e0613f;--cream:#fdfcf9;--paper:#fff;--line:#e8e2d6;--muted:#7a8299;--ink:#2a2f3a}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;font-size:16px}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
+.top{padding:24px 0 0}
+.back{font-size:13px;font-weight:700;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--coral)}
+header{padding:36px 0 8px}
+.step{font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--coral);margin-bottom:10px}
+h1{font-size:clamp(24px,6vw,32px);font-weight:800;color:var(--navy);line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+h1 em{font-style:normal;color:var(--coral)}
+.lede{margin-top:14px;color:var(--muted);font-size:15px;word-break:keep-all}
+.price-line{display:flex;align-items:baseline;gap:10px;margin-top:20px}
+.price-line .num{font-size:30px;font-weight:800;color:var(--navy)}
+.price-line small{font-size:13px;color:var(--muted)}
+section{padding:44px 0 4px}
+.sec-label{font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--coral);margin-bottom:8px}
+.sec-title{font-size:clamp(19px,4.5vw,23px);font-weight:800;color:var(--navy);word-break:keep-all;margin-bottom:22px}
+
+/* 워크플로우 */
+.flow{background:var(--navy);border-radius:16px;padding:30px 26px;color:#fff}
+.flow-line{display:flex;flex-direction:column;gap:0}
+.flow-step{display:flex;gap:14px;align-items:flex-start}
+.flow-dot{flex-shrink:0;width:30px;height:30px;border-radius:999px;background:var(--coral-bright);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.flow-body{padding-bottom:22px}
+.flow-step:last-child .flow-body{padding-bottom:0}
+.flow-body strong{display:block;font-size:15.5px;font-weight:800;margin-bottom:3px;word-break:keep-all}
+.flow-body p{font-size:13.5px;color:rgba(255,255,255,.75);word-break:keep-all}
+.flow-connector{width:2px;height:100%;background:rgba(255,255,255,.2)}
+
+.items{display:flex;flex-direction:column;gap:12px}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.item strong{display:block;font-size:15.5px;color:var(--navy);font-weight:800;margin-bottom:4px;word-break:keep-all}
+.item p{font-size:14px;color:var(--muted);word-break:keep-all}
+.item .tag{display:inline-block;font-size:11px;font-weight:800;color:var(--coral);background:rgba(192,87,62,.09);border-radius:6px;padding:2px 8px;margin-left:6px;vertical-align:2px}
+
+.quote-box{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:10px;padding:18px 20px;margin-top:16px}
+.quote-box p{font-size:14.5px;color:var(--navy);font-weight:600}
+.quote-box small{display:block;margin-top:6px;font-size:13px;color:var(--muted);font-weight:400}
+
+.prep{display:flex;flex-direction:column;gap:10px}
+.prep li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:13px 16px;word-break:keep-all}
+.prep .ico{flex-shrink:0}
+.prep strong{color:var(--navy)}
+.prep small{display:block;color:var(--muted);font-size:12.5px}
+
+.apply-card{position:relative;margin:8px 0 0}
+.apply-back{position:absolute;inset:0;background:var(--navy);opacity:.15;border-radius:14px;transform:rotate(2.5deg)}
+.apply-paper{position:relative;background:var(--paper);border:2px solid var(--navy);border-radius:14px;padding:30px 26px;text-align:center}
+.apply-paper h3{font-size:20px;font-weight:800;color:var(--navy);margin-bottom:8px}
+.apply-paper p{font-size:14px;color:var(--muted);word-break:keep-all}
+.btn{display:block;text-align:center;text-decoration:none;background:var(--navy);color:#fff;font-size:16px;font-weight:800;border-radius:10px;padding:15px 0;margin-top:20px;transition:background .15s}
+.btn:hover{background:var(--navy-deep)}
+.note{font-size:12.5px;color:var(--muted);margin-top:14px;word-break:keep-all}
+footer{text-align:center;padding:52px 20px 44px;font-size:13px;color:var(--muted)}
+footer a{color:var(--coral);font-weight:700;text-decoration:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="wrap top"><a class="back" href="seminar_page.html">← 전체 클래스</a></div>
+
+<header class="wrap">
+  <div class="step">STEP 4 · 바이브 코딩 세미나 (오프라인)</div>
+  <h1>코드 안 짜고, 말로 시켜서 만드는<br><em>내 학원 원서 시스템</em></h1>
+  <p class="lede">완성된 원서 퀴즈 시스템을 드립니다. 클로드한테 "우리 학원 이름으로 바꿔줘", "퀴즈 10문제로 늘려줘"라고 말하면 코드가 고쳐지고, 배포는 자동. 30명이 동시에 퀴즈를 풀어도 끄떡없는 진짜 시스템입니다.</p>
+  <div class="price-line"><span class="num">400,000원</span><small>오프라인 · 8월 · 정원 소수</small></div>
+</header>
+
+<section class="wrap">
+  <div class="sec-label">WORKFLOW</div>
+  <h2 class="sec-title">수업 후 여러분의 일상</h2>
+  <div class="flow">
+    <div class="flow-line">
+      <div class="flow-step"><div class="flow-dot">1</div><div class="flow-body"><strong>브라우저에서 클로드에게 말합니다</strong><p>"단어 퀴즈를 15문제로 늘려줘" — 설치도, 터미널도 없습니다.</p></div></div>
+      <div class="flow-step"><div class="flow-dot">2</div><div class="flow-body"><strong>클로드가 코드를 고쳐서 올립니다</strong><p>여러분은 코드를 안 봐도 됩니다. 변경 내용만 확인하고 승인.</p></div></div>
+      <div class="flow-step"><div class="flow-dot">3</div><div class="flow-body"><strong>배포는 자동으로 끝납니다</strong><p>몇 분 뒤, 내 학원 사이트에 바뀐 시스템이 올라와 있습니다.</p></div></div>
+    </div>
+  </div>
+  <div class="quote-box">
+    <p>"터미널도 안 깔고 그게 바이브 코딩이냐?"</p>
+    <small>맞아요, 그건 개발자용 워크플로우죠. 원장님한테 필요한 건 "코드 짜는 법"이 아니라 "내 시스템을 갖고 고쳐 쓰는 법"입니다. 저는 둘 다 해봤고, 원장님께는 브라우저 방식이 맞아서 일부러 이 길을 골랐습니다.</small>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="sec-label">CURRICULUM</div>
+  <h2 class="sec-title">당일 만드는 것들</h2>
+  <div class="items">
+    <div class="item"><strong>계정 셋업 — 한 번만 하면 끝</strong><p>GitHub·Vercel·Supabase 계정을 만들고 연결합니다. 제일 막히는 환경변수 입력은 스크린샷 가이드로 한 칸씩.</p></div>
+    <div class="item"><strong>내 원서 시스템 배포<span class="tag">하이라이트</span></strong><p>완성 템플릿을 내 계정으로 복제 → 버튼 몇 번으로 내 주소의 원서 퀴즈 시스템이 실제로 열립니다.</p></div>
+    <div class="item"><strong>바이브 코딩 기초</strong><p>클로드에게 어떻게 시켜야 원하는 대로 바뀌는지 — 잘 되는 말, 안 되는 말, 망했을 때 되돌리는 법.</p></div>
+    <div class="item"><strong>내 학원에 맞게 커스터마이즈<span class="tag">실습</span></strong><p>학원 이름·원서 목록·퀴즈 방식을 각자 자기 학원 버전으로 바꿉니다. 당일 학생에게 보낼 수 있는 상태로.</p></div>
+    <div class="item"><strong>왜 앱스크립트로는 안 되나</strong><p>30명이 동시에 퀴즈를 풀면 생기는 일 — 이 시스템이 필요한 이유를 눈으로 확인합니다.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="sec-label">PREP</div>
+  <h2 class="sec-title">준비물 · 비용 안내</h2>
+  <ul class="prep">
+    <li><span class="ico">💻</span><div><strong>노트북</strong><small>브라우저만 쓰므로 사양 무관</small></div></li>
+    <li><span class="ico">🤖</span><div><strong>Claude 유료 구독 (Pro, 월 $20)</strong><small>바이브 코딩에 필요합니다 — 수업 전 가입 안내드려요</small></div></li>
+    <li><span class="ico">🆓</span><div><strong>Vercel · Supabase · GitHub 계정</strong><small>전부 무료 — 학원 1곳 운영은 무료 티어로 충분합니다</small></div></li>
+  </ul>
+</section>
+
+<section class="wrap" id="apply">
+  <div class="apply-card">
+    <div class="apply-back"></div>
+    <div class="apply-paper">
+      <h3>8월 오프라인 · 사전 신청</h3>
+      <p>일정이 확정되면 사전 신청자에게 가장 먼저 안내드립니다.<br>이전 세미나 후기 이벤트 참여자는 50,000원 할인.</p>
+      <a class="btn" href="https://forms.gle/vVjnh7vYs34n8ArK6" target="_blank" rel="noopener">사전 신청하기</a>
+      <p class="note">입금은 일정 확정 후 안내드립니다.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  HongLab · 홍보은영어학원 · <a href="https://www.instagram.com/hongboeun_eng" target="_blank" rel="noopener">@hongboeun_eng</a>
+</footer>
+
+</body>
+</html>

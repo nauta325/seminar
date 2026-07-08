@@ -41,6 +41,10 @@ section{padding:44px 0 4px}
 .apply-paper p{font-size:14px;color:var(--muted);word-break:keep-all}
 .btn{display:block;text-align:center;text-decoration:none;background:var(--coral-bright);color:#fff;font-size:16px;font-weight:800;border-radius:10px;padding:15px 0;margin-top:20px;transition:background .15s}
 .btn:hover{background:var(--coral)}
+.btn.toss{background:#0064ff;color:#fff;margin-top:10px}
+.btn.toss:hover{background:#0052cc}
+.pc-note{font-size:12px;color:var(--muted);margin-top:8px;background:var(--cream);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;word-break:keep-all}
+
 .note{font-size:12.5px;color:var(--muted);margin-top:14px;word-break:keep-all}
 footer{text-align:center;padding:52px 20px 44px;font-size:13px;color:var(--muted)}
 footer a{color:var(--coral);font-weight:700;text-decoration:none}
@@ -88,9 +92,11 @@ footer a{color:var(--coral);font-weight:700;text-decoration:none}
     <div class="apply-back"></div>
     <div class="apply-paper">
       <h3>신청하기</h3>
-      <p>신청서 작성 → 입금 → 입금 확인 후<br>카톡으로 영상·교재·템플릿 안내를 보내드립니다.</p>
-      <a class="btn" href="https://forms.gle/vVjnh7vYs34n8ArK6" target="_blank" rel="noopener">신청서 작성하기</a>
-      <p class="note">입금 계좌 — 카카오뱅크 3333-05-6958716 홍보은<br>STEP 1+2 세트(179,000원)는 신청서에서 선택할 수 있어요.</p>
+      <p>① 신청서 작성 → ② 토스로 송금 →<br>입금 확인 후 카톡으로 안내드립니다.</p>
+      <a class="btn" href="https://forms.gle/vVjnh7vYs34n8ArK6" target="_blank" rel="noopener">① 신청서 작성하기</a>
+      <a class="btn toss" href="supertoss://send?bank=하나&accountNo=41991085044907&amount=99000">② 토스로 99,000원 송금하기</a>
+      <p class="pc-note">📱 토스 버튼은 <strong>휴대폰에서</strong> 눌러야 열려요. PC에서 보고 있다면 계좌로 직접 송금해주세요.</p>
+      <p class="note">STEP 1+2 세트(179,000원)는 신청서에서 선택할 수 있어요.<br>입금 계좌 — 하나은행 419-910850-44907<br>받는분에게 표시 — <strong>노션기초</strong> + 신청자 이름</p>
     </div>
   </div>
 </section>

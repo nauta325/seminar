@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HongLab — 학원 자동화 클래스</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{
+  --navy:#2c3e5d; --navy-deep:#1f2d45;
+  --coral:#c0573e; --coral-bright:#e0613f;
+  --cream:#fdfcf9; --paper:#fff;
+  --line:#e8e2d6; --muted:#7a8299; --ink:#2a2f3a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;font-size:16px}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px}
+
+header{padding:56px 0 12px;text-align:center}
+.brand{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.18em;color:var(--coral);border:1.5px solid var(--coral);border-radius:999px;padding:5px 16px;margin-bottom:28px}
+h1{font-size:clamp(26px,6vw,36px);font-weight:800;color:var(--navy);line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+h1 em{font-style:normal;color:var(--coral)}
+.lede{margin:20px auto 0;max-width:480px;color:var(--muted);font-size:15px;word-break:keep-all}
+.lede strong{color:var(--navy);font-weight:700}
+
+.path{margin:40px auto 0;display:flex;align-items:center;justify-content:center;gap:10px;font-size:13px;font-weight:700;color:var(--navy);flex-wrap:wrap}
+.path span{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 14px}
+.path .arrow{border:none;background:none;color:var(--coral);padding:0;font-size:15px}
+
+section{padding:52px 0 8px}
+.sec-label{font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--coral);margin-bottom:10px}
+.sec-title{font-size:clamp(20px,4.5vw,25px);font-weight:800;color:var(--navy);letter-spacing:-.01em;word-break:keep-all;margin-bottom:28px}
+
+/* 상품 카드 — 메모지 모티프 */
+.product{position:relative;margin-bottom:44px}
+.paper-back{position:absolute;inset:0;background:var(--navy);opacity:.08;border-radius:14px;transform:rotate(2.5deg)}
+.paper{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:30px 26px 26px;transform:rotate(0deg)}
+.product.featured .paper{border:2px solid var(--coral)}
+.product.featured .paper-back{background:var(--coral);opacity:.14}
+.product.vibe .paper{border:2px solid var(--navy)}
+.product.vibe .paper-back{background:var(--navy);opacity:.15}
+
+.badge{position:absolute;top:-13px;left:22px;background:var(--coral);color:#fff;font-size:12px;font-weight:800;letter-spacing:.06em;border-radius:999px;padding:5px 14px}
+.badge.navy{background:var(--navy)}
+.p-step{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--muted);margin-bottom:6px}
+.p-name{font-size:21px;font-weight:800;color:var(--navy);word-break:keep-all}
+.p-desc{font-size:14px;color:var(--muted);margin-top:8px;word-break:keep-all}
+
+.p-tags{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 4px}
+.p-tags span{font-size:12px;font-weight:600;color:var(--navy);background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:4px 11px}
+
+.p-price{display:flex;align-items:baseline;gap:10px;margin:16px 0 18px}
+.p-price .num{font-size:26px;font-weight:800;color:var(--navy);letter-spacing:-.02em}
+.p-price .was{font-size:15px;color:var(--muted);text-decoration:line-through}
+.p-price .save{font-size:12px;font-weight:800;color:var(--coral);background:rgba(192,87,62,.1);border-radius:6px;padding:3px 8px}
+
+.btn-row{display:flex;gap:10px}
+.btn{display:block;flex:1;text-align:center;text-decoration:none;background:var(--coral-bright);color:#fff;font-size:15px;font-weight:800;border-radius:10px;padding:14px 0;transition:background .15s}
+.btn:hover{background:var(--coral)}
+.btn.outline{background:transparent;border:1.5px solid var(--navy);color:var(--navy)}
+.btn.outline:hover{background:var(--navy);color:#fff}
+.btn.dark{background:var(--navy)}
+.btn.dark:hover{background:var(--navy-deep)}
+
+.proof{background:var(--navy);border-radius:16px;padding:34px 28px;color:#fff;margin-top:8px}
+.proof h3{font-size:18px;font-weight:800;margin-bottom:14px;word-break:keep-all}
+.proof p{font-size:14.5px;color:rgba(255,255,255,.82);word-break:keep-all}
+.proof p+p{margin-top:12px}
+.proof .tools{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.proof .tools span{font-size:12px;font-weight:600;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:5px 12px;color:rgba(255,255,255,.9)}
+
+footer{text-align:center;padding:56px 20px 48px;font-size:13px;color:var(--muted)}
+footer .insta{color:var(--coral);font-weight:700;text-decoration:none}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="brand">HONGLAB CLASS</div>
+  <h1>학원 자동화,<br>원장이 직접 만든 시스템을<br><em>세트로 드립니다</em></h1>
+  <p class="lede">
+    일산에서 영어학원을 운영하며 노션·Make·앱스크립트로
+    학원을 직접 자동화하고 있어요.<br>
+    <strong>영상 + 교재 + 템플릿</strong> — 그 방법 그대로 담았습니다.
+  </p>
+  <div class="path">
+    <span>① 노션 기초</span>
+    <span class="arrow">→</span>
+    <span>② 카톡 자동화</span>
+    <span class="arrow">→</span>
+    <span>③ 앱스크립트</span>
+    <span class="arrow">→</span>
+    <span>④ 바이브 코딩</span>
+  </div>
+</header>
+
+<!-- ═══ 상품 ═══ -->
+<section class="wrap" id="products">
+  <div class="sec-label">CLASS SET</div>
+  <h2 class="sec-title">단계별 클래스</h2>
+
+  <!-- ① 노션 기초 -->
+  <div class="product">
+    <div class="paper-back"></div>
+    <div class="paper">
+      <div class="badge navy">모든 자동화의 기초</div>
+      <div class="p-step">STEP 1 · 영상 세트</div>
+      <div class="p-name">노션 기초 세트</div>
+      <p class="p-desc">학생·교재·데일리리포트 DB를 노션으로. 학원 운영의 뼈대를 여기서 만듭니다. 노션 완전 처음도 OK.</p>
+      <div class="p-tags"><span>🎬 영상</span><span>📑 교재 PDF</span><span>🗂 노션 템플릿</span><span>💬 질문방</span></div>
+      <div class="p-price"><span class="num">99,000원</span></div>
+      <div class="btn-row">
+        <a class="btn outline" href="set1.html">자세히 보기</a>
+        <a class="btn" href="set1.html#apply">신청하기</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 카톡 자동화 -->
+  <div class="product">
+    <div class="paper-back"></div>
+    <div class="paper">
+      <div class="p-step">STEP 2 · 영상 세트</div>
+      <div class="p-name">카톡 자동화 세트</div>
+      <p class="p-desc">노션에 쌓인 기록이 학부모 카톡으로 자동 발송됩니다. 데일리리포트·교재비 안내, 매일 하던 수동 발송이 사라져요.</p>
+      <div class="p-tags"><span>🎬 영상</span><span>📑 교재 PDF</span><span>📨 알림톡 템플릿 문구</span><span>💬 질문방</span></div>
+      <div class="p-price"><span class="num">129,000원</span></div>
+      <div class="btn-row">
+        <a class="btn outline" href="set2.html">자세히 보기</a>
+        <a class="btn" href="set2.html#apply">신청하기</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ①+② 번들 -->
+  <div class="product featured">
+    <div class="paper-back"></div>
+    <div class="paper">
+      <div class="badge">가장 많이 선택</div>
+      <div class="p-step">STEP 1 + 2</div>
+      <div class="p-name">노션 + 카톡 자동화 세트</div>
+      <p class="p-desc">DB 구축부터 학부모 카톡 자동 발송까지 한 번에. 이어서 들으면 학원 하나가 자동으로 굴러가는 구조가 완성됩니다.</p>
+      <div class="p-price">
+        <span class="num">179,000원</span>
+        <span class="was">228,000원</span>
+        <span class="save">49,000원 할인</span>
+      </div>
+      <div class="btn-row">
+        <a class="btn" href="set1.html#apply">세트로 신청하기</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 앱스크립트 -->
+  <div class="product">
+    <div class="paper-back"></div>
+    <div class="paper">
+      <div class="p-step">STEP 3 · 영상 세트</div>
+      <div class="p-name">앱스크립트 세트</div>
+      <p class="p-desc">출결 알림·데일리리포트·AI 월말평가서까지. 매달 며칠씩 걸리던 평가서가 30분으로. 검증된 완성 코드를 그대로 드려요.</p>
+      <div class="p-tags"><span>🎬 영상</span><span>📑 교재 PDF</span><span>⚙️ 완성 코드</span><span>💬 질문방</span></div>
+      <div class="p-price"><span class="num">299,000원</span></div>
+      <div class="btn-row">
+        <a class="btn outline" href="set3.html">자세히 보기</a>
+        <a class="btn" href="set3.html#apply">신청하기</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ 바이브 코딩 · 원서 시스템 -->
+  <div class="product vibe">
+    <div class="paper-back"></div>
+    <div class="paper">
+      <div class="badge navy">오프라인 세미나 · 8월</div>
+      <div class="p-step">STEP 4 · 바이브 코딩</div>
+      <div class="p-name">원서 시스템 만들기</div>
+      <p class="p-desc">코드 한 줄 안 짜고, 클로드한테 말로 시켜서 내 학원 전용 원서 퀴즈 시스템을 배포합니다. 30명이 동시에 퀴즈를 풀어도 끄떡없는 진짜 시스템.</p>
+      <div class="p-tags"><span>🏫 오프라인</span><span>💻 완성 코드 제공</span><span>🤖 Claude Code</span><span>🚀 자동 배포</span></div>
+      <div class="p-price"><span class="num">400,000원</span></div>
+      <div class="btn-row">
+        <a class="btn dark" href="seminar3.html">자세히 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 신뢰 ═══ -->
+<section class="wrap">
+  <div class="proof">
+    <h3>강의용으로 만든 게 아니라,<br>제 학원에서 매일 쓰는 시스템입니다</h3>
+    <p>출결 현황판, 데일리리포트 알림톡, AI 월말평가서, 원서 퀴즈 — 전부 제 학원에서 실제로 돌아가고 있어요. 그중 다른 학원에서도 바로 쓸 수 있는 것들을 단계별로 정리했습니다.</p>
+    <p>세미나로 이미 여러 기수의 원장님들이 같은 과정을 따라 만들었습니다.</p>
+    <div class="tools">
+      <span>노션</span><span>Make</span><span>알림톡</span><span>앱스크립트</span><span>AI 월말평가서</span><span>바이브 코딩</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  HongLab · 홍보은영어학원<br>
+  인스타그램 <a class="insta" href="https://www.instagram.com/hongboeun_eng" target="_blank" rel="noopener">@hongboeun_eng</a>
+</footer>
+
+</body>
+</html>

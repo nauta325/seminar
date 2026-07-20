@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>우리 학원만의 원서 시스템 — 세미나 3 전자책</title>
+<title>바이브 코딩 실전 — 세미나 3 전자책</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -22,12 +22,12 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 
 /* COVER */
 .cover { background: var(--navy); color: #fff; padding: 96px 32px 84px; position: relative; overflow: hidden; }
-.cover::before { content: 'READER'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 240px; color: rgba(255,255,255,0.045); bottom: -30px; right: -20px; line-height: 1; letter-spacing: 6px; pointer-events: none; }
+.cover::before { content: 'VIBE'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 280px; color: rgba(255,255,255,0.045); bottom: -30px; right: -10px; line-height: 1; letter-spacing: 6px; pointer-events: none; }
 .cover-inner { max-width: 820px; margin: 0 auto; position: relative; z-index: 1; }
 .cover-kicker { display: inline-block; background: var(--coral); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; padding: 7px 18px; border-radius: 20px; margin-bottom: 26px; }
 .cover h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 10vw, 108px); line-height: 0.94; letter-spacing: 0.02em; margin-bottom: 22px; }
 .cover h1 .c { color: var(--coral2); }
-.cover .lead { font-size: 17px; color: rgba(255,255,255,0.82); line-height: 1.8; max-width: 600px; margin-bottom: 30px; }
+.cover .lead { font-size: 17px; color: rgba(255,255,255,0.82); line-height: 1.8; max-width: 610px; margin-bottom: 30px; }
 .cover-can { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; max-width: 620px; margin-top: 10px; }
 @media (max-width: 560px){ .cover-can { grid-template-columns: 1fr; } }
 .cover-can div { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; padding: 14px 16px; font-size: 13.5px; color: rgba(255,255,255,0.9); line-height: 1.5; }
@@ -37,7 +37,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .nav-bar { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; overflow-x: auto; scrollbar-width: none; }
 .nav-bar::-webkit-scrollbar { display: none; }
 .nav-inner { max-width: 860px; margin: 0 auto; display: flex; white-space: nowrap; padding: 0 24px; }
-.nav-item { padding: 13px 15px; font-size: 12.5px; font-weight: 700; color: var(--muted2); text-decoration: none; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.nav-item { padding: 13px 16px; font-size: 12.5px; font-weight: 700; color: var(--muted2); text-decoration: none; border-bottom: 2px solid transparent; transition: all 0.2s; }
 .nav-item:hover { color: var(--navy); border-bottom-color: var(--coral); }
 
 /* TOC */
@@ -47,7 +47,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .toc-grid { display: grid; gap: 10px; }
 .toc-row { display: flex; gap: 16px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 20px; text-decoration: none; transition: all 0.2s; }
 .toc-row:hover { border-color: var(--coral); background: rgba(192,87,62,0.04); }
-.toc-no { font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: var(--coral); line-height: 1; min-width: 62px; }
+.toc-no { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--coral); line-height: 1.1; min-width: 74px; }
 .toc-t { font-size: 15.5px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
 .toc-d { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
 
@@ -60,10 +60,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 /* PART COVER */
 .part-cover { max-width: 860px; margin: 72px auto 0; padding: 0 24px; }
 .part-cover-inner { background: var(--navy); color: #fff; border-radius: 20px; padding: 40px 36px; position: relative; overflow: hidden; }
-.part-cover-inner::before { content: attr(data-big); position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 150px; color: rgba(255,255,255,0.06); top: -24px; right: 6px; line-height: 1; }
+.part-cover-inner::before { content: attr(data-big); position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 150px; color: rgba(255,255,255,0.06); top: -24px; right: 12px; line-height: 1; }
 .pc-label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: var(--coral2); margin-bottom: 10px; position: relative; }
 .pc-title { font-size: 30px; font-weight: 900; line-height: 1.15; margin-bottom: 14px; position: relative; }
-.pc-desc { font-size: 14.5px; color: rgba(255,255,255,0.78); line-height: 1.75; max-width: 620px; position: relative; }
+.pc-desc { font-size: 14.5px; color: rgba(255,255,255,0.78); line-height: 1.75; max-width: 640px; position: relative; }
 .pc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; position: relative; }
 .pc-chip { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.92); font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 20px; }
 
@@ -76,7 +76,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .para b { color: var(--text); }
 .para code, li code, td code { background: var(--surface2); color: var(--gold); font-family: 'Space Mono', monospace; font-size: 12px; padding: 2px 7px; border-radius: 5px; }
 
-/* CARDS / STEPS (handout 계열) */
+/* CARDS / STEPS */
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; margin-bottom: 16px; }
 .card.navy-card { background: var(--navy); border-color: var(--navy); }
 .card.navy-card .card-title, .card.navy-card p { color: #fff; }
@@ -104,9 +104,17 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .callout.gold .co-label { color: #a5741d; }
 .callout b { color: inherit; font-weight: 800; }
 
+/* SPEAK BOX (클로드에게 말하기 예시) */
+.speak { background: #eef4f0; border: 1px solid #cfe3d6; border-left: 4px solid var(--green); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+.speak .sp-label { font-size: 11.5px; font-weight: 800; color: var(--green); letter-spacing: 0.04em; margin-bottom: 6px; }
+.speak .sp-q { font-size: 14px; color: #24402f; line-height: 1.7; font-style: italic; }
+.speak.bad { background: #f7efec; border-color: #e6cdc4; border-left-color: var(--coral); }
+.speak.bad .sp-label { color: var(--coral); }
+.speak.bad .sp-q { color: #6a3323; }
+
 /* SUMMARY / CHECKLIST */
 .summary { background: var(--surface2); border: 1px dashed var(--muted2); border-radius: 14px; padding: 20px 24px; margin: 22px 0 8px; }
-.summary .su-h { font-size: 13px; font-weight: 800; color: var(--navy); letter-spacing: 0.04em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.summary .su-h { font-size: 13px; font-weight: 800; color: var(--navy); letter-spacing: 0.04em; margin-bottom: 12px; }
 .summary ul { list-style: none; }
 .summary li { font-size: 13.5px; color: #3a4151; line-height: 1.6; padding: 5px 0 5px 22px; position: relative; }
 .summary li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 800; }
@@ -116,7 +124,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 .checklist li::before { content: ''; position: absolute; left: 0; top: 11px; width: 17px; height: 17px; border: 2px solid var(--muted2); border-radius: 5px; }
 .checklist li b { color: var(--text); }
 
-/* FLOW / TABLES / CODE / LINK (handout 계열) */
+/* FLOW / TABLES / CODE / LINK */
 .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
 .fnode { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 15px; font-size: 13px; font-weight: 700; line-height: 1.3; }
 .fnode.coral-node { background: rgba(192,87,62,0.12); border-color: rgba(192,87,62,0.4); color: var(--coral); }
@@ -158,16 +166,16 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 <div class="cover">
   <div class="cover-inner">
     <div class="cover-kicker">📚 세미나 3 · 전자책 교재</div>
-    <h1>우리 학원만의<br><span class="c">원서 시스템</span></h1>
-    <p class="lead">사서 쓰는 원서 프로그램은 그 회사의 책·레벨·방식입니다. 이 교재는 반대예요. 완성된 원서 앱을 <b style="color:#fff">내 것으로 복제</b>하고, <b style="color:#fff">인터넷에 올리고</b>, 클로드에게 말해서 <b style="color:#fff">우리 학원 방식대로</b> 고쳐 씁니다. 코딩을 몰라도, 순서대로 따라오면 됩니다.</p>
+    <h1>말해서 만든다<br><span class="c">바이브 코딩</span></h1>
+    <p class="lead">코드를 <b style="color:#fff">직접 짜지 않습니다.</b> 클로드에게 말해서 만들고 고칩니다. 이 교재는 먼저 완성된 <b style="color:#fff">원서 시스템</b>을 가져와 돌려보고·뜯어보고·수정하며 감을 잡고, 그다음 <b style="color:#fff">여러분만의 프로젝트</b>를 처음부터 끝까지 만들어 봅니다.</p>
     <div class="cover-can">
-      <div>📖 지문만 붙여넣으면 AI가 단어카드·퀴즈 2종을 자동 생성</div>
-      <div>🎙️ 학생이 읽고 녹음하면 한곳에 자동 수집·재생</div>
-      <div>📊 점수·통과율·완독이 실시간 대시보드·리포트로</div>
-      <div>🎨 학원명·색·레벨·시리즈·통과점수까지 전부 내 마음대로</div>
+      <div>🗣️ 코드 대신 <b>말로</b> — 클로드에게 시켜서 만들고 고친다</div>
+      <div>📖 완성된 원서 시스템을 <b>받아서 돌려보고, 뜯어보고, 수정</b></div>
+      <div>🚀 배운 걸로 <b>내 프로젝트</b>를 처음부터 끝까지</div>
+      <div>🔁 만들기 → 돌려보기 → 고치기 <b>사이클</b>이 몸에 밴다</div>
     </div>
     <div class="cover-meta">
-      <span>🏫 HongLab</span><span>📗 PART 0 – 9 + 부록</span><span>💻 코드 안 봐도 됨</span>
+      <span>🏫 HongLab</span><span>📗 1부 · 2부 · 3부 + 부록</span><span>💻 코드 안 짜도 됨</span>
     </div>
   </div>
 </div>
@@ -175,34 +183,20 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 <!-- ══════════ NAV ══════════ -->
 <div class="nav-bar"><div class="nav-inner">
   <a class="nav-item" href="#toc">목차</a>
-  <a class="nav-item" href="#p0">P0 그림</a>
-  <a class="nav-item" href="#p1">P1 준비물</a>
-  <a class="nav-item" href="#p2">P2 개념</a>
-  <a class="nav-item" href="#p3">P3 GitHub</a>
-  <a class="nav-item" href="#p4">P4 Supabase</a>
-  <a class="nav-item" href="#p5">P5 Vercel</a>
-  <a class="nav-item" href="#p6">P6 첫 실행</a>
-  <a class="nav-item" href="#p7">P7 콘텐츠</a>
-  <a class="nav-item" href="#p8">P8 커스터마이징</a>
-  <a class="nav-item" href="#p9">P9 운영</a>
+  <a class="nav-item" href="#part1">1부 · 바이브 코딩 기초</a>
+  <a class="nav-item" href="#part2">2부 · 원서로 연습</a>
+  <a class="nav-item" href="#part3">3부 · 내 프로젝트</a>
   <a class="nav-item" href="#appendix">부록</a>
 </div></div>
 
 <!-- ══════════ TOC ══════════ -->
 <div class="toc" id="toc">
   <div class="toc-head">CONTENTS</div>
-  <div class="toc-sub">이 교재는 크게 3부로 나뉩니다 — <b>준비(P0–2)</b> · <b>설치(P3–6)</b> · <b>내 학원에 맞추기(P7–9)</b>.</div>
+  <div class="toc-sub">이 교재는 3부로 흐릅니다 — <b>배우고(1부)</b> · <b>남의 코드로 연습하고(2부)</b> · <b>내 걸 만든다(3부)</b>.</div>
   <div class="toc-grid">
-    <a class="toc-row" href="#p0"><div class="toc-no">00</div><div><div class="toc-t">왜 만드나 — 원서 시스템의 그림</div><div class="toc-d">반복 노동, 사서 쓰기 vs 만들어 쓰기, 네 개의 도구, 오늘의 여정</div></div></a>
-    <a class="toc-row" href="#p1"><div class="toc-no">01</div><div><div class="toc-t">준비물 갖추기 — 계정 5종</div><div class="toc-d">GitHub · Supabase · Vercel · Claude API 키 · 노트북</div></div></a>
-    <a class="toc-row" href="#p2"><div class="toc-no">02</div><div><div class="toc-t">개념은 딱 한 번 — 기술 이야기</div><div class="toc-d">저장소 · 데이터베이스 · 배포 · 환경변수 · API 키</div></div></a>
-    <a class="toc-row" href="#p3"><div class="toc-no">03</div><div><div class="toc-t">GitHub — 내 저장소 만들기</div><div class="toc-d">Use this template, 저장소 구조 둘러보기</div></div></a>
-    <a class="toc-row" href="#p4"><div class="toc-no">04</div><div><div class="toc-t">Supabase — 데이터베이스 구축</div><div class="toc-d">프로젝트 생성, SQL 실행, 표 8종, 키 복사</div></div></a>
-    <a class="toc-row" href="#p5"><div class="toc-no">05</div><div><div class="toc-t">Vercel — 인터넷에 올리기(배포)</div><div class="toc-d">Import, 환경변수 3개, Deploy, 자동 재배포</div></div></a>
-    <a class="toc-row" href="#p6"><div class="toc-no">06</div><div><div class="toc-t">첫 실행 — 구조 익히기</div><div class="toc-d">페이지 5개, 반·학생 만들기, 로그인 방식</div></div></a>
-    <a class="toc-row" href="#p7"><div class="toc-no">07</div><div><div class="toc-t">콘텐츠 채우기 — AI 생성·배정·학습·결과</div><div class="toc-d">AI 퀴즈, 배정, 학생 흐름, 녹음, 워크시트, 리포트</div></div></a>
-    <a class="toc-row" href="#p8"><div class="toc-no">08</div><div><div class="toc-t">우리 학원에 맞추기 — 바이브 코딩</div><div class="toc-d">학원명·색·통과점수·레벨·시리즈·AI 프롬프트</div></div></a>
-    <a class="toc-row" href="#p9"><div class="toc-no">09</div><div><div class="toc-t">운영·문제해결·다음 단계</div><div class="toc-d">트러블슈팅, 비용, 백업, 안전 수칙, 자료실</div></div></a>
+    <a class="toc-row" href="#part1"><div class="toc-no">1부</div><div><div class="toc-t">바이브 코딩 기초 — 말로 코드를 다루기</div><div class="toc-d">바이브 코딩이란 · 도구(Claude Code+구독) · 핵심 루프 · 잘 말하는 법 · 되돌리기</div></div></a>
+    <a class="toc-row" href="#part2"><div class="toc-no">2부</div><div><div class="toc-t">원서 시스템으로 연습 — 받아서 돌려보고 · 수정</div><div class="toc-d">코드 받기 → 먼저 돌려보기(Supabase·Vercel) → 구조 뜯어보기 → 겉모습·데이터·기능 수정 → 자동 반영</div></div></a>
+    <a class="toc-row" href="#part3"><div class="toc-no">3부</div><div><div class="toc-t">내 프로젝트 만들기 — 예시 하나를 처음부터 끝까지</div><div class="toc-d">아이디어 고르기 · 제작 사이클 · 예시(단어 플래시카드) 워크스루 · 배포 · 계속 키우기</div></div></a>
   </div>
 </div>
 
@@ -210,595 +204,336 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 <div class="legend"><div class="legend-inner">
   <div class="li"><b>📘 개념</b> — 왜 이렇게 하는지</div>
   <div class="li"><b>🖐️ 실습</b> — 지금 직접 따라 하기</div>
-  <div class="li"><b>💡 팁</b> — 알면 편한 것</div>
+  <div class="li"><b>🗣️ 이렇게 말하기</b> — 클로드에게 할 말</div>
   <div class="li"><b>⚠️ 주의</b> — 놓치면 곤란한 것</div>
   <div class="li"><b>✅ 요약</b> — 이 파트 핵심</div>
 </div></div>
 
-<!-- ══════════ PART 0 ══════════ -->
-<div class="part-cover" id="p0"><div class="part-cover-inner" data-big="00">
-  <div class="pc-label">PART 0 · 준비</div>
-  <div class="pc-title">왜 만드나 — 원서 시스템의 그림</div>
-  <div class="pc-desc">기능 설치에 들어가기 전에, 우리가 오늘 무엇을·왜 만드는지 그림을 먼저 그립니다. 이 그림이 있으면 뒤의 모든 단계가 "지금 어디쯤인지" 보입니다.</div>
-  <div class="pc-chips"><span class="pc-chip">반복 노동</span><span class="pc-chip">사서 쓰기 vs 만들기</span><span class="pc-chip">네 개의 도구</span><span class="pc-chip">오늘의 여정</span></div>
-</div></div>
-
-<div class="content">
-  <div class="sub-header"><div class="sub-no">0.1</div><div class="sub-title">원서 한 권, 얼마나 손이 가나요?</div></div>
-  <p class="para">원서 한 권을 수업하려면 손이 이만큼 갑니다 — 책 고르기 → 본문 준비 → 단어 정리 → 퀴즈 만들기 → 학생별 배정 → 녹음 받기 → 채점 → 엑셀에 점수 정리. 한 권에 <b>30분에서 며칠</b>씩 걸리고, 학생이 많아질수록 늘어납니다.</p>
-  <div class="callout warn"><span class="co-label">⚠️ 특히 번거로운 것 — 녹음</span>학생마다 카톡으로 음원을 따로 받고, 누가 보냈는지 일일이 확인하고, 받았다고 표시하고… 매번 반복이죠. 이 시스템에서는 학생이 올린 녹음이 <b>한곳에 자동으로 모이고</b>, 제출 여부도 <b>자동 표시</b>되고, <b>클릭 하나로 바로 재생</b>됩니다.</div>
-
-  <div class="sub-header"><div class="sub-no">0.2</div><div class="sub-title">사서 쓰기 vs 만들어 쓰기</div></div>
-  <p class="para">시중의 유명 원서 프로그램(예: 르네상스/AR)은 초기 세팅비 수백만 원에, 매달도 수백만 원씩 나갑니다. 게다가 <b>책·레벨은 그 회사가 정한 대로만</b> 써야 하고, 해지하면 데이터도 사라지죠. 우리가 만드는 시스템은 반대입니다.</p>
-  <table class="tbl">
-    <tr><th>항목</th><th>사서 쓰는 프로그램</th><th style="color:var(--green)">우리가 만든 시스템</th></tr>
-    <tr><td>비용</td><td>세팅 수백만 + 월 수백만 원</td><td>직접 제작 · 추가 비용 ≈ 0</td></tr>
-    <tr><td>책</td><td>정해진 라인업만</td><td>우리가 쓰는 책 자유 추가</td></tr>
-    <tr><td>레벨·시리즈</td><td>회사 기준</td><td>우리 학원 기준 그대로</td></tr>
-    <tr><td>녹음</td><td>카톡으로 받고 수기 체크</td><td>자동 수집·표시·클릭 재생</td></tr>
-    <tr><td>데이터</td><td>그 회사 서버에 갇힘</td><td>우리 데이터는 우리 것</td></tr>
-    <tr><td>변경</td><td>요청해도 안 됨</td><td>말하면 그날 바뀜</td></tr>
-  </table>
-  <div class="callout concept"><span class="co-label">📘 이 교재의 전제</span>코드를 <b>짜는</b> 법을 배우는 게 아닙니다. 이미 다 돌아가는 앱을 <b>내 것으로 만들고, 클로드에게 말해서 고치는</b> 법을 배웁니다. 그래서 코딩을 몰라도 괜찮습니다.</div>
-
-  <div class="sub-header"><div class="sub-no">0.3</div><div class="sub-title">우리가 만들 시스템의 전체 그림</div></div>
-  <p class="para">한 시스템을 <b>세 사람</b>이 각자의 화면으로 씁니다. 선생님이 콘텐츠를 만들고, 학생이 학습하고, 학부모가 결과를 봅니다. 그 사이 데이터는 자동으로 흐릅니다.</p>
-  <div class="card navy-card">
-    <div class="card-title"><div class="num">→</div> 데이터가 흐르는 길</div>
-    <div class="flow" style="margin-top:6px">
-      <div class="fnode">👩‍🏫 선생님<br>지문 붙여넣기</div><div class="farrow">→</div>
-      <div class="fnode coral-node">✨ AI<br>단어·퀴즈 생성</div><div class="farrow">→</div>
-      <div class="fnode">🧒 학생<br>단어·녹음·퀴즈</div><div class="farrow">→</div>
-      <div class="fnode">📊 결과<br>대시보드·리포트</div>
-    </div>
-    <p style="margin-top:6px">선생님이 지문 하나를 붙여넣는 순간부터, 학부모 상담 리포트가 한 장으로 완성되기까지 — 끊기지 않고 이어집니다.</p>
-  </div>
-
-  <div class="sub-header"><div class="sub-no">0.4</div><div class="sub-title">네 개의 도구 (몰라도 되지만, 한 줄씩만)</div></div>
-  <p class="para">이 시스템은 네 가지가 맞물려 돌아갑니다. 각각이 뭔지는 PART 2에서 더 풀어서 설명하니, 지금은 <b>역할만</b> 눈에 담아 두세요.</p>
-  <div class="two-col">
-    <div class="card"><div class="card-title"><div class="num">1</div> GitHub</div><p>앱 <b>코드를 보관</b>하는 창고. 완성 앱을 여기서 내 것으로 복제해 시작합니다.</p></div>
-    <div class="card"><div class="card-title"><div class="num">2</div> Supabase</div><p><b>데이터 저장소</b>. 반·학생·책·점수·녹음이 전부 여기에 쌓입니다.</p></div>
-    <div class="card"><div class="card-title"><div class="num">3</div> Vercel</div><p>코드를 <b>인터넷 주소로</b> 올려주는 곳. 여기서 <code>내주소.vercel.app</code> 이 생깁니다.</p></div>
-    <div class="card"><div class="card-title"><div class="num">4</div> Claude</div><p><b>AI 두뇌</b>. 퀴즈를 만들고(API), 나중엔 앱을 고치는 것도 클로드에게 말로 시킵니다.</p></div>
-  </div>
-
-  <div class="sub-header"><div class="sub-no">0.5</div><div class="sub-title">오늘의 여정 (로드맵)</div></div>
-  <div class="flow">
-    <div class="fnode">준비물</div><div class="farrow">→</div>
-    <div class="fnode">GitHub 복제</div><div class="farrow">→</div>
-    <div class="fnode">Supabase DB</div><div class="farrow">→</div>
-    <div class="fnode coral-node">Vercel 배포</div><div class="farrow">→</div>
-    <div class="fnode">첫 실행</div><div class="farrow">→</div>
-    <div class="fnode">AI 콘텐츠</div><div class="farrow">→</div>
-    <div class="fnode">내 학원 맞춤</div>
-  </div>
-  <div class="summary">
-    <div class="su-h">✅ PART 0 요약</div>
-    <ul>
-      <li>원서 수업의 반복 노동(특히 녹음 수집)을 시스템이 대신한다.</li>
-      <li>사서 쓰는 프로그램과 달리, 책·레벨·방식이 전부 우리 학원 것이다.</li>
-      <li>선생님 → AI → 학생 → 결과로 데이터가 자동으로 흐른다.</li>
-      <li>도구는 GitHub·Supabase·Vercel·Claude 넷. 역할만 알면 된다.</li>
-    </ul>
-  </div>
-</div>
-
 <!-- ══════════ PART 1 ══════════ -->
-<div class="part-cover" id="p1"><div class="part-cover-inner" data-big="01">
-  <div class="pc-label">PART 1 · 준비</div>
-  <div class="pc-title">준비물 갖추기 — 계정 5종</div>
-  <div class="pc-desc">설치를 시작하기 전에 계정 다섯 개가 필요합니다. 특히 Claude 결제·API 키는 승인에 시간이 걸릴 수 있으니, 세미나 전에 미리 만들어 두세요.</div>
-  <div class="pc-chips"><span class="pc-chip">GitHub</span><span class="pc-chip">Supabase</span><span class="pc-chip">Vercel</span><span class="pc-chip">Claude API</span><span class="pc-chip">노트북</span></div>
+<div class="part-cover" id="part1"><div class="part-cover-inner" data-big="1부">
+  <div class="pc-label">PART 1 · 기초</div>
+  <div class="pc-title">바이브 코딩 기초 — 말로 코드를 다루기</div>
+  <div class="pc-desc">코드를 짜는 법이 아니라, <b>클로드에게 말해서 코드를 만들고 고치는 법</b>을 배웁니다. 이 파트만 익히면, 원서 시스템이든 내 프로젝트든 다루는 방식은 똑같습니다.</div>
+  <div class="pc-chips"><span class="pc-chip">바이브 코딩이란</span><span class="pc-chip">Claude Code</span><span class="pc-chip">핵심 루프</span><span class="pc-chip">잘 말하는 법</span><span class="pc-chip">되돌리기</span></div>
 </div></div>
 
 <div class="content">
-  <div class="sub-header"><div class="sub-no">1.1</div><div class="sub-title">한눈에 — 무엇을, 왜</div></div>
-  <table class="ftable">
-    <tr><th>계정</th><th>왜 필요한가</th><th>미리 할 일</th></tr>
-    <tr><td class="mono">GitHub</td><td>앱 코드를 내 것으로 복제</td><td>가입 · 이메일 인증</td></tr>
-    <tr><td class="mono">Supabase</td><td>데이터(반·학생·책·점수·녹음) 저장</td><td>가입 (GitHub로 로그인 권장)</td></tr>
-    <tr><td class="mono">Vercel</td><td>앱을 인터넷 주소로 배포</td><td>가입 · GitHub 연결</td></tr>
-    <tr><td class="mono">Claude API</td><td>AI가 단어카드·퀴즈 생성</td><td>결제수단 등록 · 소액 충전 · 키 발급</td></tr>
-    <tr><td class="mono">노트북</td><td>배포 실습 (폰만으로는 어려움)</td><td>크롬 설치 · 충전기</td></tr>
-  </table>
+  <div class="sub-header"><div class="sub-no">1.1</div><div class="sub-title">바이브 코딩이 뭐예요?</div></div>
+  <p class="para"><b>바이브 코딩(vibe coding)</b>은 코드를 한 줄씩 손으로 짜는 대신, AI에게 <b>"이런 걸 만들어 줘 / 이렇게 바꿔 줘"</b>라고 <b>말</b>해서 프로그램을 만드는 방식이에요. 문법을 외울 필요도, 오타를 걱정할 필요도 없어요. 여러분은 <b>무엇을 원하는지</b>만 말하고, 코드는 클로드가 씁니다.</p>
+  <div class="callout concept"><span class="co-label">📘 선생님에게 딱 맞는 이유</span>선생님은 이미 <b>"무엇이 필요한지"를 아주 잘 아는 사람</b>이에요. 어떤 화면이, 어떤 기능이 학원에 필요한지 알죠. 바이브 코딩은 바로 그 '무엇'을 말로 옮기는 일이라, 오히려 선생님이 잘합니다.</div>
 
-  <div class="sub-header"><div class="sub-no">1.2</div><div class="sub-title">GitHub 가입</div></div>
+  <div class="sub-header"><div class="sub-no">1.2</div><div class="sub-title">📘 무엇을 만들 수 있나</div></div>
+  <p class="para">웹페이지·간단한 앱·자동화 도구까지, 브라우저에서 도는 건 거의 다 만들 수 있어요. 이 세미나에서는 두 가지를 합니다 — 먼저 <b>완성된 원서 시스템</b>을 가져와 내 것으로 고치고(2부), 그다음 <b>내 아이디어로 새 프로젝트</b>를 만듭니다(3부).</p>
+  <div class="flow">
+    <div class="fnode">🗣️ 내가 원하는 걸 말한다</div><div class="farrow">→</div>
+    <div class="fnode coral-node">🤖 클로드가 코드를 쓴다</div><div class="farrow">→</div>
+    <div class="fnode">👀 돌려보고 확인한다</div><div class="farrow">→</div>
+    <div class="fnode">🔁 "여기 고쳐줘" 반복</div>
+  </div>
+
+  <div class="sub-header"><div class="sub-no">1.3</div><div class="sub-title">🖐️ 도구 준비 — Claude Code + Claude 유료 구독 <span style="color:var(--coral);font-size:13px">(핵심 준비물)</span></div></div>
+  <p class="para">바이브 코딩을 하려면 클로드에게 <b>말을 걸고, 내 파일을 다루게</b> 해줄 도구가 필요해요. 이 세미나에서는 <b>Claude Code</b>를 씁니다. 그리고 Claude Code를 제대로 쓰려면 <b>Claude 유료 구독</b>이 있어야 해요.</p>
   <div class="card"><ul class="step-list">
-    <li><code>github.com</code> → 우측 위 <b>Sign up</b> (이미 있으면 로그인)</li>
-    <li>이메일·비밀번호·사용자 이름(username) 입력</li>
-    <li>가입 후 온 <b>인증 메일</b>의 링크 클릭 (스팸함도 확인)</li>
-    <li>노트북 크롬에서 로그인 상태 확인</li>
+    <li><b>Claude 유료 구독</b> — <code>claude.ai</code>에서 Pro(또는 상위) 플랜 가입 (세미나 3의 준비물 "Claude 유료 플랜")</li>
+    <li><b>Claude Code 설치</b> — 데스크톱 앱(또는 터미널 CLI)을 노트북에 설치하고, 위 계정으로 <b>로그인</b></li>
+    <li><b>노트북</b> — 크롬 권장. 스마트폰만으로는 실습이 어려워요</li>
   </ul></div>
-  <div class="callout tip"><span class="co-label">💡 팁</span>Supabase·Vercel 둘 다 <b>"GitHub로 로그인"</b>을 지원해요. GitHub를 먼저 만들면 나머지 가입이 클릭 한 번으로 끝납니다.</div>
+  <div class="callout warn"><span class="co-label">⚠️ 헷갈리기 쉬운 두 개의 "Claude" — 꼭 구분하세요</span>
+    <b>① Claude 구독 + Claude Code</b> = <b>내가</b> 코딩할 때 쓰는 도구 (앱을 만들고 고치는 사람 = 나).<br>
+    <b>② ANTHROPIC_API_KEY</b> = <b>원서 앱이</b> 퀴즈를 만들 때 쓰는 열쇠 (2부에서 Vercel에 넣음).<br>
+    → 이 둘은 <b>완전히 별개</b>예요. 바이브 코딩 자체에는 <b>①</b>이 필요하고, 원서 앱의 AI 생성 기능에는 <b>②</b>가 필요합니다.</div>
 
-  <div class="sub-header"><div class="sub-no">1.3</div><div class="sub-title">Supabase 가입</div></div>
-  <div class="card"><ul class="step-list">
-    <li><code>supabase.com</code> → <b>Start your project</b> / Sign in</li>
-    <li><b>Continue with GitHub</b>로 로그인 (제일 편함)</li>
-    <li>대시보드가 열리면 끝 — 프로젝트 생성은 PART 4에서</li>
-  </ul></div>
-  <div class="callout concept"><span class="co-label">📘 결제 카드 필요 없어요</span>Supabase는 <b>무료 요금제(Free)</b>로 세미나 실습에 충분합니다. 나중에 학생이 아주 많아지면 유료로 올리면 돼요.</div>
+  <div class="sub-header"><div class="sub-no">1.4</div><div class="sub-title">📘 핵심 루프 — 이 네 박자가 전부</div></div>
+  <p class="para">바이브 코딩은 결국 <b>같은 사이클의 반복</b>이에요. 원서 시스템을 고칠 때도, 내 프로젝트를 만들 때도 똑같습니다.</p>
+  <div class="card navy-card">
+    <div class="flow" style="margin-top:2px">
+      <div class="fnode">① 말하기<br>(원하는 것)</div><div class="farrow">→</div>
+      <div class="fnode coral-node">② 돌려보기<br>(결과 실행)</div><div class="farrow">→</div>
+      <div class="fnode">③ 확인<br>(맞나 본다)</div><div class="farrow">→</div>
+      <div class="fnode">④ 고치기<br>("여기 이렇게")</div>
+    </div>
+    <p style="margin-top:6px">한 번에 완벽하지 않아도 괜찮아요. <b>돌려보고 → 고치고</b>를 몇 번 돌리면 원하는 모습이 됩니다. 이게 코딩을 몰라도 되는 이유예요.</p>
+  </div>
 
-  <div class="sub-header"><div class="sub-no">1.4</div><div class="sub-title">Vercel 가입</div></div>
-  <div class="card"><ul class="step-list">
-    <li><code>vercel.com</code> → <b>Sign Up</b></li>
-    <li><b>Continue with GitHub</b> 선택 — 배포가 자동으로 쉬워짐</li>
-    <li>대시보드가 열리면 끝 — Import·배포는 PART 5에서</li>
-  </ul></div>
+  <div class="sub-header"><div class="sub-no">1.5</div><div class="sub-title">🗣️ 클로드에게 잘 말하는 법</div></div>
+  <p class="para">잘 만드는 사람 = 잘 말하는 사람이에요. 요령은 <b>구체적으로, 하나씩, 결과로</b>. 아래 비교를 보세요.</p>
+  <div class="speak bad"><div class="sp-label">✗ 애매한 요청</div><div class="sp-q">"예쁘게 만들어 줘."</div></div>
+  <div class="speak"><div class="sp-label">✓ 구체적인 요청</div><div class="sp-q">"제목을 가운데로 옮기고, 대표 색을 따뜻한 주황색으로, 버튼을 더 크고 둥글게 해줘."</div></div>
+  <div class="callout tip"><span class="co-label">💡 세 가지만 기억</span><b>① 구체적으로</b> — "예쁘게" 말고 "색·크기·위치"로. <b>② 하나씩</b> — 한 번에 열 개 말고, 한두 개씩 바꾸고 확인. <b>③ 결과로</b> — "이렇게 보이면 좋겠어"라고 원하는 모습을 묘사.</div>
+  <div class="callout concept"><span class="co-label">📘 모르면 물어봐도 돼요</span>"이거 어떻게 하는지 모르겠어", "이 화면 뭐가 문제야?"처럼 <b>질문</b>해도 됩니다. 클로드가 설명하고, 방법을 제안해요. 대화하듯 쓰면 됩니다.</div>
 
-  <div class="sub-header"><div class="sub-no">1.5</div><div class="sub-title">Claude API 키 + 결제 <span style="color:var(--coral);font-size:13px">(가장 미리 해둘 것)</span></div></div>
-  <div class="card"><ul class="step-list">
-    <li><code>console.anthropic.com</code> 가입/로그인</li>
-    <li><b>Billing(결제)</b> → 카드 등록 → <b>$5</b> 정도 소액 충전</li>
-    <li><b>API Keys → Create Key</b> → 키를 복사해 <b>메모장에 저장</b> (다시 안 보여줌)</li>
-  </ul></div>
-  <div class="callout warn"><span class="co-label">⚠️ 결제가 자꾸 실패하면 — 크롬 언어를 영어로</span>한국어 브라우저에서 카드 등록·결제가 오류 나는 경우가 있어요. <b>크롬 설정 → 언어 → English(United States)를 맨 위로 → "이 언어로 Chrome 표시" → 재시작</b> 후 결제 페이지를 새로고침하고 다시 시도하면 대부분 해결됩니다. 끝나면 한국어로 돌려놔도 돼요.</div>
-  <div class="callout warn"><span class="co-label">⚠️ 키는 비밀번호</span>API 키는 화면공유·채팅에 노출하지 마세요. 노출되면 콘솔에서 즉시 삭제하고 새로 발급하면 됩니다.</div>
-
-  <div class="sub-header"><div class="sub-no">1.6</div><div class="sub-title">노트북 · 지문 · 학원 정보</div></div>
+  <div class="sub-header"><div class="sub-no">1.6</div><div class="sub-title">📘 겁내지 마세요 — 언제든 되돌릴 수 있어요</div></div>
+  <p class="para">"잘못 건드리면 어쩌지?" 걱정 안 해도 돼요. 두 가지 안전장치가 있어요.</p>
   <ul class="checklist">
-    <li><b>노트북 + 크롬 + 충전기</b> — 스마트폰만으로는 배포 실습이 어려워요</li>
-    <li><b>스마트폰</b> — 학생 녹음 기능 테스트용(선택)</li>
-    <li><b>테스트용 영어 지문 2~3개</b> — 5~10문장이면 충분 (복사 가능한 형태)</li>
-    <li><b>학원 기본 정보</b> — 학원명 / 대표색 / 통과점수 / 레벨 목록 / 시리즈 목록 / 학생 3~5명(가명 OK)</li>
+    <li><b>복제본에서 작업</b> — 2부에서 원본을 그대로 두고 <b>내 복사본</b>을 고칩니다. 원본은 안 망가져요</li>
+    <li><b>버전 기록(git)</b> — 저장할 때마다 이전 상태가 기록돼서, 이상하면 <b>"방금 바꾼 거 되돌려줘"</b>라고 하면 됩니다</li>
   </ul>
+  <div class="speak"><div class="sp-label">✓ 되돌리고 싶을 때</div><div class="sp-q">"방금 바꾼 것 때문에 화면이 깨졌어. 바로 전 상태로 되돌려줘."</div></div>
   <div class="summary">
     <div class="su-h">✅ PART 1 요약</div>
     <ul>
-      <li>계정 5종을 미리 만든다: GitHub·Supabase·Vercel·Claude·노트북.</li>
-      <li>Supabase·Vercel은 GitHub 로그인으로 가입하면 편하다.</li>
-      <li>Claude는 결제·키 발급에 시간이 걸리니 가장 먼저 해둔다.</li>
-      <li>결제 오류 땐 크롬 언어를 영어로 바꿔 재시도한다.</li>
+      <li>바이브 코딩 = 코드를 짜지 않고, 클로드에게 말해서 만들고 고치는 것.</li>
+      <li>도구는 Claude Code + Claude 유료 구독(내가 코딩할 때). 앱의 API 키와는 별개.</li>
+      <li>핵심 루프: 말하기 → 돌려보기 → 확인 → 고치기의 반복.</li>
+      <li>구체적으로·하나씩·결과로 말한다. 모르면 질문한다.</li>
+      <li>복제본 + 버전 기록 덕에 언제든 되돌릴 수 있다.</li>
     </ul>
   </div>
 </div>
 
 <!-- ══════════ PART 2 ══════════ -->
-<div class="part-cover" id="p2"><div class="part-cover-inner" data-big="02">
-  <div class="pc-label">PART 2 · 준비</div>
-  <div class="pc-title">개념은 딱 한 번 — 기술 이야기</div>
-  <div class="pc-desc">여기서 기술 용어를 딱 한 번만 정리합니다. 이 다섯 가지 비유만 잡아 두면, 뒤에서 어떤 버튼을 누르든 "이게 왜 필요한지"가 보입니다.</div>
-  <div class="pc-chips"><span class="pc-chip">저장소</span><span class="pc-chip">데이터베이스</span><span class="pc-chip">배포</span><span class="pc-chip">환경변수</span><span class="pc-chip">API 키</span></div>
+<div class="part-cover" id="part2"><div class="part-cover-inner" data-big="2부">
+  <div class="pc-label">PART 2 · 연습</div>
+  <div class="pc-title">원서 시스템으로 연습 — 받아서 돌려보고 · 수정</div>
+  <div class="pc-desc">빈 화면에서 시작하면 막막해요. 그래서 <b>완성된 원서 시스템</b>을 먼저 받아 <b>돌려보고</b>, 어떻게 생겼는지 <b>뜯어본 뒤</b>, 클로드에게 말해서 <b>우리 학원에 맞게 수정</b>합니다. 1부의 핵심 루프를 진짜 코드에 적용해 보는 파트예요.</div>
+  <div class="pc-chips"><span class="pc-chip">코드 받기</span><span class="pc-chip">먼저 돌려보기</span><span class="pc-chip">뜯어보기</span><span class="pc-chip">겉모습·데이터·기능 수정</span></div>
 </div></div>
 
 <div class="content">
-  <div class="sub-header"><div class="sub-no">2.1</div><div class="sub-title">저장소(GitHub) = 코드 원본 창고</div></div>
-  <p class="para">앱은 결국 <b>여러 개의 파일</b>입니다. 이 파일들을 모아 두고 버전을 관리하는 인터넷 창고가 <b>저장소(repository)</b>예요. 완성된 원서 앱의 저장소를 <b>통째로 내 계정으로 복제</b>해서 내 원본으로 삼습니다.</p>
+  <div class="sub-header"><div class="sub-no">2.1</div><div class="sub-title">📘 왜 남의 완성 코드로 시작하나</div></div>
+  <p class="para">처음부터 빈 종이에 만들려면 막막하죠. 하지만 <b>이미 돌아가는 앱</b>을 받아서 고치면 훨씬 쉬워요 — 결과가 눈에 보이니까요. 요리로 치면, 백지에서 레시피를 짜는 게 아니라 <b>완성된 요리를 맛보고 간을 내 입맛에 맞추는</b> 것과 같아요. 이 파트에서 감을 잡으면, 3부에서 내 것을 만들 때 훨씬 수월합니다.</p>
 
-  <div class="sub-header"><div class="sub-no">2.2</div><div class="sub-title">데이터베이스(Supabase) = 인터넷에 있는 엑셀 창고</div></div>
-  <p class="para">반·학생·책·점수·녹음처럼 <b>계속 쌓이고 바뀌는 데이터</b>를 담는 곳입니다. 엑셀 표 여러 개가 인터넷에 있다고 생각하면 쉬워요. 앱 화면에서 학생을 추가하면 이 표에 한 줄이 쌓이고, 다시 열 때 여기서 불러옵니다.</p>
+  <div class="sub-header"><div class="sub-no">2.2</div><div class="sub-title">🖐️ 코드 받아오기</div></div>
+  <div class="card"><ul class="step-list">
+    <li>강사가 안내한 <b>원서 시스템 템플릿 저장소</b>(GitHub)를 엽니다 (부록 링크)</li>
+    <li>우측 상단 <b>"Use this template" → Create a new repository</b> (버튼이 없으면 <b>Fork</b>)</li>
+    <li>이름 입력(예: <code>my-reader</code>) → <b>Create</b> → 내 계정에 복사본 완성</li>
+    <li>그 저장소를 <b>Claude Code로 열기</b> — 이제 클로드가 이 코드를 다룰 수 있어요</li>
+  </ul></div>
+  <div class="callout concept"><span class="co-label">📘 이 앱은 구조가 아주 단순해요</span>서버 전체가 <code>api/mini-reader.js</code> 파일 하나, 화면은 <code>public/mini/</code> 안의 HTML들, 데이터 설계는 <code>sql/mini-setup.sql</code> 하나예요. 지금 파일을 직접 읽을 필요는 없어요 — 2.6에서 클로드에게 설명을 시킬 거예요.</div>
 
-  <div class="sub-header"><div class="sub-no">2.3</div><div class="sub-title">배포(Vercel) = 내 코드를 인터넷 주소로</div></div>
-  <p class="para">내 컴퓨터 안의 코드는 나만 볼 수 있죠. <b>배포(deploy)</b>는 그 코드를 인터넷에 올려 <b>누구나 접속할 주소</b>로 만드는 일입니다. Vercel이 내 GitHub 저장소를 읽어 <code>내주소.vercel.app</code> 을 만들어 줍니다.</p>
+  <div class="sub-header"><div class="sub-no">2.3</div><div class="sub-title">🖐️ 먼저 돌려보기 ① — 데이터 창고 붙이기 (Supabase)</div></div>
+  <p class="para">앱이 돌려면 데이터를 담을 창고가 필요해요. <b>Supabase</b>에 창고를 만들고 연결합니다.</p>
+  <div class="card"><ul class="step-list">
+    <li><code>supabase.com</code> 로그인 → <b>New project</b> (Region은 Seoul 추천, 비번은 메모)</li>
+    <li>왼쪽 <b>SQL Editor → New query</b> → 내 저장소의 <code>sql/mini-setup.sql</code> 전체를 붙여넣고 <b>Run</b></li>
+    <li>표(반·학생·책·결과·녹음 등)와 녹음 저장 버킷, 샘플 책이 <b>한 번에</b> 생성돼요</li>
+    <li><b>Settings → API</b>에서 <b>Project URL</b>과 <b>service_role 키</b>를 복사해 둡니다</li>
+  </ul></div>
+  <div class="callout warn"><span class="co-label">⚠️ service_role 키는 비밀</span>다음 단계에서 <b>Vercel에만</b> 넣습니다. 카톡·화면공유·HTML에 붙여넣지 마세요.</div>
 
-  <div class="sub-header"><div class="sub-no">2.4</div><div class="sub-title">환경변수 = 코드 밖에 숨겨 두는 비밀 값</div></div>
-  <p class="para">데이터베이스 주소나 API 키 같은 <b>비밀 값</b>을 코드 안에 적으면, 소스를 보는 누구나 볼 수 있어 위험합니다. 그래서 이런 값은 코드가 아니라 <b>Vercel 설정(환경변수)</b>에 따로 넣어 둡니다. 코드는 "환경변수에서 꺼내 써"라고만 되어 있어요.</p>
-  <div class="callout warn"><span class="co-label">⚠️ 이 앱의 절대 규칙</span>API 키·비밀 값은 <b>Vercel 환경변수에만</b> 넣습니다. HTML이나 브라우저 코드에는 절대 넣지 않아요 — 학생·학부모가 소스를 볼 수 있으니까요.</div>
+  <div class="sub-header"><div class="sub-no">2.4</div><div class="sub-title">🖐️ 먼저 돌려보기 ② — 인터넷에 올리기 (Vercel)</div></div>
+  <div class="card"><ul class="step-list">
+    <li><code>vercel.com</code> → <b>Add New → Project</b> → 내 저장소 <b>Import</b></li>
+    <li><b>Environment Variables</b>에 아래 3개를 이름 그대로 입력</li>
+    <li><b>Deploy</b> → 1~2분 뒤 <code>내주소.vercel.app/mini/</code> 열기</li>
+  </ul></div>
+  <table class="ftable">
+    <tr><th>이름</th><th>값 (어디서)</th><th>필수</th></tr>
+    <tr><td class="mono">SUPABASE_URL</td><td>Supabase Project URL (2.3)</td><td>✅</td></tr>
+    <tr><td class="mono">SUPABASE_SERVICE_KEY</td><td>Supabase service_role 키 (2.3)</td><td>✅</td></tr>
+    <tr><td class="mono">ANTHROPIC_API_KEY</td><td>Claude 콘솔의 API 키 — <b>앱의 AI 생성용</b></td><td>선택</td></tr>
+  </table>
+  <div class="callout warn"><span class="co-label">⚠️ 여기서 다시 — 두 Claude 구분</span>이 <code>ANTHROPIC_API_KEY</code>는 <b>앱이 퀴즈를 만들 때</b> 쓰는 키예요(1.3의 ②). 내가 바이브 코딩할 때 쓰는 <b>Claude Code 구독</b>과는 다릅니다. 없어도 배포는 되고, 그땐 수동 "책 추가"만 돼요.</div>
 
-  <div class="sub-header"><div class="sub-no">2.5</div><div class="sub-title">API · API 키 = AI에게 일을 시키는 전화선과 사원증</div></div>
-  <p class="para"><b>API</b>는 다른 서비스(여기선 Claude)에게 일을 시키는 통로예요. 우리 앱이 "이 지문으로 퀴즈 만들어 줘"라고 Claude에게 요청을 보내면, Claude가 결과를 돌려줍니다. <b>API 키</b>는 그 통로를 쓸 수 있는 <b>사원증</b>이에요. 키가 있어야(그리고 잔액이 있어야) 요청이 통합니다.</p>
+  <div class="sub-header"><div class="sub-no">2.5</div><div class="sub-title">🖐️ 돌아가는 걸 눈으로 보기</div></div>
+  <p class="para">배포된 <code>/mini/</code>를 열고 실제로 굴려 보세요. "이게 진짜 돌아가는구나"를 느끼는 게 이 단계의 목적이에요.</p>
+  <ul class="checklist">
+    <li><code>/mini/students.html</code>에서 <b>반·학생</b> 만들기</li>
+    <li><code>/mini/books.html</code>에서 <b>AI로 생성</b> — 영어 지문 붙여넣어 단어카드·퀴즈 만들기</li>
+    <li>학생에게 <b>배정</b> → 학생 화면(<code>/mini/</code>)에서 단어→녹음→퀴즈 흐름 보기</li>
+    <li><code>/mini/report.html</code>에서 <b>학부모 리포트</b> 출력해 보기</li>
+  </ul>
 
-  <div class="sub-header"><div class="sub-no">2.6</div><div class="sub-title">다섯 개가 어떻게 이어지나</div></div>
-  <div class="card navy-card">
-    <div class="flow" style="margin-top:2px">
-      <div class="fnode">GitHub<br>(코드 원본)</div><div class="farrow">→</div>
-      <div class="fnode coral-node">Vercel<br>(배포·실행)</div>
-      <div class="farrow">↔</div>
-      <div class="fnode">Supabase<br>(데이터)</div>
-    </div>
-    <p style="margin-top:6px">Vercel이 GitHub의 코드를 실행하고, 그 코드가 Supabase에서 데이터를 읽고 씁니다. AI가 필요할 땐 Vercel의 코드가 <b>환경변수에 든 API 키</b>로 Claude를 호출합니다.</p>
-  </div>
-  <div class="summary">
-    <div class="su-h">✅ PART 2 요약</div>
-    <ul>
-      <li>저장소=코드 창고, 데이터베이스=엑셀 창고, 배포=인터넷 주소 만들기.</li>
-      <li>환경변수=코드 밖에 숨긴 비밀 값. 키는 절대 코드에 안 넣는다.</li>
-      <li>API 키=AI에게 일을 시키는 사원증. 잔액이 있어야 통한다.</li>
-      <li>Vercel이 GitHub 코드를 실행하고 Supabase 데이터를 다룬다.</li>
-    </ul>
-  </div>
+  <div class="sub-header"><div class="sub-no">2.6</div><div class="sub-title">🗣️ 코드 뜯어보기 — 클로드에게 물어보기</div></div>
+  <p class="para">고치기 전에, 이 앱이 어떻게 생겼는지 <b>클로드에게 설명을 시켜</b> 보세요. 코드를 직접 읽지 않아도 구조가 잡힙니다.</p>
+  <div class="speak"><div class="sp-label">🗣️ 이렇게 말하기</div><div class="sp-q">"이 프로젝트가 어떤 앱인지, 파일들이 각각 무슨 역할을 하는지 쉽게 설명해줘. 내가 학원 선생님이라 코드는 잘 몰라."</div></div>
+  <div class="speak"><div class="sp-label">🗣️ 더 물어보기</div><div class="sp-q">"학원 이름이나 색깔을 바꾸려면 어느 파일을 고쳐야 해?"</div></div>
+
+  <div class="sub-header"><div class="sub-no">2.7</div><div class="sub-title">🗣️ 수정 ① — 겉모습 (학원명·색·통과점수)</div></div>
+  <p class="para">가장 쉬운 것부터. 아래처럼 말하고, 저장한 뒤 <b>돌려보기</b>로 확인하세요. 한 번에 하나씩!</p>
+  <div class="speak"><div class="sp-label">🗣️ 학원 이름</div><div class="sp-q">"리포트와 워크시트에 나오는 학원 이름을 '홍보은영어'로 바꿔줘."</div></div>
+  <div class="speak"><div class="sp-label">🗣️ 대표 색</div><div class="sp-q">"앱 전체 대표 색을 따뜻한 주황색 계열로 바꿔줘."</div></div>
+  <div class="speak"><div class="sp-label">🗣️ 통과 점수</div><div class="sp-q">"퀴즈 통과 점수를 70점에서 75점으로 바꿔줘."</div></div>
+
+  <div class="sub-header"><div class="sub-no">2.8</div><div class="sub-title">🗣️ 수정 ② — 목록·데이터 (레벨·시리즈)</div></div>
+  <div class="speak"><div class="sp-label">🗣️ 레벨 목록</div><div class="sp-q">"레벨(단계) 목록을 우리 학원 방식인 '1단계·2단계·3단계·4단계'로 바꿔줘."</div></div>
+  <div class="speak"><div class="sp-label">🗣️ 시리즈 목록</div><div class="sp-q">"원서 시리즈 목록을 'Henry and Mudge, Fancy Nancy, Nate the Great'로 바꿔줘."</div></div>
+
+  <div class="sub-header"><div class="sub-no">2.9</div><div class="sub-title">🗣️ 수정 ③ — 기능·AI 출제</div></div>
+  <div class="speak"><div class="sp-label">🗣️ 문항 수·언어</div><div class="sp-q">"AI가 만드는 원서퀴즈2를 5문항으로 늘리고, 3단계 이상 책은 보기까지 전부 영어로 내줘."</div></div>
+  <div class="callout tip"><span class="co-label">💡 조금 더 욕심내도 돼요</span>"현황 화면에 완독 권수 칸을 하나 추가해줘"처럼 <b>기능을 더하는 것</b>도 말로 됩니다. 사서 쓰는 프로그램은 못 하지만, 이건 여러분 것이니까요.</div>
+
+  <div class="sub-header"><div class="sub-no">2.10</div><div class="sub-title">📘 저장 → 자동 반영</div></div>
+  <p class="para">클로드가 고친 내용을 <b>저장(커밋·푸시)</b>하면 GitHub에 올라가고, Vercel이 <b>자동으로 다시 배포</b>합니다. 몇 분 뒤 내 주소를 새로고침하면 바뀐 화면이 보여요. 저장·푸시도 <b>"방금 바꾼 거 저장하고 올려줘"</b>라고 클로드에게 말하면 됩니다.</p>
+
+  <div class="sub-header"><div class="sub-no">2.11</div><div class="sub-title">🛠 막힐 때</div></div>
+  <table class="tbl">
+    <tr><th>증상</th><th>해결</th></tr>
+    <tr><td class="sym">/mini/ 데이터가 안 뜸</td><td>Vercel 환경변수(URL·키) 오타 확인 → 재배포</td></tr>
+    <tr><td class="sym">저장·등록이 안 됨</td><td>Supabase SQL을 안 돌렸을 가능성 → SQL 다시 실행</td></tr>
+    <tr><td class="sym">"AI로 생성"이 안 됨</td><td><code>ANTHROPIC_API_KEY</code> 없음/잔액 부족 확인</td></tr>
+    <tr><td class="sym">화면이 깨졌다</td><td>클로드에게 "방금 바꾼 것 되돌려줘"</td></tr>
+    <tr><td class="sym">뭐가 문제인지 모르겠다</td><td>에러 메시지를 복사해 클로드에게 그대로 붙여넣고 물어보기</td></tr>
+  </table>
+  <div class="summary"><div class="su-h">✅ PART 2 요약</div><ul>
+    <li>완성된 원서 코드를 내 저장소로 복제해 Claude Code로 연다.</li>
+    <li>Supabase(데이터)·Vercel(배포)을 붙여 먼저 돌려본다.</li>
+    <li>고치기 전에 클로드에게 구조를 설명시켜 감을 잡는다.</li>
+    <li>겉모습→데이터→기능 순으로, 말로 하나씩 수정하고 확인한다.</li>
+    <li>저장하면 자동 재배포된다. 막히면 에러를 클로드에게 붙여넣는다.</li>
+  </ul></div>
 </div>
 
 <!-- ══════════ PART 3 ══════════ -->
-<div class="part-cover" id="p3"><div class="part-cover-inner" data-big="03">
-  <div class="pc-label">PART 3 · 설치</div>
-  <div class="pc-title">GitHub — 내 저장소 만들기</div>
-  <div class="pc-desc">완성된 원서 앱을 내 계정으로 복제합니다. 여기서 만든 저장소가 앞으로 Vercel이 배포할 "내 원서 앱의 원본"이 됩니다.</div>
-  <div class="pc-chips"><span class="pc-chip">Use this template</span><span class="pc-chip">Fork</span><span class="pc-chip">저장소 구조</span></div>
+<div class="part-cover" id="part3"><div class="part-cover-inner" data-big="3부">
+  <div class="pc-label">PART 3 · 창작</div>
+  <div class="pc-title">내 프로젝트 만들기 — 처음부터 끝까지</div>
+  <div class="pc-desc">이제 남의 코드가 아니라 <b>내 아이디어</b>로 만듭니다. 방법은 2부와 똑같아요 — 말하고, 돌려보고, 고친다. 예시로 <b>"우리 학원 단어 플래시카드"</b>를 처음부터 끝까지 함께 만들어 봅니다.</div>
+  <div class="pc-chips"><span class="pc-chip">아이디어 고르기</span><span class="pc-chip">제작 사이클</span><span class="pc-chip">예시 워크스루</span><span class="pc-chip">배포</span></div>
 </div></div>
 
 <div class="content">
-  <div class="sub-header"><div class="sub-no">3.1</div><div class="sub-title">템플릿이란?</div></div>
-  <p class="para">이 원서 앱 저장소는 <b>템플릿(template)</b>으로 설정돼 있어요. 템플릿 저장소는 <b>"Use this template"</b> 버튼 하나로 똑같은 구조의 새 저장소를 내 계정에 만들어 줍니다. 원본은 그대로 두고, 내 복사본에서 자유롭게 고칠 수 있어요.</p>
+  <div class="sub-header"><div class="sub-no">3.1</div><div class="sub-title">📘 빈 종이가 두렵지 않은 이유</div></div>
+  <p class="para">2부에서 이미 <b>말하기 → 돌려보기 → 고치기</b>를 해봤어요. 내 프로젝트도 <b>완전히 같은 방식</b>입니다. 다른 점은 단 하나 — 시작이 "완성된 앱"이 아니라 "빈 화면"이라는 것뿐이에요. 그마저도 첫 요청 한 번이면 뭔가가 화면에 나타납니다.</p>
 
-  <div class="sub-header"><div class="sub-no">3.2</div><div class="sub-title">🖐️ 실습 — Use this template</div></div>
-  <div class="card"><ul class="step-list">
-    <li>자료실(PART 9)의 <b>템플릿 저장소</b> 주소를 크롬에서 엽니다</li>
-    <li>우측 상단 초록색 <b>"Use this template"</b> → <b>"Create a new repository"</b> 클릭</li>
-    <li><b>Repository name</b> 입력 (예: <code>my-reader</code>) — 영문 소문자·하이픈 권장</li>
-    <li>공개 범위는 <b>Public</b> 그대로 두고 <b>"Create repository"</b> 클릭</li>
-    <li>잠시 뒤 내 계정에 <b>똑같은 앱</b>이 복제되면 성공</li>
-  </ul></div>
-  <div class="callout tip"><span class="co-label">💡 "Use this template" 버튼이 안 보이면</span>우측 상단 <b>Fork</b> 버튼을 눌러도 똑같이 내 계정으로 복사됩니다. 결과는 같아요.</div>
+  <div class="sub-header"><div class="sub-no">3.2</div><div class="sub-title">📘 좋은 첫 프로젝트 고르기</div></div>
+  <ul class="checklist">
+    <li><b>작게</b> — 화면 하나로 끝나는 것부터 (기능 1~2개)</li>
+    <li><b>내 학원의 진짜 문제</b> — 매번 손으로 하던 반복 작업</li>
+    <li><b>결과가 눈에 보이는 것</b> — 표·카드·버튼처럼 화면에 나타나는 것</li>
+  </ul>
+  <div class="callout concept"><span class="co-label">📘 이런 것들이 좋아요</span>단어 플래시카드 · 출석 체크 보드 · 칭찬 스티커 판 · 수업 타이머 · 오늘의 숙제 게시판 · 간단한 학부모 설문. 오늘은 <b>단어 플래시카드</b>로 사이클 전체를 보여드릴게요.</div>
 
-  <div class="sub-header"><div class="sub-no">3.3</div><div class="sub-title">📘 내 저장소 안에 뭐가 들었나</div></div>
-  <p class="para">복제된 저장소를 열어 보면 파일이 몇 개 없습니다. 이 <b>단순함</b>이 이 앱의 핵심이에요 — 서버 전체가 파일 하나입니다.</p>
-  <table class="ftable">
-    <tr><th>위치</th><th>역할</th></tr>
-    <tr><td class="mono">api/mini-reader.js</td><td><b>서버 전부</b>가 이 파일 하나. 책·퀴즈·배정·결과·녹음·AI생성·리포트 모든 기능</td></tr>
-    <tr><td class="mono">public/mini/*.html</td><td>페이지별 화면 (index·reader·students·books·report·worksheet)</td></tr>
-    <tr><td class="mono">public/mini/mini.css</td><td>공통 스타일</td></tr>
-    <tr><td class="mono">sql/mini-setup.sql</td><td>데이터베이스 세팅 SQL (PART 4에서 사용)</td></tr>
-    <tr><td class="mono">CLAUDE.md</td><td>클로드가 이 앱을 고칠 때 지키는 규칙 (PART 8에서 유용)</td></tr>
-  </table>
-  <div class="callout concept"><span class="co-label">📘 지금은 안 열어봐도 돼요</span>파일을 직접 편집하는 건 PART 8(바이브 코딩)에서 클로드와 함께 합니다. 지금은 "이런 게 들어 있구나" 정도면 충분해요.</div>
-  <div class="summary"><div class="su-h">✅ PART 3 요약</div><ul>
-    <li>템플릿 저장소를 "Use this template"로 내 계정에 복제한다.</li>
-    <li>버튼이 없으면 Fork로 해도 결과는 같다.</li>
-    <li>서버 전체가 api/mini-reader.js 파일 하나 — 구조가 아주 단순하다.</li>
-  </ul></div>
-</div>
-
-<!-- ══════════ PART 4 ══════════ -->
-<div class="part-cover" id="p4"><div class="part-cover-inner" data-big="04">
-  <div class="pc-label">PART 4 · 설치</div>
-  <div class="pc-title">Supabase — 데이터베이스 구축</div>
-  <div class="pc-desc">데이터가 쌓일 창고를 만듭니다. 프로젝트를 만들고 → SQL 한 번으로 표·저장공간을 자동 생성하고 → 연결에 쓸 값 두 개를 복사합니다.</div>
-  <div class="pc-chips"><span class="pc-chip">프로젝트 생성</span><span class="pc-chip">SQL 실행</span><span class="pc-chip">표 8종</span><span class="pc-chip">키 복사</span></div>
-</div></div>
-
-<div class="content">
-  <div class="sub-header"><div class="sub-no">4.1</div><div class="sub-title">🖐️ 새 프로젝트 만들기</div></div>
-  <div class="card"><ul class="step-list">
-    <li>Supabase 로그인 → <b>New project</b></li>
-    <li>프로젝트 이름 입력, <b>Database Password</b> 설정 (메모해 두기)</li>
-    <li>Region은 <b>Northeast Asia (Seoul)</b> 추천 → <b>Create new project</b></li>
-    <li>1~2분간 준비되는 동안 기다립니다</li>
-  </ul></div>
-  <div class="callout tip"><span class="co-label">💡 비밀번호는 메모</span>데이터베이스 비밀번호는 나중에 필요할 수 있으니 메모장에 적어 두세요. (배포에는 이 비번이 아니라 4.5의 키를 씁니다.)</div>
-
-  <div class="sub-header"><div class="sub-no">4.2</div><div class="sub-title">🖐️ SQL 한 번으로 표·저장공간 생성</div></div>
-  <div class="card"><ul class="step-list">
-    <li>왼쪽 메뉴 <b>SQL Editor → New query</b></li>
-    <li>내 저장소의 <code>sql/mini-setup.sql</code> 내용을 <b>전체 복사</b></li>
-    <li>편집기에 <b>붙여넣고</b> 오른쪽 아래 <b>Run</b> 클릭</li>
-    <li>표·녹음 저장공간·샘플 책이 <b>한 번에</b> 만들어집니다</li>
-  </ul></div>
-  <div class="callout concept"><span class="co-label">📘 여러 번 실행해도 안전</span>이 SQL은 "이미 있으면 무시"하도록 만들어져 있어요. 실수로 두 번 돌려도 데이터가 깨지지 않습니다. 나중에 앱을 업데이트할 때 다시 돌려도 안전해요.</div>
-
-  <div class="sub-header"><div class="sub-no">4.3</div><div class="sub-title">📘 만들어지는 표 8종 (무엇이 어디에 쌓이나)</div></div>
-  <table class="ftable">
-    <tr><th>표 이름</th><th>담는 것</th></tr>
-    <tr><td class="mono">mini_books</td><td>책 + 3종(단어카드 <code>words</code> · 원서퀴즈1 <code>q1</code> · 원서퀴즈2 <code>q2</code>) + 원문·챕터·영상</td></tr>
-    <tr><td class="mono">mini_classes</td><td>반</td></tr>
-    <tr><td class="mono">mini_students</td><td>학생 (이름·반·로그인 아이디·레벨)</td></tr>
-    <tr><td class="mono">mini_assignments</td><td>배정 (학생 ↔ 책, 중복 방지)</td></tr>
-    <tr><td class="mono">mini_results</td><td>결과·점수 (<code>quiz_type</code> 0=단어·1=퀴즈1·2=퀴즈2)</td></tr>
-    <tr><td class="mono">mini_recordings</td><td>녹음 메타 (실제 파일은 recordings 버킷)</td></tr>
-    <tr><td class="mono">mini_worksheets</td><td>저장한 워크시트 (리딩·라이팅·단어)</td></tr>
-    <tr><td class="mono">mini_settings</td><td>앱 설정 (예: 영어 출제 시작 레벨)</td></tr>
-  </table>
-
-  <div class="sub-header"><div class="sub-no">4.4</div><div class="sub-title">📘 recordings 버킷 (녹음 파일 저장소)</div></div>
-  <p class="para">SQL은 표뿐 아니라 <b>recordings</b>라는 비공개 저장 버킷도 만듭니다. 학생이 녹음한 <b>오디오 파일</b>은 여기 저장되고, 표(mini_recordings)에는 "누가·어떤 책을·어디에" 저장했는지 정보만 남아요.</p>
-  <div class="callout warn"><span class="co-label">⚠️ 녹음이 안 올라가면</span>대개 recordings 버킷이 없어서예요. 4.2의 SQL을 다시 실행하면 버킷까지 생성됩니다.</div>
-
-  <div class="sub-header"><div class="sub-no">4.5</div><div class="sub-title">🖐️ 연결에 쓸 값 2개 복사</div></div>
-  <div class="card"><ul class="step-list">
-    <li>왼쪽 <b>Settings → API</b> 이동</li>
-    <li><b>Project URL</b> 복사 → 배포 때 <code>SUPABASE_URL</code> 로 씀</li>
-    <li><b>service_role</b> 키 복사 → 배포 때 <code>SUPABASE_SERVICE_KEY</code> 로 씀</li>
-  </ul></div>
-  <div class="callout warn"><span class="co-label">⚠️ service_role은 최고 권한 비밀키</span>이 키는 데이터베이스를 마음대로 다룰 수 있는 강력한 키예요. 다음 파트에서 <b>Vercel 환경변수에만</b> 넣고, 카톡·화면공유·HTML에는 절대 붙여넣지 마세요.</div>
-  <div class="summary"><div class="su-h">✅ PART 4 요약</div><ul>
-    <li>새 프로젝트 → SQL 한 번 실행 → 표 8종·recordings 버킷·샘플 책 자동 생성.</li>
-    <li>SQL은 여러 번 돌려도 안전하다.</li>
-    <li>Settings → API에서 Project URL과 service_role 키를 복사해 둔다.</li>
-    <li>service_role 키는 Vercel 환경변수에만 넣는다.</li>
-  </ul></div>
-</div>
-
-<!-- ══════════ PART 5 ══════════ -->
-<div class="part-cover" id="p5"><div class="part-cover-inner" data-big="05">
-  <div class="pc-label">PART 5 · 설치</div>
-  <div class="pc-title">Vercel — 인터넷에 올리기(배포)</div>
-  <div class="pc-desc">내 저장소를 Vercel에 연결하고, 앞서 복사한 값들을 환경변수로 넣은 뒤 배포합니다. 끝나면 진짜 내 주소가 생깁니다.</div>
-  <div class="pc-chips"><span class="pc-chip">Import</span><span class="pc-chip">환경변수 3개</span><span class="pc-chip">Deploy</span><span class="pc-chip">자동 재배포</span></div>
-</div></div>
-
-<div class="content">
-  <div class="sub-header"><div class="sub-no">5.1</div><div class="sub-title">🖐️ 내 저장소 불러오기(Import)</div></div>
-  <div class="card"><ul class="step-list">
-    <li><code>vercel.com</code> → <b>Add New → Project</b></li>
-    <li>PART 3에서 만든 <b>내 저장소를 Import</b></li>
-    <li>빌드 설정은 <b>기본값 그대로</b> (건드릴 것 없음)</li>
-  </ul></div>
-
-  <div class="sub-header"><div class="sub-no">5.2</div><div class="sub-title">🖐️ 환경변수 3개 입력 <span style="color:var(--coral);font-size:13px">(가장 중요)</span></div></div>
-  <p class="para">배포 화면의 <b>Environment Variables</b>에 아래 3개를 추가합니다. <b>이름은 정확히 똑같이</b>, 값은 앞서 복사한 것으로.</p>
-  <table class="ftable">
-    <tr><th>이름 (Key)</th><th>값 (어디서 온 값)</th><th>필수</th></tr>
-    <tr><td class="mono">SUPABASE_URL</td><td>Supabase Settings→API의 Project URL (4.5)</td><td>✅</td></tr>
-    <tr><td class="mono">SUPABASE_SERVICE_KEY</td><td>Supabase의 service_role 키 (4.5)</td><td>✅</td></tr>
-    <tr><td class="mono">ANTHROPIC_API_KEY</td><td>Claude 콘솔의 API 키 (1.5)</td><td>선택</td></tr>
-  </table>
-  <div class="callout gold"><span class="co-label">💡 ANTHROPIC_API_KEY 없이도 배포는 돼요</span>없으면 "AI로 생성" 대신 수동 "책 추가"만 쓸 수 있어요. 세미나에서는 넣고 진행합니다. 나중에 Vercel 설정에서 추가하고 재배포해도 됩니다.</div>
-
-  <div class="sub-header"><div class="sub-no">5.3</div><div class="sub-title">🖐️ Deploy → 내 주소 확인</div></div>
-  <div class="card"><ul class="step-list">
-    <li><b>Deploy</b> 클릭 → 1~2분 기다리기</li>
-    <li>완료되면 <code>내프로젝트.vercel.app</code> 주소 생성</li>
-    <li>주소 뒤에 <b>/mini/</b> 를 붙여 열기 → <code>내프로젝트.vercel.app/mini/</code></li>
-  </ul></div>
-  <div class="callout tip"><span class="co-label">💡 이 화면이 뜨면 배포 성공</span>홈 화면(학생·학생관리·원서관리 버튼)이 뜨면 끝났어요. 이제 이 주소가 우리 학원 원서 앱입니다.</div>
-
-  <div class="sub-header"><div class="sub-no">5.4</div><div class="sub-title">📘 자동 재배포 — 고치면 저절로 반영</div></div>
-  <p class="para">Vercel은 내 GitHub 저장소와 연결돼 있어요. 그래서 나중에 <b>코드가 바뀌면(커밋·푸시) Vercel이 자동으로 다시 배포</b>합니다. PART 8에서 클로드로 앱을 고치고 저장하면, 몇 분 뒤 내 주소에 저절로 반영돼요.</p>
-  <div class="summary"><div class="su-h">✅ PART 5 요약</div><ul>
-    <li>Vercel에 내 저장소를 Import 한다.</li>
-    <li>환경변수 3개(URL·service_role·API키)를 이름 그대로 넣는다.</li>
-    <li>Deploy 후 <code>/mini/</code> 로 접속해 홈 화면을 확인한다.</li>
-    <li>이후 코드가 바뀌면 자동으로 재배포된다.</li>
-  </ul></div>
-</div>
-
-<!-- ══════════ PART 6 ══════════ -->
-<div class="part-cover" id="p6"><div class="part-cover-inner" data-big="06">
-  <div class="pc-label">PART 6 · 설치</div>
-  <div class="pc-title">첫 실행 — 구조 익히기</div>
-  <div class="pc-desc">배포된 앱의 페이지 다섯 개를 익히고, 반과 학생을 만들어 데이터가 실제로 Supabase에 쌓이는 것을 확인합니다.</div>
-  <div class="pc-chips"><span class="pc-chip">페이지 5개</span><span class="pc-chip">반 만들기</span><span class="pc-chip">학생 등록</span><span class="pc-chip">로그인 방식</span></div>
-</div></div>
-
-<div class="content">
-  <div class="sub-header"><div class="sub-no">6.1</div><div class="sub-title">📘 페이지 지도 (북마크 해두기)</div></div>
-  <table class="ftable">
-    <tr><th>누가</th><th>주소</th><th>하는 일</th></tr>
-    <tr><td>🧒 학생</td><td class="mono">/mini/</td><td>배정된 책 → 단어·퀴즈 → 녹음</td></tr>
-    <tr><td>👩‍🏫 선생님</td><td class="mono">/mini/students.html</td><td>반·학생·배정·학습 현황</td></tr>
-    <tr><td>👩‍🏫 선생님</td><td class="mono">/mini/books.html</td><td>AI 생성·책 목록·수정·삭제</td></tr>
-    <tr><td>👨‍👩‍👧 학부모</td><td class="mono">/mini/report.html</td><td>학습 리포트 (인쇄·PDF)</td></tr>
-    <tr><td>👩‍🏫 선생님</td><td class="mono">/mini/worksheet.html</td><td>워크시트 출력</td></tr>
-  </table>
-
-  <div class="sub-header"><div class="sub-no">6.2</div><div class="sub-title">🖐️ 반 만들기</div></div>
-  <div class="card"><ul class="step-list">
-    <li><code>/mini/students.html</code> 열기</li>
-    <li><b>반 만들기</b> — 반 이름 입력 (예: 월수금 A반)</li>
-    <li>여러 반을 미리 만들어 두면 학생 등록이 편해요</li>
-  </ul></div>
-
-  <div class="sub-header"><div class="sub-no">6.3</div><div class="sub-title">🖐️ 학생 등록 (하나씩 또는 붙여넣기)</div></div>
-  <div class="card"><ul class="step-list">
-    <li><b>학생 등록</b> — 이름 · (선택)로그인 아이디 · 반 · 레벨 입력</li>
-    <li>여러 명은 <b>일괄 등록(붙여넣기)</b>도 돼요 — 전체학생 목록을 복사해 붙이면 새 반 이름은 자동 생성</li>
-    <li>준비해온 학생 3~5명을 넣어 봅니다</li>
-  </ul></div>
-  <div class="callout concept"><span class="co-label">📘 학생 로그인 방식</span>학생은 <code>/mini/</code> 에서 <b>이름</b>으로 로그인해요. 등록 시 <b>로그인 아이디</b>를 넣어 두면 "아이디 + 이름"이 맞아야 들어갈 수 있고, 아이디를 비워 두면 이름만으로 들어갑니다. 동명이인이 있으면 아이디로 구분하세요.</div>
-
-  <div class="sub-header"><div class="sub-no">6.4</div><div class="sub-title">🖐️ 데이터가 쌓이는 것 확인</div></div>
-  <p class="para">방금 만든 반·학생이 실제로 저장됐는지 확인해 봅시다. Supabase 대시보드 → <b>Table Editor</b> → <code>mini_classes</code>·<code>mini_students</code> 표를 열면, 방금 넣은 줄이 보일 거예요. <b>화면에서 한 일이 데이터베이스에 남는다</b> — 이게 이 시스템의 핵심입니다.</p>
-  <div class="summary"><div class="su-h">✅ PART 6 요약</div><ul>
-    <li>페이지는 5개: 학생 /mini/, 선생님 students·books·worksheet, 부모 report.</li>
-    <li>반을 먼저 만들고 학생을 등록한다(일괄 붙여넣기 가능).</li>
-    <li>학생은 이름(+선택 아이디)으로 로그인한다.</li>
-    <li>화면에서 한 일은 Supabase 표에 그대로 쌓인다.</li>
-  </ul></div>
-</div>
-
-<!-- ══════════ PART 7 ══════════ -->
-<div class="part-cover" id="p7"><div class="part-cover-inner" data-big="07">
-  <div class="pc-label">PART 7 · 내 학원에 맞추기</div>
-  <div class="pc-title">콘텐츠 채우기 — AI 생성·배정·학습·결과</div>
-  <div class="pc-desc">이제 앱에 알맹이를 넣습니다. 지문으로 AI 퀴즈를 만들고, 학생에게 배정하고, 학생이 학습·녹음하면 결과가 대시보드·리포트로 모이는 전 과정을 봅니다.</div>
-  <div class="pc-chips"><span class="pc-chip">AI 생성</span><span class="pc-chip">배정</span><span class="pc-chip">학생 흐름</span><span class="pc-chip">녹음</span><span class="pc-chip">워크시트</span><span class="pc-chip">리포트</span></div>
-</div></div>
-
-<div class="content">
-  <div class="sub-header"><div class="sub-no">7.1</div><div class="sub-title">📘 AI 생성의 원리 — 지문 하나로 3종</div></div>
-  <p class="para">선생님이 <b>영어 지문</b>을 붙여넣으면, 앱이 그 지문을 Claude에게 보내 <b>세 가지</b>를 한 번에 받아 옵니다. 단어퀴즈는 단어카드에서 자동으로 만들어져요.</p>
+  <div class="sub-header"><div class="sub-no">3.3</div><div class="sub-title">📘 제작 사이클</div></div>
   <div class="flow">
-    <div class="fnode">📖 지문 붙여넣기</div><div class="farrow">→</div>
-    <div class="fnode coral-node">✨ AI 생성</div><div class="farrow">→</div>
-    <div class="fnode">🃏 단어카드(words)</div><div class="fnode">📝 원서퀴즈1(단어·표현)</div><div class="fnode">📝 원서퀴즈2(내용이해)</div>
+    <div class="fnode">💡 아이디어</div><div class="farrow">→</div>
+    <div class="fnode">🗣️ 한 문장으로 설명</div><div class="farrow">→</div>
+    <div class="fnode coral-node">🤖 만들기</div><div class="farrow">→</div>
+    <div class="fnode">👀 돌려보기</div><div class="farrow">→</div>
+    <div class="fnode">🔁 고치기</div><div class="farrow">→</div>
+    <div class="fnode">🚀 배포</div>
   </div>
-  <div class="callout concept"><span class="co-label">📘 레벨에 따라 퀴즈 언어가 자동 조절</span>낮은 레벨 책이면 퀴즈 질문·보기를 <b>한글</b>로, 높은 레벨이면 <b>영어</b>로 냅니다(기준 레벨은 설정에서 조절 가능). 단어카드는 레벨과 무관하게 항상 영어+한글이에요.</div>
 
-  <div class="sub-header"><div class="sub-no">7.2</div><div class="sub-title">🖐️ 책 만들기 (AI 생성 / 수동 추가)</div></div>
-  <div class="card"><ul class="step-list">
-    <li><code>/mini/books.html</code> → <b>"AI로 생성"</b></li>
-    <li>제목·<b>레벨·시리즈</b> 선택, 준비한 <b>영어 지문</b>(5~10문장) 붙여넣기</li>
-    <li>(선택) 챕터북이면 챕터 번호, 읽어주기 유튜브 영상 링크도 넣을 수 있어요</li>
-    <li><b>생성</b> → 단어카드·원서퀴즈 2종 자동 완성 → 확인 후 <b>저장</b></li>
-    <li>AI 없이 쓰려면 수동 <b>"책 추가"</b>로 직접 입력</li>
-  </ul></div>
-  <div class="callout warn"><span class="co-label">⚠️ "AI로 생성"이 안 될 때</span><code>ANTHROPIC_API_KEY</code> 미입력·오타·잔액 부족이 원인이에요. Vercel 환경변수와 Claude 결제 잔액을 확인하세요.</div>
+  <div class="sub-header"><div class="sub-no">3.4</div><div class="sub-title">🖐️ 예시 워크스루 — "우리 학원 단어 플래시카드"</div></div>
 
-  <div class="sub-header"><div class="sub-no">7.3</div><div class="sub-title">🖐️ 배정 — 레벨 기반, 중복 방지</div></div>
-  <p class="para">만든 책을 <b>학생 개별</b> 또는 <b>반 전체</b>에 배정합니다. 학생을 고르면 그 학생 <b>레벨에 맞는 시리즈·책</b>이 뜨고, 이미 읽은 책은 <b>읽음</b>, 배정한 책은 <b>배정됨</b>으로 표시돼 잘못 배정할 일이 없어요.</p>
-
-  <div class="sub-header"><div class="sub-no">7.4</div><div class="sub-title">📘 학생이 보는 흐름 — 순서대로 잠금 해제</div></div>
-  <div class="flow">
-    <div class="fnode">🃏 단어 학습</div><div class="farrow">→</div>
-    <div class="fnode">🎙️ 소리내어 읽고 녹음</div><div class="farrow">→</div>
-    <div class="fnode coral-node">📝 퀴즈</div>
+  <div class="card">
+    <div class="card-title"><div class="num">0</div> 아이디어</div>
+    <p>단어 시험 전에 학생들이 스스로 외울 <b>플래시카드</b> 페이지가 있으면 좋겠다. 앞면은 영어 단어, 누르면 뒤집혀 한글 뜻. 폰으로도 잘 되게.</p>
   </div>
-  <p class="para">학생 화면(<code>/mini/</code>)은 <b>단어 → 녹음 → 퀴즈</b> 순으로 하나씩 열리는 구조라, 학생이 빠뜨리지 않고 끝까지 합니다. 통과 점수를 넘으면 완독 배지가 붙어요.</p>
 
-  <div class="sub-header"><div class="sub-no">7.5</div><div class="sub-title">📘 녹음 — 자동 수집·클릭 재생</div></div>
-  <p class="para">학생이 책을 읽고 <b>직접 녹음해 올리면</b>, 파일은 학생·책별로 한곳(recordings 버킷)에 자동 정리됩니다. 선생님은 학습 현황에서 <b>제출 여부를 한눈에</b> 보고, <b>클릭 한 번으로 바로 재생</b>해 들어볼 수 있어요. 카톡으로 받고 체크하던 일이 통째로 사라집니다.</p>
+  <div class="card">
+    <div class="card-title"><div class="num">1</div> 클로드에게 첫 요청</div>
+    <div class="speak"><div class="sp-label">🗣️ 이렇게 말하기</div><div class="sp-q">"영어 단어 학습용 플래시카드 웹페이지를 만들어줘. 단어 목록(영어·한글 뜻)을 넣으면, 카드가 한 장씩 보이고 누르면 뒤집혀서 뜻이 나와. '다음' 버튼으로 넘기고, 휴대폰에서도 크게 잘 보이게. 파일 하나로."</div></div>
+    <p style="margin-top:8px">클로드가 HTML 파일 하나를 만들어 줄 거예요.</p>
+  </div>
 
-  <div class="sub-header"><div class="sub-no">7.6</div><div class="sub-title">🖐️ 워크시트 (리딩·라이팅·단어)</div></div>
-  <p class="para">책 하나로 <b>리딩 이해 / 라이팅 / 단어</b> 워크시트를 만들어 인쇄할 수 있어요. 책의 레벨에 맞춰 난이도가 정해지고, <b>기초·중급·심화</b>로 더 조절됩니다. 한 번 만든 워크시트는 저장돼서 다시 열거나 인쇄할 수 있어요.</p>
+  <div class="card">
+    <div class="card-title"><div class="num">2</div> 돌려보기</div>
+    <div class="speak"><div class="sp-label">🗣️ 이렇게 말하기</div><div class="sp-q">"방금 만든 걸 브라우저에서 열어서 보여줘."</div></div>
+    <p style="margin-top:8px">화면에 카드가 뜨는지 확인해요. 뭔가 나타나면 절반은 성공 — 이제 고치면 됩니다.</p>
+  </div>
 
-  <div class="sub-header"><div class="sub-no">7.7</div><div class="sub-title">📘 결과 대시보드 & 학부모 리포트</div></div>
-  <p class="para">학생이 푼 퀴즈·점수·통과율·완독 권수가 <b>엑셀 정리 없이 자동</b>으로 쌓입니다. 선생님은 학습 현황에서 즉시 확인하고, <code>/mini/report.html</code> 의 <b>학부모 리포트(PDF)</b>는 완독·평균점수·통과율·월별 추이·책별 결과에 녹음까지 정리해 <b>버튼 한 번</b>으로 출력됩니다.</p>
-  <div class="summary"><div class="su-h">✅ PART 7 요약</div><ul>
-    <li>지문 하나로 단어카드·원서퀴즈 2종이 자동 생성된다(레벨별 언어 조절).</li>
-    <li>배정은 레벨 기반 + 읽음·배정 표시로 중복이 없다.</li>
-    <li>학생은 단어→녹음→퀴즈 순으로 잠금 해제하며 학습한다.</li>
-    <li>녹음은 자동 수집·클릭 재생, 결과는 대시보드·리포트로 자동 집계된다.</li>
-  </ul></div>
-</div>
+  <div class="card">
+    <div class="card-title"><div class="num">3</div> 고치기 (반복)</div>
+    <p>마음에 안 드는 부분을 <b>하나씩</b> 말합니다. 매번 돌려보며 확인해요.</p>
+    <div class="speak"><div class="sp-label">🗣️ 섞기</div><div class="sp-q">"카드를 무작위 순서로 섞는 '섞기' 버튼을 추가해줘."</div></div>
+    <div class="speak"><div class="sp-label">🗣️ 모르는 것만 다시</div><div class="sp-q">"카드마다 '알아요/모르겠어요' 버튼을 넣고, '모르겠어요'만 모아서 다시 볼 수 있게 해줘."</div></div>
+    <div class="speak"><div class="sp-label">🗣️ 우리 학원 색</div><div class="sp-q">"전체 색을 우리 학원 색인 주황색으로 바꾸고, 카드를 더 둥글고 크게 해줘."</div></div>
+  </div>
 
-<!-- ══════════ PART 8 ══════════ -->
-<div class="part-cover" id="p8"><div class="part-cover-inner" data-big="08">
-  <div class="pc-label">PART 8 · 내 학원에 맞추기</div>
-  <div class="pc-title">우리 학원에 맞추기 — 바이브 코딩</div>
-  <div class="pc-desc">여기가 이 시스템의 진짜 힘입니다. 코드를 직접 고치지 않고, 클로드에게 "이렇게 바꿔줘"라고 말해서 학원명·색·레벨·통과점수까지 우리 학원 방식으로 바꿉니다.</div>
-  <div class="pc-chips"><span class="pc-chip">Claude Code</span><span class="pc-chip">학원명·색</span><span class="pc-chip">레벨·시리즈</span><span class="pc-chip">통과점수</span><span class="pc-chip">AI 프롬프트</span></div>
-</div></div>
+  <div class="card">
+    <div class="card-title"><div class="num">4</div> (선택) 단어를 쉽게 넣기 · 저장하기</div>
+    <div class="speak"><div class="sp-label">🗣️ 단어 입력</div><div class="sp-q">"위쪽에 칸을 만들어서, '영어, 한글' 을 한 줄에 하나씩 붙여넣으면 그 단어들로 카드가 만들어지게 해줘."</div></div>
+    <div class="speak"><div class="sp-label">🗣️ 이어서 하기</div><div class="sp-q">"학생이 껐다 켜도 진도가 남게, 브라우저에 저장해줘. (여러 학생 점수를 모으고 싶으면 나중에 Supabase를 붙이자고 말할게.)"</div></div>
+    <div class="callout concept"><span class="co-label">📘 데이터가 필요해지면</span>혼자 쓰는 저장은 브라우저 저장으로 충분해요. <b>여러 학생의 기록을 한곳에 모으고 싶어지면</b>, 2부에서 해본 것처럼 Supabase를 붙이면 됩니다 — "이 앱에 Supabase를 붙여서 학생별 점수를 저장하고 싶어"라고 말하면 돼요.</div>
+  </div>
 
-<div class="content">
-  <div class="sub-header"><div class="sub-no">8.1</div><div class="sub-title">📘 저장소를 클로드로 열기</div></div>
-  <p class="para">내 저장소를 <b>Claude Code</b>로 열면, 클로드가 그 파일들을 읽고 내 지시대로 고칠 수 있어요. 여러분은 코드를 보지 않고 <b>말로만</b> 시킵니다. 고친 뒤 저장(커밋·푸시)하면 Vercel이 자동 재배포합니다.</p>
+  <div class="card">
+    <div class="card-title"><div class="num">5</div> 배포 — 학생들이 폰으로 쓰게</div>
+    <div class="speak"><div class="sp-label">🗣️ 이렇게 말하기</div><div class="sp-q">"이걸 인터넷에 올려서 학생들이 링크로 접속하게 하고 싶어. GitHub에 올리고 Vercel로 배포하는 걸 도와줘."</div></div>
+    <p style="margin-top:8px">2부에서 한 배포와 똑같아요. 끝나면 링크가 생기고, 카톡으로 학생들에게 보내면 됩니다.</p>
+  </div>
 
-  <div class="sub-header"><div class="sub-no">8.2</div><div class="sub-title">📘 커스터마이징 지도 — 말하기 → 바뀌는 곳</div></div>
-  <table class="ftable">
-    <tr><th>이렇게 말하세요</th><th>바뀌는 것</th><th>위치(참고)</th></tr>
-    <tr><td>"대표 색을 분홍색으로 바꿔줘"</td><td>앱 전체 색</td><td class="mono">:root --brand</td></tr>
-    <tr><td>"통과 점수를 80점으로 바꿔줘"</td><td>퀴즈 통과 기준</td><td class="mono">reader.html --pass-score</td></tr>
-    <tr><td>"리포트 학원 이름을 우리 학원으로"</td><td>리포트·워크시트 학원명</td><td class="mono">var ACADEMY</td></tr>
-    <tr><td>"레벨 목록을 우리 학원 레벨로"</td><td>레벨(단계) 목록</td><td class="mono">books.html var LEVELS</td></tr>
-    <tr><td>"시리즈 목록을 우리 책들로"</td><td>원서 시리즈 목록</td><td class="mono">books.html var SERIES</td></tr>
-    <tr><td>"퀴즈 문항 수를 늘려줘 / 영어로 내줘"</td><td>AI 생성 프롬프트·문항 수</td><td class="mono">api generate</td></tr>
-  </table>
-  <div class="callout concept"><span class="co-label">📘 위치는 몰라도 됩니다</span>표의 "위치"는 참고일 뿐이에요. 실제로는 <b>"통과 점수를 80점으로 바꿔줘"</b>라고만 말하면 클로드가 알아서 그 파일을 찾아 고칩니다.</div>
-
-  <div class="sub-header"><div class="sub-no">8.3</div><div class="sub-title">🖐️ 예시 — 이렇게 말하면 돼요</div></div>
-  <div class="codeblock"><span class="cm"># 학원 정체성 한 번에</span>
-"우리 학원 이름을 <span class="v">홍보은영어</span>로 바꾸고,
- 대표 색은 <span class="v">따뜻한 주황색</span>으로,
- 통과 점수는 <span class="v">75점</span>으로 바꿔줘."
-
-<span class="cm"># 레벨·시리즈를 우리 것으로</span>
-"레벨 목록을 <span class="v">1단계·2단계·3단계</span>로 바꾸고,
- 시리즈는 <span class="v">Henry and Mudge, Fancy Nancy, Nate the Great</span>로 바꿔줘."
-
-<span class="cm"># AI 출제 방식 조정</span>
-"원서퀴즈2를 <span class="v">5문항</span>으로 늘리고,
- 3레벨 이상은 <span class="v">보기까지 전부 영어</span>로 내줘."</div>
-
-  <div class="sub-header"><div class="sub-no">8.4</div><div class="sub-title">📘 바뀐 뒤 — 저장하면 자동 반영</div></div>
-  <p class="para">클로드가 고친 내용을 <b>저장(커밋·푸시)</b>하면 GitHub에 올라가고, Vercel이 <b>자동으로 다시 배포</b>합니다. 몇 분 뒤 내 주소를 새로고침하면 바뀐 화면이 보여요.</p>
-  <div class="callout tip"><span class="co-label">💡 "이거 불편한데?" 하면 그 자리에서</span>정렬을 바꾸고 싶거나, 칸을 하나 더 넣고 싶으면 그냥 클로드에게 말하세요. 사서 쓰는 프로그램은 요청해도 안 되지만, 이건 <b>말하면 그날 바뀝니다</b>.</div>
-  <div class="summary"><div class="su-h">✅ PART 8 요약</div><ul>
-    <li>저장소를 Claude Code로 열고 "이렇게 바꿔줘"라고 말로 고친다.</li>
-    <li>학원명·색·통과점수·레벨·시리즈·AI 출제까지 전부 바꿀 수 있다.</li>
-    <li>위치를 몰라도 클로드가 알아서 파일을 찾는다.</li>
-    <li>저장하면 Vercel이 자동 재배포해 몇 분 뒤 반영된다.</li>
-  </ul></div>
-</div>
-
-<!-- ══════════ PART 9 ══════════ -->
-<div class="part-cover" id="p9"><div class="part-cover-inner" data-big="09">
-  <div class="pc-label">PART 9 · 운영</div>
-  <div class="pc-title">운영·문제해결·다음 단계</div>
-  <div class="pc-desc">배포 후 실제로 굴리며 만나는 문제들의 해결법, 비용 관리, 데이터 안전, 그리고 이 시스템을 계속 키워 가는 법을 정리합니다.</div>
-  <div class="pc-chips"><span class="pc-chip">트러블슈팅</span><span class="pc-chip">비용</span><span class="pc-chip">백업</span><span class="pc-chip">안전</span><span class="pc-chip">자료실</span></div>
-</div></div>
-
-<div class="content">
-  <div class="sub-header"><div class="sub-no">9.1</div><div class="sub-title">🛠 트러블슈팅</div></div>
+  <div class="sub-header"><div class="sub-no">3.5</div><div class="sub-title">🛠 자주 겪는 상황</div></div>
   <table class="tbl">
-    <tr><th>이런 증상</th><th>이렇게 해결</th></tr>
-    <tr><td class="sym">/mini/ 열었더니 데이터가 안 뜸</td><td>Vercel 환경변수(URL·service_role) 오타 확인 → 고치고 <b>재배포(Redeploy)</b></td></tr>
-    <tr><td class="sym">저장·등록이 안 됨</td><td>Supabase에서 <b>SQL을 안 돌렸을</b> 가능성 → PART 4의 SQL 다시 실행</td></tr>
-    <tr><td class="sym">"AI로 생성"이 작동 안 함</td><td><code>ANTHROPIC_API_KEY</code> 없음/오타/잔액 부족 → Vercel 환경변수·Claude 결제 확인</td></tr>
-    <tr><td class="sym">녹음이 안 올라감</td><td><b>recordings 버킷</b>이 없을 수 있음 → PART 4의 SQL 재실행으로 버킷 생성</td></tr>
-    <tr><td class="sym">Claude 결제가 자꾸 실패</td><td>크롬 <b>언어를 English</b>로 바꾸고 재시도 (설정→언어→English 맨 위→재시작)</td></tr>
-    <tr><td class="sym">바꿨는데 화면에 반영 안 됨</td><td>Vercel 재배포 완료 확인 → 브라우저 <b>강력 새로고침(Ctrl+Shift+R)</b></td></tr>
-    <tr><td class="sym">학생이 로그인이 안 됨</td><td>등록한 <b>이름</b> 철자 확인 / 아이디를 넣었다면 아이디도 일치해야 함</td></tr>
+    <tr><th>상황</th><th>이렇게</th></tr>
+    <tr><td class="sym">화면이 하얗게 비었다</td><td>"화면이 안 나와. 뭐가 문제인지 보고 고쳐줘."</td></tr>
+    <tr><td class="sym">고쳤더니 다른 게 깨졌다</td><td>"방금 바꾼 것 되돌리고, 다른 방법으로 해줘."</td></tr>
+    <tr><td class="sym">원하는 모습이 설명이 어렵다</td><td>비슷한 걸 예로 들기 — "○○앱처럼 아래에 버튼 두 개"</td></tr>
+    <tr><td class="sym">욕심이 커진다</td><td>한 번에 다 말고, <b>지금 되는 것</b>부터 배포하고 하나씩 추가</td></tr>
   </table>
-  <div class="callout warn"><span class="co-label">🆘 그래도 막히면</span>에러 메시지를 그대로 복사해서 <b>클로드에게 붙여넣고</b> "이거 왜 이래?"라고 물어보세요. 대부분 바로 원인을 짚어 줍니다.</div>
 
-  <div class="sub-header"><div class="sub-no">9.2</div><div class="sub-title">📘 비용 관리</div></div>
-  <ul class="checklist">
-    <li><b>Vercel · Supabase</b> — 학원 규모에선 대개 <b>무료 범위</b>로 충분</li>
-    <li><b>Claude API</b> — 사용한 만큼 과금. 원서 몇 개 생성은 몇 백 원 수준이라 부담이 적어요</li>
-    <li>콘솔에서 <b>사용량·잔액</b>을 가끔 확인하고, 필요할 때만 소액 충전</li>
-  </ul>
-  <div class="callout concept"><span class="co-label">📘 르네상스 한 달 치면 몇 년</span>사서 쓰는 프로그램의 한 달 구독료면, 이 시스템은 몇 년을 굴리고도 남습니다.</div>
-
-  <div class="sub-header"><div class="sub-no">9.3</div><div class="sub-title">📘 데이터는 내 것 · 안전 수칙</div></div>
-  <ul class="checklist">
-    <li>학생·점수·녹음은 <b>내 Supabase</b>에 있음 — 그 회사 서버에 갇히지 않아요</li>
-    <li><b>service_role 키·API 키</b>는 Vercel 환경변수에만. 카톡·화면공유·HTML 금지</li>
-    <li>키가 노출됐다면 <b>즉시 삭제하고 새로 발급</b> (Supabase·Claude 콘솔에서)</li>
-    <li>테이블 이름의 <code>mini_</code> 접두사는 그대로 두기 (다른 시스템과 한 Supabase를 같이 쓸 수 있어요)</li>
-  </ul>
-
-  <div class="sub-header"><div class="sub-no">9.4</div><div class="sub-title">📘 계속 키워 가기</div></div>
-  <p class="para">이 시스템은 완성이 아니라 <b>시작</b>이에요. 쓰다가 불편한 점이 보이면 클로드에게 말해서 그때그때 고치고, 새 기능도 붙일 수 있어요. "매일 개선되는 살아 있는 시스템"이 사서 쓰는 프로그램과 가장 다른 점입니다.</p>
-
-  <div class="sub-header"><div class="sub-no">9.5</div><div class="sub-title">🔗 자료실</div></div>
-  <div class="two-col">
-    <a class="link-card" href="https://github.com/nauta325/mini-reader" target="_blank"><div class="lc-label">템플릿 저장소</div><div class="lc-title">📦 원서 앱 원본 (Use this template)</div><div class="lc-url">github.com/nauta325/mini-reader</div></a>
-    <a class="link-card" href="https://nauta325.github.io/seminar/prep_s3.html" target="_blank"><div class="lc-label">사전 준비</div><div class="lc-title">📋 준비물 체크리스트</div><div class="lc-url">nauta325.github.io/seminar/prep_s3.html</div></a>
-    <a class="link-card" href="https://nauta325.github.io/seminar/seminar_handout3.html" target="_blank"><div class="lc-label">요약 핸드아웃</div><div class="lc-title">📄 세미나 3 · 따라하기 자료</div><div class="lc-url">nauta325.github.io/seminar/seminar_handout3.html</div></a>
-    <a class="link-card" href="https://console.anthropic.com" target="_blank"><div class="lc-label">API 키</div><div class="lc-title">✨ Claude 콘솔 (API Keys)</div><div class="lc-url">console.anthropic.com</div></a>
-  </div>
-  <div class="summary"><div class="su-h">✅ PART 9 요약</div><ul>
-    <li>대부분의 문제는 환경변수·SQL 재실행·재배포·새로고침으로 풀린다.</li>
-    <li>막히면 에러를 클로드에게 붙여넣어 물어본다.</li>
-    <li>운영 비용은 무료 범위 + Claude 사용량 정도로 낮다.</li>
-    <li>데이터는 내 것이고, 키는 환경변수에만 둔다.</li>
+  <div class="sub-header"><div class="sub-no">3.6</div><div class="sub-title">📘 계속 키우기</div></div>
+  <p class="para">첫 배포는 끝이 아니라 시작이에요. 쓰다 보면 "여기 이게 있으면" 싶은 게 생겨요. 그때마다 말해서 붙이면 됩니다. <b>작게 시작해서, 쓰면서 키우는 것</b> — 이게 바이브 코딩의 진짜 힘이에요.</p>
+  <div class="summary"><div class="su-h">✅ PART 3 요약</div><ul>
+    <li>내 프로젝트도 2부와 같은 사이클: 말하기→돌려보기→고치기→배포.</li>
+    <li>작게·내 학원 문제·눈에 보이는 것으로 첫 프로젝트를 고른다.</li>
+    <li>첫 요청 한 번으로 화면을 띄우고, 하나씩 고쳐 완성한다.</li>
+    <li>데이터가 필요하면 Supabase, 공유하려면 Vercel 배포를 붙인다.</li>
+    <li>작게 시작해 쓰면서 키운다.</li>
   </ul></div>
 </div>
 
 <!-- ══════════ 부록 ══════════ -->
 <div class="part-cover" id="appendix"><div class="part-cover-inner" data-big="+">
   <div class="pc-label">APPENDIX · 부록</div>
-  <div class="pc-title">한눈에 보는 요약표</div>
-  <div class="pc-desc">배포·운영 중에 빠르게 찾아볼 수 있도록, 핵심 표를 한곳에 모았습니다.</div>
+  <div class="pc-title">빠르게 찾아보는 자료</div>
+  <div class="pc-desc">준비물, 자주 쓰는 프롬프트, 원서 시스템 설정, 배포 정보를 한곳에 모았습니다.</div>
 </div></div>
 
 <div class="content">
-  <div class="sub-header"><div class="sub-no">A</div><div class="sub-title">환경변수 3개</div></div>
-  <table class="ftable">
-    <tr><th>이름</th><th>값 출처</th><th>필수</th></tr>
-    <tr><td class="mono">SUPABASE_URL</td><td>Supabase Settings→API · Project URL</td><td>✅</td></tr>
-    <tr><td class="mono">SUPABASE_SERVICE_KEY</td><td>Supabase Settings→API · service_role</td><td>✅</td></tr>
-    <tr><td class="mono">ANTHROPIC_API_KEY</td><td>Claude 콘솔 · API Keys</td><td>선택(AI 생성용)</td></tr>
+  <div class="sub-header"><div class="sub-no">A</div><div class="sub-title">바이브 코딩 준비물 (내가 코딩할 때)</div></div>
+  <ul class="checklist">
+    <li><b>Claude 유료 구독</b> — claude.ai에서 Pro(또는 상위) 가입</li>
+    <li><b>Claude Code 설치·로그인</b> — 노트북에 설치 후 위 계정으로 로그인</li>
+    <li><b>노트북 + 크롬</b> — 폰만으로는 어려움</li>
+    <li><b>GitHub 계정</b> — 코드 저장·복제·배포 연결용</li>
+  </ul>
+  <div class="callout warn"><span class="co-label">⚠️ 앱의 AI 생성용 키는 별개</span>원서 앱이 퀴즈를 만들려면 <code>ANTHROPIC_API_KEY</code>(Claude 콘솔 발급)가 따로 필요해요. 이건 <b>Vercel 환경변수</b>에 넣습니다 — 내 코딩용 구독과 혼동하지 마세요.</div>
+
+  <div class="sub-header"><div class="sub-no">B</div><div class="sub-title">자주 쓰는 바이브 코딩 프롬프트</div></div>
+  <table class="tbl">
+    <tr><th>하고 싶은 것</th><th>이렇게 말하기</th></tr>
+    <tr><td>구조 파악</td><td>"이 프로젝트가 무슨 앱인지, 파일 역할을 쉽게 설명해줘"</td></tr>
+    <tr><td>겉모습 바꾸기</td><td>"색을 ○○로, 글자를 더 크게, 제목을 가운데로"</td></tr>
+    <tr><td>기능 추가</td><td>"○○ 버튼을 추가해서 △△ 되게 해줘"</td></tr>
+    <tr><td>돌려보기</td><td>"브라우저에서 열어서 보여줘"</td></tr>
+    <tr><td>되돌리기</td><td>"방금 바꾼 것 되돌려줘"</td></tr>
+    <tr><td>저장·배포</td><td>"저장하고 GitHub에 올려줘" / "Vercel로 배포하게 도와줘"</td></tr>
+    <tr><td>문제 해결</td><td>(에러를 붙여넣고) "이거 왜 이래? 고쳐줘"</td></tr>
   </table>
 
-  <div class="sub-header"><div class="sub-no">B</div><div class="sub-title">페이지 주소</div></div>
+  <div class="sub-header"><div class="sub-no">C</div><div class="sub-title">원서 시스템 — 자주 바꾸는 곳</div></div>
+  <table class="tbl">
+    <tr><th>바꾸고 싶은 것</th><th>클로드에게</th></tr>
+    <tr><td>학원 이름</td><td>"리포트·워크시트 학원 이름을 ○○로"</td></tr>
+    <tr><td>대표 색</td><td>"대표 색을 ○○색으로"</td></tr>
+    <tr><td>통과 점수</td><td>"통과 점수를 ○점으로"</td></tr>
+    <tr><td>레벨 목록</td><td>"레벨 목록을 우리 학원 단계로"</td></tr>
+    <tr><td>시리즈 목록</td><td>"시리즈 목록을 우리 책들로"</td></tr>
+    <tr><td>AI 출제</td><td>"퀴즈 문항 수·언어를 ○○로"</td></tr>
+  </table>
+
+  <div class="sub-header"><div class="sub-no">D</div><div class="sub-title">원서 앱 — 환경변수 · 페이지 주소</div></div>
+  <table class="ftable">
+    <tr><th>환경변수</th><th>값 출처</th></tr>
+    <tr><td class="mono">SUPABASE_URL</td><td>Supabase Settings→API · Project URL</td></tr>
+    <tr><td class="mono">SUPABASE_SERVICE_KEY</td><td>Supabase Settings→API · service_role</td></tr>
+    <tr><td class="mono">ANTHROPIC_API_KEY</td><td>Claude 콘솔 · API Keys (선택)</td></tr>
+  </table>
   <table class="ftable">
     <tr><th>주소</th><th>누구·무엇</th></tr>
     <tr><td class="mono">/mini/</td><td>학생 — 학습·녹음</td></tr>
     <tr><td class="mono">/mini/students.html</td><td>선생님 — 반·학생·배정·현황</td></tr>
     <tr><td class="mono">/mini/books.html</td><td>선생님 — AI 생성·책 관리</td></tr>
-    <tr><td class="mono">/mini/worksheet.html</td><td>선생님 — 워크시트 출력</td></tr>
-    <tr><td class="mono">/mini/report.html</td><td>학부모 — 학습 리포트(PDF)</td></tr>
+    <tr><td class="mono">/mini/worksheet.html</td><td>선생님 — 워크시트</td></tr>
+    <tr><td class="mono">/mini/report.html</td><td>학부모 — 리포트(PDF)</td></tr>
   </table>
 
-  <div class="sub-header"><div class="sub-no">C</div><div class="sub-title">커스터마이징 한눈에</div></div>
-  <table class="tbl">
-    <tr><th>바꾸고 싶은 것</th><th>클로드에게 이렇게</th></tr>
-    <tr><td>학원 이름</td><td>"리포트·워크시트 학원 이름을 ○○로 바꿔줘"</td></tr>
-    <tr><td>대표 색</td><td>"대표 색을 ○○색으로 바꿔줘"</td></tr>
-    <tr><td>통과 점수</td><td>"통과 점수를 ○점으로 바꿔줘"</td></tr>
-    <tr><td>레벨 목록</td><td>"레벨 목록을 우리 학원 레벨로 바꿔줘"</td></tr>
-    <tr><td>시리즈 목록</td><td>"시리즈 목록을 우리 책들로 바꿔줘"</td></tr>
-    <tr><td>AI 출제</td><td>"퀴즈 문항 수·언어를 ○○로 바꿔줘"</td></tr>
-  </table>
-
-  <div class="sub-header"><div class="sub-no">D</div><div class="sub-title">배포 전 최종 체크</div></div>
-  <ul class="checklist">
-    <li><b>GitHub</b> — 템플릿을 내 저장소로 복제했다</li>
-    <li><b>Supabase</b> — 프로젝트 생성 + SQL 실행(표·버킷) 완료</li>
-    <li><b>Supabase</b> — Project URL · service_role 키 복사해 둠</li>
-    <li><b>Claude</b> — API 키 발급 + 소액 충전 완료</li>
-    <li><b>Vercel</b> — 저장소 Import + 환경변수 3개 입력 + Deploy</li>
-    <li><b>확인</b> — <code>/mini/</code> 접속 → 반·학생·AI 생성·배정 동작</li>
-  </ul>
+  <div class="sub-header"><div class="sub-no">E</div><div class="sub-title">자료실</div></div>
+  <div class="two-col">
+    <a class="link-card" href="https://github.com/nauta325/mini-reader" target="_blank"><div class="lc-label">템플릿 저장소</div><div class="lc-title">📦 원서 시스템 원본 (Use this template)</div><div class="lc-url">github.com/nauta325/mini-reader</div></a>
+    <a class="link-card" href="https://nauta325.github.io/seminar/prep_s3.html" target="_blank"><div class="lc-label">사전 준비</div><div class="lc-title">📋 준비물 체크리스트</div><div class="lc-url">nauta325.github.io/seminar/prep_s3.html</div></a>
+    <a class="link-card" href="https://nauta325.github.io/seminar/seminar_handout3.html" target="_blank"><div class="lc-label">요약 핸드아웃</div><div class="lc-title">📄 세미나 3 · 따라하기 자료</div><div class="lc-url">nauta325.github.io/seminar/seminar_handout3.html</div></a>
+    <a class="link-card" href="https://claude.ai" target="_blank"><div class="lc-label">바이브 코딩 도구</div><div class="lc-title">🤖 Claude (구독 · Claude Code)</div><div class="lc-url">claude.ai</div></a>
+  </div>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-  <div><div class="ft-title">Hong<span style="color:var(--coral)">Lab</span></div><div class="ft-sub">세미나 3 · 우리 학원만의 원서 시스템 만들기 · 전자책 교재</div></div>
-  <div class="ft-right">막히면 클로드에게 물어보세요 🙌<br>이 교재대로 집에서 그대로 따라 하셔도 됩니다.</div>
+  <div><div class="ft-title">Hong<span style="color:var(--coral)">Lab</span></div><div class="ft-sub">세미나 3 · 바이브 코딩 실전 (원서 시스템으로 배우고, 내 프로젝트까지) · 전자책</div></div>
+  <div class="ft-right">막히면 클로드에게 물어보세요 🙌<br>작게 시작해서, 쓰면서 키우세요.</div>
 </div>
 
 </body>

@@ -379,8 +379,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 <div class="part-cover" id="part3"><div class="part-cover-inner" data-big="3부">
   <div class="pc-label">PART 3 · 창작</div>
   <div class="pc-title">내 프로젝트 만들기 — 처음부터 끝까지</div>
-  <div class="pc-desc">이제 남의 코드가 아니라 <b>내 아이디어</b>로 만듭니다. 방법은 2부와 똑같아요 — 말하고, 돌려보고, 고친다. 예시로 <b>"우리 학원 단어 플래시카드"</b>를 처음부터 끝까지 함께 만들어 봅니다.</div>
-  <div class="pc-chips"><span class="pc-chip">아이디어 고르기</span><span class="pc-chip">제작 사이클</span><span class="pc-chip">예시 워크스루</span><span class="pc-chip">배포</span></div>
+  <div class="pc-desc">이제 남의 코드가 아니라 <b>내 아이디어</b>로 만듭니다. 2부는 준비된 원서 템플릿을 가져왔지만, 여기선 <b>GitHub·Claude Code·Supabase·Vercel을 새로</b> 만들어 잇고, 내가 원하는 프로그램을 처음부터 만들어요.</div>
+  <div class="pc-chips"><span class="pc-chip">기획</span><span class="pc-chip">새 GitHub 저장소</span><span class="pc-chip">Claude Code 새 채팅</span><span class="pc-chip">새 Supabase·Vercel</span><span class="pc-chip">예시 워크스루</span></div>
 </div></div>
 
 <div class="content">
@@ -395,7 +395,66 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
   </ul>
   <div class="callout concept"><span class="co-label">📘 이런 것들이 좋아요</span>단어 플래시카드 · 출석 체크 보드 · 칭찬 스티커 판 · 수업 타이머 · 오늘의 숙제 게시판 · 간단한 학부모 설문. 오늘은 <b>단어 플래시카드</b>로 사이클 전체를 보여드릴게요.</div>
 
-  <div class="sub-header"><div class="sub-no">3.3</div><div class="sub-title">📘 제작 사이클</div></div>
+  <div class="sub-header"><div class="sub-no">3.3</div><div class="sub-title">🖐️ 새 프로젝트 세팅 — 4개 도구를 처음부터</div></div>
+  <p class="para">2부에선 원서 템플릿을 <b>복제</b>해서 GitHub·Supabase·Vercel이 이미 연결돼 있었어요. 내 프로젝트는 그 도구들을 <b>내가 새로</b> 만들어 잇습니다. 순서대로만 하면 어렵지 않아요.</p>
+  <div class="flow">
+    <div class="fnode">💡 기획</div><div class="farrow">→</div>
+    <div class="fnode">🐙 새 GitHub 저장소</div><div class="farrow">→</div>
+    <div class="fnode coral-node">🤖 Claude Code 새 채팅 + 연결</div><div class="farrow">→</div>
+    <div class="fnode">🗄️ 새 Supabase<br>(데이터 필요 시)</div><div class="farrow">→</div>
+    <div class="fnode">▲ 새 Vercel 배포</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">1</div> 기획 — 뭘 만들지 한 장으로 정리</div>
+    <ul class="step-list">
+      <li><b>한 문장</b>으로: "○○할 수 있는 웹페이지/앱"</li>
+      <li><b>화면</b>: 뭐가 보여야 하나 — 목록·카드·버튼·입력칸?</li>
+      <li><b>데이터</b>: 여러 명이 같이 쓰고 <b>기록이 쌓여야</b> 하나? → Supabase 필요 / 나 혼자·그때만? → 필요 없음</li>
+    </ul>
+    <div class="callout tip"><span class="co-label">💡 기획이 막히면</span>클로드에게 물어봐도 돼요 — "학원에서 ○○가 불편한데, 이런 웹앱 만들면 될까? 어떤 화면이 필요할까?"</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">2</div> GitHub — 새 저장소 만들기 (빈 저장소)</div>
+    <ul class="step-list">
+      <li>github.com → 우측 위 <b>+</b> → <b>New repository</b></li>
+      <li>이름 입력(예: <code>my-flashcard</code>), <b>Public</b>, <b>Add a README</b> 체크 → <b>Create repository</b></li>
+      <li>2부의 "템플릿 복제"와 달리, 이번엔 <b>텅 빈 내 저장소</b>예요</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">3</div> Claude Code — 새 채팅 창 + 이 저장소 연결</div>
+    <ul class="step-list">
+      <li>Claude Code에서 <b>새 채팅(New chat)</b>을 엽니다</li>
+      <li>방금 만든 <b>내 저장소를 연결</b>해요 (그 저장소를 열기/가져오기)</li>
+      <li>첫 마디: <span style="color:var(--coral)">"이 저장소에서 ○○ 웹앱을 만들 거야. 같이 하자."</span></li>
+    </ul>
+    <div class="callout concept"><span class="co-label">📘 왜 새 채팅을 여나요?</span>원서 앱 채팅과 섞이면 클로드가 헷갈려요. <b>프로젝트 = 저장소 = 채팅</b> 하나로 짝지으면 깔끔하고, 클로드가 그 프로젝트에만 집중합니다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">4</div> Supabase — 새 프로젝트 <span style="color:var(--muted);font-weight:400;font-size:13px">(데이터가 필요할 때만)</span></div>
+    <ul class="step-list">
+      <li>여러 사람의 기록이 쌓여야 하면 → Supabase에 <b>새 프로젝트</b> (2부와 같은 방법: 프로젝트 생성 → SQL → 키)</li>
+      <li>클로드에게 <b>"이 앱에 Supabase를 붙여서 ○○를 저장하자"</b> → 필요한 표·연결을 안내해줘요</li>
+      <li>혼자 쓰거나 기록이 필요 없으면 <b>건너뛰기</b> — 브라우저 저장으로 충분</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="num">5</div> Vercel — 새 프로젝트로 배포</div>
+    <ul class="step-list">
+      <li>vercel.com → <b>Add New → Project</b> → <b>내 새 저장소</b>를 Import</li>
+      <li>(Supabase를 붙였으면) 환경변수 입력 → <b>Deploy</b></li>
+      <li>내 링크 완성 → 학생·학부모에게 공유. 이후 고칠 때마다 <b>자동 재배포</b></li>
+    </ul>
+  </div>
+
+  <div class="callout gold"><span class="co-label">🧭 정리 — 2부와 다른 점은 딱 하나</span>새 프로젝트 = <b>새 GitHub 저장소 + Claude Code 새 채팅 + (필요 시) 새 Supabase + 새 Vercel</b>. 4개를 <b>새로 잇는 것</b>만 다르고, 만드는 방식(말하기 → 돌려보기 → 고치기)은 2부와 <b>똑같아요</b>.</div>
+
+  <div class="sub-header"><div class="sub-no">3.4</div><div class="sub-title">📘 제작 사이클</div></div>
   <div class="flow">
     <div class="fnode">💡 아이디어</div><div class="farrow">→</div>
     <div class="fnode">🗣️ 한 문장으로 설명</div><div class="farrow">→</div>
@@ -405,7 +464,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
     <div class="fnode">🚀 배포</div>
   </div>
 
-  <div class="sub-header"><div class="sub-no">3.4</div><div class="sub-title">🖐️ 예시 워크스루 — "우리 학원 단어 플래시카드"</div></div>
+  <div class="sub-header"><div class="sub-no">3.5</div><div class="sub-title">🖐️ 예시 워크스루 — "우리 학원 단어 플래시카드"</div></div>
 
   <div class="card">
     <div class="card-title"><div class="num">0</div> 아이디어</div>
@@ -445,7 +504,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
     <p style="margin-top:8px">2부에서 한 배포와 똑같아요. 끝나면 링크가 생기고, 카톡으로 학생들에게 보내면 됩니다.</p>
   </div>
 
-  <div class="sub-header"><div class="sub-no">3.5</div><div class="sub-title">🛠 자주 겪는 상황</div></div>
+  <div class="sub-header"><div class="sub-no">3.6</div><div class="sub-title">🛠 자주 겪는 상황</div></div>
   <table class="tbl">
     <tr><th>상황</th><th>이렇게</th></tr>
     <tr><td class="sym">화면이 하얗게 비었다</td><td>"화면이 안 나와. 뭐가 문제인지 보고 고쳐줘."</td></tr>
@@ -454,10 +513,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
     <tr><td class="sym">욕심이 커진다</td><td>한 번에 다 말고, <b>지금 되는 것</b>부터 배포하고 하나씩 추가</td></tr>
   </table>
 
-  <div class="sub-header"><div class="sub-no">3.6</div><div class="sub-title">📘 계속 키우기</div></div>
+  <div class="sub-header"><div class="sub-no">3.7</div><div class="sub-title">📘 계속 키우기</div></div>
   <p class="para">첫 배포는 끝이 아니라 시작이에요. 쓰다 보면 "여기 이게 있으면" 싶은 게 생겨요. 그때마다 말해서 붙이면 됩니다. <b>작게 시작해서, 쓰면서 키우는 것</b> — 이게 바이브 코딩의 진짜 힘이에요.</p>
   <div class="summary"><div class="su-h">✅ PART 3 요약</div><ul>
     <li>내 프로젝트도 2부와 같은 사이클: 말하기→돌려보기→고치기→배포.</li>
+    <li>새 프로젝트 = <b>새 GitHub 저장소 + Claude Code 새 채팅 + (필요 시) Supabase + Vercel</b>을 새로 잇는다.</li>
     <li>작게·내 학원 문제·눈에 보이는 것으로 첫 프로젝트를 고른다.</li>
     <li>첫 요청 한 번으로 화면을 띄우고, 하나씩 고쳐 완성한다.</li>
     <li>데이터가 필요하면 Supabase, 공유하려면 Vercel 배포를 붙인다.</li>

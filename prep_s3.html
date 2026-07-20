@@ -200,7 +200,7 @@
   <div class="progress-wrap">
     <div class="progress-header">
       <span class="progress-label">✅ 준비 완료</span>
-      <span class="progress-count" id="progressCount">0 / 11</span>
+      <span class="progress-count" id="progressCount">0 / 13</span>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   </div>
@@ -348,13 +348,51 @@
   </div>
 
   <hr class="divider">
-  <!-- STEP 5 - DAY OF -->
+  <!-- STEP 5 - VIBE CODING TOOL (Claude Code) -->
   <div class="section">
-    <div class="section-title"><div class="section-icon yellow">🎒</div><div class="section-name">STEP 5 — 당일 준비물</div></div>
+    <div class="section-title"><div class="section-icon violet">🤖</div><div class="section-name">STEP 5 — 바이브 코딩 도구 (Claude Code) <span class="new-badge">핵심</span></div></div>
+    <div class="step-card" id="step12" onclick="toggleStep('step12')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step12')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="step-main"><div class="step-num">STEP 08</div><div class="step-title">Claude 유료 구독 (Pro 이상)</div><div class="step-subtitle">내가 직접 코드를 고칠 때 쓰는 'AI 짝꿍' — ⚠️ 앱의 API 키와 별개예요</div></div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li><b>claude.ai</b> 접속 → 로그인 → 요금제에서 <b>Pro(또는 상위)</b> 구독</li>
+          <li>이 구독이 있어야 다음 단계의 <b>Claude Code</b>로 앱을 고치고 새 프로젝트를 만들 수 있어요</li>
+        </ul>
+        <div class="tip-box"><strong>💡 이 세미나의 핵심이에요</strong><br>세미나 3은 <b>바이브 코딩</b>(코드를 짜지 않고 클로드에게 말해서 만들고 고치기)이 핵심이에요. 그 도구가 바로 <b>Claude Code</b>이고, 쓰려면 이 <b>Claude 유료 구독</b>이 필요합니다.</div>
+        <div class="warning-box"><strong>⚠️ STEP 4의 API 키와 헷갈리지 마세요 — 둘 다 필요해요</strong><br><b>① 이 Claude 구독</b> = <b>내가</b> 코드를 고칠 때 쓰는 도구.<br><b>② Anthropic API 키(STEP 05~07)</b> = <b>원서 앱이</b> 퀴즈를 만들 때 쓰는 열쇠.<br>→ 성격이 완전히 다른 <b>별개</b>예요. 하나는 '내가 코딩용', 하나는 '앱이 AI 생성용'.</div>
+        <a href="https://claude.ai" target="_blank" class="link-btn violet" style="background:var(--accent3)">👉 Claude 구독하러 가기</a>
+      </div>
+    </div>
+    <div class="step-card" id="step13" onclick="toggleStep('step13')">
+      <div class="step-header">
+        <div class="checkbox" onclick="checkStep(event,'step13')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="step-main"><div class="step-num">STEP 09</div><div class="step-title">Claude Code 설치 + 로그인</div><div class="step-subtitle">'말로' 코드를 고치는 바로 그 도구예요</div></div>
+        <div class="done-badge">완료 ✓</div>
+      </div>
+      <div class="step-detail">
+        <ul class="detail-steps">
+          <li>노트북에 <b>Claude Code</b>를 설치해요 (안내 링크대로 — 데스크톱 앱/CLI)</li>
+          <li>위에서 만든 <b>Claude 구독 계정으로 로그인</b>해요</li>
+          <li>설치·로그인까지 <b>세미나 전에</b> 확인해두면 당일 바로 실습할 수 있어요</li>
+        </ul>
+        <div class="tip-box"><strong>💡 세미나에서 이걸로 실습해요</strong><br>Claude Code로 원서 앱 저장소를 열고 <b>"학원 이름 바꿔줘 · 색 바꿔줘"</b>처럼 말하며 고치고, 나중엔 <b>내 프로젝트</b>까지 만들어요.</div>
+        <a href="https://claude.ai/code" target="_blank" class="link-btn dark">👉 Claude Code 안내</a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <!-- STEP 6 - DAY OF -->
+  <div class="section">
+    <div class="section-title"><div class="section-icon yellow">🎒</div><div class="section-name">STEP 6 — 당일 준비물</div></div>
     <div class="step-card" id="step8" onclick="toggleStep('step8')">
       <div class="step-header">
         <div class="checkbox" onclick="checkStep(event,'step8')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="step-main"><div class="step-num">STEP 08</div><div class="step-title">노트북 챙기기</div><div class="step-subtitle">맥북·윈도우 모두 OK. 충전기도 챙겨오세요</div></div>
+        <div class="step-main"><div class="step-num">STEP 10</div><div class="step-title">노트북 챙기기</div><div class="step-subtitle">맥북·윈도우 모두 OK. 충전기도 챙겨오세요</div></div>
         <div class="done-badge">완료 ✓</div>
       </div>
       <div class="step-detail">
@@ -369,7 +407,7 @@
     <div class="step-card" id="step9" onclick="toggleStep('step9')">
       <div class="step-header">
         <div class="checkbox" onclick="checkStep(event,'step9')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="step-main"><div class="step-num">STEP 09</div><div class="step-title">스마트폰 챙기기</div><div class="step-subtitle">학생 화면의 "소리내어 읽고 녹음" 테스트용</div></div>
+        <div class="step-main"><div class="step-num">STEP 11</div><div class="step-title">스마트폰 챙기기</div><div class="step-subtitle">학생 화면의 "소리내어 읽고 녹음" 테스트용</div></div>
         <div class="done-badge">완료 ✓</div>
       </div>
       <div class="step-detail">
@@ -384,7 +422,7 @@
     <div class="step-card" id="step10" onclick="toggleStep('step10')">
       <div class="step-header">
         <div class="checkbox" onclick="checkStep(event,'step10')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="step-main"><div class="step-num">STEP 10</div><div class="step-title">테스트용 원서 지문 2~3개 준비</div><div class="step-subtitle">AI 단어카드·퀴즈 생성을 직접 실습해봐요</div></div>
+        <div class="step-main"><div class="step-num">STEP 12</div><div class="step-title">테스트용 원서 지문 2~3개 준비</div><div class="step-subtitle">AI 단어카드·퀴즈 생성을 직접 실습해봐요</div></div>
         <div class="done-badge">완료 ✓</div>
       </div>
       <div class="step-detail">
@@ -399,7 +437,7 @@
     <div class="step-card" id="step11" onclick="toggleStep('step11')">
       <div class="step-header">
         <div class="checkbox" onclick="checkStep(event,'step11')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="step-main"><div class="step-num">STEP 11</div><div class="step-title">학원 기본 정보 정리해 오기</div><div class="step-subtitle">앱을 우리 학원에 맞게 바꾸는 실습(바이브 코딩)에 써요</div></div>
+        <div class="step-main"><div class="step-num">STEP 13</div><div class="step-title">학원 기본 정보 정리해 오기</div><div class="step-subtitle">앱을 우리 학원에 맞게 바꾸는 실습(바이브 코딩)에 써요</div></div>
         <div class="done-badge">완료 ✓</div>
       </div>
       <div class="step-detail">
@@ -447,14 +485,14 @@ const SUPABASE_URL = 'https://ypxkkzusllgwekdehmlp.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlweGtrenVzbGxnd2VrZGVobWxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTA5NzQsImV4cCI6MjA4NzE2Njk3NH0.CQG3XMDPK8_R1zWqs02V5pA0zvQymkKfmIbqE2Z-vw8';
 const ADMIN_PW = '0502';
 const SEMINAR = 'reader';       // ← 이 페이지는 원서 앱 세미나
-const TOTAL = 11;
+const TOTAL = 13;
 
 const sb = (typeof supabase !== 'undefined' && supabase.createClient)
   ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
   : null;
 
 // 화면에 보이는 순서대로의 단계 ID — 진행률 계산에 사용
-const ALL_STEPS = ['step1','step2','step3','step4','step5','step6','step7','step8','step9','step10','step11'];
+const ALL_STEPS = ['step1','step2','step3','step4','step5','step6','step7','step12','step13','step8','step9','step10','step11'];
 
 // 참가자 명단 — 비어 있으면 누구나 이름 입력 후 시작 가능.
 // 명단이 정해지면 아래 배열에 { name:'홍보은', academy:'홍보은영어' } 형태로 채우면

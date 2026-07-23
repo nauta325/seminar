@@ -409,7 +409,9 @@ const ALL_STEPS = ['step1','step2','step3','step4','step5','step6','step7','step
 
 // 참가자 명단 — VOD 상시 판매라 비워둡니다.
 // 비어 있으면 누구나 이름 입력 후 시작 가능하고, 관리자 화면엔 시작한 사람만 표시됩니다.
-const PARTICIPANTS = [];
+const PARTICIPANTS = [
+  { name: '홍보은', academy: '홍보은영어학원' }
+]
 
 let currentUser = null;
 let checkedSteps = new Set();

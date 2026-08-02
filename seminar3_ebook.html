@@ -186,6 +186,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
   <a class="nav-item" href="#part1">1부 · 바이브 코딩 기초</a>
   <a class="nav-item" href="#part2">2부 · 원서로 연습</a>
   <a class="nav-item" href="#part3">3부 · 내 프로젝트</a>
+  <a class="nav-item" href="#handson">따라하기</a>
   <a class="nav-item" href="#appendix">부록</a>
 </div></div>
 
@@ -197,6 +198,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
     <a class="toc-row" href="#part1"><div class="toc-no">1부</div><div><div class="toc-t">바이브 코딩 기초 — 말로 코드를 다루기</div><div class="toc-d">바이브 코딩이란 · 도구(Claude Code+구독) · 핵심 루프 · 잘 말하는 법 · 되돌리기</div></div></a>
     <a class="toc-row" href="#part2"><div class="toc-no">2부</div><div><div class="toc-t">원서 시스템으로 연습 — 받아서 돌려보고 · 수정</div><div class="toc-d">코드 받기 → 먼저 돌려보기(Supabase·Vercel) → 구조 뜯어보기 → 겉모습·데이터·기능 수정 → 자동 반영</div></div></a>
     <a class="toc-row" href="#part3"><div class="toc-no">3부</div><div><div class="toc-t">내 프로젝트 만들기 — 예시 하나를 처음부터 끝까지</div><div class="toc-d">아이디어 고르기 · 제작 사이클 · 예시(단어 플래시카드) 워크스루 · 배포 · 계속 키우기</div></div></a>
+    <a class="toc-row" href="#handson"><div class="toc-no">따라<br>하기</div><div><div class="toc-t">처음부터 끝까지 따라하기 (설치·배포 실전)</div><div class="toc-d">영상 없이 혼자서도 — Fork → Supabase → Vercel → 접속 → 말로 수정 · 내 프로젝트 · 자주 막히는 곳 · 용어사전</div></div></a>
   </div>
 </div>
 
@@ -526,6 +528,123 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 </div>
 
 <!-- ══════════ 부록 ══════════ -->
+<!-- ══════════ 따라하기 (HANDS-ON) ══════════ -->
+<div class="part-cover" id="handson"><div class="part-cover-inner" data-big="▶">
+  <div class="pc-label">HANDS-ON · 따라하기</div>
+  <div class="pc-title">처음부터 끝까지 따라하기</div>
+  <div class="pc-desc">영상 없이 혼자서도 할 수 있게 <b style="color:#fff">클릭 하나까지</b> 적었습니다. 2부(내 원서 앱 복사·배포)와 3부(내 프로젝트)를 순서대로 따라 하세요.</div>
+  <div class="pc-chips"><span class="pc-chip">Fork</span><span class="pc-chip">Supabase</span><span class="pc-chip">Vercel</span><span class="pc-chip">Claude Code</span></div>
+</div></div>
+
+<div class="content">
+  <div class="callout concept"><span class="co-label">🧭 도구 4개, 한 줄로</span><b>GitHub</b> 코드 창고 · <b>Supabase</b> 데이터 서랍장 · <b>Vercel</b> 인터넷에 켜기 · <b>Claude Code</b> 말로 고치는 AI. 흐름은 늘 <b>GitHub→Vercel→인터넷 주소</b>, 데이터가 필요하면 Supabase 연결.</div>
+
+  <div class="sub-header"><div class="sub-no">2-1</div><div class="sub-title">내 코드 만들기 — Fork(복사)</div></div>
+  <ul class="step-list">
+    <li><code>github.com/nauta325/mini-reader</code> 접속</li>
+    <li>오른쪽 위 <b>Fork</b> → <b>Create fork</b></li>
+    <li>주소가 <code>github.com/(내아이디)/mini-reader</code> 로 바뀌면 성공</li>
+  </ul>
+
+  <div class="sub-header"><div class="sub-no">2-2</div><div class="sub-title">데이터베이스 — Supabase</div></div>
+  <ul class="step-list">
+    <li><b>supabase.com</b> → <b>New project</b> · Region <b>Seoul</b> · 비밀번호 메모</li>
+    <li><b>SQL Editor → New query</b> → 내 저장소 <code>sql/mini-setup.sql</code> 전체 복사(Raw) → 붙여넣고 <b>Run</b> → "Success"</li>
+    <li>(선택) <code>sql/mini-seed-demo.sql</code> 도 Run → 데모 학생·책이 채워짐</li>
+    <li><b>Settings → API</b>에서 <b>Project URL</b>·<b>service_role</b> 키 복사·메모</li>
+  </ul>
+  <div class="callout warn"><span class="co-label">⚠️ 두 가지만 조심</span>① <b>꼭 '새' 프로젝트</b>에 (기존 것에 섞으면 나중에 헷갈림). ② 키는 <code>anon</code> 말고 <b><code>service_role</code>(secret)</b> — 잘못 넣으면 저장·로그인이 안 돼요.</div>
+
+  <div class="sub-header"><div class="sub-no">2-3</div><div class="sub-title">인터넷에 올리기 — Vercel</div></div>
+  <div class="callout gold"><span class="co-label">⭐ 제일 중요한 함정</span>환경변수(키·주소)는 <b>"Deploy 누르기 전에"</b> 넣으세요. 배포 후에 넣으면 다시 배포해야 반영돼서 "왜 안 바뀌지?"로 오래 헤맵니다.</div>
+  <ul class="step-list">
+    <li><b>vercel.com → Add New → Project</b> → 내 <code>mini-reader</code> <b>Import</b></li>
+    <li><b>Deploy 전에</b> Environment Variables 펼쳐 2개 입력 ↓</li>
+  </ul>
+  <table class="ftable">
+    <tr><th>Name</th><th>Value</th></tr>
+    <tr><td class="mono">SUPABASE_URL</td><td>2-2의 Project URL</td></tr>
+    <tr><td class="mono">SUPABASE_SERVICE_KEY</td><td>2-2의 service_role 키</td></tr>
+  </table>
+  <ul class="step-list">
+    <li>(AI 생성 쓸 때만) <code>ANTHROPIC_API_KEY</code> 추가 — Claude 콘솔 발급(유료)</li>
+    <li>이제 <b>Deploy</b> → "Congratulations 🎉" → <b>Visit</b></li>
+  </ul>
+
+  <div class="sub-header"><div class="sub-no">2-4</div><div class="sub-title">내 앱 접속</div></div>
+  <div class="callout warn"><span class="co-label">⚠️ 주소 끝에 /mini/</span>앱 화면은 <code>/mini/</code> 아래에 있어요. <code>https://(내프로젝트).vercel.app/mini/</code> 로 여세요. (루트로 들어가도 자동으로 넘어갑니다.)</div>
+  <p class="para">빨간 책 로고 홈이 뜨면 성공. 데모를 넣었다면 학생 로그인 테스트: 아이디 <code>seojun</code> / 이름 <code>김서준</code>.</p>
+
+  <div class="sub-header"><div class="sub-no">2-5</div><div class="sub-title">말로 바꾸기 — 첫 바이브 코딩</div></div>
+  <p class="para">Claude Code 새 채팅 → 내 저장소 연결 → 이렇게 말해보세요(하나씩):</p>
+  <div class="speak"><div class="sp-label">🗣️ 이렇게 말하기</div><div class="sp-q">"대표 색을 분홍색으로 바꿔줘"<br>"리포트 학원 이름을 ○○영어로 바꿔줘"<br>"퀴즈 통과 점수를 80점으로 바꿔줘"</div></div>
+  <p class="para">저장(push)하면 Vercel이 자동 배포 → 잠시 후 <b>강력 새로고침</b>(Ctrl/Cmd+Shift+R)하면 반영돼요.</p>
+
+  <div class="sub-header"><div class="sub-no">3-0</div><div class="sub-title">내 프로젝트 — 마음가짐</div></div>
+  <div class="callout tip"><span class="co-label">🌱 작게 시작</span><b>가장 작은 버전(MVP) 먼저.</b> 한 화면·한 기능. "오늘은 이것 하나만 되면 성공." 완벽하게 말고 일단 되게 → 말로 키우기.</div>
+
+  <div class="sub-header"><div class="sub-no">3-1</div><div class="sub-title">기획 (종이 5분)</div></div>
+  <div class="codeblock"><span class="cm"># 빈칸을 채우면 클로드에게 줄 설계도</span>
+· 앱 이름:
+· 한 줄 설명: (누가 / 무엇을 / 하는 앱)
+· 쓰는 사람:
+· 첫 화면에 뭐가 보이나:
+· 저장할 것(데이터):
+· 오늘의 첫 목표(이것만 되면 성공):</div>
+  <p class="para"><b>학원용 아이디어</b>: 단어 시험지 생성기 · 출석부 · 숙제 체크판 · 독서록 · 상담일지 · 스티커판.</p>
+
+  <div class="sub-header"><div class="sub-no">3-2</div><div class="sub-title">새 저장소 → Claude Code 첫 지시</div></div>
+  <ul class="step-list">
+    <li>github.com → <b>+ → New repository</b> → 이름 · Public · ☑ Add a README → Create</li>
+    <li>Claude Code 새 채팅 → 그 저장소 연결 → 아래처럼 첫 지시 ↓</li>
+  </ul>
+  <div class="codeblock">아래 기획으로 웹앱을 만들어줘.
+<span class="cm">[3-1 기획서 붙여넣기]</span>
+
+구조는 mini-reader 처럼 아주 단순하게:
+- 화면은 public 폴더에 HTML로 (빌드·프레임워크 없이)
+- 서버가 필요하면 api 파일 하나로 (순수 fetch)
+- 데이터는 Supabase에 저장 (필요하면 SQL도 같이 줘)
+- 키·비밀값은 HTML에 넣지 말고 환경변수로
+일단 '오늘의 첫 목표' 기능 하나만 되게 가장 작게 만들어줘.</div>
+
+  <div class="sub-header"><div class="sub-no">3-3</div><div class="sub-title">Supabase · Vercel (데이터 쓰면) · 성공 기준</div></div>
+  <ul class="step-list">
+    <li>Supabase 새 프로젝트 → 클로드가 준 SQL Run → URL·service_role 키 복사</li>
+    <li>Vercel Import → <b>Deploy 전에</b> 환경변수 → Deploy → Visit</li>
+    <li>주소가 헷갈리면 클로드에게 "메인 주소가 뭐야?"</li>
+  </ul>
+  <ul class="checklist">
+    <li>내 앱이 <b>인터넷 주소</b>로 열린다</li>
+    <li><b>첫 목표 기능 하나</b>가 동작한다</li>
+    <li>클로드에게 <b>한 가지를 말해서</b> 바꿔봤다</li>
+  </ul>
+
+  <div class="sub-header"><div class="sub-no">F</div><div class="sub-title">자주 막히는 곳</div></div>
+  <table class="tbl">
+    <tr><th>증상</th><th>해결</th></tr>
+    <tr><td class="sym">루트에서 404</td><td>주소 끝에 <code>/mini/</code> 붙이기</td></tr>
+    <tr><td class="sym">undefined/rest/v1…</td><td><code>SUPABASE_URL</code> 오타/누락 → 고치고 Redeploy</td></tr>
+    <tr><td class="sym">column … does not exist</td><td>세팅 SQL을 끝까지 실행 안 함 → 전체 다시 Run</td></tr>
+    <tr><td class="sym">PGRST204 schema cache</td><td>Supabase <b>Settings→General→Restart project</b></td></tr>
+    <tr><td class="sym">저장·로그인 안 됨</td><td>키가 <code>anon</code>일 수 있음 → <code>service_role</code>로 교체</td></tr>
+    <tr><td class="sym">고쳤는데 그대로</td><td>① Redeploy 했나 ② 강력 새로고침 ③ 보는 주소가 <b>내 프로젝트</b> 맞나</td></tr>
+  </table>
+
+  <div class="sub-header"><div class="sub-no">G</div><div class="sub-title">용어 사전</div></div>
+  <table class="tbl">
+    <tr><th>말</th><th>뜻</th></tr>
+    <tr><td>Fork(포크)</td><td>남의 저장소를 내 계정으로 복사</td></tr>
+    <tr><td>배포(Deploy)</td><td>코드를 실제 웹사이트로 켜기</td></tr>
+    <tr><td>환경변수</td><td>키·주소를 코드 밖(서버)에 안전하게 두는 칸</td></tr>
+    <tr><td>SQL</td><td>데이터베이스에 "표 만들어/넣어" 시키는 명령</td></tr>
+    <tr><td>service_role 키</td><td>DB를 마음대로 읽고 쓰는 <b>비밀</b> 열쇠 (서버 전용)</td></tr>
+    <tr><td>강력 새로고침</td><td>캐시 버리고 새로 불러오기 (Ctrl/Cmd+Shift+R)</td></tr>
+  </table>
+
+  <div class="callout tip"><span class="co-label">📎 참고</span>이 따라하기는 원본 저장소의 <code>교재.md</code>·<code>실습가이드.md</code>와 같은 내용이에요. Fork하면 그 파일들이 <b>내 저장소에 그대로</b> 남아 언제든 볼 수 있어요.</div>
+</div>
+
 <div class="part-cover" id="appendix"><div class="part-cover-inner" data-big="+">
   <div class="pc-label">APPENDIX · 부록</div>
   <div class="pc-title">빠르게 찾아보는 자료</div>

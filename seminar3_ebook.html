@@ -586,7 +586,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
     <li><b>supabase.com</b> → <b>New project</b> · Region <b>Seoul</b> · 비밀번호 메모</li>
     <li><b>SQL Editor → New query</b> → 내 저장소 <code>sql/mini-setup.sql</code> 전체 복사(Raw) → 붙여넣고 <b>Run</b> → "Success"</li>
     <li>(선택) <code>sql/mini-seed-demo.sql</code> 도 Run → 데모 학생·책이 채워짐</li>
-    <li><b>Settings → API</b>에서 <b>Project URL</b>·<b>service_role</b> 키 복사·메모</li>
+    <li><b>Project URL</b> → <b>Settings → Data API</b> (맨 위) · <b>service_role 키</b> → <b>Settings → API Keys</b> → service_role 줄 <b>Reveal → Copy</b></li>
   </ul>
   <div class="callout warn"><span class="co-label">⚠️ 두 가지만 조심</span>① <b>꼭 '새' 프로젝트</b>에 (기존 것에 섞으면 나중에 헷갈림). ② 키는 <code>anon</code> 말고 <b><code>service_role</code>(secret)</b> — 잘못 넣으면 저장·로그인이 안 돼요.</div>
 
@@ -741,8 +741,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
   <div class="sub-header"><div class="sub-no">D</div><div class="sub-title">원서 앱 — 환경변수 · 페이지 주소</div></div>
   <table class="ftable">
     <tr><th>환경변수</th><th>값 출처</th></tr>
-    <tr><td class="mono">SUPABASE_URL</td><td>Supabase Settings→API · Project URL</td></tr>
-    <tr><td class="mono">SUPABASE_SERVICE_KEY</td><td>Supabase Settings→API · service_role</td></tr>
+    <tr><td class="mono">SUPABASE_URL</td><td>Supabase <b>Settings → Data API</b> · Project URL</td></tr>
+    <tr><td class="mono">SUPABASE_SERVICE_KEY</td><td>Supabase <b>Settings → API Keys</b> · service_role (Reveal)</td></tr>
     <tr><td class="mono">ANTHROPIC_API_KEY</td><td>Claude 콘솔 · API Keys (선택)</td></tr>
   </table>
   <table class="ftable">

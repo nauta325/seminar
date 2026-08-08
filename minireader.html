@@ -1,0 +1,309 @@
+<style>
+  :root{
+    --ground:#f3f4fb; --surface:#ffffff; --surface-2:#f7f8fd;
+    --ink:#22263a; --muted:#6b7291; --border:#e4e7f3;
+    --brand:#5560d6; --brand-ink:#3a44b8; --coral:#e5455e; --good:#0f9d6b; --gold:#b9860b;
+    --chip:#eceefb; --tip:#eef1fc; --warn-bg:#fdf0e6; --warn-bd:#f6d5b0; --warn-ink:#8a4b12;
+    --shadow:0 3px 14px rgba(40,48,100,.06);
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --ground:#13151e; --surface:#1b1e2c; --surface-2:#20243550;
+    --ink:#e8ebf7; --muted:#99a0bd; --border:#2b2f47;
+    --brand:#8b96f2; --brand-ink:#aab3ff; --coral:#ff7386; --good:#3fd6a0; --gold:#e3b34a;
+    --chip:#242844; --tip:#20263f; --warn-bg:#33291a; --warn-bd:#5a4423; --warn-ink:#e6b877;
+    --shadow:0 3px 16px rgba(0,0,0,.3);
+  }}
+  :root[data-theme="dark"]{
+    --ground:#13151e; --surface:#1b1e2c; --surface-2:#20243550;
+    --ink:#e8ebf7; --muted:#99a0bd; --border:#2b2f47;
+    --brand:#8b96f2; --brand-ink:#aab3ff; --coral:#ff7386; --good:#3fd6a0; --gold:#e3b34a;
+    --chip:#242844; --tip:#20263f; --warn-bg:#33291a; --warn-bd:#5a4423; --warn-ink:#e6b877;
+    --shadow:0 3px 16px rgba(0,0,0,.3);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,-apple-system,sans-serif;
+    font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:var(--brand);text-underline-offset:2px}
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px 90px}
+
+  /* 상단 진행바 */
+  header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--ground) 88%,transparent);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .hbar{max-width:760px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;gap:12px}
+  .htitle{font-weight:800;font-size:16px;letter-spacing:-.01em;white-space:nowrap;
+    min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .htitle .em{color:var(--coral)}
+  .prog{flex:1;height:9px;border-radius:20px;background:var(--chip);overflow:hidden;min-width:60px}
+  .prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand-ink));
+    transition:width .35s ease}
+  .pnum{font-size:13px;font-weight:800;color:var(--brand-ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .iconbtn{appearance:none;border:1px solid var(--border);background:var(--surface);color:var(--ink);
+    width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:15px;line-height:1;flex:0 0 auto}
+  .iconbtn:hover{border-color:var(--brand);color:var(--brand)}
+
+  /* 히어로 */
+  .hero{padding:30px 0 8px}
+  .kicker{font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+  h1{font-size:31px;font-weight:800;letter-spacing:-.02em;margin:6px 0 8px;text-wrap:balance;line-height:1.2}
+  .lede{color:var(--muted);font-size:16px;margin:0}
+  .how{display:flex;gap:10px;align-items:flex-start;background:var(--tip);border:1px solid var(--border);
+    border-radius:13px;padding:12px 15px;margin:18px 0 4px;font-size:14.5px}
+  .how b{color:var(--brand-ink)}
+
+  h2.sec{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+    margin:30px 4px 12px}
+
+  /* 카드 */
+  .step{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px;
+    margin:0 0 15px;box-shadow:var(--shadow)}
+  .shead{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+  .chip{flex:0 0 auto;width:38px;height:38px;border-radius:11px;background:var(--brand);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px}
+  .step.warnstep .chip{background:var(--coral)}
+  .stitle{font-weight:800;font-size:19px;letter-spacing:-.01em}
+  .stitle .t{font-size:12.5px;font-weight:700;color:var(--muted);margin-left:6px}
+  ol.act{margin:10px 0 4px;padding-left:22px} ol.act li{margin:5px 0}
+  code{background:var(--chip);border-radius:6px;padding:1px 6px;font-size:.9em;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .big-link{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#fff;font-weight:800;
+    text-decoration:none;padding:11px 16px;border-radius:11px;margin:6px 0;font-size:16px}
+  .big-link:hover{filter:brightness(1.06)}
+  .qr{float:right;width:104px;height:104px;border-radius:10px;border:1px solid var(--border);margin:0 0 8px 14px}
+
+  /* 체크 항목 */
+  .check{display:flex;gap:11px;align-items:flex-start;padding:9px 12px;border:1px solid var(--border);
+    border-radius:11px;background:var(--surface-2);margin:8px 0;cursor:pointer;user-select:none}
+  .check input{appearance:none;flex:0 0 auto;width:22px;height:22px;border:2px solid var(--muted);border-radius:7px;
+    margin:1px 0 0;cursor:pointer;position:relative;background:var(--surface)}
+  .check input:checked{background:var(--good);border-color:var(--good)}
+  .check input:checked::after{content:"✓";position:absolute;inset:0;color:#fff;font-size:14px;font-weight:900;
+    display:flex;align-items:center;justify-content:center}
+  .check .tx{font-size:15.5px}
+  .check input:checked ~ .tx{color:var(--muted);text-decoration:line-through}
+  .check:focus-within{outline:2px solid var(--brand);outline-offset:1px}
+
+  .tip{display:flex;gap:8px;background:var(--tip);border-radius:10px;padding:9px 12px;margin:9px 0;font-size:14px}
+  .warn{display:flex;gap:8px;background:var(--warn-bg);border:1px solid var(--warn-bd);color:var(--warn-ink);
+    border-radius:10px;padding:9px 12px;margin:9px 0;font-size:14px;font-weight:600}
+
+  table{width:100%;border-collapse:collapse;font-size:14.5px;margin:6px 0}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+  th{font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+  td code{white-space:nowrap}
+  .cheat b{color:var(--coral)}
+  .foot{text-align:center;color:var(--muted);font-size:14px;margin-top:26px;font-style:italic}
+  .done-banner{display:none;background:linear-gradient(90deg,var(--good),#0bb37e);color:#fff;font-weight:800;
+    text-align:center;padding:13px;border-radius:13px;margin:16px 0}
+  @media (max-width:440px){
+    .hbar{gap:8px;padding:9px 13px}
+    .htitle{font-size:14px} .htitle .em{display:none}
+    .pnum{font-size:12px} .iconbtn{width:31px;height:31px}
+    h1{font-size:26px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media print{header{position:static} .iconbtn{display:none} .step{break-inside:avoid;box-shadow:none}}
+</style>
+
+<header>
+  <div class="hbar">
+    <span class="htitle">📕 미니 원서 <span class="em">따라 하기</span></span>
+    <div class="prog"><i id="bar"></i></div>
+    <span class="pnum" id="pnum">0 / 0</span>
+    <button class="iconbtn" id="theme" title="밝게/어둡게" aria-label="테마 전환">🌙</button>
+    <button class="iconbtn" id="reset" title="체크 초기화" aria-label="체크 초기화">↺</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">세미나 3 · 실습</div>
+    <h1>코드 없이, 말로 만드는 내 원서 앱</h1>
+    <p class="lede">줌 화면을 보며 이 페이지를 옆에 펴놓고, 위에서부터 하나씩 <b>체크(✓)하며</b> 따라 하세요.</p>
+    <div class="how">🖥 <div><b>쓰는 법</b> — 각 단계를 따라 하고, 다 되면 네모를 눌러 체크. 진행률이 위에 표시되고 <b>자동 저장</b>돼요. 막히면 강사에게 화면 공유로 물어보세요!</div></div>
+  </div>
+
+  <div class="done-banner" id="doneBanner">🎉 전부 완료! 내 원서 앱이 인터넷에 살아있어요.</div>
+
+  <h2 class="sec">시작 전 · 준비물</h2>
+  <div class="step">
+    <div class="shead"><span class="chip">✓</span><span class="stitle">계정 로그인 확인</span></div>
+    <label class="check"><input type="checkbox"><span class="tx"><b>GitHub</b> — <a href="https://github.com" target="_blank" rel="noopener">github.com</a></span></label>
+    <label class="check"><input type="checkbox"><span class="tx"><b>Supabase</b> — <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a> <span style="color:var(--muted)">("Continue with GitHub" 추천)</span></span></label>
+    <label class="check"><input type="checkbox"><span class="tx"><b>Vercel</b> — <a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a> <span style="color:var(--muted)">("Continue with GitHub" 추천)</span></span></label>
+    <label class="check"><input type="checkbox"><span class="tx"><b>Claude</b> — <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> · <a href="https://code.claude.com" target="_blank" rel="noopener">code.claude.com</a></span></label>
+    <label class="check"><input type="checkbox"><span class="tx"><b>Anthropic API 키</b> — <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a> <span style="color:var(--muted)">(2차 때 받았으면 재사용)</span></span></label>
+  </div>
+
+  <h2 class="sec">2부 · 복사해서 인터넷에 올리기</h2>
+
+  <div class="step">
+    <div class="shead"><span class="chip">1</span><span class="stitle">코드 복사하기 (Fork)</span></div>
+    <img class="qr" src="data:image/png;base64,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" alt="템플릿 저장소 QR">
+    <p style="margin:6px 0">강사 템플릿 저장소를 열어 <b>내 것으로 복사</b>합니다. (폰은 QR 스캔)</p>
+    <a class="big-link" href="https://github.com/nauta325/mini-reader" target="_blank" rel="noopener">🔗 github.com/nauta325/mini-reader</a>
+    <ol class="act">
+      <li>위 주소 열기 → 오른쪽 위 <b>Fork</b> → <b>Create fork</b></li>
+      <li>주소가 <code>github.com/(내아이디)/mini-reader</code> 로 바뀌면 성공</li>
+    </ol>
+    <label class="check"><input type="checkbox"><span class="tx">주소에 <b>내 아이디</b>가 들어갔다</span></label>
+    <div class="tip">💡 Fork 버튼이 없으면 → GitHub <b>로그인</b>부터.</div>
+  </div>
+
+  <div class="step">
+    <div class="shead"><span class="chip">2</span><span class="stitle">데이터베이스 만들기 (Supabase)</span></div>
+    <ol class="act">
+      <li><a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a> → <b>New project</b> · Region <b>Northeast Asia (Seoul)</b> · DB 비밀번호 <b>메모</b></li>
+      <li>내 저장소에서 <code>sql/mini-setup.sql</code> 열기 → <b>Raw</b> → 전체 복사</li>
+      <li>Supabase <b>SQL Editor → New query</b> → 붙여넣기 → <b>Run</b> → <b>Success</b></li>
+      <li>(선택) <code>sql/mini-seed-demo.sql</code> 도 Run → 데모 채워짐</li>
+    </ol>
+    <label class="check"><input type="checkbox"><span class="tx"><code>Success</code> 가 떴다</span></label>
+    <div class="warn">⚠️ SQL은 <b>반드시 끝까지 Run!</b> 중간에 멈추면 나중에 녹음 저장이 안 돼요.</div>
+    <div class="tip">💡 빨간 에러 → 복사가 잘린 것 → <b>Raw</b>로 전체 다시 복사해 Run.</div>
+  </div>
+
+  <div class="step">
+    <div class="shead"><span class="chip">3</span><span class="stitle">주소·키 복사하기</span></div>
+    <ol class="act">
+      <li><b>Project URL</b>: Settings → <b>Data API</b> → 복사 (<code>https://xxxx.supabase.co</code>)</li>
+      <li><b>service_role 키</b>: Settings → <b>API Keys</b> → service_role <b>Reveal</b> → 복사</li>
+    </ol>
+    <label class="check"><input type="checkbox"><span class="tx">두 값을 메모장에 붙여뒀다</span></label>
+    <div class="tip">💡 키는 꼭 <b>service_role</b>! <code>anon</code>이면 저장·로그인이 안 돼요. 이 키는 비밀번호급 — 남에게 X.</div>
+  </div>
+
+  <div class="step warnstep">
+    <div class="shead"><span class="chip">4</span><span class="stitle">인터넷에 올리기 (Vercel) <span class="t">⭐가장 중요</span></span></div>
+    <div class="warn">⚠️ 환경변수를 <b>"Deploy 누르기 전에"</b> 넣으세요! (뒤에 넣으면 다시 배포해야 해서 헷갈려요)</div>
+    <ol class="act">
+      <li><a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a> → <b>Add New → Project</b> → 내 <b>mini-reader</b> <b>Import</b></li>
+      <li><b>Deploy 전에</b> <b>Environment Variables</b> 펼치고 3개 추가:</li>
+    </ol>
+    <table>
+      <tr><th>이름</th><th>값</th></tr>
+      <tr><td><code>SUPABASE_URL</code></td><td>3번의 Project URL</td></tr>
+      <tr><td><code>SUPABASE_SERVICE_KEY</code></td><td>3번의 service_role 키</td></tr>
+      <tr><td><code>ANTHROPIC_API_KEY</code></td><td>내 Anthropic 키 (있으면)</td></tr>
+    </table>
+    <p style="margin:8px 0 0">그다음 <b>Deploy</b> → 1~2분 → <b>Congratulations</b> 🎉 → <b>Visit</b></p>
+    <label class="check"><input type="checkbox"><span class="tx"><b>Congratulations</b> 를 봤다</span></label>
+  </div>
+
+  <div class="step">
+    <div class="shead"><span class="chip">5</span><span class="stitle">API 키 발급 <span class="t">없는 사람만</span></span></div>
+    <ol class="act">
+      <li><a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a> → <b>Billing → Buy credits</b> ($5)</li>
+      <li><b>API Keys → Create Key</b> → <code>sk-ant-…</code> <b>복사(한 번만 보임!)</b></li>
+      <li>Vercel <code>ANTHROPIC_API_KEY</code> 에 넣고 → <b>Redeploy</b></li>
+    </ol>
+    <label class="check"><input type="checkbox"><span class="tx">키를 넣고 Redeploy 했다 <span style="color:var(--muted)">(AI 안 쓰면 건너뛰기 OK)</span></span></label>
+    <div class="tip">💡 <b>카드가 안 되면</b> → 크롬 언어를 <b>English</b>로 바꾸고 다시 시도(잘 됩니다).</div>
+  </div>
+
+  <div class="step">
+    <div class="shead"><span class="chip">6</span><span class="stitle">접속 확인</span></div>
+    <p style="margin:6px 0">내 주소: <code>https://(내프로젝트).vercel.app/mini/</code> ← 끝에 <b>/mini/</b> 꼭!</p>
+    <label class="check"><input type="checkbox"><span class="tx">빨간 책 로고 <b>홈 화면</b>이 떴다</span></label>
+    <div class="tip">💡 루트에서 <b>404</b> → 주소 끝에 <code>/mini/</code> 를 붙이세요.</div>
+  </div>
+
+  <h2 class="sec">🧪 다 같이 · 공통 테스트</h2>
+  <div class="step warnstep">
+    <div class="shead"><span class="chip">7</span><span class="stitle">앱이 살아있는지 8가지 확인</span></div>
+    <p style="margin:4px 0;color:var(--muted);font-size:14.5px">강사와 <b>똑같이</b> 해보고, 되는 것마다 체크!</p>
+    <p style="margin:12px 0 2px;font-weight:800">👦 학생으로 (홈 → 학생 시작하기)</p>
+    <label class="check"><input type="checkbox"><span class="tx">아이디 <code>seojun</code> / 이름 <code>김서준</code> 로그인</span></label>
+    <label class="check"><input type="checkbox"><span class="tx">책 열기 → <b>단어 학습</b> 넘겨보기</span></label>
+    <label class="check"><input type="checkbox"><span class="tx"><b>🎤 소리내어 읽고 녹음</b> → 시작 → 읽고 → 멈추기 → "✅ 저장됐어요"</span></label>
+    <label class="check"><input type="checkbox"><span class="tx"><b>원서퀴즈 1</b> 풀고 제출 → 점수 화면</span></label>
+    <p style="margin:14px 0 2px;font-weight:800">🔑 선생님으로 (홈 맨 아래 🔑 선생님용)</p>
+    <label class="check"><input type="checkbox"><span class="tx">(처음이면) <b>관리자 비밀번호 설정</b></span></label>
+    <label class="check"><input type="checkbox"><span class="tx"><b>원서 배정·결과 → 결과 대시보드</b></span></label>
+    <label class="check"><input type="checkbox"><span class="tx">김서준 <b>퀴즈 점수</b> · <b>▶ 녹음 재생</b> 되는지</span></label>
+    <label class="check"><input type="checkbox"><span class="tx"><b>월별 추이 그래프</b> · <b>학생별 현황 표</b> 보이는지</span></label>
+    <div class="tip">💡 녹음 저장 실패 → <code>mini-setup.sql</code>을 <b>끝까지</b> 다시 Run (녹음 버킷이 안 생긴 것).</div>
+  </div>
+
+  <h2 class="sec">2부 · 말로 바꾸기 (첫 바이브 코딩)</h2>
+  <div class="step">
+    <div class="shead"><span class="chip">8</span><span class="stitle">말해서 하나 바꿔보기</span></div>
+    <ol class="act">
+      <li>크롬에서 <a href="https://code.claude.com" target="_blank" rel="noopener">code.claude.com</a> → <b>새 세션</b></li>
+      <li>(처음) GitHub 승인 → 저장소 <b>(내아이디)/mini-reader</b> 연결</li>
+      <li>한국어로 <b>하나만</b> 시켜보기 👇</li>
+    </ol>
+    <table>
+      <tr><th>이렇게 말하면</th><th>이렇게 바뀝니다</th></tr>
+      <tr><td>"대표 색을 분홍색으로 바꿔줘"</td><td>앱 전체 색</td></tr>
+      <tr><td>"통과 점수를 80점으로 바꿔줘"</td><td>퀴즈 통과 기준</td></tr>
+      <tr><td>"리포트 학원 이름을 '○○영어'로"</td><td>리포트·워크시트</td></tr>
+      <tr><td>"학생 화면을 더 크고 귀엽게"</td><td>디자인</td></tr>
+    </table>
+    <p style="margin:8px 0 0">고쳐서 저장 → <b>Vercel 자동 배포</b> → <b>강력 새로고침</b>(Ctrl/Cmd+Shift+R)으로 확인</p>
+    <label class="check"><input type="checkbox"><span class="tx">말해서 <b>하나 바꿔봤다</b> 🎉</span></label>
+    <div class="tip">💡 <b>한 번에 하나씩!</b> 하나 바꾸고 → 확인 → 다음.</div>
+  </div>
+
+  <h2 class="sec">3부 · 백지에서 내 프로젝트</h2>
+  <div class="step">
+    <div class="shead"><span class="chip">🚀</span><span class="stitle">복사 말고, 처음부터 만들기</span></div>
+    <p style="margin:4px 0;color:var(--muted);font-size:14.5px">흐름은 2부와 똑같아요.</p>
+    <ol class="act">
+      <li><b>기획 5분</b> — 앱 이름 / 한 줄 설명 / <b>오늘의 첫 목표(이것만 되면 성공)</b></li>
+      <li><b>새 GitHub 저장소</b> (Public + README)</li>
+      <li><b>Claude Code 새 세션</b> → 연결 → 기획 붙여넣고 <i>"mini-reader처럼 단순하게, 가장 작게 만들어줘"</i></li>
+      <li>(저장 필요할 때만) <b>새 Supabase</b> → 클로드가 준 SQL Run</li>
+      <li><b>새 Vercel</b> — Deploy 전에 환경변수 (같은 함정)</li>
+      <li><b>말해서 키우기</b> — "저장 추가", "인쇄 버튼"…</li>
+    </ol>
+    <div class="warn">🎯 제일 흔한 실패 = 처음부터 크게. <b>"이것 하나만 되면 성공"</b> 으로 작게 시작!</div>
+  </div>
+
+  <h2 class="sec">막히면 · 자주 쓰는 값</h2>
+  <div class="step cheat">
+    <table>
+      <tr><th>증상</th><th>해결</th></tr>
+      <tr><td>루트에서 <b>404</b></td><td>주소 끝에 <code>/mini/</code></td></tr>
+      <tr><td>화면이 안 바뀜</td><td>Vercel <b>Redeploy</b> + <b>강력 새로고침</b> + 내 주소 맞는지</td></tr>
+      <tr><td><code>undefined/rest…</code></td><td><code>SUPABASE_URL</code> 오타 확인 → Redeploy</td></tr>
+      <tr><td>녹음 저장 실패</td><td><code>recordings</code> 버킷 없음 → 전체 SQL 다시 Run</td></tr>
+      <tr><td>저장·로그인 안 됨</td><td>키가 <code>anon</code>일 수 있음 → <b>service_role</b>로 교체</td></tr>
+    </table>
+    <p style="margin:12px 0 0;font-size:14.5px">
+      <b>데모 로그인</b> <code>seojun</code> / <code>김서준</code> &nbsp;·&nbsp;
+      <b>관리</b> <code>…/mini/admin.html</code><br>
+      <b>Supabase</b> 주소=<code>Settings→Data API</code> · 키=<code>API Keys→service_role→Reveal</code>
+    </p>
+  </div>
+
+  <p class="foot">오늘 만든 앱은 내 저장소에 영원히 남아요. 집에서도 클로드에게 말해서 계속 키우면 됩니다. 🚀</p>
+</div>
+
+<script>
+  (function(){
+    var KEY='minireader_follow_v1';
+    var boxes=[].slice.call(document.querySelectorAll('.check input[type=checkbox]'));
+    var bar=document.getElementById('bar'), pnum=document.getElementById('pnum'), banner=document.getElementById('doneBanner');
+    var saved={}; try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+    boxes.forEach(function(b,i){ if(saved[i]) b.checked=true;
+      b.addEventListener('change',function(){ save(); update(); }); });
+    function save(){ var o={}; boxes.forEach(function(b,i){ if(b.checked) o[i]=1; });
+      try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){} }
+    function update(){ var n=boxes.filter(function(b){return b.checked}).length, t=boxes.length;
+      bar.style.width=(t?Math.round(n/t*100):0)+'%'; pnum.textContent=n+' / '+t;
+      banner.style.display=(n===t&&t>0)?'block':'none'; }
+    update();
+    document.getElementById('reset').addEventListener('click',function(){
+      if(!confirm('체크를 모두 지울까요?'))return;
+      boxes.forEach(function(b){b.checked=false}); save(); update(); });
+    // 테마 토글
+    var tbtn=document.getElementById('theme');
+    function cur(){ var a=document.documentElement.getAttribute('data-theme');
+      if(a)return a; return matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'; }
+    function paint(){ tbtn.textContent=cur()==='dark'?'☀️':'🌙'; }
+    tbtn.addEventListener('click',function(){
+      document.documentElement.setAttribute('data-theme', cur()==='dark'?'light':'dark'); paint(); });
+    paint();
+  })();
+</script>

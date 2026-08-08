@@ -583,6 +583,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
   </ul>
 
   <div class="sub-header"><div class="sub-no">2-2</div><div class="sub-title">데이터베이스 — Supabase</div></div>
+  <div class="callout tip"><span class="co-label">🙈 처음 뜨는 낯선 화면 (당황 방지)</span><b>Continue with GitHub</b>로 로그인 → <b>Authorize Supabase</b> 나오면 <b>Authorize</b>(안전) → <b>Create a new organization</b> 나오면 <b>Type=Personal · Plan=Free</b>, 이름은 아무거나. (결제정보 안 물어봐요.)</div>
   <ul class="step-list">
     <li><b>supabase.com</b> → <b>New project</b> · Region <b>Seoul</b> · 비밀번호 메모</li>
     <li><b>SQL Editor → New query</b> → 내 저장소 <code>sql/mini-setup.sql</code> 전체 복사(Raw) → 붙여넣고 <b>Run</b> → "Success"</li>
@@ -593,8 +594,9 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 
   <div class="sub-header"><div class="sub-no">2-3</div><div class="sub-title">인터넷에 올리기 — Vercel</div></div>
   <div class="callout gold"><span class="co-label">⭐ 제일 중요한 함정</span>환경변수(키·주소)는 <b>"Deploy 누르기 전에"</b> 넣으세요. 배포 후에 넣으면 다시 배포해야 반영돼서 "왜 안 바뀌지?"로 오래 헤맵니다.</div>
+  <div class="callout tip"><span class="co-label">🙈 처음 뜨는 낯선 화면 (당황 방지)</span><b>Continue with GitHub</b> 로그인 → <b>Secure Your Account(2FA)</b> 뜨면 <b>Skip securing my account</b>로 넘어가도 됨 · 저장소 목록이 비었으면 <b>Install</b>(GitHub 앱 설치) → 내 계정 선택 (오른쪽 <b>Clone Template</b> 카드는 무시, <b>왼쪽에서 내 저장소 Import</b>) · 끝에 <b>Install Coding Agent Plugin</b> 카드는 ⊗로 닫기.</div>
   <ul class="step-list">
-    <li><b>vercel.com → Add New → Project</b> → 내 <code>mini-reader</code> <b>Import</b></li>
+    <li><b>vercel.com → Add New → Project</b> → 내 <code>mini-reader</code> <b>Import</b> (목록에 없으면 위 Install)</li>
     <li><b>Deploy 전에</b> Environment Variables 펼쳐 2개 입력 ↓</li>
   </ul>
   <table class="ftable">
@@ -609,7 +611,19 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
 
   <div class="sub-header"><div class="sub-no">2-4</div><div class="sub-title">내 앱 접속</div></div>
   <div class="callout warn"><span class="co-label">⚠️ 주소 끝에 /mini/</span>앱 화면은 <code>/mini/</code> 아래에 있어요. <code>https://(내프로젝트).vercel.app/mini/</code> 로 여세요. (루트로 들어가도 자동으로 넘어갑니다.)</div>
-  <p class="para">빨간 책 로고 홈이 뜨면 성공. 데모를 넣었다면 학생 로그인 테스트: 아이디 <code>seojun</code> / 이름 <code>김서준</code>.</p>
+  <p class="para">빨간 책 로고 홈이 뜨면 성공. 이 홈은 <b>학생용</b>이에요(가운데 <b>학생 시작하기</b>, 맨 아래 <b>🔑 선생님용 관리 페이지</b> → <code>/mini/admin.html</code>). 데모를 넣었다면 학생 로그인 테스트: 아이디 <code>seojun</code> / 이름 <code>김서준</code>.</p>
+  <div class="callout concept"><span class="co-label">🔒 학생/선생님 화면 분리</span>학생이 성적·다른 학생 정보를 못 보게, 관리는 <b>선생님용 페이지</b>로 따로 들어가요. 선생님용에서 <b>🔐 관리자 비밀번호</b>를 한 번 설정하면, 학생이 주소를 알아도 <b>비밀번호</b> 없이는 못 열려요. (비밀번호는 서버에만 저장 — 코드·주소에 안 보임.)</div>
+
+  <div class="sub-header"><div class="sub-no">2-4½</div><div class="sub-title">📖 AI로 책 만들기 — 지문만 넣으면 퀴즈 자동 생성</div></div>
+  <p class="para">지문(원서 본문)만 있으면 <b>단어카드 + 원서퀴즈 1·2</b>를 AI가 자동으로 만들어 줘요. 직접 문제를 안 짜도 됩니다.</p>
+  <ul class="step-list">
+    <li><b>🔑 선생님용 관리 페이지 → 원서 관리 → 🤖 AI로 책 만들기</b></li>
+    <li><b>책 제목</b> 입력 · <b>시리즈·레벨</b> 선택 · (챕터북이면 <b>챕터 번호</b>, 그림책은 비움)</li>
+    <li><b>영어 지문</b> 붙여넣기 — 또는 <b>🎬 유튜브 스크립트</b>로 자동(북마크 드래그 → 유튜브 스크립트 표시 → 클릭 → 새 탭에 제목·지문 자동)</li>
+    <li>(선택) 읽어주기 <b>영상 URL</b> → 학생 화면에 책 읽어주기 영상</li>
+    <li><b>🤖 AI로 생성 & 저장</b> → "✅ 완성! 단어 N · 원서퀴즈1 N · 원서퀴즈2 N" → 학생에게 <b>배정</b></li>
+  </ul>
+  <div class="callout warn"><span class="co-label">⚠️ ANTHROPIC_API_KEY 필요</span>2-3에서 넣은 그 키가 있어야 해요. <b>원서퀴즈1이 0개</b>면 지문이 너무 짧은 경우 → 지문을 더 넣고 다시 생성(그림책은 퀴즈가 하나만 나올 수 있음). <b>챕터북</b>은 챕터마다 따로(생성 후 챕터 자동 +1).</div>
 
   <div class="sub-header"><div class="sub-no">2-5</div><div class="sub-title">말로 내 취향대로 고치기 — 첫 바이브 코딩</div></div>
   <p class="para"><b>A. Claude Code 열고 내 저장소 연결</b> (크롬, 설치 X) — <b>code.claude.com</b> → 새 세션 → (처음이면 GitHub 승인) → <code>(내아이디)/mini-reader</code> 선택해 연결. 이제 채팅창에 한국어로 말하면 돼요.</p>
@@ -703,6 +717,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
     <li><b>노트북 + 크롬</b> — 폰만으로는 어려움</li>
     <li><b>GitHub 계정</b> — 코드 저장·복제·배포 연결용</li>
   </ul>
+  <div class="callout tip"><span class="co-label">🔑 미리 만들 건 GitHub 하나뿐</span>Supabase·Vercel은 <b>수업 중</b> 각 사이트에서 <b>"Continue with GitHub"</b>을 누르면 그 자리에서 바로 가입돼요(미리 안 만들어도 OK).</div>
   <div class="callout warn"><span class="co-label">⚠️ 앱의 AI 생성용 키는 별개</span>원서 앱이 퀴즈를 만들려면 <code>ANTHROPIC_API_KEY</code>(Claude 콘솔 발급)가 따로 필요해요. 이건 <b>Vercel 환경변수</b>에 넣습니다 — 내 코딩용 구독과 혼동하지 마세요.</div>
 
   <div class="sub-header"><div class="sub-no">A+</div><div class="sub-title">Anthropic API 키 발급 (AI 자동생성용)</div></div>

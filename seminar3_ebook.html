@@ -237,7 +237,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
   <p class="para">바이브 코딩을 하려면 클로드에게 <b>말을 걸고, 내 파일을 다루게</b> 해줄 도구가 필요해요. 이 세미나에서는 <b>Claude Code</b>를 씁니다. 그리고 Claude Code를 제대로 쓰려면 <b>Claude 유료 구독</b>이 있어야 해요.</p>
   <div class="card"><ul class="step-list">
     <li><b>Claude 유료 구독</b> — <code>claude.ai</code>에서 Pro(또는 상위) 플랜 가입 (세미나 3의 준비물 "Claude 유료 플랜")</li>
-    <li><b>Claude Code 설치</b> — 데스크톱 앱(또는 터미널 CLI)을 노트북에 설치하고, 위 계정으로 <b>로그인</b></li>
+    <li><b>Claude Code (웹)</b> — <b>설치 없이</b> 크롬에서 <code>code.claude.com</code> 접속, 위 계정으로 로그인만 하면 돼요 (터미널·데스크톱 앱 불필요)</li>
     <li><b>노트북</b> — 크롬 권장. 스마트폰만으로는 실습이 어려워요</li>
   </ul></div>
   <div class="callout warn"><span class="co-label">⚠️ 헷갈리기 쉬운 두 개의 "Claude" — 꼭 구분하세요</span>
@@ -363,13 +363,17 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
   </ul>
 
   <div class="sub-header"><div class="sub-no">2.6</div><div class="sub-title">🖐️ 크롬에서 Claude Code 열고 내 저장소 연결</div></div>
-  <p class="para">이제 클로드에게 말하려면, 먼저 <b>크롬에서 Claude Code를 열고 내 저장소를 연결</b>해야 해요. 설치도 터미널도 필요 없어요.</p>
+  <p class="para">이제 클로드에게 말하려면, 먼저 <b>크롬에서 Claude Code를 열고 내 저장소를 연결</b>해야 해요. 설치도 터미널도 필요 없어요 — 다만 <b>Claude 유료 구독(Pro/Max)</b>이 있어야 열려요(무료 계정은 안 열림).</p>
+  <div class="callout gold"><span class="co-label">🔌 처음 여는 사람이 보는 화면 (공식 순서 — 제일 헷갈림)</span>강사·경험자는 이미 연결돼서 이 단계가 안 보여요. <b>처음 여는 참가자는 이걸 봐요:</b></div>
   <div class="card"><ul class="step-list">
-    <li>크롬에서 <b>code.claude.com</b> 접속 (claude.ai → <b>Code</b>)</li>
-    <li><b>새 세션</b> 시작 → (처음 한 번) <b>GitHub 연결·승인</b> — 내 GitHub 접근 허용</li>
-    <li>2.2에서 만든 <b>내 저장소</b>(예: <code>my-reader</code>)를 <b>선택해 연결</b></li>
+    <li><b>code.claude.com</b> 접속 → Claude 계정 로그인</li>
+    <li>처음이면 화면이 <b>"GitHub 연결"</b>을 요청 → <b>Install the Claude GitHub App</b>(Claude GitHub 앱 설치)</li>
+    <li>GitHub에서 <b>저장소 접근 허용</b> — <b>All(전체)</b> 또는 <b>Only select → my-mini-reader만</b> → <b>Install &amp; Authorize</b></li>
+    <li>돌아오면 <b>Default 환경</b>이 자동 생성 → <b>기본값 그대로</b></li>
+    <li>입력창 아래 <b>저장소 선택</b> → 2.2에서 만든 <b>내 저장소</b>(예: <code>my-mini-reader</code>)</li>
     <li>이제 채팅창에 <b>한국어로 말하면</b> 이 코드를 고쳐줘요 (아래부터 그 "말들")</li>
   </ul></div>
+  <div class="callout tip"><span class="co-label">💡 2회차부터 · 막힐 때</span><b>다음부터는</b> GitHub 연결·승인 화면이 안 나와요 — 바로 저장소 선택부터. · 🆘 <b>"GitHub 로그인 버튼만 보임"</b> = 아직 연결 전(위 2~3번) · 🆘 <b>"저장소가 안 보임"</b> = 연결한 GitHub 계정이 그 저장소에 접근 권한 있는지 확인(내가 소유했거나 협업자로 초대돼야 목록에 뜸).</div>
   <div class="callout concept"><span class="co-label">📘 왜 저장소를 연결하나요?</span>연결해야 클로드가 <b>바로 그 코드</b>를 읽고 고칠 수 있어요. 프로젝트 하나 = 저장소 하나 = 세션 하나로 짝지으면 깔끔합니다.</div>
 
   <div class="sub-header"><div class="sub-no">2.7</div><div class="sub-title">🗣️ 코드 뜯어보기 — 클로드에게 물어보기</div></div>
@@ -715,7 +719,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
   <div class="sub-header"><div class="sub-no">A</div><div class="sub-title">바이브 코딩 준비물 (내가 코딩할 때)</div></div>
   <ul class="checklist">
     <li><b>Claude 유료 구독</b> — claude.ai에서 Pro(또는 상위) 가입</li>
-    <li><b>Claude Code 설치·로그인</b> — 노트북에 설치 후 위 계정으로 로그인</li>
+    <li><b>Claude Code (웹)</b> — 설치 없이 크롬에서 <code>code.claude.com</code> 접속·로그인 (터미널 불필요)</li>
     <li><b>노트북 + 크롬</b> — 폰만으로는 어려움</li>
     <li><b>GitHub 계정</b> — 코드 저장·복제·배포 연결용</li>
   </ul>

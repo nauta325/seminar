@@ -133,6 +133,7 @@
     <label class="check"><input type="checkbox"><span class="tx"><b>Vercel</b> — <a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a> <span style="color:var(--muted)">("Continue with GitHub" 추천)</span></span></label>
     <label class="check"><input type="checkbox"><span class="tx"><b>Claude</b> — <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> · <a href="https://code.claude.com" target="_blank" rel="noopener">code.claude.com</a></span></label>
     <label class="check"><input type="checkbox"><span class="tx"><b>Anthropic API 키</b> — <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a> <span style="color:var(--muted)">(2차 때 받았으면 재사용)</span></span></label>
+    <div class="tip">💡 꼭 미리 있어야 하는 건 <b>GitHub</b> 하나예요. <b>Supabase·Vercel</b>은 세미나 때 <b>"Continue with GitHub"</b> 한 번이면 가입 끝(미리 만들어와도 OK).</div>
   </div>
 
   <h2 class="sec">2부 · 복사해서 인터넷에 올리기</h2>
@@ -161,6 +162,7 @@
       <li>(선택) <code>sql/mini-seed-demo.sql</code> 도 Run → 데모 채워짐</li>
     </ol>
     <label class="check"><input type="checkbox"><span class="tx"><code>Success</code> 가 떴다</span></label>
+    <div class="tip">💡 처음 가입(GitHub로)이면 "Create a new organization" 화면이 떠요 → <b>Type = Personal, Plan = Free</b>, 이름 아무거나 → <b>Create organization</b> → 그다음 <b>New project</b>.</div>
     <div class="warn">⚠️ SQL은 <b>반드시 끝까지 Run!</b> 중간에 멈추면 나중에 녹음 저장이 안 돼요.</div>
     <div class="tip">💡 빨간 에러 → 복사가 잘린 것 → <b>Raw</b>로 전체 다시 복사해 Run.</div>
   </div>
@@ -179,7 +181,9 @@
     <div class="shead"><span class="chip">4</span><span class="stitle">인터넷에 올리기 (Vercel) <span class="t">⭐가장 중요</span></span></div>
     <div class="warn">⚠️ 환경변수를 <b>"Deploy 누르기 전에"</b> 넣으세요! (뒤에 넣으면 다시 배포해야 해서 헷갈려요)</div>
     <ol class="act">
-      <li><a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a> → <b>Add New → Project</b> → 내 <b>mini-reader</b> <b>Import</b></li>
+      <li><a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a> → <b>Add New → Project</b></li>
+      <li>처음이면 <b>"Install the GitHub application"</b> → <b>Install</b> 눌러 GitHub 연결(한 번만) → 계정 선택 → Install</li>
+      <li>왼쪽 <b>Import Git Repository</b> 에서 내 <b>mini-reader</b> 찾아 <b>Import</b> <span style="color:var(--muted)">(오른쪽 "Clone Template"은 무시!)</span></li>
       <li><b>Deploy 전에</b> <b>Environment Variables</b> 펼치고 3개 추가:</li>
     </ol>
     <table>

@@ -198,7 +198,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
     <a class="toc-row" href="#part1"><div class="toc-no">1부</div><div><div class="toc-t">바이브 코딩 기초 — 말로 코드를 다루기</div><div class="toc-d">바이브 코딩이란 · 도구(Claude Code+구독) · 핵심 루프 · 잘 말하는 법 · 되돌리기</div></div></a>
     <a class="toc-row" href="#part2"><div class="toc-no">2부</div><div><div class="toc-t">원서 시스템으로 연습 — 받아서 돌려보고 · 수정</div><div class="toc-d">코드 받기 → 먼저 돌려보기(Supabase·Vercel) → 구조 뜯어보기 → 겉모습·데이터·기능 수정 → 자동 반영</div></div></a>
     <a class="toc-row" href="#part3"><div class="toc-no">3부</div><div><div class="toc-t">내 프로젝트 만들기 — 예시 하나를 처음부터 끝까지</div><div class="toc-d">아이디어 고르기 · 제작 사이클 · 예시(단어 플래시카드) 워크스루 · 배포 · 계속 키우기</div></div></a>
-    <a class="toc-row" href="#handson"><div class="toc-no">따라<br>하기</div><div><div class="toc-t">처음부터 끝까지 따라하기 (설치·배포 실전)</div><div class="toc-d">영상 없이 혼자서도 — Fork → Supabase → Vercel → 접속 → 말로 수정 · 내 프로젝트 · 자주 막히는 곳 · 용어사전</div></div></a>
+    <a class="toc-row" href="#handson"><div class="toc-no">따라<br>하기</div><div><div class="toc-t">처음부터 끝까지 따라하기 (설치·배포 실전)</div><div class="toc-d">영상 없이 혼자서도 — 가져오기 → Supabase → Vercel → 접속 → 말로 수정 · 내 프로젝트 · 자주 막히는 곳 · 용어사전</div></div></a>
   </div>
 </div>
 
@@ -568,17 +568,18 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
   <div class="pc-label">HANDS-ON · 따라하기</div>
   <div class="pc-title">처음부터 끝까지 따라하기</div>
   <div class="pc-desc">영상 없이 혼자서도 할 수 있게 <b style="color:#fff">클릭 하나까지</b> 적었습니다. 2부(내 원서 앱 복사·배포)와 3부(내 프로젝트)를 순서대로 따라 하세요.</div>
-  <div class="pc-chips"><span class="pc-chip">Fork</span><span class="pc-chip">Supabase</span><span class="pc-chip">Vercel</span><span class="pc-chip">Claude Code</span></div>
+  <div class="pc-chips"><span class="pc-chip">Use this template</span><span class="pc-chip">Supabase</span><span class="pc-chip">Vercel</span><span class="pc-chip">Claude Code</span></div>
 </div></div>
 
 <div class="content">
   <div class="callout concept"><span class="co-label">🧭 도구 4개, 한 줄로</span><b>GitHub</b> 코드 창고 · <b>Supabase</b> 데이터 서랍장 · <b>Vercel</b> 인터넷에 켜기 · <b>Claude Code</b> 말로 고치는 AI. 흐름은 늘 <b>GitHub→Vercel→인터넷 주소</b>, 데이터가 필요하면 Supabase 연결.</div>
 
-  <div class="sub-header"><div class="sub-no">2-1</div><div class="sub-title">내 코드 만들기 — Fork(복사)</div></div>
+  <div class="sub-header"><div class="sub-no">2-1</div><div class="sub-title">내 코드 만들기 — Use this template(복사)</div></div>
   <ul class="step-list">
     <li><code>github.com/nauta325/mini-reader</code> 접속</li>
-    <li>오른쪽 위 <b>Fork</b> → <b>Create fork</b></li>
-    <li>주소가 <code>github.com/(내아이디)/mini-reader</code> 로 바뀌면 성공</li>
+    <li>오른쪽 위 초록색 <b>Use this template</b> → <b>Create a new repository</b></li>
+    <li>저장소 이름 정하고(예: <code>my-mini-reader</code>) → <b>Create repository</b></li>
+    <li>주소가 <code>github.com/(내아이디)/…</code> 로 바뀌면 성공 <span class="muted">(히스토리 없는 깨끗한 내 저장소)</span></li>
   </ul>
 
   <div class="sub-header"><div class="sub-no">2-2</div><div class="sub-title">데이터베이스 — Supabase</div></div>
@@ -677,7 +678,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
   <div class="sub-header"><div class="sub-no">G</div><div class="sub-title">용어 사전</div></div>
   <table class="tbl">
     <tr><th>말</th><th>뜻</th></tr>
-    <tr><td>Fork(포크)</td><td>남의 저장소를 내 계정으로 복사</td></tr>
+    <tr><td>Use this template</td><td>템플릿 저장소를 내 계정으로 깨끗이 복사 (커밋 히스토리 없음)</td></tr>
     <tr><td>배포(Deploy)</td><td>코드를 실제 웹사이트로 켜기</td></tr>
     <tr><td>환경변수</td><td>키·주소를 코드 밖(서버)에 안전하게 두는 칸</td></tr>
     <tr><td>SQL</td><td>데이터베이스에 "표 만들어/넣어" 시키는 명령</td></tr>
@@ -685,7 +686,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', s
     <tr><td>강력 새로고침</td><td>캐시 버리고 새로 불러오기 (Ctrl/Cmd+Shift+R)</td></tr>
   </table>
 
-  <div class="callout tip"><span class="co-label">📎 참고</span>이 따라하기는 원본 저장소의 <code>교재.md</code>·<code>실습가이드.md</code>와 같은 내용이에요. Fork하면 그 파일들이 <b>내 저장소에 그대로</b> 남아 언제든 볼 수 있어요.</div>
+  <div class="callout tip"><span class="co-label">📎 참고</span>이 따라하기는 원본 저장소의 <code>교재.md</code>·<code>실습가이드.md</code>와 같은 내용이에요. "Use this template"로 복사하면 그 파일들이 <b>내 저장소에 그대로</b> 남아 언제든 볼 수 있어요.</div>
 </div>
 
 <div class="part-cover" id="appendix"><div class="part-cover-inner" data-big="+">
